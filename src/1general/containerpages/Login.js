@@ -1,22 +1,24 @@
-import React, { useContext } from 'react'
+import React, { useContext , useState} from 'react'
 import { userInfoContext } from '../../Globalcontext'
-import { useNavigate } from 'react-router-dom';
 
 function Login() {
 
-  const {userinfo, setuserinfo} = useContext(userInfoContext);
+  const {setuserinfo} = useContext(userInfoContext);
+
+  const [username, setusername] = useState()
+
   return (
     <div>
 
       <h1>Login page</h1>
         <ul>
-            <li>*username*</li>
+            <li>*username* <input type="text"  defaultValue ={username} onChange={(e)=>{setusername(e.target.value)}}/></li>
             <li>*password*</li>
         </ul>
         <button onClick={()=>{setuserinfo({
           'username' : "wilson",
           'password' : 'password',
-          'usertype' : 'prof'
+          'usertype' : username
         }); 
 
         }}>
