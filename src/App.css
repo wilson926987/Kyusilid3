@@ -1,38 +1,555 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap');
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+    overflow-x: hidden;
+
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+
+.sidebarcontent::-webkit-scrollbar{ 
+  width: 10px; 
+}
+.sidebarcontent::-webkit-scrollbar-thumb{ 
+  background-color: rgba(255, 255, 255, 0.219);
+  border-radius: 5px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+
+
+.appbody{
+  display: block;
+  position: relative;
+  transition: none;
+  padding-bottom: 40px;
+  height: 100vh;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+body::-webkit-scrollbar{
+  display: none;
+}
+
+:root{
+  --defaultprimary : #9ba1ff;
+  --defaultsecondary: #484d97;
+  --defaulttertiary: rgb(255, 255, 255);
+  --defaultbackground: #e2e4fa;;
+
+
+  --lighttextprimary: rgb(207, 207, 207);
+  --lighttextsecondary: rgb(236, 236, 236);
+  --darktextprimary: rgb(58, 58, 58)  ;
+  --darktextsecondary: rgb(58, 57, 57);
+
+
+
+  --darkthemeprimary: rgb(26, 25, 25);
+  --darkthemesecondary: rgb(44, 44, 44);
+  --darkthemetertiary: rgb(63, 63, 63);
+  --darkthemebackground: rgb(54, 54, 54);
+  --highlightcolor: #fddf8e;
+}
+
+
+*{
+  transition: .6s;
+  margin: 0;
+  padding: 0;
+  font-family: 'Montserrat', sans-serif;
+  user-select: none;
+}
+
+ul{
+  list-style-type: none;
+}
+
+
+svg{
+  transform: scale(1.2);
+}
+
+
+.relative{
+  position: relative;
+}
+
+
+.default .primary{
+  background-color: var(--defaultprimary);
+}
+
+.default .secondary{
+  background-color: var(--defaultsecondary);
+}
+
+.default .tertiary{
+  background-color: var(--defaulttertiary);
+}
+
+.default *{
+  color: var(--darktextprimary);
+}
+
+.default .background{
+  background-color: var(--defaultbackground);
+}
+
+
+
+.dark .primary{
+  background-color: var(--darkthemeprimary);
+}
+
+.dark .secondary{
+  background-color: var(--darkthemesecondary);
+}
+
+.dark .tertiary{
+  background-color: var(--darkthemetertiary);
+}
+
+.dark *{
+  color: var(--lighttextprimary);
+}
+
+.dark .background{
+  background-color: var(--darkthemebackground);
+}
+
+
+.lightinset{
+  box-shadow: -4px -6px 15px 2px rgba(255,255,255,0.3) inset;
+  -webkit-box-shadow: -4px -6px 15px 2px rgba(255,255,255,0.3) inset;
+  -moz-box-shadow: -4px -6px 15px 2px rgba(255,255,255,0.3) inset;
+}
+
+.borderradius-lg{
+  border-radius:  14px;
+}
+
+.borderradius-md{
+  border-radius: 8px;
+}
+
+
+.blacken{
+  background-color: black !important;
+
+}
+
+
+.rounded , .profileicon img{
+  border-radius: 50%;
+}
+
+.modalbackground-lgt{
+  display: block;
+  position:absolute;
+  height: 100vh;
+  width: 100vw;
+}
+
+.sidebarbody{
+  display: block;
+  overflow: hidden;
+  padding-top: 40px;
+  left : 12px;
+  position:relative;
+  top: 50vh;
+  transform: translateY(-50%);
   display: flex;
+  align-items: center;
   flex-direction: column;
+  width: 250px;
+  height: 96vh;
+  z-index: 4;
+  margin-right: 20px;
+}
+
+
+
+.sidebarnotactive{
+  width: 0px !important;
+  margin-right: 60px;
+
+}
+
+
+
+
+
+
+
+
+.sidebarclosed{
+  height: 240px;
+  width: 30px;
+  display: block;
+  top:30vh;
+  transform: translateY(-50%);
+  position: absolute;
+  z-index: 4;
+  overflow: hidden;
+  left: 12px;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  transform: translateX(-100%);
+  opacity: 0 ;
+}
+
+
+.sidebarclosed svg{
+  transform: scale(2);
+
+}
+
+.togglebuttonbody{
+  height: 100vh;
+  display: block;
+  width: 60px;
+  position: fixed;
+  top: 0;
+  z-index: 5;
+}
+
+.togglebuttonbody:hover .sidebarclosed{
+  opacity: 1 !important;
+  transform: translateX(0);
+}
+
+.dimmer{
+  height: 100%;
+  width: 100%;
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+ 
+}
+.sidebarbody img{
+  height: 70px;
+  margin-bottom: 12px;
+  width: 70px;
+
+}
+
+.sidebarcontent{
+  padding: 0 12px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 100%;
+  margin-top: 30px;
+  margin-bottom: 40px;
+}
+
+
+
+.sidebarcontent>ul>li{
+    padding-top: 6px;
+    padding-bottom: 6px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-weight: bold;
+   
+}
+
+.sidebarcontent li svg{
+   margin-left: 12px;
+   margin-right: 12px;
+}
+
+
+
+
+
+
+
+.sidebarsubmenu{
+  padding-left: 45px;
+  font-size: 14px;
+}
+
+.highlight{
+  display: block;
+  height: 100%;
+  width: 0;
+  position :absolute;
+  right: 40px;
+  border-radius: 4px;
+  transition: .1s;
+
+}
+
+
+
+.sidebarmenu:hover .highlight , .sidebarsubmenu:hover .highlight{
+  background: rgb(255,255,255);
+background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255, 255, 255, 0.4) 58%, rgba(255, 255, 255, 0.4) 100%);
+  border-right: 8px solid rgba(255, 255, 255, 0.459);
+  right: 0;
+  width: 100%;
+
+
+
+}
+
+.sidebarfooter{
+  margin-bottom: 5vh;
+  margin-top: auto;
+}
+
+.sidebarfooter svg{
+  transform: scale(1.8);
+  cursor: pointer;
+}
+
+.sidebarfootertoggle{
+  margin-top: 2vh;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+
+}
+
+.maincontainer{
+  display: flex;
+  width: 100%;
+ 
+}
+
+.content{
+  width: 100%;
+  padding: 0 20px;
+
+}
+
+.profilenotif{
+  display: flex;
+  height: 70px;
+  width: max-content;
+  width: 100%;
+  align-items: center;
+  transition: none;
+}
+
+.profilenotif>div:first-child{
+  margin-right: auto;
+  margin-left: 12px;
+}
+
+
+
+.notificationicon{
+  margin-right: 24px ;
+}
+
+.notificationicon img{
+  height: 20px;
+  width: 20px;
+}
+
+
+.profileicon img{
+  height: 40px;
+  width: 40px;
+  margin: 0 24px;
+}
+
+.dbannouncements{
+  height: 380px;
+
+}
+
+.dbpanelmargin{
+  margin-bottom: 20px !important;
+}
+
+
+.db-status {
+  height: 210px;
+}
+
+
+.themegroupbackground{
+  position :absolute;
+  display: block;
+  height: 100vh;
+  width: 100vw;
+  left: 0;
+  top: 0;
+  z-index: 5;
+}
+
+
+.themegroupbody{
+  display:flex;
+  position: absolute;
+  height: 45px;
+  z-index: 6;
+  transform:translateX(-50%);
+  border-radius: 14px;
+  box-shadow: 1px 1px 8px 0px rgba(0,0,0,0.61);
+-webkit-box-shadow: 1px 1px 8px 0px rgba(0,0,0,0.61);
+-moz-box-shadow: 1px 1px 8px 0px rgba(0,0,0,0.61);
+align-items: center;
+justify-content: space-around;
+}
+
+.themeitem{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  height: 24px;
+  width: 24px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.themeactive{
+  border: 2px solid rgb(199, 199, 199);
+}
+
+.themeitem img{
+  transform: scale(.8);
+}
+
+
+.darkicon{
+  display: block;
+  height: 16px;
+  width: 16px;
+  background-color: gray;
+  border-radius: 50%;
+
+}
+
+
+
+.welcomebanner{
+  height: 180px;
+  padding: 18px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  position: relative;
+  min-width: 360px;
+  overflow: hidden;
+
+}
+
+.welcomebannerdesign{
+  position: absolute;
+  right: 30px;
+  bottom: -30px;
+}
+
+.welcomebannerdesign img{
+  height: 200px;
+}
+
+
+
+.welcomebanner *{
   color: white;
+    white-space: nowrap;
 }
 
-.App-link {
-  color: #61dafb;
+.welcomebanner button{
+  padding:  6px 0px;
+  width: 30%;
+  min-width: 140px;
+  border-radius: 8px;
+  border: none;
+  font-weight: bold;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.attendancepanel , .activitystatuspanel{
+  height: 180px;
+  padding: 18px;
+}
+
+
+.dbactivitylist{
+  padding: 18px;
+}
+
+.dbactivitylist>div:first-child{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+
+}
+
+
+.activityitem{
+  height: 60px;
+  border-radius: 8px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+
+}
+
+.activityitempic{
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  
+  margin-right: 20px;
+  margin-left: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.activityitempic>div{
+  border-radius: 50%;
+  height: 31px;
+  width: 31px;
+  text-align: center;
+  line-height: 31px;
+
+}
+
+.eventscontainer{
+  height: 90vh;
+  padding: 18px;
+}
+
+.calendarcontainer{
+  margin-top: 12px;
+  height: 230px;
+  margin-bottom: 18px;
+}
+
+@media screen and (max-width: 600px) {
+  .sidebarbody{
+    position: fixed;
+    left: 0;
+    border-radius: 0;
+    height: 100vh;  
   }
-  to {
-    transform: rotate(360deg);
+  .sidebarclosed{
+    left: 0;
   }
+  .profilenotifcontent{
+    display: none;
+  }
+
+  .profilenotif{
+    width: 100vw;
+    margin-left: -20px;
+    background-color: rgba(255, 255, 255, 0.219);
+    margin-bottom: 20px;
+ 
+  }
+
 }
