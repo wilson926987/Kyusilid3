@@ -242,8 +242,13 @@ svg{
   width: 100%;
   margin-top: 30px;
   margin-bottom: 40px;
+  white-space: nowrap;
 }
 
+
+.clear{
+  opacity: 0;
+}
 
 
 .sidebarcontent>ul>li{
@@ -340,7 +345,54 @@ background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255, 255, 255, 0
 .profilenotif>div:first-child{
   margin-right: auto;
   margin-left: 12px;
+  display: flex;
+  align-items: center; 
+  justify-content: center;
 }
+
+
+.pnsearchbar{
+  margin-left: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.pnsearchbarclosed{
+  height: 30px;
+  width: 30px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pnsearchbarclosed svg{
+  font-size: 14px;
+}
+
+.pnsearchbaropen{
+  display: block;
+  width: 200px;
+  overflow: hidden;
+  margin-right: -12px;
+}
+
+.pnsearchbaropen input{
+  width: 100%;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-left: 20px;
+  padding-right: 40px;
+  border-radius: 8px;
+  border: none;
+  
+}
+
+
+
+
+
+
 
 
 
@@ -530,6 +582,145 @@ justify-content: space-around;
   margin-bottom: 18px;
 }
 
+
+.classlisttimeline{
+    height: 200px;
+}
+
+.classpanel{
+  height: 180px;
+  margin-bottom: 12px;
+  padding: 8px;
+  transition: .1s;
+}
+
+
+
+.title{
+  margin-top: 25px;
+  margin-bottom: 15px;
+  margin-left: 16px;
+
+}
+
+.classcontainer{
+  margin-left: 16px;
+  margin-right: 16px;
+  position: relative;
+}
+
+
+.classpanelheader{
+  display: block;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  height: 120px;
+  position: relative;
+  opacity: .6;
+  transition-delay: .2s;
+}
+
+.classpaneltitle{
+  padding-left: 6px;
+  margin-top: 12px;
+  position: relative;
+  
+}
+
+
+.classpanel:hover{
+  box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.75);
+  -webkit-box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.75);
+}
+
+.classpanel:hover .classpanelheader{
+  height: 40px;
+}
+
+.classpanel:hover .classpanelprofile{
+  opacity: 1;
+}
+
+.classpanel:hover .classpanelopen{
+  opacity: 1;
+  margin-left: 0;
+  transition-delay: .6s;
+}
+
+.classpanel:hover .classpanelclosed{
+ transition-delay: 0s;
+  opacity: 0;
+  margin-bottom: -4px;
+}
+
+
+.classpanelprofile{ 
+  position: absolute;
+  top: -40px;
+  right: 20px;
+  opacity: 0;
+}
+
+.classpanel img{
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+
+}
+
+
+.classpanelopen{
+  margin-top: 12px;
+  opacity: 0;
+  margin-left: 20px;
+}
+
+.classpanelclosed{
+  transition-delay: .6s;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @media screen and (max-width: 600px) {
   .sidebarbody{
     position: fixed;
@@ -547,7 +738,6 @@ justify-content: space-around;
   .profilenotif{
     width: 100vw;
     margin-left: -20px;
-    background-color: rgba(255, 255, 255, 0.219);
     margin-bottom: 20px;
  
   }

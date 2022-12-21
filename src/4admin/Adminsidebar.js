@@ -51,12 +51,11 @@ function Adminsidebar() {
 {sidebar && <div className='sidebarcontent'>
     <ul>
         <li className='sidebarmenu' onClick={()=>{navigate('/kyusilidAdmin')}}> <div className="highlight"></div> <MdSpaceDashboard />  Dashboard</li>
-        <li className="sidebarmenu" onClick={()=>{navigate('accounts')}}> <div className="highlight"></div> <MdManageAccounts />  Accounts</li>  
-        <li className='sidebarmenu' onClick={()=>{navigate('Information_Technology')}}> <div className="highlight"></div> <MdBrightness1/> {shorten('Information Technology')}</li>
-        <li className='sidebarmenu' onClick={()=>{navigate('Business_Administration')}}> <div className="highlight"></div> <MdBrightness1/> {shorten('Business Administration')}</li>
-        <li className='sidebarmenu' onClick={()=>{navigate('Industrial_Engineering')}}> <div className="highlight"></div> <MdBrightness1/> {shorten('Industrial Engineering')}</li>
-        <li className='sidebarmenu' onClick={()=>{navigate('Entrepreneurship')}}> <div className="highlight"></div> <MdBrightness1/> {shorten('Entrepreneurship')}</li>
-        <li className="sidebarmenu" onClick={()=>{navigate('filemanager')}}> <div className="highlight"></div>  <AiFillFile /> File Manager</li>
+        <li className='sidebarmenu' onClick={()=>{navigate('Information_Technology')}}> <div className="highlight"></div> <MdBrightness1 className='clear'/> {shorten('Information Technology')}</li>
+        <li className='sidebarmenu' onClick={()=>{navigate('Business_Administration')}}> <div className="highlight"></div> <MdBrightness1 className='clear'/> {shorten('Business Administration')}</li>
+        <li className='sidebarmenu' onClick={()=>{navigate('Industrial_Engineering')}}> <div className="highlight"></div> <MdBrightness1 className='clear'/> {shorten('Industrial Engineering')}</li>
+        <li className='sidebarmenu' onClick={()=>{navigate('Entrepreneurship')}}> <div className="highlight"></div> <MdBrightness1 className='clear'/> {shorten('Entrepreneurship')}</li>
+
     </ul>              
 </div>}
 <div className='sidebarfooter'>

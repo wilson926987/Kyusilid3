@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react'
-import {FaBell} from 'react-icons/fa'
+import {FaBell ,FaSearch} from 'react-icons/fa'
 import {BsFillGearFill} from 'react-icons/bs'
 import Profilepic from '../../assets/images/avatar.jpg'
 import RGB from '../../assets/images/rgb.png'
 import { themeContext } from '../../Globalcontext'
 import { useLocation } from 'react-router-dom'
+import {GrMail} from 'react-icons/gr'
+
 
 
 
@@ -57,7 +59,21 @@ function Profilenotif() {
 
   return (
     <div className='profilenotif'>
-        <div><h3>{currentpage}</h3></div>
+        <div><h3>{currentpage}</h3>
+            <div className="pnsearchbar">
+                <div className='pnsearchbaropen'>
+                    <input type="text" placeholder='search here' />
+                </div>
+                <div className="pnsearchbarclosed primary ">
+                    <FaSearch />
+                </div> 
+              
+
+
+               
+            </div>
+        </div>
+        
         <div className='notificationicon'><FaBell /></div>
         <div className='notificationicon' >  <BsFillGearFill onClick={togglecontainer}/>
             {themecontainer && 
@@ -72,6 +88,7 @@ function Profilenotif() {
             }
         
         </div>
+        <div className="notificationicon"> <GrMail /></div>
         <div className='profilenotifcontent'>
              <h5>##username # </h5>
              <h6>##user id or position if prof#</h6>
