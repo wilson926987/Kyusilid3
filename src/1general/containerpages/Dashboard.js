@@ -21,7 +21,10 @@ function Dashboard() {
             <div className='col-md-4'>
                 <div className='eventscontainer tertiary borderradius-lg'>
                     <div className="calendarcontainer primary borderradius-lg"></div>
-                    <h4>Announcements ##Announcement#</h4>
+                    <div className='announcementscontainer'>
+                        
+                    </div>
+                
                 </div>
             </div>
         </div>

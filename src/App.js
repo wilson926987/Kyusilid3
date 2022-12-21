@@ -11,7 +11,7 @@ import Dashboard from './1general/containerpages/Dashboard';
 import Archived from './1general/containerpages/Archived';
 import ClassContainer from './1general/containerpages/ClassContainer';
 import MyclassesDefault from './1general/containerpages/MyclassesDefault';
-import Classstream from './1general/containerpages/Classstream';
+import ClassStats from './1general/containerpages/ClassStats';
 import ClassInfo from './1general/containerpages/ClassInfo';
 import ClassActivity from './1general/containerpages/ClassActivity';
 import Classmarks from './2prof/Classmarks';
@@ -50,7 +50,7 @@ function App() {
                 <Route path={'classes'} element={<MyClasses/>}>  {/*this is the class list*/}
                     <Route path='' element={<MyclassesDefault/>} />
                     <Route path={'sampleclass'} element={<ClassContainer/>}>
-                        <Route path='' element ={ <Classstream/>} />
+                        <Route path='' element ={ <ClassStats/>} />
                         <Route path='info'  element={<ClassInfo/>} />
                         <Route path= 'activities' element={<ClassActivity/>} />
                         <Route path='marks' element={<Classmarks/>} />

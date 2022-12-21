@@ -1,42 +1,81 @@
 import React from 'react'
-import { Outlet , Link } from 'react-router-dom'
+import { Outlet , Link , useNavigate} from 'react-router-dom'
 
 function ClassContainer() {
+
+  const navigate = useNavigate();
   return (
-    <div>
-
-      <h4>Class Container</h4>
+    <div className='classcontent'>
      
-      <br />
-      <br />
-      <br />
-      (for classbanner)
-      <ul>
-        <li>## Classname#</li>
-        <li>##ProfName#</li>
-        <li>## Schedule#</li>
-      </ul>
 
-      
-      
+      <div className='classcontentmain'>
+        <div className='row'> 
+            <div className="col-md-12 " >
+              <div className='primary classheader classheader-lg borderradius-lg dbpanelmargin'>
+                <h4>Class name</h4>
+              </div>
+
+            <div className="classcontentsub">
+              <div className="row">
+                  <div className="col-lg-3 classnav-min">
+                    <div className="classnav tertiary borderradius-md dbpanelmargin">
+                    
+                      <ul>
+                        <li className='classnavitem' onClick={()=>{navigate('/classes/sampleclass')}}>  Announcements </li>
+                        <li><hr /></li>
+                        <li className='classnavitem' onClick={()=>{navigate('modules')}}>  Class Modules</li>
+                        <li><hr /></li>
+                        <li className='classnavitem' onClick={()=>{navigate('activities')}}>  Activities</li>
+                        <li><hr /></li>
+                        <li className='classnavitem' onClick={()=>{navigate('info')}}>  Class info </li>
+                        <li><hr /></li>
+                        <li className='classnavitem' onClick={()=>{navigate('marks')}}> Marks </li>
+                        
+                      </ul>
+                     
+                      
+                    </div>
+
+                  </div>
+
+
+                  <div className="col-lg-9 outletcontainer-min">
+                    <div className="tertiary borderradius-md outletcontainer">
+                          <Outlet />
+                    </div>
+                
+                  </div>
+
+                </div>
+            </div>
+
+
+            </div>
+
+            <div className="col-md-8">
+
+            </div>
+
+
+
+        </div>
+
+      </div>
+
+      <div className='activitylog borderradius-md tertiary'>
        
 
-      <br />
-      <br />
-      <br />
+      </div>
 
-        (navigation)
-        <ul>
-          <li> <Link to={'/classes/sampleclass'}> Class Stream</Link></li>
-          <li> <Link to={'info'}> Class info </Link></li>
-          <li> <Link to={'activities'}> Activities</Link></li>
-          <li><Link to={'marks'}> Marks</Link></li>
-          <li><Link to={'modules'}> Class Modules</Link></li>
-        </ul>
-        <br /><br /><br /><br /><br /><br />
 
-        (content)
-        <Outlet></Outlet>
+      
+    
+
+
+
+
+   
+
     </div>
 
   )

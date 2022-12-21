@@ -5,7 +5,7 @@ import Avatar from '../../assets/images/avatar.jpg'
 function Classpanel() {
   return (
    
-    <div className="col-lg-3">
+    <div className="col-lg-3 classpanel-min">
         <div className='classpanel borderradius-md primary '>
             <div className='classpanelheader secondary'>        
             </div>

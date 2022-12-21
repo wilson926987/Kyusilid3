@@ -23,6 +23,15 @@ function Profilenotif() {
     const [theme1 , settheme1] = useState('themeactive');
     const [theme2, settheme2] = useState();
 
+    const [searchbar, setsearchbar] = useState(false);
+    const [searchfilled,setfilled] = useState(false);
+    const [search, setsearch]= useState('');
+
+    useEffect(()=>{
+        search.length>0 ? setfilled(true) : setfilled(false)
+    },[search])
+  
+  
   
 
     const switchtheme =(e)=>{
@@ -35,7 +44,6 @@ function Profilenotif() {
         settheme2('themeactive');
         settheme('dark');
        }
-
     }
 
 
@@ -48,21 +56,23 @@ function Profilenotif() {
         );
     },[location])
 
+
+
     function temp(r){
         switch(r){
-            case '/' : return "Dashboard"; break;
-            case '/classes' : return 'Classes'; break;
-            case '/archived' : return 'Archived' ; break;
-            default: return '' ; 
+            case '/' : return "Dashboard";
+            case '/classes' : return 'Classes';
+            case '/archived' : return 'Archived' ;
+            default: return 'Classname' ; 
         }
     }
 
   return (
     <div className='profilenotif'>
         <div><h3>{currentpage}</h3>
-            <div className="pnsearchbar">
-                <div className='pnsearchbaropen'>
-                    <input type="text" placeholder='search here' />
+            <div className="pnsearchbar" onMouseEnter={()=>{setsearchbar(true)}} onMouseLeave={()=>{setsearchbar(false)}}>
+                <div className={`pnsearchbaropen ${searchbar ||searchfilled ? ' pnsearchbaropen-active' :""}`}>
+                    <input type="text" placeholder='search here' defaultValue={search}  onChange={(e)=>{setsearch(e.target.value) }} />
                 </div>
                 <div className="pnsearchbarclosed primary ">
                     <FaSearch />
