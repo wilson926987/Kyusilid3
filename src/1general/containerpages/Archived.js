@@ -1,15 +1,17 @@
 import React from 'react'
+import Classpanel from '../components/Classpanel'
 
 function Archived() {
   return (
     <div>
 
-        <p>##archived list#</p>
-        <ul>
-            <li>##class name#</li>
-            <li>## prof name#</li>
-            <li> ##subject code#</li>
-        </ul>
+    <div className='classcontainer'>
+        <div className="row">
+            <Classpanel/>   <Classpanel/>   <Classpanel/>   <Classpanel/>   <Classpanel/>   <Classpanel/>   <Classpanel/>   <Classpanel/>
+            <Classpanel/>   <Classpanel/>   <Classpanel/>   <Classpanel/>   <Classpanel/>   <Classpanel/>   <Classpanel/>
+          
+        </div>
+      </div>
 
     </div>
   )

@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { themeContext } from '../../Globalcontext'
 import Welcomebannerstud from '../components/Welcomebannerstud'
 import DbStudent from './DbStudent'
+import CalendarAnnouncements from '../components/CalendarAnnouncements'
 
 function Dashboard() {
   return (
@@ -18,15 +19,7 @@ function Dashboard() {
             
 
             </div>
-            <div className='col-md-4'>
-                <div className='eventscontainer tertiary borderradius-lg'>
-                    <div className="calendarcontainer primary borderradius-lg"></div>
-                    <div className='announcementscontainer'>
-                        
-                    </div>
-                
-                </div>
-            </div>
+           <CalendarAnnouncements />
         </div>
        
     </div>

@@ -9,8 +9,7 @@ function ClassStats() {
 
       <div className="col-md-12 margintop12 ">
         <Announcementpanel />
-        <Announcementpanel />
-       
+        <Announcementpanel />   
         <Announcementpanel />
        
        
