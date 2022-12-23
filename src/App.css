@@ -6,9 +6,7 @@ body {
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
     overflow-x: hidden;
-
 }
-
 
 .sidebarcontent::-webkit-scrollbar{ 
   width: 10px; 
@@ -17,7 +15,6 @@ body {
   background-color: rgba(255, 255, 255, 0.219);
   border-radius: 5px;
 }
-
 
 button{
   cursor: pointer;
@@ -60,7 +57,6 @@ body::-webkit-scrollbar{
   --highlightcolor2:  rgba(0, 0, 0, 0.164);
 }
 
-
 *{
   transition: .6s;
   margin: 0;
@@ -74,16 +70,13 @@ ul{
   list-style-type: none;
 }
 
-
 svg{
   transform: scale(1.2);
 }
 
-
 .relative{
   position: relative;
 }
-
 
 .default .primary{
   background-color: var(--defaultprimary);
@@ -105,8 +98,6 @@ svg{
   background-color: var(--defaultbackground);
 }
 
-
-
 .dark .primary{
   background-color: var(--darkthemeprimary);
 }
@@ -127,7 +118,6 @@ svg{
   background-color: var(--darkthemebackground);
 }
 
-
 .lightinset{
   box-shadow: -4px -6px 15px 2px rgba(255,255,255,0.3) inset;
   -webkit-box-shadow: -4px -6px 15px 2px rgba(255,255,255,0.3) inset;
@@ -142,12 +132,9 @@ svg{
   border-radius: 8px;
 }
 
-
 .blacken{
   background-color: black !important;
-
 }
-
 
 .rounded , .profileicon img{
   border-radius: 50%;
@@ -177,20 +164,10 @@ svg{
   margin-right: 20px;
 }
 
-
-
 .sidebarnotactive{
   width: 0px !important;
   margin-right: 60px;
-
 }
-
-
-
-
-
-
-
 
 .sidebarclosed{
   height: 240px;
@@ -207,7 +184,6 @@ svg{
   transform: translateX(-100%);
   opacity: 0 ;
 }
-
 
 .sidebarclosed svg{
   transform: scale(2);
@@ -234,13 +210,11 @@ svg{
   display: flex;
   align-items: center;
   justify-content: center;
- 
 }
 .sidebarbody img{
   height: 70px;
   margin-bottom: 12px;
   width: 70px;
-
 }
 
 .sidebarcontent{
@@ -253,11 +227,9 @@ svg{
   white-space: nowrap;
 }
 
-
 .clear{
   opacity: 0;
 }
-
 
 .sidebarcontent>ul>li{
     padding-top: 8px;
@@ -266,21 +238,13 @@ svg{
     display: flex;
     align-items: center;
     cursor: pointer;
-    font-weight: bold;
-   
+    font-weight: bold;  
 }
 
 .sidebarcontent li svg{
    margin-left: 12px;
    margin-right: 12px;
 }
-
-
-
-
-
-
-
 .sidebarsubmenu{
   padding-left: 45px;
   font-size: 14px;
@@ -294,13 +258,9 @@ svg{
   right: 40px;
   border-radius: 4px;
   transition: .1s;
-
 }
 
-
-
 .sidebarmenu:hover .highlight , .sidebarsubmenu:hover .highlight , .sidebarhighlightactive{
-
   background-color: var(--highlightcolor);
   border-right: 8px solid rgba(255, 255, 255, 0.459);
   right: 0;
@@ -332,19 +292,16 @@ svg{
   border-radius: 50%;
   height: 20px;
   width: 20px;
-
 }
 
 .maincontainer{
   display: flex;
   width: 100%;
- 
 }
 
 .content{
   width: 100%;
   padding: 0 20px;
-
 }
 
 .profilenotif{
@@ -355,7 +312,6 @@ svg{
   align-items: center;
   transition: none;
 }
-
 .profilenotif>div:first-child{
   margin-right: auto;
   margin-left: 12px;
@@ -363,7 +319,6 @@ svg{
   align-items: center; 
   justify-content: center;
 }
-
 
 .pnsearchbar{
   min-width: 30px;
@@ -373,9 +328,6 @@ svg{
   align-items: center;
  
 }
-
-
-
 .pnsearchbarclosed{
   height: 30px;
   width: 30px;
@@ -405,8 +357,6 @@ svg{
   width: 200px !important;
 }
 
-
-
 .pnsearchbaropen input{
   width: 100%;
   padding-top: 6px;
@@ -417,21 +367,9 @@ svg{
   border: none; 
 }
 
-
-
 .pnsearchbaropen input:focus{
   outline: none;
 }
-
-
-
-
-
-
-
-
-
-
 .notificationicon{
   margin-right: 24px ;
 }
@@ -507,17 +445,13 @@ justify-content: space-around;
   transform: scale(.8);
 }
 
-
 .darkicon{
   display: block;
   height: 16px;
   width: 16px;
   background-color: gray;
   border-radius: 50%;
-
 }
-
-
 
 .welcomebanner{
   height: 180px;
@@ -528,7 +462,6 @@ justify-content: space-around;
   position: relative;
   min-width: 360px;
   overflow: hidden;
-
 }
 
 .welcomebannerdesign{
@@ -540,8 +473,6 @@ justify-content: space-around;
 .welcomebannerdesign img{
   height: 200px;
 }
-
-
 
 .welcomebanner *{
   color: white;
@@ -568,7 +499,6 @@ justify-content: space-around;
   padding: 18px;
 }
 
-
 .dbactivitylist{
   padding: 18px;
 }
@@ -577,9 +507,7 @@ justify-content: space-around;
   display: flex;
   justify-content: space-between;
   margin-bottom: 12px;
-
 }
-
 
 .activityitem{
   height: 60px;
@@ -590,7 +518,6 @@ justify-content: space-around;
   display: flex;
   align-items: center;
   margin-bottom: 12px;
-
 }
 
 .activityitempic{
@@ -610,11 +537,10 @@ justify-content: space-around;
   width: 31px;
   text-align: center;
   line-height: 31px;
-
 }
 
 .eventscontainer{
-  height: 90vh;
+  min-height: 90vh;
 }
 
 .calendarcontainer{
@@ -626,8 +552,8 @@ justify-content: space-around;
 
 .announcementscontainer{
   padding : 18px;
+  overflow-y: auto;
 }
-
 
 .classlisttimeline{
     height: 200px;
@@ -639,8 +565,8 @@ justify-content: space-around;
   padding: 8px;
   transition: .1s;
   overflow: hidden;
+  cursor: pointer;
 }
-
 
 .classpanelsched button{
   padding: 8px 20px;
@@ -653,12 +579,10 @@ justify-content: space-around;
   margin-top: 12px;
 }
 
-
 .title{
   margin-top: 25px;
   margin-bottom: 15px;
   margin-left: 16px;
-
 }
 
 .classcontainer{
@@ -668,10 +592,8 @@ justify-content: space-around;
 }
 
 .classcontainer .row>div{
-  align-items: center;
-  
+  align-items: center; 
 }
-
 
 .classpanelheader{
   display: block;
@@ -686,10 +608,8 @@ justify-content: space-around;
 .classpaneltitle{
   padding-left: 6px;
   margin-top: 12px;
-  position: relative;
-  
+  position: relative; 
 }
-
 
 .classpanel:hover{
   box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.75);
@@ -717,7 +637,6 @@ justify-content: space-around;
   margin-bottom: -4px;
 }
 
-
 .classpanelprofile{ 
   position: absolute;
   top: -40px;
@@ -736,7 +655,6 @@ justify-content: space-around;
   min-width: 300px;
 }
 
-
 .classpanelopen{
   margin-top: 12px;
   opacity: 0;
@@ -746,7 +664,6 @@ justify-content: space-around;
 .classpanelclosed{
   transition-delay: .6s;
 }
-
 
 .classpanelsched{
   display: flex;
@@ -763,15 +680,11 @@ justify-content: space-around;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-
-
 }
-
 
 .classcontent{
   display: flex;
   flex-direction: row;
-
 }
 
 .classcontentmain{
@@ -779,22 +692,41 @@ justify-content: space-around;
 }
 
 .classheader{
- 
   margin-left: 12px;
   margin-right: 12px;
- 
+  display: flex;
+  align-items: flex-end;
+  padding: 16px 20px;
+}
+.classheader h3{
+  margin-bottom: 12px;
 }
 
 .classheader-lg{
   height: 200px;
 }
 
-
 .activitylog{
   width: 350px;
   height: 90vh;
   padding: 18px;
   margin-left: 20px;
+}
+
+.activitysubtitle{
+  margin-left: 4px;
+}
+
+.space-between{
+  justify-content: space-between;
+}
+
+.smol{
+  font-size: 12px;
+}
+
+.activitylog>h4{
+  margin-bottom: 24px ;
 }
 
 .classcontentsub{
@@ -843,8 +775,6 @@ justify-content: space-around;
   transition: 0s;
 }
 
-
-
 .margintop12{
   margin-top: 18px;
 }
@@ -853,7 +783,6 @@ justify-content: space-around;
   height: 200px;
   margin-bottom: 20px;
 }
-
 
 .outletcontainer{
   min-height: 400px;
@@ -875,6 +804,7 @@ justify-content: space-around;
 .announcementpanel{
   margin-bottom: 12px;
   padding:8px;
+ 
   
 }
 
@@ -882,29 +812,24 @@ justify-content: space-around;
   min-width: 300px;
 }
 
-
-
 .announcementheader{
   display: flex;
   margin-bottom: 8px;
-
-
 }
-
 .announcementheader>div:first-child{
   margin-right: auto;
 }
-
 
 .announcementcontent{
   padding: 16px;
   margin-bottom: 8px;
   font-size: 14px;
+  user-select: text;
 }
 
 .announcementcomment{
   margin-top: 12px;
-  width: 80%;
+  width: 100%;
   display: flex;
   justify-content: center;
   margin-left: auto;
@@ -925,16 +850,13 @@ justify-content: space-around;
 .announcementcomment textarea::-webkit-scrollbar{
   width: 0;
 }
-
 .default .announcementcomment textarea{
   background-color: var(--defaultbackground);
 }
 
-
 .dark .announcementpanel textarea{
   background-color: var(--darkthemebackground);
 }
-
 .sendbutton{
   position: absolute;
   right: 4px;
@@ -951,15 +873,10 @@ justify-content: space-around;
   background-color: rgba(0, 0, 0, 0.3);
 }
 
-
 .topicpanel{
   margin-bottom: 12px;
   padding-bottom: 12px;
 }
-
-
-
-
 
 .panel-header{
   display: flex;
@@ -967,6 +884,7 @@ justify-content: space-around;
   padding : 6px 20px;
   align-items: center;
   border-radius: 3px;
+  cursor: pointer;
 }
 
 .panel-header>div:first-child{
@@ -980,6 +898,31 @@ justify-content: space-around;
   border-style: solid;
   margin-right: 20px;
 }
+
+.activityname {
+  display: flex;
+  align-items: center;
+}
+
+.activityname svg{
+  font-size: 18px;
+  transform: translateY(12%);
+  margin-left: 20px;
+  margin-right: 4px;
+}
+
+.default .activityname svg{
+  fill: var(--defaultprimary);
+}
+
+.dark .activityname svg{
+  fill: var(--darkthemeprimary);
+}
+
+.activityname > p:last-of-type{
+    font-size: 10px;
+}
+
 
 .panel-header>div:last-of-type{
   margin-left: auto;
@@ -1003,7 +946,6 @@ justify-content: space-around;
   padding: 6px 50px;
 }
 
-
 .panel-content-active{
   height: 100px !important;
 }
@@ -1022,11 +964,9 @@ justify-content: space-around;
   font-size: 13px;
 }
 
-
 .panel-content>div:first-child>svg{
     font-size: 30px;  
 }
-
 
 .personpanel{
   display: flex;
@@ -1039,7 +979,6 @@ justify-content: space-around;
 .default .personpanel{
   border-bottom: 1px solid var(--defaultprimary);
 }
-
 
 .dark .personpanel{
   border-bottom: 1px solid var(--lighttextprimary);
@@ -1075,7 +1014,6 @@ justify-content: space-around;
   border: 3px solid var(--darktextprimary);
 }
 
-
 .classinfotitle{
   margin-top: 20px;
   margin-bottom:12px;
@@ -1104,25 +1042,199 @@ justify-content: space-around;
   margin-bottom: 40px;
 }
 
-
 .adminpostpanel{
   height: 100px;
   width: 100%;
-  display: flex;
   margin-bottom: 8px;
+  position: relative;
+  display: flex;
+  padding: 8px 12px;
 }
 
 .default .adminpostpanel:hover{
-  background-color: var(--defaultprimary);
+  background-color: var(--defaultbackground);
 }
 
+.dark .adminpostpanel:hover{
+  background-color: var(--darkthemebackground);
+}
+
+.adminposticons{
+  display: inline;
+  margin-right: 12px;
+  position: relative;
+  height: 40px;
+  width: 40px;
+}
+
+.adminposticons>div:first-child{
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid rgba(128, 128, 128, 0.507);
+}
+
+.default .adminposticons>div:first-child{
+  background-color : var(--defaultbackground);
+}
+
+.dark .adminposticons>div:first-child{
+  background-color: var(--darkthemebackground);
+}
+
+.adminposticons>div:last-of-type{
+  position: absolute;
+  bottom: -8px;
+  right: -8px;
+}
+
+.adminposticons>div:last-of-type img{
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+
+}
 
 .adminposttitle{
+  display: flex;
+  gap : 4px;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.adminposttitle p{
+  font-size: 12px;
+}
+
+.adminpostcontent{
+  padding-left: 4px;
+}
+
+.adminpostcontent p{
+  font-size: 13px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.activitycommentsection{
+  padding: 12px 20px;
+  margin: 0 12px;
+}
+
+.activitycommentsection> h5{
+  margin-bottom: 12px;
+}
+
+.default .activitycommentsection{
+  border-top: 1px solid var(--defaultsecondary);
+}
+
+.dark .activitycommentsection{
+  border-top: var(--darkthemesecondary);
+}
+
+.classcomments li{
+  display: flex;
+  margin-bottom: 20px;
+}
+.commentprofile{
+  display: block;
+  margin-right: 12px;
 
 }
 
+.commentprofile ,.commentprofile img{
+  background-color: gray;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+ 
+}
+
+.flex{
+  display: flex;
+  align-items: center;
+}
+
+.commentcontent{
+  width: 100%;
+}
+
+.commentcontent .flex{
+    align-items: center;
+}
+
+.commentcontent>div:first-child p{
+  font-size: 11px;
+  margin-left: 30px;
+}
+
+.commentmessage{
+  font-size: 15px;
+  margin-top: 4px;
+}
+
+.activitylogpanel{
+  display: flex;
+  margin-bottom: 35px;
+
+}
+
+.activityicon{
+  display: flex;
+  height: 30px;
+  min-width: 30px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.486);
+  margin: 0 3px;
+}
+
+.activitylogicon{
+  display: flex;
+  height: 30px;
+  min-width: 30px;
+  border-radius: 50%;
+  background-color: rgba(131, 131, 131, 0.486);
+  margin: 0 3px;
+}
+
+.activitylogname{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+}
 
 
+.createNewbutton{
+  position: fixed;
+  bottom: 30px;
+  right: 40px;
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align:center;
+  box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.69) inset;
+  -webkit-box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.69) inset;
+  -moz-box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.69) inset;}
+
+.createNewbutton svg{
+  font-size: 25px;
+}
+
+
+.default .createNewbutton svg{
+  fill: white;
+}
 
 
 
@@ -1185,6 +1297,9 @@ justify-content: space-around;
 
   .activitylog{
     display: none;
+  }
+  .createNewbutton{
+    display: flex;
   }
  
 }

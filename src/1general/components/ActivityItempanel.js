@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
-import {FaClipboardList} from 'react-icons/fa'
+import {FaClipboardList, FaCommentAlt} from 'react-icons/fa'
 import {AiFillFile} from 'react-icons/ai'
+import {MdSend} from 'react-icons/md'
+import Avatar from '../../assets/images/avatar.jpg'
 
 function ActivityItempanel() {
 
@@ -15,8 +17,8 @@ function ActivityItempanel() {
             <div className='activityicon'>
                 <FaClipboardList />
             </div>
-            <div>
-              <p>Activityname</p>
+            <div className='activityname'>
+              <p>Activityname</p> <FaCommentAlt/> <p>6</p>
             </div>
             <div>
               <p>Date posted</p>
@@ -30,8 +32,70 @@ function ActivityItempanel() {
                   <AiFillFile />
                   filename
                 </div>
-              }
+              }       
           </div>
+          {maximized &&
+                  <div className='activitycommentsection'>
+                    <h5>Class comments</h5>
+                    <ul className='classcomments'>
+                      <li>
+                        <div className='commentprofile'>
+
+                        </div>
+                        <div className='commentcontent'>
+                              <div className='flex'><h5>Student name</h5> <p>date posted</p></div>
+                              <div className='commentmessage'>
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, odio! Est expedita iure eum sint aperiam excepturi, labore at. Enim vitae velit quae impedit modi commodi? Laboriosam, a placeat. Sapiente.
+                              </div>
+
+                        </div>
+                        
+
+                      </li>
+                      <li>
+                        <div className='commentprofile'>
+
+                        </div>
+                        <div className='commentcontent'>
+                              <div className='flex'><h5>Student name</h5> <p>date posted</p></div>
+                              <div className='commentmessage'>
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, odio! Est expedita iure eum sint aperiam excepturi, labore at. Enim vitae velit quae impedit modi commodi? Laboriosam, a placeat. Sapiente.
+                              </div>
+
+                        </div>
+                        
+
+                      </li>
+                      <li>
+                        <div className='commentprofile'>
+
+                        </div>
+                        <div className='commentcontent'>
+                              <div className='flex'><h5>Student name</h5> <p>date posted</p></div>
+                              <div className='commentmessage'>
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, odio! Est expedita iure eum sint aperiam excepturi, labore at. Enim vitae velit quae impedit modi commodi? Laboriosam, a placeat. Sapiente.
+                              </div>
+
+                        </div>
+                        
+
+                      </li>
+               
+                    </ul>
+
+                    <div className="announcementcomment"> 
+        <textarea name="Text1"  cols='1' rows="2"  placeholder='Enter comment'></textarea>
+        <div className='sendbutton'>  <MdSend/></div>
+      
+    </div>
+                    
+
+              
+                </div>
+              }
+        
+
+
            
             
         </li>

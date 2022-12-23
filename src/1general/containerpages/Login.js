@@ -11,6 +11,7 @@ function Login() {
     <div>
 
       <h1>Login page</h1>
+      note: type usertype dun sa username (student, prof, admin)
         <ul>
             <li>*username* <input type="text"  defaultValue ={username} onChange={(e)=>{setusername(e.target.value)}}/></li>
             <li>*password*</li>

@@ -26,8 +26,7 @@ function Container() {
             <Profilenotif />
             <Outlet/> 
             
-
-            
+   
         </div>
     
     </div>

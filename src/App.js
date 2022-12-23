@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { themeContext , userInfoContext} from './Globalcontext';
 import Container from './1general/components/Container';
 import { BrowserRouter,  Routes, Route } from 'react-router-dom';
+import {FaPlus} from 'react-icons/fa'
+
 
 import Login from './1general/containerpages/Login';
 import MyClasses from './1general/containerpages/MyClasses';
@@ -69,11 +71,17 @@ function App() {
                 <Route path='filemanager' element={<FileManager/>}></Route>
 
               </Route>
-          
+
+
           
            
 
             </Routes>   
+            
+              <div className='createNewbutton secondary'>
+                <FaPlus/>
+              </div>
+          
         </BrowserRouter>
       </div>
       </div>

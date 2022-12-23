@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Outlet , useNavigate, useLocation} from 'react-router-dom'
+import Activitylogpanel from '../components/Activitylogpanel';
 
 function ClassContainer() {
 
@@ -28,7 +29,11 @@ function ClassContainer() {
         <div className='row'> 
             <div className="col-md-12 " >
               <div className='primary classheader classheader-lg borderradius-lg dbpanelmargin'>
-                <h4 id='top'>Class name</h4>
+                <div><h3 id='top'>Class name</h3>
+                    <h4>Subject code</h4>
+                    <h4>Saturdays 5am- 12pm</h4>
+                    <h4>Prof name</h4>
+                </div>
               </div>
 
             <div className="classcontentsub">
@@ -82,10 +87,6 @@ function ClassContainer() {
 
             </div>
 
-            <div className="col-md-8">
-
-            </div>
-
 
 
         </div>
@@ -93,7 +94,10 @@ function ClassContainer() {
       </div>
 
       <div className='activitylog borderradius-md tertiary'>
-       
+            <h4>Class Activity log</h4>
+            <Activitylogpanel /><Activitylogpanel /><Activitylogpanel /><Activitylogpanel /><Activitylogpanel /><Activitylogpanel />
+
+
 
       </div>
 

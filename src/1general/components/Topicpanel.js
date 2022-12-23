@@ -10,6 +10,7 @@ function Topicpanel() {
        <h4>Topic Title</h4> <hr />
        <ul className='topiclist'>
           <ActivityItempanel/>
+          <ActivityItempanel/>
        </ul>
     </div>
   )
