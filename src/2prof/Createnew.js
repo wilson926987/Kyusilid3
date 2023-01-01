@@ -16,11 +16,15 @@ function Createnew() {
   const [postdate, setpostdate] = useState();
   const [posttimer, setposttimer] = useState(0);
   const [activitytype, setactivitytype] = useState('Material');
+  const [duedate, setduedate] = useState();
+  const [duescheduletype, setduescheduletype] = useState('fixed');
+  const [duetimer, setduetimer] = useState(0);
+  const [availability, setavailability] = useState();
   
 
   return (
     <div><h4>Create new</h4>
-                <div className='row'>
+                <div className='row margintop12'>
                         <div className="col-lg-7">
                           <div>
                                    
@@ -30,8 +34,10 @@ function Createnew() {
                           <ul>
                             <li>-file</li>
                             <li>-link</li>
-                            <li>-questionnaire</li>
+                           
                              </ul>
+                             {activitytype==='Questionnaire' &&
+                             <label htmlFor="" className='primary'>Questionaire( pag questionaire ung type)</label>}
                           </div>
 
 
@@ -49,6 +55,7 @@ function Createnew() {
                                <option value="Attendance">Attendance</option>
                               </select>
                             </div>
+                            <hr />
             
                              <div className='flex'>
                                  <label htmlFor="">Schedule</label> 
@@ -66,12 +73,60 @@ function Createnew() {
                             }
                             {postscheduletype==='relative' &&                           
                               <>
-                                <input type="text" defaultValue={posttimer}  /> minutes after start of class
+                                <input type="number" defaultValue={posttimer}  min ='0'/> minutes after start of class
                               </>
                             }
+                            <hr />
 
 
                             </div>
+
+                            {(activitytype==='Assignment' || activitytype ==='Activity') &&
+                              <>
+                              <hr />
+                              <div>
+                                <input type="checkbox" name="" id="allowedit" /> <label htmlFor="allowedit">Allow Students to edit once submitted</label> <br />
+                                <input type="checkbox" name='' id='allowlate'/> <label htmlFor="allowlate">Allow late submissions</label> <br />
+                                <label htmlFor="limitavailability">Limit availability</label>  
+                                <select name="" id="">
+                                    <option value="none">None</option>
+                                    <option value="present">Only present</option>
+
+
+                                </select>
+                                <br />
+
+                              </div>
+                              <hr />
+
+                              <div className='flex'>
+                                 <label htmlFor="">Due Date</label> 
+                                 <select name="schedule" id="schedule" onChange={(e)=>{setduescheduletype(e.target.value)}}>
+                                    <option value="fixed">fixed</option>
+                                    <option value="relative">relative</option>
+                                  </select>                        
+                             </div>
+
+                             {duescheduletype==='fixed' &&
+                             <>
+                           
+                              <input type="date" name="" id="postdate" defaultValue={duedate} />      
+                             </>
+
+                                                  
+                             }
+                              {duescheduletype==='relative' &&
+                                <>
+                            
+                                <input type="number" defaultValue={duetimer}  min ='0'/> minutes after posting
+                              </>
+                              }
+
+                              </>
+
+                            
+                            
+                            }
 
                               
 
@@ -80,6 +135,9 @@ function Createnew() {
                         </div>
 
                 </div> 
+                <div className="margintop12">
+                  <button>Confirm</button>
+                </div>
     
     </div>
   )
