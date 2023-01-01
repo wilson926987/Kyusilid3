@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import Welcomebannerstud from '../components/Welcomebannerstud'
+import Welcomebannerstud from '../../3student/Welcomebannerstud'
 import DbStudent from '../../3student/DbStudent'
 import DbProf from '../../2prof/DbProf'
 import CalendarAnnouncements from '../components/CalendarAnnouncements'

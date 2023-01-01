@@ -18,6 +18,7 @@ import ClassInfo from './1general/containerpages/ClassInfo';
 import ClassActivity from './1general/containerpages/ClassActivity';
 import Classmarks from './2prof/Classmarks';
 import ClassModules from './2prof/ClassModules';
+import Createnew from './2prof/Createnew';
 
 import AdminContainer from './4admin/AdminContainer';
 import AdminDashboard from './4admin/AdminDashboard';
@@ -51,8 +52,9 @@ function App() {
                 <Route path={''} element={<Dashboard/>}></Route>  {/*this is the dashboard*/}
                 <Route path={'classes'} element={<MyClasses/>}>  {/*this is the class list*/}
                     <Route path='' element={<MyclassesDefault/>} />
-                    <Route path={'sampleclass'} element={<ClassContainer/>}>
+                    <Route path={'sampleclass'} element={<ClassContainer/>}>          
                         <Route path='' element ={ <ClassStats/>} />
+                        <Route path='createnew' element={<Createnew/> }/>
                         <Route path='info'  element={<ClassInfo/>} />
                         <Route path= 'activities' element={<ClassActivity/>} />
                         <Route path='marks' element={<Classmarks/>} />
@@ -69,13 +71,7 @@ function App() {
                 <Route path='Entrepreneurship' element={<COURSE_ENTREP/>}></Route>
                 <Route path='accounts' element={<Accounts/>}> </Route>
                 <Route path='filemanager' element={<FileManager/>}></Route>
-
               </Route>
-
-
-          
-           
-
             </Routes>   
             
               <div className='createNewbutton secondary'>

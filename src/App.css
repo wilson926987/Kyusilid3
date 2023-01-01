@@ -160,7 +160,7 @@ svg{
   flex-direction: column;
   width: 250px;
   height: 96vh;
-  z-index: 4;
+  z-index: 12;
   margin-right: 20px;
 }
 
@@ -454,7 +454,7 @@ justify-content: space-around;
 }
 
 .welcomebanner{
-  height: 180px;
+  height: 240px;
   padding: 18px 30px;
   display: flex;
   flex-direction: column;
@@ -487,6 +487,8 @@ justify-content: space-around;
   border: none;
   font-weight: bold;
 }
+
+
 
 .welcomebanner button:hover{
   box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.75);
@@ -706,6 +708,14 @@ justify-content: space-around;
   height: 200px;
 }
 
+.notransition{
+  transition: none;
+}
+
+.classheader-md{
+  height: 60px;
+}
+
 .activitylog{
   width: 350px;
   height: 90vh;
@@ -735,10 +745,10 @@ justify-content: space-around;
 }
 
 .classnav{
-  height: 500px;
+ 
   position: sticky;
   padding-top: 12px;
-  padding-bottom: 12px;
+  padding-bottom: 18px;
   
 
 }
@@ -1210,7 +1220,6 @@ justify-content: space-around;
   max-width: 200px;
 }
 
-
 .createNewbutton{
   position: fixed;
   bottom: 30px;
@@ -1225,12 +1234,12 @@ justify-content: space-around;
   text-align:center;
   box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.69) inset;
   -webkit-box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.69) inset;
-  -moz-box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.69) inset;}
+  -moz-box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.69) inset;
+}
 
 .createNewbutton svg{
   font-size: 25px;
 }
-
 
 .default .createNewbutton svg{
   fill: white;
@@ -1239,6 +1248,69 @@ justify-content: space-around;
 
 
 
+.blurbackground{
+  position: fixed;
+  height: 100vh;
+  width: 100%;
+  top: 0;
+  left:  0;
+  z-index: 4;
+  transition: 0;
+  backdrop-filter: blur(2px);
+}
+
+.createnewModal{
+ min-height: 600px;
+ padding: 20px;
+}
+
+.fullwidth{
+  width: 100%;
+  position: fixed;
+  min-height: 600px;
+  z-index: 5;
+  top : 50%;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(-50%);
+}
+
+.navcreatenew{
+  height: 45px;
+  cursor: pointer;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ gap: 6px;
+}
+
+
+.classSelectionitem{
+  padding: 6px 12px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  transition: none;
+}
+
+.classSelectionitem input{
+  transform: scale(1.4);
+
+}
+
+.default .classSelectionitem:hover{
+background-color: var(--defaultprimary);
+}
+
+.dark .classSelectionitem:hover{
+  background-color: var(--darkthemeprimary);
+}
+
+.classSelectionitem>div p{
+  font-size: 12px;
+}
 
 
 
@@ -1284,22 +1356,14 @@ justify-content: space-around;
     width: 100vw;
     margin-left: -20px;
     margin-bottom: 20px;
- 
   }
 
-  .pnsearchbar{
+  .pnsearchbar , .activitylog{
     display: none;
   }
 
-  .classnav{
-    display: none;
-  }
-
-  .activitylog{
-    display: none;
-  }
-  .createNewbutton{
-    display: flex;
+  .panel-header{
+    padding : 6px 0px;
   }
  
 }

@@ -46,7 +46,7 @@ function DbStudent() {
 
                
                </div>
-                          <div className='activityitem primary'> 
+                      <div className='activityitem primary'> 
                     <div className='activityitempic secondary'>
                       <div className='tertiary'>
                       <GrNotes/>
@@ -56,7 +56,6 @@ function DbStudent() {
                     <div className='activityitemcontent'>
                       <h5>##Activity name#</h5>
                       <h6>##Activity due date#</h6>
-
                     </div>
 
                

@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import {FaClipboardList, FaCommentAlt} from 'react-icons/fa'
 import {AiFillFile} from 'react-icons/ai'
 import {MdSend} from 'react-icons/md'
 import Avatar from '../../assets/images/avatar.jpg'
+import { userInfoContext } from '../../Globalcontext'
 
 function ActivityItempanel() {
-
+  const {userinfo} = useContext(userInfoContext);
   const [maximized, setmaximized] = useState(false)
   const togglemaximise = ()=>{
     setmaximized(!maximized)
@@ -22,6 +23,11 @@ function ActivityItempanel() {
             </div>
             <div>
               <p>Date posted</p>
+
+              {userinfo.usertype==='prof' ?  <p>12/44 submitted</p> : <p>Due date</p>
+             }
+   
+
             </div>
           </div>
 

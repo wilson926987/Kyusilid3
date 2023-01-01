@@ -7,64 +7,45 @@ function DbProf() {
     <div className="row">
         <div className="col-md-4">
             <div className="tertiary attendancepanel borderradius-lg dbpanelmargin">
-                attendance status:
+                My classes:
                 <ul>
-                    <li>##total discussions#</li>
-                    <li>##total attended#</li>
+                    <li>##total classes#</li>
+                    <li>##average students per class#</li>
                 </ul>
             </div>
         </div>
 
-        <div className='col-md-8'>
-            <div className="tertiary borderradius-lg activitystatuspanel dbpanelmargin">
-                activity status:
+        <div className="col-md-4">
+            <div className="tertiary attendancepanel borderradius-lg dbpanelmargin">
+                Class Activities:
                 <ul>
-                    <li>dropdown(assignments, quizzes, seatwork)</li>
-                    <li>grap itmes(##number of pending#, ##number of done #, ##number of missing#)</li>
+                    <li>##Activities, assignments and quizzes etc posted#</li>
+                    <li>##total students submitted#</li>
+                </ul>
+            </div>
+        </div>
+
+        <div className="col-md-4">
+            <div className="tertiary attendancepanel borderradius-lg dbpanelmargin">
+                attendance status:
+                <ul>
+                    <li>##total discussions#</li>
+                    <li>##average attendance per class#</li>
                 </ul>
             </div>
         </div>
 
         <div className='col-md-12'>
-          <div className='tertiary borderradius-lg dbactivitylist dbpanelmargin'>
-             <div><h4>Upcoming Activities</h4>
-                      <button>dropdown ##classlist#</button>
-              </div>
-
-               <div className='activityitem primary'> 
-                    <div className='activityitempic secondary'>
-                      <div className='tertiary'>
-                      <GrNotes/>
-                      </div>
-                   
-                    </div>
-                    <div className='activityitemcontent'>
-                      <h5>##Activity name#</h5>
-                      <h6>##Activity due date#</h6>
-
-                    </div>
-
-               
-               </div>
-                          <div className='activityitem primary'> 
-                    <div className='activityitempic secondary'>
-                      <div className='tertiary'>
-                      <GrNotes/>
-                      </div>
-                   
-                    </div>
-                    <div className='activityitemcontent'>
-                      <h5>##Activity name#</h5>
-                      <h6>##Activity due date#</h6>
-
-                    </div>
-
-               
-               </div>
-           
-           
-          </div>
+            <div className="tertiary borderradius-lg activitystatuspanel dbpanelmargin">
+                  extra statistic:
+                <ul>
+                    <li>(malapad na graph o kung ano man)</li>
+                    <li></li>
+                </ul>
+            </div>
         </div>
+
+     
     </div>
 </div>
   )
