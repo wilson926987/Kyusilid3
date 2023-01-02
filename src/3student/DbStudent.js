@@ -1,5 +1,8 @@
 import React from 'react'
 import {GrNotes} from 'react-icons/gr'
+import DonutChart from '../1general/components/DonutChart'
+import BarChart from '../1general/components/BarChart'
+
 
 function DbStudent() {
   return (
@@ -7,21 +10,16 @@ function DbStudent() {
     <div className="row">
         <div className="col-md-4">
             <div className="tertiary attendancepanel borderradius-lg dbpanelmargin">
-                attendance status:
-                <ul>
-                    <li>##total discussions#</li>
-                    <li>##total attended#</li>
-                </ul>
+            <h2 className="text-left">Attendance Status</h2>
+<br></br>
+<DonutChart></DonutChart>
             </div>
         </div>
 
         <div className='col-md-8'>
             <div className="tertiary borderradius-lg activitystatuspanel dbpanelmargin">
-                activity status:
-                <ul>
-                    <li>dropdown(assignments, quizzes, seatwork)</li>
-                    <li>grap itmes(##number of pending#, ##number of done #, ##number of missing#)</li>
-                </ul>
+            <h2 className="text-left">Activity Status</h2>
+            <div className='BarChart'>   <BarChart></BarChart></div>
             </div>
         </div>
 
@@ -46,7 +44,7 @@ function DbStudent() {
 
                
                </div>
-                      <div className='activityitem primary'> 
+                          <div className='activityitem primary'> 
                     <div className='activityitempic secondary'>
                       <div className='tertiary'>
                       <GrNotes/>
@@ -56,6 +54,7 @@ function DbStudent() {
                     <div className='activityitemcontent'>
                       <h5>##Activity name#</h5>
                       <h6>##Activity due date#</h6>
+
                     </div>
 
                
