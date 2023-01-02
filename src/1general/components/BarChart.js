@@ -7,8 +7,8 @@ function Barchart() {
 
         <Chart
 
-            height = {130}
-            width = {650}
+            height = '90%'
+            width = '100%'
             type= "bar"
             series= {[
               
@@ -39,7 +39,7 @@ function Barchart() {
             },
             plotOptions: {
               bar: {
-                columnWidth: "30%",
+                columnWidth: "50%",
                 position:'center'
               }
             },
@@ -58,7 +58,9 @@ function Barchart() {
                 },
                 title: {
                   text: ""
-                }
+                },
+              
+
               },
               {
                 seriesName: 'Done',
@@ -92,7 +94,7 @@ function Barchart() {
                 colors: ['#F44336', '#E91E63', '#9C27B0']
              },*/
               //horizontalAlign: "right",
-              offsetX: 0,
+              offsetX: 8,
               offsetY: 15
               
          

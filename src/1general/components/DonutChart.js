@@ -37,9 +37,9 @@ function Donutchart()
 <Chart  
 
 type="donut"
-width={300}
-height={300}
-series={[47,50]}
+width={280}
+height= {280}
+series={[470,50]}
 
 options={{
     
