@@ -1312,6 +1312,38 @@ background-color: var(--defaultprimary);
   font-size: 12px;
 }
 
+.postannouncement{
+  height: 80px;
+}
+
+.createactivitytitle input[type=text], .createactivitytitle input[type=date] , .createactivitytitle textarea, .createactivitytitle select{
+  padding: 6px 12px;
+  width: 80%;
+  border-radius: 8px;
+  resize: none;
+  margin-bottom: 4px;
+}
+
+.createactivitytitle input[type= number]{
+  padding: 6px 12px;
+  width: 60px;
+  border-radius: 8px;
+  margin-bottom: 4px;
+}
+
+
+
+.default .primaryborder{
+  border: 3px solid  var(--defaultprimary);
+}
+
+.dark .primaryborder{
+  border: 3px solid var(--darkthemeprimary);
+}
+
+.dark .createactivitytitle select ,.dark .createactivitytitle input , .dark .createactivitytitle textarea{
+  background-color: var(--darkthemebackground);
+}
 
 
 

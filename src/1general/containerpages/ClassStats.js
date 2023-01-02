@@ -1,13 +1,29 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import Announcementpanel from '../components/Announcementpanel'
+import { userInfoContext } from '../../Globalcontext'
 
 function ClassStats() {
+  const {userinfo} = useContext(userInfoContext)
+  const [openpost, setopenpost] = useState(false);
   return (
     <div>
       <h4>Announcements</h4>
 
+      
 
-      <div className="col-md-12 margintop12 ">
+      {userinfo.usertype==='prof' &&
+      <>  
+        <div className='col-lg-12 margintop12 postannouncement primary'>
+          hjhdaksfjh
+        </div>
+      
+      </>
+        
+      }
+
+
+
+      <div className="col-lg-12 margintop12 ">
         <Announcementpanel />
         <Announcementpanel />   
         <Announcementpanel />
