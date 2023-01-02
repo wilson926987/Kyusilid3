@@ -3,7 +3,7 @@ import {MdSend} from 'react-icons/md'
 
 function Announcementpanel() {
   return (
-    <div className="announcementpanel borderradius-md">
+    <div className="announcementpanel primaryborder borderradius-md">
     <div className="announcementheader">
       <div>
           <h5>Announcement title</h5>

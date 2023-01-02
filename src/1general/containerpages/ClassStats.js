@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react'
 import Announcementpanel from '../components/Announcementpanel'
 import { userInfoContext } from '../../Globalcontext'
+import CreateAnnouncementprof from '../../2prof/CreateAnnouncementprof'
 
 function ClassStats() {
   const {userinfo} = useContext(userInfoContext)
@@ -13,9 +14,7 @@ function ClassStats() {
 
       {userinfo.usertype==='prof' &&
       <>  
-        <div className='col-lg-12 margintop12 postannouncement primary'>
-          hjhdaksfjh
-        </div>
+            <CreateAnnouncementprof />
       
       </>
         

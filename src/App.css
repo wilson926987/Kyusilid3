@@ -800,22 +800,12 @@ justify-content: space-around;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
 }
 
-.default .announcementpanel{
-  border: 2px solid var(--defaultprimary);
-}
-
-.dark .announcementpanel{
-  border: 2px solid var(--darkthemeprimary)
-}
 
 .announcementpanel{
   margin-bottom: 12px;
-  padding:8px;
- 
-  
+  padding:8px; 
 }
 
 .outletcontainer-min{
@@ -860,6 +850,7 @@ justify-content: space-around;
 .announcementcomment textarea::-webkit-scrollbar{
   width: 0;
 }
+
 .default .announcementcomment textarea{
   background-color: var(--defaultbackground);
 }
@@ -867,6 +858,7 @@ justify-content: space-around;
 .dark .announcementpanel textarea{
   background-color: var(--darkthemebackground);
 }
+
 .sendbutton{
   position: absolute;
   right: 4px;
@@ -1312,9 +1304,6 @@ background-color: var(--defaultprimary);
   font-size: 12px;
 }
 
-.postannouncement{
-  height: 80px;
-}
 
 .createactivitytitle input[type=text], .createactivitytitle input[type=date] , .createactivitytitle textarea, .createactivitytitle select{
   padding: 6px 12px;
@@ -1332,7 +1321,6 @@ background-color: var(--defaultprimary);
 }
 
 
-
 .default .primaryborder{
   border: 3px solid  var(--defaultprimary);
 }
@@ -1344,6 +1332,142 @@ background-color: var(--defaultprimary);
 .dark .createactivitytitle select ,.dark .createactivitytitle input , .dark .createactivitytitle textarea{
   background-color: var(--darkthemebackground);
 }
+
+.createactivitytitle select option{
+  padding: 80px 0px;
+}
+
+.createactivitytitle button{
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: none;
+  margin-bottom: 4px;
+  font-weight: bold;
+}
+
+.createactivityfooter{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.createactivityconfirm{
+  padding: 16px 0px;
+  width: 50%;
+  border-radius: 8px;
+  border: none;
+  margin-bottom: 20px;
+  font-weight: bold;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+}
+
+.uploadpanel{
+  margin: 12px;
+  height: 100px;
+  width: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 12px;
+  cursor: pointer;
+}
+
+
+.postannouncementclosed{
+
+  cursor: pointer;
+  height: 50px;
+
+  display: flex;
+  align-items: center;
+
+}
+
+.postannouncementcontainer{
+  padding: 6px 12px;
+  font-size: 14px;
+}
+
+
+
+
+.postannouncementbody button{
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  background-color: black;
+}
+
+.postannouncement{
+  min-height: 80px;
+  display: flex;
+  flex-direction: column;
+}
+
+.postannouncementfooter{
+  margin-top: auto;
+}
+
+
+
+
+.dropdowncontainer{
+  position: relative;
+
+}
+
+.dropdowncontrol{
+  padding: 6px 12px;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between; 
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+
+.dropdownmain{
+  position: relative;
+  transition: none;
+
+}
+
+.dropdownmain-active{
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.dropdownmenu{
+  position: absolute;
+  bottom: 0;
+  transform: translateY(100%);
+  width: 100%;
+  left: 0;
+  z-index: 4;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+
+}
+
+.dropdownitem{
+  border-radius: 3px;
+  padding: 6px 12px;
+}
+
+.dark .dropdownitem:hover{
+  background-color: var(--darkthemebackground);
+
+}
+
+.default .dropdownitem:hover{
+  background-color: var(--defaultbackground);
+}
+
+
+
 
 
 

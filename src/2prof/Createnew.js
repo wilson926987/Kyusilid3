@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { userInfoContext } from '../Globalcontext'
+import {AiFillFile} from 'react-icons/ai'
+import {FiLink} from 'react-icons/fi'
 
 function Createnew() {
   const {userinfo} = useContext(userInfoContext)
@@ -31,12 +33,31 @@ function Createnew() {
                           <label htmlFor="">Title</label> <br /><input type="text"  className='primaryborder' placeholder='title'/> <br />
                           <br />
                           <label htmlFor="">Description</label> <br /> <textarea name="" id="" cols="30" rows="6" className='primaryborder' placeholder='description'></textarea><br />
-                          <label htmlFor="">Upload</label>
-                          <ul>
-                            <li>-file</li>
-                            <li>-link</li>
-                           
-                             </ul>
+                          <br />
+                          
+
+
+                          {!(activitytype==='Questionnaire' || activitytype==='Attendance') &&
+
+                               <>
+                               <label htmlFor="">Upload</label>
+                                <div className="flex">
+                                <div className='primary uploadpanel borderradius-md'>
+                                <AiFillFile/>
+                                  <h4>File</h4>
+                                </div>
+
+                                <div className='primary uploadpanel borderradius-md'>
+                                  <FiLink/>
+                                <h4>   Link</h4>
+                                </div>
+                                </div> 
+
+
+                               </>
+                                         
+                        }
+                         
                              {activitytype==='Questionnaire' &&
                              <label htmlFor="" className='primary'>Questionaire( pag questionaire ung type)</label>}
                           </div>
@@ -48,7 +69,7 @@ function Createnew() {
                         <div className="col-lg-5 createactivitytitle">
                           <div>
                             <div>
-                              <label htmlFor="activitytype">Activity type</label>
+                              <label htmlFor="activitytype">Activity type</label> <br />
                               <select name="activitytype" className='primary primaryborder' id="activitytype" onChange={(e)=>{setactivitytype(e.target.value)}}>
                                <option value="Material">Material</option>
                                <option value="Assignment">Assignment</option>
@@ -94,18 +115,17 @@ function Createnew() {
             
                             
 
-                            {(activitytype==='Assignment' || activitytype ==='Activity') &&
+                            {(activitytype==='Assignment' || activitytype ==='Activity' || activitytype==='Questionnaire') &&
                               <>
                               <br />
                               <div>
                                 <input type="checkbox" name="" id="allowedit" /> <label htmlFor="allowedit">Allow Students to edit once submitted</label> <br />
                                 <input type="checkbox" name='' id='allowlate'/> <label htmlFor="allowlate">Allow late submissions</label> <br />
-                                <label htmlFor="limitavailability">Limit availability</label>  
-                                <select name="" id="">
+                               <br />
+                               <label htmlFor="limitavailability">Limit availability</label>  
+                                <select name="" id="" className=' primaryborder'>
                                     <option value="none">None</option>
                                     <option value="present">Only present</option>
-
-
                                 </select>
                                 <br />
 
@@ -114,12 +134,15 @@ function Createnew() {
 
                       
                         
-                             
+                             <br />
                              <label htmlFor="">Due Date</label> 
-                                <input type="number" defaultValue={duetimer}  min ='0'/> hours after posting <br />
-                                <button>today</button> <br />
-                                <button>this week</button> <br />
-                                <button>this month</button><br />
+                             <br />
+                                <input type="number" defaultValue={duetimer}  min ='0' className=' primaryborder'/> hours after posting <br />
+                                <div>
+                                <button className='primary'>today</button> <br />
+                                <button className='primary'>this week</button> <br />
+                                <button className='primary'> this month</button><br />
+                                </div>
                             
 
                               </>
@@ -129,15 +152,21 @@ function Createnew() {
                             }
 
                               
-
-
-                          </div>
+                         </div>
                         </div>
 
                 </div> 
-                <div className="margintop12">
-                  <button>Confirm</button>
+                <br />
+                <hr />
+                <div className="createactivityfooter">
+                  
+                   
+                <button className='primary createactivityconfirm'>Confirm</button>
+                
+
                 </div>
+              
+             
     
     </div>
   )
