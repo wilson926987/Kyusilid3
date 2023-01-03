@@ -12,9 +12,9 @@ function DbStudent() {
             <div className="tertiary attendancepanel borderradius-lg dbpanelmargin">
             <h2 className="text-left">Attendance Status</h2>
 <br></br>
-<div className="primary">
+
 <DonutChart></DonutChart>
-</div>
+
             </div>
         </div>
 

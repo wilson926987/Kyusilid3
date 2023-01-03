@@ -6,34 +6,59 @@ import RGB from '../../assets/images/rgb.png'
 import { themeContext } from '../../Globalcontext'
 import { useLocation } from 'react-router-dom'
 import {GrMail} from 'react-icons/gr'
+import { useNavigate } from 'react-router-dom'
+import { userInfoContext } from '../../Globalcontext'
 
 
 
 
 function Profilenotif() {
     const {theme, settheme} = useContext(themeContext);
-
     const [themecontainer, setthemecontainer] = useState(false);
+    const [searchbar, setsearchbar] = useState(false);
+    const [searchfilled,setfilled] = useState(false);
+    const [search, setsearch]= useState('');
+    const [currentpage, setcurrentpage] = useState();
+    const location = useLocation();
+    const {userinfo, setuserinfo}= useContext(userInfoContext);
+    const [theme1 , settheme1] = useState('themeactive');
+    const [theme2, settheme2] = useState();
+
+    const [profilepanel, setprofilepanel] = useState(true);
+
+
+    const navigate = useNavigate()
 
     const togglecontainer = ()=>{
         setthemecontainer(!themecontainer)
         console.log('hello');
     }
 
-    const [theme1 , settheme1] = useState('themeactive');
-    const [theme2, settheme2] = useState();
+    const toggleprofilepanel= ()=>{
+        setprofilepanel(!profilepanel)
+    }
 
-    const [searchbar, setsearchbar] = useState(false);
-    const [searchfilled,setfilled] = useState(false);
-    const [search, setsearch]= useState('');
+    
+    const gotoprofile= ()=>{
+        toggleprofilepanel();
+        navigate('/profile');
+    }
+
+    const logout =()=>{
+        setprofilepanel(false) 
+        setuserinfo();
+    }
+
+    useEffect(()=>{
+        setprofilepanel(false)
+    },[userinfo])
+
+ 
 
     useEffect(()=>{
         search.length>0 ? setfilled(true) : setfilled(false)
     },[search])
   
-  
-  
-
     const switchtheme =(e)=>{
        if(e==='default'){
         settheme1('themeactive');
@@ -47,16 +72,12 @@ function Profilenotif() {
     }
 
 
-    const [currentpage, setcurrentpage] = useState();
-    const location = useLocation()
 
     useEffect(()=>{   
         setcurrentpage(
             temp(location.pathname)
         );
     },[location])
-
-
 
     function temp(r){
         switch(r){
@@ -76,11 +97,7 @@ function Profilenotif() {
                 </div>
                 <div className="pnsearchbarclosed primary ">
                     <FaSearch />
-                </div> 
-              
-
-
-               
+                </div>             
             </div>
         </div>
         
@@ -88,8 +105,8 @@ function Profilenotif() {
         <div className='notificationicon' >  <BsFillGearFill onClick={togglecontainer}/>
             {themecontainer && 
                     <div>
-                    <div className="themegroup"></div>
-                    <div className="themegroupbackground" onClick={togglecontainer}></div>
+                   
+                    <div className="modalbackground" onClick={togglecontainer}></div>
                     <div className='themegroupbody background'>
                         <div className={`themeitem ${theme1}`} onClick={()=>{switchtheme('default')}} > <img src={RGB} alt="" /> </div>
                         <div className={`themeitem ${theme2}`} onClick={()=>{switchtheme('dark')}}> <div className='darkicon'></div></div>
@@ -98,17 +115,32 @@ function Profilenotif() {
             }
         
         </div>
-        <div className="notificationicon"> <GrMail /></div>
+        <div className="notificationicon"> <GrMail  onClick={()=>{navigate('messages')}}/></div>
         <div className='profilenotifcontent'>
              <h5>##username # </h5>
              <h6>##user id or position if prof#</h6>
         </div>
         
-        <div className='profileicon'>
+        <div className='profileicon' >
              
-            <img src={Profilepic} alt="" />
+            <img src={Profilepic} alt="" onClick={toggleprofilepanel}/>
+            {profilepanel &&
+                <div >
+                <div className="modalbackground" onClick={toggleprofilepanel}>
+                    
+                </div>
+                <div className='profilemodal background borderradius-md'>
+                        <img src={Profilepic} alt=""/>
+                    <button className='secondary' onClick={ gotoprofile}>Go to Account</button>
+                    <button className='secondary' onClick={logout}>Logout</button>
+
+                </div>
+
+                </div>}
 
         </div>
+
+     
 
     </div>
   )

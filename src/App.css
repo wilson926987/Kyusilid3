@@ -140,6 +140,13 @@ svg{
   border-radius: 50%;
 }
 
+.profileicon> img:hover{
+box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.75);
+-webkit-box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.75);
+
+}
+
 .modalbackground-lgt{
   display: block;
   position:absolute;
@@ -401,7 +408,7 @@ svg{
 }
 
 
-.themegroupbackground{
+.modalbackground{
   position :absolute;
   display: block;
   height: 100%;
@@ -409,6 +416,7 @@ svg{
   left: 0;
   top: 0;
   z-index: 5;
+
 }
 
 
@@ -1377,22 +1385,15 @@ background-color: var(--defaultprimary);
 
 
 .postannouncementclosed{
-
   cursor: pointer;
   height: 50px;
-
   display: flex;
   align-items: center;
-
 }
-
 .postannouncementcontainer{
   padding: 6px 12px;
   font-size: 14px;
 }
-
-
-
 
 .postannouncementbody button{
   position: absolute;
@@ -1411,14 +1412,9 @@ background-color: var(--defaultprimary);
   margin-top: auto;
 }
 
-
-
-
 .dropdowncontainer{
   position: relative;
-
 }
-
 .dropdowncontrol{
   padding: 6px 12px;
   font-weight: bold;
@@ -1428,11 +1424,9 @@ background-color: var(--defaultprimary);
   cursor: pointer;
 }
 
-
 .dropdownmain{
   position: relative;
   transition: none;
-
 }
 
 .dropdownmain-active{
@@ -1449,7 +1443,6 @@ background-color: var(--defaultprimary);
   z-index: 4;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
-
 }
 
 .dropdownitem{
@@ -1459,11 +1452,43 @@ background-color: var(--defaultprimary);
 
 .dark .dropdownitem:hover{
   background-color: var(--darkthemebackground);
-
 }
 
 .default .dropdownitem:hover{
   background-color: var(--defaultbackground);
+}
+
+.profilemodal{
+  display: flex;
+  flex-direction: column;
+  height: 290px;
+  width: 270px;
+  position: absolute;
+  z-index: 5;
+  right: 0;
+  transform: translateX(-12%);
+  box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.75);
+  -webkit-box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.75);
+  justify-content: center;
+  align-items: center;
+}
+
+.profilemodal button{
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: none;
+  margin: 4px;
+  font-weight: bold;
+
+}
+.profilemodal img{
+  transform: scale(2);
+  margin-bottom: 30px;
+}
+
+.default .profilemodal button{
+  color: var(--lighttextprimary);
 }
 
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import Adminpostpanel from './Adminpostpanel'
+import Adminpostpanel from '../components/Adminpostpanel'
 
 function CalendarAnnouncements() {
   return (

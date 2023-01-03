@@ -31,6 +31,9 @@ import COURSE_IT from  './4admin/COURSE_IT';
 import COURSE_ENTREP from './4admin/COURSE_ENTREP';
 import COURSE_BSBA from './4admin/COURSE_BSBA';
 
+import Profiilepage from './1general/containerpages/Profiilepage';
+import MessagesPage from './1general/containerpages/MessagesPage';
+
 
 
 
@@ -63,6 +66,9 @@ function App() {
                     </Route>
                 </Route> 
                 <Route path={'archived'} element={<Archived/>} /> 
+                <Route path={'profile'} element={<Profiilepage/> } />
+                <Route path={'messages'} element={<MessagesPage/>}></Route>
+                
               </Route> 
               <Route path='/kyusilidAdmin' element={userinfo!=null ? <AdminContainer/> : <Login/>}>
                 <Route path='' element={<AdminDashboard/>} />
