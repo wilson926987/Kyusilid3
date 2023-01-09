@@ -1,0 +1,20 @@
+.arrowselector{
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.arrowselector div:first-child{
+    display: flex;
+    flex-direction: column;
+    transform: scaleX(1.5);
+    margin-left: 8px;
+}
+
+.default .arrowselector div:first-child svg{
+    fill: var(--defaultprimary);
+}
+
+.dark .arrowselector div:first-child svg{
+    fill:  var(--darkthemeprimary);
+}

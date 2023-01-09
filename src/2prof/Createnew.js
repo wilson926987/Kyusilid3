@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { userInfoContext } from '../Globalcontext'
 import {AiFillFile} from 'react-icons/ai'
 import {FiLink} from 'react-icons/fi'
+import ArrowSelector from '../1general/formcomponents/ArrowSelector'
 
 function Createnew() {
   const {userinfo} = useContext(userInfoContext)
@@ -22,7 +23,84 @@ function Createnew() {
   const [duescheduletype, setduescheduletype] = useState('fixed');
   const [duetimer, setduetimer] = useState(0);
   const [availability, setavailability] = useState();
+
+
+  const Postoptions = [ {
+    'text': "1 hr before the start of class",
+    'value' : -60
+},
+{
+    'text': "30 mins before the start of class",
+    'value' : -30
+},
+{
+    'text': "10 mins before the start of class",
+    'value' : -10
+},
+{
+    'text': "5 mins before the start of class",
+    'value' : -5
+},
+{
+    'text': "at the start of class",
+    'value' : 0
+},
+{
+    'text': "5 mins after the start of class",
+    'value' : 5
+},
+{
+    'text': "10 mins after the start of class",
+    'value' : 10
+},
+{
+    'text': "30 mins after the start of class",
+    'value' : 30
+},
+{
+    'text': "1 hr after the start of class",
+    'value' :60
+} ]
   
+
+const Dueoptions =[ 
+{
+  'text' : 'no due date',
+  'value' : 999
+},
+{
+  'text': "30 mins after posted",
+  'value' : 30
+},
+{
+  'text': "45 mins after posted",
+  'value' : 45
+},
+{
+  'text': "1 hour after posted",
+  'value' : 60
+},
+{
+  'text': "2 hours after posted",
+  'value' : 120
+},
+{
+  'text': "3 hours after posted",
+  'value' : 180
+},
+{
+  'text': 'today',
+  'value' : 999
+},
+{
+  'text' : 'before the next discussion',
+  'value' : 999
+}
+
+
+
+
+ ]
 
   return (
     <div>
@@ -52,18 +130,13 @@ function Createnew() {
                                 <h4>   Link</h4>
                                 </div>
                                 </div> 
-
-
                                </>
                                          
                         }
                          
                              {activitytype==='Questionnaire' &&
                              <label htmlFor="" className='primary'>Questionaire( pag questionaire ung type)</label>}
-                          </div>
-
-
-                   
+                          </div>                  
                         </div>
 
                         <div className="col-lg-5 createactivitytitle">
@@ -78,9 +151,26 @@ function Createnew() {
                                <option value="Attendance">Attendance</option>
                               </select>
                             </div>
+                            <br />
+
+                            <div>
+                              <label htmlFor="category">Category</label> <br />
+                              <select name="category" id="category" className='primary primaryborder'>
+                                <option value="Lab">Laboratory</option>
+                                <option value="Lecture">Lecture</option>
+                              </select>
+                            </div>
+                            <br />
+
+                            <div>
+                              <label htmlFor="module">Module</label><br />
+                              <select name="module" id="module" className='primary primaryborder'>
+                                <option value="Week1">Week 1</option>
+                                <option value="Week2">Week 2</option>
+                                <option value="Week3">Week 3</option>
+                              </select>
+                            </div>
                
-
-
                             {activitytype!== 'Attendance' &&
                             <>
                             <br />
@@ -98,23 +188,15 @@ function Createnew() {
                                                  
                             }
                             {postscheduletype==='timed' &&                           
-                              <>
-                        
-                                <input type="number" defaultValue={posttimer} className='primaryborder' min ='0'/> minutes after start of class
-                              </>
+                                <ArrowSelector options={Postoptions} startingvalue={4} />
                             }
-                      
-
-
+                  
                             </div>
                             </>
-                            
-                            
-                            
+                                                  
                             }
             
                             
-
                             {(activitytype==='Assignment' || activitytype ==='Activity' || activitytype==='Questionnaire') &&
                               <>
                               <br />
@@ -124,7 +206,7 @@ function Createnew() {
                                <br />
                                <label htmlFor="limitavailability">Limit availability</label>  
                                 <select name="" id="" className=' primaryborder'>
-                                    <option value="none">None</option>
+                                    <option value="none">All Selected</option>
                                     <option value="present">Only present</option>
                                 </select>
                                 <br />
@@ -137,12 +219,7 @@ function Createnew() {
                              <br />
                              <label htmlFor="">Due Date</label> 
                              <br />
-                                <input type="number" defaultValue={duetimer}  min ='0' className=' primaryborder'/> hours after posting <br />
-                                <div>
-                                <button className='primary'>today</button> <br />
-                                <button className='primary'>this week</button> <br />
-                                <button className='primary'> this month</button><br />
-                                </div>
+                               <ArrowSelector  options={Dueoptions} startingvalue={0}/>
                             
 
                               </>

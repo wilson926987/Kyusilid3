@@ -24,7 +24,7 @@ function Profilenotif() {
     const [theme1 , settheme1] = useState('themeactive');
     const [theme2, settheme2] = useState();
 
-    const [profilepanel, setprofilepanel] = useState(true);
+    const [profilepanel, setprofilepanel] = useState(false);
 
 
     const navigate = useNavigate()

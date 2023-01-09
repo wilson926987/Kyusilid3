@@ -311,6 +311,7 @@ box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.75);
   padding: 0 20px;
 }
 
+
 .profilenotif{
   display: flex;
   height: 70px;
@@ -1286,14 +1287,15 @@ justify-content: space-around;
  gap: 6px;
 }
 
-
-.classSelectionitem{
-  padding: 6px 12px;
+.classSelectionitem ,.studentSelectionitem{
   display: flex;
   gap: 12px;
   align-items: center;
   transition: none;
+  padding: 8px 12px;
 }
+
+
 
 .classSelectionitem input{
   transform: scale(1.4);
@@ -1458,6 +1460,10 @@ background-color: var(--defaultprimary);
   background-color: var(--defaultbackground);
 }
 
+.marginleftauto{
+  margin-left: auto;
+}
+
 .profilemodal{
   display: flex;
   flex-direction: column;
@@ -1490,6 +1496,93 @@ background-color: var(--defaultprimary);
 .default .profilemodal button{
   color: var(--lighttextprimary);
 }
+
+
+
+
+.profilepanelmain img{
+  height: 90px;
+  width: 90px;
+  border-radius: 50%;
+  margin-left: 30px;
+  margin-right: 12px;
+}
+
+.profilepanelmain, .currentsempanel{
+  overflow: hidden;
+  padding: 12px 20px;
+}
+
+.accountinfo{
+  margin-left: 132px;
+}
+
+.accountinfo p{
+  margin-bottom: 4px;
+}
+
+.profilesettings{
+  position: absolute;
+  right: 30px;
+  top: 30px;
+  transform: scale(1.6);
+}
+
+.profilesettingsdropdown{
+  position: absolute;
+  top: 60px;
+  right: 12px;
+  box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.75);
+-webkit-box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.75);
+padding: 12px;
+}
+
+.profiledropdownitem{
+  padding: 4px 8px;
+  border-radius: 3px;
+}
+
+.default .profiledropdownitem:hover{
+  background-color: var(--defaultbackground);
+}
+
+.dark .profiledropdownitem:hover{
+  background-color: var(--darkthemebackground);
+}
+
+.studentlistgear{
+  position :absolute;
+  top: 14px;
+  right: 12px;
+}
+
+.createactivitystudentlist{
+  min-height: 0;
+  max-height: 0;
+  margin-right: 20px;
+  overflow:hidden;
+  margin-left: 30px;
+  
+}
+
+.createactivitystudentlist-active{
+  min-height: 80px;
+  max-height: 400px;
+  overflow: auto;
+}
+
+.default .createactivitystudentlist{
+  border-left: 4px solid var(--defaultprimary);
+
+}
+
+.dark .createactivitystudentlist{
+  border-right: 4px solid var(--darkthemeprimary);
+}
+
+
+
 
 
 

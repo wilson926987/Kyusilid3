@@ -1,5 +1,6 @@
 import React, { useContext , useState} from 'react'
 import { userInfoContext } from '../../Globalcontext'
+import Wallpaper from '../../assets/images/wallpaper.jpg'
 
 function Login() {
 
@@ -9,8 +10,11 @@ function Login() {
 
   return (
     <div>
-
-      <h1>Login page</h1>
+      
+    
+      
+   <div>
+   <h1>Login page</h1>
       note: type usertype dun sa username (student, prof, admin)
         <ul>
             <li>*username* <input type="text"  defaultValue ={username} onChange={(e)=>{setusername(e.target.value)}}/></li>
@@ -25,6 +29,10 @@ function Login() {
         }}>
           login
         </button>
+
+   </div>
+
+
     </div>
   )
 }
