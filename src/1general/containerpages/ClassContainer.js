@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Outlet , useNavigate, useLocation} from 'react-router-dom'
 import Activitylogpanel from '../components/Activitylogpanel';
-import { userInfoContext } from '../../Globalcontext';
+import { userInfoContext, topicfilterContext, activitytypefilterContext } from '../../Globalcontext';
 import {FaPlusCircle} from  'react-icons/fa'
 import {RiArrowLeftCircleFill} from 'react-icons/ri'
 import ClassSelectionitem from '../components/ClassSelectionitem';
@@ -55,11 +55,11 @@ function ClassContainer() {
       'classschedule' : 'class schedule',
       'checked' : false
     }
-
  ])
 
-
-
+ const [activitytypefilter, setactivitytypefilter] = useState('none')
+ const [topicfilter, settopicfilter] = useState('none')
+ 
   return (
     <div className='classcontent'>
      
@@ -140,9 +140,6 @@ function ClassContainer() {
   {classSelection.map((item, key)=>(
       <ClassSelectionitem key={key} classname1={item.subjectname} classsched1={item.classschedule} ifchecked1 = {item.checked}/>
   ))}
-  
-                     
-                
 
 
 </ul>
@@ -155,7 +152,15 @@ function ClassContainer() {
 
                   <div className="col-lg-9 outletcontainer-min">
                     <div className="tertiary borderradius-md outletcontainer">
-                          <Outlet /> 
+                          
+                                
+
+                                 <activitytypefilterContext.Provider value={{activitytypefilter, setactivitytypefilter}}>
+                                 <topicfilterContext.Provider value={{topicfilter, settopicfilter}}>
+                                    <Outlet /> 
+                                 </topicfilterContext.Provider>
+                                 </activitytypefilterContext.Provider>
+                    
                           <div>
                           <a href="#top">Back to top</a>
                           </div>
