@@ -9,7 +9,7 @@ function DbProf() {
             <div className="tertiary attendancepanel borderradius-lg dbpanelmargin">
                 My classes:
                 <ul>
-                    <li>##total classes#</li>
+                    <li>##total classes# wilson</li>
                     <li>##average students per class#</li>
                 </ul>
             </div>
