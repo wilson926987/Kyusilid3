@@ -20,6 +20,7 @@ import ClassActivity from './1general/containerpages/ClassActivity';
 import Classmarks from './2prof/Classmarks';
 import ClassModules from './2prof/ClassModules';
 import Createnew from './2prof/Createnew';
+import Attendance from './1general/containerpages/Attendance';
 
 import AdminContainer from './4admin/AdminContainer';
 import AdminDashboard from './4admin/AdminDashboard';
@@ -33,7 +34,7 @@ import COURSE_BSBA from './4admin/COURSE_BSBA';
 
 import Profiilepage from './1general/containerpages/Profiilepage';
 import MessagesPage from './1general/containerpages/MessagesPage';
-
+import SourceMaterials from './2prof/SourceMaterials';
 
 
 
@@ -60,11 +61,14 @@ function App() {
                         <Route path='' element ={ <ClassStats/>} />
                         <Route path='createnew' element={<Createnew/> }/>
                         <Route path='info'  element={<ClassInfo/>} />
-                        <Route path= 'activities' element={<ClassActivity/>} />
                         <Route path='marks' element={<Classmarks/>} />
                         <Route path='modules' element={<ClassModules/>} />
+                        <Route path='sourcematerials' element={<SourceMaterials/>} />
+                        <Route  path='attendance' element={<Attendance/> }/>
+                        <Route path= 'activity/activityId' element={<ClassActivity/>} />
                     </Route>
                 </Route> 
+              
                 <Route path={'archived'} element={<Archived/>} /> 
                 <Route path={'profile'} element={<Profiilepage/> } />
                 <Route path={'messages'} element={<MessagesPage/>}></Route>

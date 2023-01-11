@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Outlet , useNavigate, useLocation} from 'react-router-dom'
 import Activitylogpanel from '../components/Activitylogpanel';
-import { userInfoContext, topicfilterContext, activitytypefilterContext } from '../../Globalcontext';
+import { userInfoContext, topicfilterContext, activitytypefilterContext , topiclistContext , currentActivityContext } from '../../Globalcontext';
 import {FaPlusCircle} from  'react-icons/fa'
 import {RiArrowLeftCircleFill} from 'react-icons/ri'
 import ClassSelectionitem from '../components/ClassSelectionitem';
@@ -13,14 +13,13 @@ function ClassContainer() {
   const navigate = useNavigate();
   const {userinfo} = useContext(userInfoContext);
   const [navcreate, setnavcreate] = useState(false);
-
+  const [currentactivity, setcurrentactivity] = useState()
 
   const [currentpage, setcurrentpage] = useState();
   const location = useLocation()
 
   useEffect(()=>{   
       setcurrentpage(location.pathname);
-      
   },[location])
 
   function isactive(e){
@@ -57,6 +56,24 @@ function ClassContainer() {
     }
  ])
 
+ const [topiclist, settopiclist] = useState([
+  {
+    'topicId' : 1,
+    'topicname' : 'Topic 1'
+  },
+  {
+    'topicId' : 2,
+    'topicname' : 'Topic 2'
+  },
+  {
+    'topicId' : 3,
+    'topicname' : 'Topic 3'
+  }
+ 
+ ])
+
+
+
  const [activitytypefilter, setactivitytypefilter] = useState('none')
  const [topicfilter, settopicfilter] = useState('none')
  
@@ -67,9 +84,9 @@ function ClassContainer() {
       <div className='classcontentmain'>
         <div className='row'> 
             <div className="col-md-12 " >
-              <div className={`primary classheader borderradius-lg dbpanelmargin ${(isactive('/classes/sampleclass/createnew') ? ' classheader-md' : ' classheader-lg')}`}>
+              <div className={`primary classheader borderradius-lg dbpanelmargin ${((isactive('/classes/sampleclass/createnew') || isactive('/classes/sampleclass/activity/activityId')) ? ' classheader-md' : ' classheader-lg')}`}>
                 <div><h3 id='top'>Class name</h3>
-                  {!isactive('/classes/sampleclass/createnew') ?
+                  {!(isactive('/classes/sampleclass/createnew')|| isactive('/classes/sampleclass/activity/activityId') ) ?
                      <div>
                      <h4>Subject code</h4>
                     <h4>Saturdays 5am- 12pm</h4>
@@ -90,9 +107,10 @@ function ClassContainer() {
                       <FaPlusCircle /><h4>Create New</h4>
                      </div>
                      :
-                     <div className="primary navcreatenew borderradius-lg dbpanelmargin" onClick={()=>{navigate('/classes/sampleclass')}}>
-                     <RiArrowLeftCircleFill /><h4 >Cancel</h4>
-                    </div>
+                    userinfo.usertype==='prof' &&
+                    <div className="primary navcreatenew borderradius-lg dbpanelmargin" onClick={()=>{navigate('/classes/sampleclass')}}>
+                    <RiArrowLeftCircleFill /><h4>Cancel</h4>
+                   </div>
                   
                   }
 
@@ -103,20 +121,35 @@ function ClassContainer() {
                      
                      <li className={`classnavitem ${isactive('/classes/sampleclass') && 'classnav-active'}`} onClick={()=>{navigate('/classes/sampleclass')}}>  Announcements </li>
                      <li><hr /></li>
-                     <li className={`classnavitem ${isactive('/classes/sampleclass/modules') && 'classnav-active'}`} onClick={()=>{navigate('modules')}}>  Class Modules</li>
+                     <li className={`classnavitem ${isactive('/classes/sampleclass/modules') && 'classnav-active'}`} onClick={()=>{navigate('modules')}}>  Class Work</li>
                      <li><hr /></li>
+
+                 
                   
-                     {isactive('/classes/sampleclass/modules') &&  
+                     {(isactive('/classes/sampleclass/modules') || isactive('/classes/sampleclass/activity/activityId')) &&  
                        <div>
-                         <li className='classnavsubitem'>All topics</li>
+                         <li className='classnavsubitem' onClick={()=>{settopicfilter('none') ; navigate('modules')}}>All topics</li>
                          <li><hr /></li>
-                         <li className='classnavsubitem'>topic 1</li>
-                         <li><hr /></li>
-                         <li className='classnavsubitem'>topic 2</li>
-                         <li><hr /></li>
-                    
+
+                         {topiclist.map((topicitem, key)=>(
+                          <React.Fragment key={key}> 
+                              <li key={key} className='classnavsubitem' onClick={()=>{settopicfilter(topicitem.topicId) ; navigate('modules')}}>{topicitem.topicname}</li>
+                              <li><hr /></li>
+                          </React.Fragment>
+  
+                         ))}
+                                
                        </div>
                      }
+
+                      {userinfo.usertype==='prof' &&
+                        <>
+                        <li className={`classnavitem ${isactive('/classes/sampleclass/sourcematerials') && 'classnav-active'}`} onClick={()=>{navigate('sourcematerials')}}>  Source Materials</li>
+                     <li><hr /></li>
+                        </>
+                     }
+                      <li className={`classnavitem ${isactive('/classes/sampleclass/attendance') && 'classnav-active'}`} onClick={()=>{navigate('attendance')}}>  Attendance </li>
+                     <li><hr /></li>
 
                      <li className={`classnavitem ${isactive('/classes/sampleclass/info') && 'classnav-active'}`} onClick={()=>{navigate('info')}}>  Class info </li>
                      <li><hr /></li>
@@ -153,13 +186,18 @@ function ClassContainer() {
                   <div className="col-lg-9 outletcontainer-min">
                     <div className="tertiary borderradius-md outletcontainer">
                           
-                                
-
-                                 <activitytypefilterContext.Provider value={{activitytypefilter, setactivitytypefilter}}>
+                                <currentActivityContext.Provider value={{currentactivity, setcurrentactivity}}>
+                                <topiclistContext.Provider value={{topiclist, settopiclist}}>
+                                  <activitytypefilterContext.Provider value={{activitytypefilter, setactivitytypefilter}}>
                                  <topicfilterContext.Provider value={{topicfilter, settopicfilter}}>
                                     <Outlet /> 
                                  </topicfilterContext.Provider>
-                                 </activitytypefilterContext.Provider>
+                                  </activitytypefilterContext.Provider>
+                                  </topiclistContext.Provider>
+
+                                </currentActivityContext.Provider>
+                                  
+                                 
                     
                           <div>
                           <a href="#top">Back to top</a>
@@ -181,7 +219,7 @@ function ClassContainer() {
 
       </div>
 
-     {!isactive('/classes/sampleclass/createnew')  ?
+     {!(isactive('/classes/sampleclass/createnew') || isactive('/classes/sampleclass/activity/activityId') )  ?
          <div className='activitylog borderradius-md tertiary'>
          <h4>Class Activity log</h4>
          <Activitylogpanel /><Activitylogpanel /><Activitylogpanel /><Activitylogpanel /><Activitylogpanel /><Activitylogpanel />

@@ -13,10 +13,22 @@ function Createnew() {
     if(userinfo.usertype!== 'prof'){
       navigate('/');
     }
-  })
+ 
+  },[])
+
+
+
+
+  var tzoffset = (new Date()).getTimezoneOffset() * 60000;
+
+
+ 
+
 
   const [postscheduletype, setpostscheduletype] = useState('fixed');
-  const [postdate, setpostdate] = useState();
+  const [postdate, setpostdate] = useState(new Date(Date.now() -tzoffset).toISOString().slice(0, -8));
+  const [currentdate  , setcurrentdate] = useState(new Date(Date.now() -tzoffset).toISOString().slice(0, -8));
+
   const [posttimer, setposttimer] = useState(0);
   const [activitytype, setactivitytype] = useState('Material');
   const [duedate, setduedate] = useState();
@@ -143,7 +155,7 @@ const Dueoptions =[
                           <div>
                             <div>
                               <label htmlFor="activitytype">Activity type</label> <br />
-                              <select name="activitytype" className='primary primaryborder' id="activitytype" onChange={(e)=>{setactivitytype(e.target.value)}}>
+                              <select name="activitytype" className='primary primaryborder' id="activitytype" onChange={(e)=>{setactivitytype(e.target.value)}} >
                                <option value="Material">Material</option>
                                <option value="Assignment">Assignment</option>
                                <option value="Activity">Activity</option>
@@ -184,7 +196,8 @@ const Dueoptions =[
                           
                             <div>
                             {postscheduletype==='fixed' &&
-                             <input type="date" name="" className='primaryborder' id="postdate" defaultValue={postdate} /> 
+                             <input type="datetime-local" name="" className='primaryborder' id="postdate" defaultValue={postdate}  min={currentdate} /> 
+                       
                                                  
                             }
                             {postscheduletype==='timed' &&                           
