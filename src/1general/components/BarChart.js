@@ -7,8 +7,8 @@ function Barchart() {
 
         <Chart
 
-            height = '90%'
-            width = '100%'
+            height = '85%'
+            width = '95%'
             type= "bar"
             series= {[
               
@@ -45,7 +45,12 @@ function Barchart() {
             },
             
             xaxis: {
-              categories: ['Class #1', 'Class #2', 'Class #3', 'Class #4', 'Class #5', 'Class #6', 'Class #7', 'Class #8']
+              categories: ['Class #1', 'Class #2', 'Class #3', 'Class #4', 'Class #5', 'Class #6', 'Class #7', 'Class #8'],
+              labels: {
+              style: {
+                fontSize:  '10px',
+              }
+            }
             },
             yaxis: [
               {
@@ -68,6 +73,7 @@ function Barchart() {
               }, {
                 opposite: true,
                 seriesName: 'Missing',
+                show:false,
                 axisTicks: {
                   show: true
                 },
@@ -94,7 +100,7 @@ function Barchart() {
                 colors: ['#F44336', '#E91E63', '#9C27B0']
              },*/
               //horizontalAlign: "right",
-              offsetX: 8,
+              offsetX: -5,
               offsetY: 15
               
          

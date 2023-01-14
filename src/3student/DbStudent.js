@@ -11,9 +11,8 @@ function DbStudent() {
         <div className="col-md-4">
             <div className="tertiary attendancepanel borderradius-lg dbpanelmargin">
             <h2 className="text-left">Attendance Status</h2>
-<br></br>
 
-<DonutChart></DonutChart>
+<div className='DonutChart'><DonutChart></DonutChart></div>
 
             </div>
         </div>
@@ -21,7 +20,7 @@ function DbStudent() {
         <div className='col-md-8'>
             <div className="tertiary borderradius-lg activitystatuspanel dbpanelmargin">
             <h2 className="text-left">Activity Status</h2>
-            <div className='BarChart'>   <BarChart></BarChart></div>
+            <div className='BarChart'> <BarChart></BarChart></div>
             </div>
         </div>
 

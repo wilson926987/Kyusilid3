@@ -1,9 +1,11 @@
-
-import React ,{useState, useEffect}from "react";
+import React from 'react';
+//import React ,{useState, useEffect}from "react";
 import Chart from 'react-apexcharts';
 
 function Donutchart()
+
 {
+    /*
     const [ActStatus, setActStatus]= useState([]);
     const [medal, setMedal]= useState([]);
 
@@ -29,7 +31,7 @@ function Donutchart()
      getdata();
     
     },[]);
-
+*/
     return(
         
           <React.Fragment>
@@ -37,8 +39,8 @@ function Donutchart()
 <Chart  
 
 type="donut"
-width={280}
-height= {280}
+width={'110%'}
+height= {'60%'}
 series={[470,50]}
 
 options={{
@@ -109,7 +111,8 @@ labels:['Total Discussions','Total Attended'],
  
 
 legend:{
-position:"right"
+position:"right",
+offsetX: 5
 },
 dataLabels: {
 enabled: false,
