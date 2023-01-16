@@ -94,6 +94,11 @@ svg{
   color: var(--darktextprimary);
 }
 
+.default .lighttext * , .default .lighttext{
+  color: var(--lighttextsecondary);
+  fill: var(--lighttextsecondary);
+}
+
 .default .background{
   background-color: var(--defaultbackground);
 }
@@ -522,6 +527,10 @@ justify-content: space-around;
   display: flex;
   align-items: center;
   margin-bottom: 12px;
+}
+
+.flexcolumn{
+  flex-direction: column;
 }
 
 .activityitempic{
@@ -1211,9 +1220,18 @@ background-color: var(--defaultprimary);
 }
 
 
-.createactivitytitle input[type=text], .createactivitytitle input[type=datetime-local] , .createactivitytitle textarea, .createactivitytitle select{
+.createactivitytitle input[type=text], .createactivitytitle input[type=datetime-local] , .createactivitytitle textarea, .createactivitytitle select
+,.commontextarea{
   padding: 6px 12px;
   width: 80%;
+  border-radius: 8px;
+  resize: none;
+  margin-bottom: 4px;
+}
+
+.commontextarea{
+  padding: 6px 12px;
+  width: 100%;
   border-radius: 8px;
   resize: none;
   margin-bottom: 4px;
@@ -1231,7 +1249,7 @@ background-color: var(--defaultprimary);
   border: 3px solid  var(--defaultprimary);
 }
 
-.dark .primaryborder{
+.dark .primaryborder , .dark .commontextarea{
   border: 3px solid var(--darkthemeprimary);
 }
 
@@ -1243,13 +1261,7 @@ background-color: var(--defaultprimary);
   padding: 80px 0px;
 }
 
-.createactivitytitle button{
-  padding: 6px 12px;
-  border-radius: 8px;
-  border: none;
-  margin-bottom: 4px;
-  font-weight: bold;
-}
+
 
 .createactivityfooter{
   display: flex;
@@ -1279,6 +1291,18 @@ background-color: var(--defaultprimary);
   flex-direction: column;
   gap: 12px;
   cursor: pointer;
+  
+}
+.uploadpanel svg{
+  font-size: 24px;
+}
+
+
+.uploadedfile{
+  padding: 12px 20px;
+  width: 300px;
+  gap : 20px;
+
 }
 
 
@@ -1291,6 +1315,10 @@ background-color: var(--defaultprimary);
 .postannouncementcontainer{
   padding: 6px 12px;
   font-size: 14px;
+  box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.75);
+  -webkit-box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.75);
+
 }
 
 .postannouncementbody button{
@@ -1308,7 +1336,9 @@ background-color: var(--defaultprimary);
 
 .postannouncementfooter{
   margin-top: auto;
+  justify-content: flex-end;
 }
+
 
 .dropdowncontainer{
   position: relative;
@@ -1318,14 +1348,25 @@ background-color: var(--defaultprimary);
   font-weight: bold;
   display: flex;
   justify-content: space-between; 
-  border-radius: 12px;
+
   cursor: pointer;
+  border: none;
+  outline: none;
 }
 
 .dropdownmain{
   position: relative;
   transition: none;
 }
+
+.sendbutton{
+  position: absolute;
+  bottom: 12px;
+  right: 30px;
+  transform: translateY(-50%);
+}
+
+
 
 .dropdownmain-active{
   border-bottom-left-radius: 0;
@@ -1376,14 +1417,14 @@ background-color: var(--defaultprimary);
   align-items: center;
 }
 
-.profilemodal button{
+.commonbutton{
   padding: 6px 12px;
   border-radius: 8px;
   border: none;
   margin: 4px;
   font-weight: bold;
-
 }
+
 .profilemodal img{
   transform: scale(2);
   margin-bottom: 30px;
@@ -1493,9 +1534,7 @@ padding: 12px;
   margin-bottom: 12px;
 }
 
-.activitycontent{
 
-}
 
 .materialpanel{
   height: 110px;
@@ -1509,7 +1548,9 @@ padding: 12px;
   gap: 8px;
 }
 
-.materialpanel:hover , .questionnairepanel:hover , .questionnairepanel button:hover{
+.materialpanel:hover , .questionnairepanel:hover , .questionnairepanel button:hover , .submissionpanel button:hover
+
+{
   box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.75);
   -webkit-box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.75);
   -moz-box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.75);
@@ -1557,8 +1598,117 @@ padding: 12px;
   height: 45px;
 }
 
+.submissionpanel{
+  padding : 12px;
+  min-height: 200px;
+  margin-top: 12px;
+}
+
+.submissionpanel>div{
+  flex-direction: column;
+  padding-top: 20px;
+  gap : 20px;
+
+}
+
+.submissionpanel button{
+  padding :8px 0px;
+  border: none;
+  border-radius: 4px;
+  width: 80%;
+  font-weight: bold;
+  color: #e2e4fa;
+}
+
+.attendancecontainer{
+  min-height: 400px;
+  overflow: auto;
+  position: relative;
+  margin-bottom: 12px;
+
+}
 
 
+
+
+.attendancetable{
+  table-layout: fixed;
+  position: absolute;
+ 
+}
+
+.attendancetable>tr:first-child{
+  position: sticky;
+  z-index: 3;
+  top: 0;
+}
+
+.attendancetable>tr>td:first-child{
+  position: sticky;
+  z-index: 3;
+  left: 0;
+}
+
+
+
+.temp2{
+  position: absolute;
+  z-index: 4;
+  width: 200px;
+  top: 2px;
+  left: 2px;
+  height: 38px;
+}
+
+
+
+.tddate {
+  width: 20px;
+  text-align: center;
+  padding: 0px 12px;
+
+}
+
+.tdname{
+  white-space: nowrap;
+  padding: 0px 8px;
+  gap: 8px;
+  width: 200px;
+  overflow: hidden;
+}
+
+.tdname img{
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+
+}
+
+
+.materialcontent{
+  overflow: hidden;
+  max-height: 0;
+}
+
+.materialcontent>div{
+  padding: 12px;
+}
+
+
+.materialcontent-active{
+  max-height: 230px !important;
+}
+
+
+.postsourcematerial{
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.postsourcematerial button{
+  color: var(--lighttextsecondary);
+}
 
 
 

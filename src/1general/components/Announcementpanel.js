@@ -1,7 +1,7 @@
 import React from 'react'
 import {MdSend} from 'react-icons/md'
 
-function Announcementpanel() {
+function Announcementpanel({announcementitem}) {
   return (
     <div className="announcementpanel primaryborder borderradius-md">
     <div className="announcementheader">
@@ -9,17 +9,17 @@ function Announcementpanel() {
           <h5>Announcement title</h5>
       </div>
       <div>
-        <h6>Posted ##date# by ##Prof name #</h6>
+        <h6>Posted {announcementitem.dateposted} by {announcementitem.postedBy}</h6>
       </div>
     </div>
 
     <div className='announcementcontent'>
-      ## Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit rem eius iste. Neque assumenda voluptatum omnis facere. Similique corrupti voluptates repudiandae accusantium ipsa quis, aliquam delectus ex voluptate pariatur suscipit!
+        {announcementitem.content}
     </div>
     <hr />
 
-    <div className="announcementcomment"> 
-        <textarea name="Text1"  cols='1' rows="2"  placeholder='Enter comment'></textarea>
+    <div className="announcementcomment relative"> 
+        <textarea name="Text1"  cols='1' rows="2"  placeholder='Enter comment' className='commontextarea primaryborder'></textarea>
         <div className='sendbutton'>  <MdSend/></div>
       
     </div>

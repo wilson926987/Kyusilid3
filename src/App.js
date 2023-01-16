@@ -27,10 +27,7 @@ import AdminDashboard from './4admin/AdminDashboard';
 import Accounts from './4admin/Accounts';
 import FileManager from './4admin/FileManager';
 
-import COURSE_IE from './4admin/COURSE_IE';
-import COURSE_IT from  './4admin/COURSE_IT';
-import COURSE_ENTREP from './4admin/COURSE_ENTREP';
-import COURSE_BSBA from './4admin/COURSE_BSBA';
+
 
 import Profiilepage from './1general/containerpages/Profiilepage';
 import MessagesPage from './1general/containerpages/MessagesPage';
@@ -76,12 +73,9 @@ function App() {
               </Route> 
               <Route path='/kyusilidAdmin' element={userinfo!=null ? <AdminContainer/> : <Login/>}>
                 <Route path='' element={<AdminDashboard/>} />
-                <Route path='Information_Technology' element={<COURSE_IT/>}></Route>
-                <Route path='Business_Administration' element={<COURSE_BSBA/>}></Route>
-                <Route path='Industrial_Engineering' element={<COURSE_IE/>}></Route>
-                <Route path='Entrepreneurship' element={<COURSE_ENTREP/>}></Route>
-                <Route path='accounts' element={<Accounts/>}> </Route>
-                <Route path='filemanager' element={<FileManager/>}></Route>
+                <Route path='Accounts' element={<Accounts/>}></Route>
+                
+             
               </Route>
             </Routes>   
             

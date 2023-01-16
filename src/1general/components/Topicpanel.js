@@ -1,13 +1,13 @@
 import React, { useContext, useState } from 'react'
 import ActivityItempanel from './ActivityItempanel'
-import { topicfilterContext ,activitytypefilterContext } from '../../Globalcontext';
+import { activitytypefilterContext } from '../../Globalcontext';
 
 
 
 
 function Topicpanel({topicitem}) {
-  const {topicfilter, settopicfilter} = useContext(topicfilterContext)
-  const {activitytypefilter, setactivitytypefilter} = useContext(activitytypefilterContext)
+
+  const {activitytypefilter} = useContext(activitytypefilterContext)
 
   const [ClassActivitylist , setClassActivitylist] = useState([
     {
@@ -82,6 +82,7 @@ function Topicpanel({topicitem}) {
                 
               ))}
        </ul>
+       
     </div>
   )
 }

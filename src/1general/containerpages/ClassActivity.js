@@ -47,8 +47,8 @@ function ClassActivity() {
        </div>
 
 
-       {userinfo.usertype ==='prof' &&
-        <div className= {`flex activitytab ${responsepage && 'primary'}`} onClick={()=>{setresponsepage(true)}}>
+       {userinfo.usertype ==='prof' && (currentactivity.activitytype !== 'material') &&
+        <div className= {`flex activitytab ${responsepage ? 'primary' : 'background'}`} onClick={()=>{setresponsepage(true)}}>
             
          <h4>Responses</h4>
  
@@ -65,11 +65,15 @@ function ClassActivity() {
 
        {!responsepage ?
         <React.Fragment>
-           <div className='activitydescription'> 
+      
+
+        <div className="row">
+          <div className="col-lg-8 ">
+          <div className='activitydescription'> 
           {currentactivity.description}
 
         </div>
-        <div className='activitycontent'>
+          <div className='activitycontent'>
             {currentactivity.activitytype ==='material' ?
               <div className="flex">
                  <div className='materialpanel primary borderradius-md'>
@@ -96,6 +100,22 @@ function ClassActivity() {
             <div></div>
           }
         </div>
+
+          </div>
+           
+         {userinfo.usertype==='stud' && (currentactivity.activitytype!== 'material' && currentactivity.activitytype !=='questionnaire') &&
+           <div className="col-lg-4">
+           <div className=" background borderradius-md submissionpanel">
+             <h4>Your work</h4>
+             <div className='flex '>
+                <button className='secondary'>Add file</button>
+                <button className='secondary'> Hand In</button>
+               
+             </div>
+           </div>
+          </div>}
+        </div>
+       
 
         <div className="activitycomments">
           <h4>Class comments</h4>

@@ -6,9 +6,9 @@ import Dropdown from '../1general/formcomponents/Dropdown';
 
 
 function ClassModules() {
- const {topicfilter, settopicfilter} = useContext(topicfilterContext)
- const {activityfilter, setactivitytypefilter} = useContext(activitytypefilterContext)
- const {topiclist,settopiclist} = useContext(topiclistContext)
+ const {topicfilter} = useContext(topicfilterContext)
+ const { setactivitytypefilter} = useContext(activitytypefilterContext)
+ const {topiclist} = useContext(topiclistContext)
   const [tempactivityfilter, settempactivityfilter] = useState([
     'none' , 'activity' , 'assignment' , 'questionnaire' ,'material'
   ])

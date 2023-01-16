@@ -12,3 +12,7 @@ export const activitytypefilterContext = createContext();
 export const topiclistContext = createContext();
 
 export const currentActivityContext = createContext();
+export const sourceMaterialContext = createContext();
+
+export const myClasesContext = createContext();
+export const currentclassContext = createContext();

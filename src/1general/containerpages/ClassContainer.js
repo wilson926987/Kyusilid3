@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Outlet , useNavigate, useLocation} from 'react-router-dom'
 import Activitylogpanel from '../components/Activitylogpanel';
-import { userInfoContext, topicfilterContext, activitytypefilterContext , topiclistContext , currentActivityContext } from '../../Globalcontext';
-import {FaPlusCircle} from  'react-icons/fa'
-import {RiArrowLeftCircleFill} from 'react-icons/ri'
+import { userInfoContext, topicfilterContext, activitytypefilterContext , topiclistContext , currentActivityContext , sourceMaterialContext } from '../../Globalcontext';
+import {FaPlusCircle ,FaArrowCircleLeft} from  'react-icons/fa'
+
 import ClassSelectionitem from '../components/ClassSelectionitem';
 
 
@@ -14,6 +14,7 @@ function ClassContainer() {
   const {userinfo} = useContext(userInfoContext);
   const [navcreate, setnavcreate] = useState(false);
   const [currentactivity, setcurrentactivity] = useState()
+  const [sourcematerial,setsourcematerial] = useState();
 
   const [currentpage, setcurrentpage] = useState();
   const location = useLocation()
@@ -103,13 +104,13 @@ function ClassContainer() {
 
                   {userinfo.usertype==='prof' &&
                       !isactive('/classes/sampleclass/createnew') ?
-                      <div className="primary navcreatenew borderradius-lg dbpanelmargin" onClick={()=>{navigate('createnew')}}>
+                      <div className="secondary lighttext navcreatenew borderradius-lg dbpanelmargin" onClick={()=>{setsourcematerial(); navigate('createnew')}}>
                       <FaPlusCircle /><h4>Create New</h4>
                      </div>
                      :
                     userinfo.usertype==='prof' &&
-                    <div className="primary navcreatenew borderradius-lg dbpanelmargin" onClick={()=>{navigate('/classes/sampleclass')}}>
-                    <RiArrowLeftCircleFill /><h4>Cancel</h4>
+                    <div className="secondary lighttext navcreatenew borderradius-lg dbpanelmargin" onClick={()=>{navigate('/classes/sampleclass')}}>
+                    <FaArrowCircleLeft /><h4>Cancel</h4>
                    </div>
                   
                   }
@@ -181,11 +182,11 @@ function ClassContainer() {
                 
                 }
                   </div>
-
-
                   <div className="col-lg-9 outletcontainer-min">
                     <div className="tertiary borderradius-md outletcontainer">
-                          
+
+
+                                <sourceMaterialContext.Provider value={{sourcematerial, setsourcematerial}}>
                                 <currentActivityContext.Provider value={{currentactivity, setcurrentactivity}}>
                                 <topiclistContext.Provider value={{topiclist, settopiclist}}>
                                   <activitytypefilterContext.Provider value={{activitytypefilter, setactivitytypefilter}}>
@@ -196,6 +197,8 @@ function ClassContainer() {
                                   </topiclistContext.Provider>
 
                                 </currentActivityContext.Provider>
+                                </sourceMaterialContext.Provider>
+                                
                                   
                                  
                     

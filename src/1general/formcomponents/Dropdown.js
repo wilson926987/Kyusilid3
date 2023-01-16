@@ -14,7 +14,7 @@ function Dropdown({options, menuClass, itemClass, mainClass , controlClass, onCh
 
   return (
     <div className={`${mainClass} " " ${dropdownopen && mainActiveClass }`}>
-        <div className={`${controlClass} ' ' ${dropdownopen ? controlActiveClass : controlCloseClass}`} onClick={toggledropdown}>
+        <div className={` flex ${controlClass} ' ' ${dropdownopen ? controlActiveClass : controlCloseClass}`} onClick={toggledropdown}>
             {valuetemp!== undefined ? valuetemp : placeholderValue !==undefined ? placeholderValue : 'choose option'}
             <AiOutlineCaretDown />
         </div>
