@@ -32,6 +32,7 @@ import FileManager from './4admin/FileManager';
 import Profiilepage from './1general/containerpages/Profiilepage';
 import MessagesPage from './1general/containerpages/MessagesPage';
 import SourceMaterials from './2prof/SourceMaterials';
+import Classloading from './1general/loadingscreen/Classloading';
 
 
 

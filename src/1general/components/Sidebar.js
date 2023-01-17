@@ -6,11 +6,13 @@ import { themeContext } from '../../Globalcontext'
 import {BiChevronsLeft ,BiChevronsRight} from 'react-icons/bi'
 import { useNavigate } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
+import { currentclassContext, myClasesContext } from '../../Globalcontext'
 
 
 function Sidebar() {
-    const {theme ,settheme} = useContext(themeContext);
-
+    const {myclasses} = useContext(myClasesContext)
+    const {setcurrentclass} = useContext(currentclassContext);
+    const {theme} = useContext(themeContext);
     const [sidebar, setsidebar] = useState(true);
 
     const shorten = (text)=>{
@@ -33,10 +35,12 @@ function Sidebar() {
        return e===currentpage ? true : false;
     }
 
-
-
-
    const navigate = useNavigate();
+
+   const gotoclass =(e)=>{
+    setcurrentclass(e)
+    navigate('/classes/sampleclass')
+   }
 
   return (
 
@@ -66,11 +70,12 @@ function Sidebar() {
 {sidebar && <div className='sidebarcontent'>
     <ul>
         <li className='sidebarmenu' onClick={()=>{navigate('/')}}> <div className={`highlight ${isactive('/') && ' sidebarhighlightactive'}`}></div> <MdSpaceDashboard />  Dashboard</li>
-        <li className="sidebarmenu" onClick={()=>{navigate('/classes')}}> <div className={`highlight ${isactive('/classes') && ' sidebarhighlightactive'}`}></div> <FaBookReader />  Classes ##classlist#</li>  
+        <li className="sidebarmenu" onClick={()=>{navigate('/classes')}}> <div className={`highlight ${isactive('/classes') && ' sidebarhighlightactive'}`}></div> <FaBookReader />All Classes</li> 
+        {myclasses.map(classitem =>(
+             <li className="sidebarsubmenu" key={classitem.classId} onClick={()=>{gotoclass(classitem)}}><div className="highlight"></div> {shorten(classitem.classname)} </li>
+        ))} 
    
-        <li className="sidebarsubmenu " onClick={()=>{navigate('/classes/sampleclass')}}><div className="highlight"></div> {shorten('##subject name')} </li>
-        <li className="sidebarsubmenu"><div className="highlight"></div> {shorten('##subject name')}</li>
-
+       
         <li className="sidebarmenu" onClick={()=>{navigate('/archived')}}> <div className= {`highlight ${isactive('/archived') && ' sidebarhighlightactive'}`}></div>  <FaBookReader /> Archived</li>
     </ul>              
 </div>}

@@ -14,24 +14,35 @@ function Container() {
 
     {
       'classId' : 1,
-      'classname' : 'PRC101',
+      'classname' : 'Practicum',
       'classSched_from' : '6:00',
       'classSched_to' : '8:00',
-      'classDay' : 'Monday'
+      'classDay' : 'Monday',
+      'classbanner' : 1,
+      'subjectcode' : 'Prc101',
+      'profname' : 'Juan delacruz'
+
+      
     },
     {
       'classId' : 2,
       'classname' : 'Capstone',
       'classSched_from' : '6:00',
       'classSched_to' : '8:00',
-      'classDay' : 'Monday'
+      'classDay' : 'Monday',
+      'classbanner' : 1,
+      'subjectcode' : 'Capstone111',
+      'profname' : 'Juan delacruz'
     },
     {
       'classId' : 3,
       'classname' : 'Automata',
       'classSched_from' : '6:00',
       'classSched_to' : '8:00',
-      'classDay' : 'Monday'
+      'classDay' : 'Monday',
+      'classbanner' : 1,
+      'subjectcode' : 'Auto1111',
+      'profname' : 'Juan delacruz'
     }
 
   ]);
@@ -58,13 +69,10 @@ function Container() {
         <div className='content'>
             <Profilenotif />
             <Outlet/> 
-            
-   
-        </div>
-    
+        </div> 
         </div>
     </currentclassContext.Provider>     
-     </myClasesContext.Provider>
+    </myClasesContext.Provider>
 
     
   )

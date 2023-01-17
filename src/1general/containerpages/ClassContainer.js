@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Outlet , useNavigate, useLocation} from 'react-router-dom'
 import Activitylogpanel from '../components/Activitylogpanel';
-import { userInfoContext, topicfilterContext, activitytypefilterContext , topiclistContext , currentActivityContext , sourceMaterialContext } from '../../Globalcontext';
+import { userInfoContext, topicfilterContext, activitytypefilterContext , topiclistContext , currentActivityContext , sourceMaterialContext , currentclassContext, myClasesContext } from '../../Globalcontext';
 import {FaPlusCircle ,FaArrowCircleLeft} from  'react-icons/fa'
 
 import ClassSelectionitem from '../components/ClassSelectionitem';
@@ -9,11 +9,14 @@ import ClassSelectionitem from '../components/ClassSelectionitem';
 
 function ClassContainer() {
 
+  
 
   const navigate = useNavigate();
   const {userinfo} = useContext(userInfoContext);
+  const {currentclass} = useContext(currentclassContext);
+  const {myclasses} = useContext(myClasesContext);
   const [navcreate, setnavcreate] = useState(false);
-  const [currentactivity, setcurrentactivity] = useState()
+  const [currentactivity, setcurrentactivity] = useState();
   const [sourcematerial,setsourcematerial] = useState();
 
   const [currentpage, setcurrentpage] = useState();
@@ -33,29 +36,32 @@ function ClassContainer() {
     console.log(navcreate)
  }
 
- const [classSelection , setClassSelection] = useState(
-  [
-    {
-      'subjectname' : 'Class 1',
-      'classschedule' : 'class schedule',
-      'checked' : false
-    },
-    {
-      'subjectname' : 'Class 1',
-      'classschedule' : 'class schedule',
-      'checked' : false
-    },
-    {
-      'subjectname' : 'Class 1',
-      'classschedule' : 'class schedule',
-      'checked' : false
-    },
-    {
-      'subjectname' : 'Class 1',
-      'classschedule' : 'class schedule',
-      'checked' : false
+ const [classSelection , setClassSelection] = useState( (myclasses!== undefined && currentclass!== undefined) && makeSelection() )
+
+
+ function makeSelection(){
+  let currenttemp = myclasses.map(item=>{
+    if(item.classId ===currentclass.classId){
+      return { 'subjectname' : item.classname , 'classschedule' : item.classDay + ' ' + item.classSched_to + ' - ' + item.classSched_to}
     }
- ])
+  })
+
+  let temp = myclasses.map(item =>{
+    if(item.classId !== currentclass.classId){
+      return { 'subjectname' : item.classname , 'classschedule' : item.classDay + ' ' + item.classSched_to + ' - ' + item.classSched_to}
+    }
+  }) 
+  currenttemp = currenttemp.filter( x => x!== undefined);
+  temp = temp.filter( x => x!== undefined);
+  var fin = currenttemp.concat(temp)
+  return fin;
+ }
+
+
+ useEffect(()=>{
+  setClassSelection((myclasses!== undefined && currentclass!== undefined) && makeSelection())
+ },[currentclass])
+
 
  const [topiclist, settopiclist] = useState([
   {
@@ -74,24 +80,31 @@ function ClassContainer() {
  ])
 
 
-
  const [activitytypefilter, setactivitytypefilter] = useState('none')
  const [topicfilter, settopicfilter] = useState('none')
+
+ useEffect(()=>{
+  if(currentclass===undefined){
+    navigate('/')
+  }
+ })
  
+ 
+ if(currentclass===undefined){
+  return <div></div>
+ }
   return (
     <div className='classcontent'>
-     
-
       <div className='classcontentmain'>
         <div className='row'> 
             <div className="col-md-12 " >
               <div className={`primary classheader borderradius-lg dbpanelmargin ${((isactive('/classes/sampleclass/createnew') || isactive('/classes/sampleclass/activity/activityId')) ? ' classheader-md' : ' classheader-lg')}`}>
-                <div><h3 id='top'>Class name</h3>
+                <div><h3 id='top'>{currentclass.classname}</h3>
                   {!(isactive('/classes/sampleclass/createnew')|| isactive('/classes/sampleclass/activity/activityId') ) ?
                      <div>
-                     <h4>Subject code</h4>
-                    <h4>Saturdays 5am- 12pm</h4>
-                    <h4>Prof name</h4>
+                     <h4>Subject code : {currentclass.subjectcode}</h4>
+                    <h4>{currentclass.classDay}s {currentclass.classSched_to} - {currentclass.classSched_from}</h4>
+                    <h4>Professor name : {currentclass.profname}</h4>
                    </div> :
                    <h5>Saturdays 5am - 12pm</h5>
                   }
@@ -199,25 +212,15 @@ function ClassContainer() {
                                 </currentActivityContext.Provider>
                                 </sourceMaterialContext.Provider>
                                 
-                                  
-                                 
-                    
+                                                
                           <div>
                           <a href="#top">Back to top</a>
                           </div>
-
-                    </div>
-                
+                    </div>             
                   </div>
-
                 </div>
             </div>
-
-
             </div>
-
-
-
         </div>
 
       </div>
@@ -230,24 +233,13 @@ function ClassContainer() {
         </div>
       :
         <div>
-        </div>
-        
-    
-    
+        </div>    
     }
-
-
-      
-    
-
-
-
-
-   
-
     </div>
-
   )
+ 
+ 
+
 }
 
 export default ClassContainer
