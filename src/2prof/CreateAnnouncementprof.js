@@ -1,9 +1,22 @@
 import React, { useState } from 'react'
-
 import Multiselector from '../1general/formcomponents/Multiselector';
 import Dropdown from '../1general/formcomponents/Dropdown';
+import axios from 'axios';
 
 function CreateAnnouncementprof() {
+    const[announcementcontent, setannouncementcontent] = useState();
+    const[dateposted, setdateposted] = useState()
+
+    function saveAnnouncement(e){
+        e.preventDefault();
+        var temp = {
+            'Pr_dateposted' : dateposted,
+            'pr_announcementcontent' : announcementcontent
+        }
+        console.log(temp)   
+    }
+
+
     const [activ, setactiv] = useState(false)
     const temp = ()=>{
         alert("aksdfjs");
@@ -82,18 +95,24 @@ function CreateAnnouncementprof() {
                     <div className='col-lg-4'>
                         <div>
                             <p className='smallfont'>Schedule post</p>
-                            <input type="datetime-local" className='dropdowncontrol primary borderradius-md' defaultValue={postdate}  min={currentdate}/>
+                            <input type="datetime-local" className='dropdowncontrol primary borderradius-md' defaultValue={postdate}  min={currentdate} onChange={(e)=>{setpostdate(e.target.value)}}/>
                         </div>
-                    </div>
+            </div>
                 </div>
+                <form action="" onSubmit={(e)=>{saveAnnouncement(e)}}>
                 <div className='margintop12'>
-                        <textarea name="" id="" cols="30" rows="3" className='commontextarea primaryborder' placeholder='Enter content...'></textarea>
-                </div>
+                
+                <textarea name="" id="" cols="30" rows="3" className='commontextarea primaryborder' placeholder='Enter content...' onChange={(e)=>{setannouncementcontent(e.target.value)}}></textarea>
 
-                <div className="postannouncementfooter flex">
-                                <button onClick={temp2} className='secondary lighttext commonbutton'> Cancel</button>
-                                <button onClick={temp2}  className='secondary  lighttext commonbutton'> Post</button>
-                </div>  
+   
+   </div>
+
+   <div className="postannouncementfooter flex">
+                   <button onClick={temp2} className='secondary lighttext commonbutton'> Cancel</button>
+                   <input type="submit" className='secondary  lighttext commonbutton' value="Post" />
+                   <input type="submit" className='secondary lighttext commonbutton' value="Post" />
+   </div>  
+                </form>
                 
             </div>  
     

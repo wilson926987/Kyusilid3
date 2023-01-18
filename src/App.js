@@ -24,7 +24,8 @@ import Attendance from './1general/containerpages/Attendance';
 
 import AdminContainer from './4admin/AdminContainer';
 import AdminDashboard from './4admin/AdminDashboard';
-import Accounts from './4admin/Accounts';
+import Accountsprof from './4admin/Accountsprof';
+import Department from './4admin/Department';
 import FileManager from './4admin/FileManager';
 
 
@@ -33,6 +34,9 @@ import Profiilepage from './1general/containerpages/Profiilepage';
 import MessagesPage from './1general/containerpages/MessagesPage';
 import SourceMaterials from './2prof/SourceMaterials';
 import Classloading from './1general/loadingscreen/Classloading';
+import Departmentoverview from './4admin/Departmentoverview';
+import Adminlog from './4admin/Adminlog';
+import Events from './4admin/Events';
 
 
 
@@ -65,16 +69,20 @@ function App() {
                         <Route  path='attendance' element={<Attendance/> }/>
                         <Route path= 'activity/activityId' element={<ClassActivity/>} />
                     </Route>
-                </Route> 
-              
+                </Route>        
                 <Route path={'archived'} element={<Archived/>} /> 
                 <Route path={'profile'} element={<Profiilepage/> } />
-                <Route path={'messages'} element={<MessagesPage/>}></Route>
-                
+                <Route path={'messages'} element={<MessagesPage/>} />              
               </Route> 
               <Route path='/kyusilidAdmin' element={userinfo!=null ? <AdminContainer/> : <Login/>}>
                 <Route path='' element={<AdminDashboard/>} />
-                <Route path='Accounts' element={<Accounts/>}></Route>
+                <Route path='department' element={<Department/>}> 
+                  <Route path='' element={<Departmentoverview/>}></Route>
+                  <Route path='accounts' element={<Accountsprof/>} />
+                </Route>
+                <Route path='adminlog' element={<Adminlog/>}/>
+                <Route  path='events' element={<Events/>  }/>
+                
                 
              
               </Route>

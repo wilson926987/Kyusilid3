@@ -1,19 +1,19 @@
 import React, { useContext,  useState } from 'react'
 import kyusilidlogo from '../assets/images/Kyusilid.jpg'
-import {MdSpaceDashboard ,MdManageAccounts, MdBrightness1} from 'react-icons/md'
-import {AiFillFile} from 'react-icons/ai'
-import { themeContext } from '../Globalcontext'
+import {MdSpaceDashboard , MdBrightness1} from 'react-icons/md'
+import { themeContext , departmentsContext } from '../Globalcontext'
 import {BiChevronsLeft ,BiChevronsRight} from 'react-icons/bi'
 import { useNavigate } from 'react-router-dom'
 
 
 function Adminsidebar() {
     const {theme} = useContext(themeContext);
-
+    const {departments} = useContext(departmentsContext)
     const [sidebar, setsidebar] = useState(true);
     const shorten = (text)=>{
       return text.length>20 ? text.slice(0,18)+ "..." : text
   }
+
 
 
     const togglesidebar=()=>{
@@ -51,10 +51,10 @@ function Adminsidebar() {
 {sidebar && <div className='sidebarcontent'>
     <ul>
         <li className='sidebarmenu' onClick={()=>{navigate('/kyusilidAdmin')}}> <div className="highlight"></div> <MdSpaceDashboard />  Dashboard</li>
-        <li className='sidebarmenu' onClick={()=>{navigate('Information_Technology')}}> <div className="highlight"></div> <MdBrightness1 className='clear'/> {shorten('Information Technology')}</li>
-        <li className='sidebarmenu' onClick={()=>{navigate('Business_Administration')}}> <div className="highlight"></div> <MdBrightness1 className='clear'/> {shorten('Business Administration')}</li>
-        <li className='sidebarmenu' onClick={()=>{navigate('Industrial_Engineering')}}> <div className="highlight"></div> <MdBrightness1 className='clear'/> {shorten('Industrial Engineering')}</li>
-        <li className='sidebarmenu' onClick={()=>{navigate('Entrepreneurship')}}> <div className="highlight"></div> <MdBrightness1 className='clear'/> {shorten('Entrepreneurship')}</li>
+        {departments.map((item)=>(
+             <li key={item.departmentId} className='sidebarmenu' onClick={()=>{navigate('department')}}> <div className="highlight"></div> <MdBrightness1 className='clear'/> {shorten(item.departmentname)}</li>
+        ))}
+        <li className='sidebarmenu' onClick={()=>{navigate('adminlog')}}> <div className="highlight"></div> <MdSpaceDashboard /> Admin log</li>
 
     </ul>              
 </div>}
