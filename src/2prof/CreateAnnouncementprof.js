@@ -1,21 +1,43 @@
-import React, { useState } from 'react'
+import React, { useState , useContext} from 'react'
 import Multiselector from '../1general/formcomponents/Multiselector';
 import Dropdown from '../1general/formcomponents/Dropdown';
 import axios from 'axios';
+import { announcementlistContext } from '../Globalcontext';
 
 function CreateAnnouncementprof() {
     const[announcementcontent, setannouncementcontent] = useState();
-    const[dateposted, setdateposted] = useState()
+    const[dateposted, setdateposted] = useState();
+    const {announcementlist, setannouncementlist} = useContext(announcementlistContext);
+    const [saveannouncementready, setsaveannouncement] = useState(true);
+
 
     function saveAnnouncement(e){
-        e.preventDefault();
-        var temp = {
-            'Pr_dateposted' : dateposted,
-            'pr_announcementcontent' : announcementcontent
+        if(saveannouncementready===true){
+            setsaveannouncement(false);
+            e.preventDefault();
+            var temp = {
+                'an_content' : announcementcontent,
+            }  
+            const response = axios.post('http://localhost:8000/api/add-announcement', temp);
+            alert('Saved');
+            console.log(response); 
+            e.target.reset();
+            setannouncementcontent();
+            axios.get('http://localhost:8000/api/get-announcement')
+            .then(response => {
+            setannouncementlist(response.data)
+          })
+          .catch(error => {
+            console.log(error);
+          });
+          setsaveannouncement(true);
         }
-        console.log(temp)   
+        
+    
+    
+    
+    
     }
-
 
     const [activ, setactiv] = useState(false)
     const temp = ()=>{

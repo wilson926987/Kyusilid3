@@ -1,11 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Outlet , useNavigate, useLocation} from 'react-router-dom'
 import Activitylogpanel from '../components/Activitylogpanel';
-import { userInfoContext, topicfilterContext, activitytypefilterContext , topiclistContext , currentActivityContext , sourceMaterialContext , currentclassContext, myClasesContext } from '../../Globalcontext';
+import { announcementlistContext, userInfoContext, topicfilterContext, activitytypefilterContext , topiclistContext , currentActivityContext , sourceMaterialContext , currentclassContext, myClasesContext } from '../../Globalcontext';
 import {FaPlusCircle ,FaArrowCircleLeft} from  'react-icons/fa'
-
 import ClassSelectionitem from '../components/ClassSelectionitem';
-
+import axios from 'axios';
 
 function ClassContainer() {
 
@@ -18,9 +17,32 @@ function ClassContainer() {
   const [navcreate, setnavcreate] = useState(false);
   const [currentactivity, setcurrentactivity] = useState();
   const [sourcematerial,setsourcematerial] = useState();
-
   const [currentpage, setcurrentpage] = useState();
   const location = useLocation()
+
+
+  const [announcementlist, setannouncementlist] = useState([
+    {
+      'postId' : 0,
+      'dateposted' : '' ,
+      'postedBy' : '',
+      'content' : ''
+    }
+  ]
+  );
+
+   useEffect(() => {
+    axios.get('http://localhost:8000/api/get-announcement')
+      .then(response => {
+        setannouncementlist(response.data)
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, []);
+
+
+
 
   useEffect(()=>{   
       setcurrentpage(location.pathname);
@@ -199,7 +221,8 @@ function ClassContainer() {
                     <div className="tertiary borderradius-md outletcontainer">
 
 
-                                <sourceMaterialContext.Provider value={{sourcematerial, setsourcematerial}}>
+                                <announcementlistContext.Provider value={{announcementlist, setannouncementlist}}> 
+                                  <sourceMaterialContext.Provider value={{sourcematerial, setsourcematerial}}>
                                 <currentActivityContext.Provider value={{currentactivity, setcurrentactivity}}>
                                 <topiclistContext.Provider value={{topiclist, settopiclist}}>
                                   <activitytypefilterContext.Provider value={{activitytypefilter, setactivitytypefilter}}>
@@ -208,9 +231,9 @@ function ClassContainer() {
                                  </topicfilterContext.Provider>
                                   </activitytypefilterContext.Provider>
                                   </topiclistContext.Provider>
-
                                 </currentActivityContext.Provider>
                                 </sourceMaterialContext.Provider>
+                                </announcementlistContext.Provider>
                                 
                                                 
                           <div>

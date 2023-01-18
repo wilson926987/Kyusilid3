@@ -1,12 +1,13 @@
 import React from 'react'
 import {MdSend} from 'react-icons/md'
 
+
 function Announcementpanel({announcementitem}) {
   return (
     <div className="announcementpanel primaryborder borderradius-md">
     <div className="announcementheader">
       <div>
-          <h5>Announcement title</h5>
+          <h5>{announcementitem.an_title}</h5>
       </div>
       <div>
         <h6>Posted {announcementitem.dateposted} by {announcementitem.postedBy}</h6>
@@ -14,7 +15,7 @@ function Announcementpanel({announcementitem}) {
     </div>
 
     <div className='announcementcontent'>
-        {announcementitem.content}
+        {announcementitem.an_content}
     </div>
     <hr />
 
