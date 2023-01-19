@@ -46,7 +46,7 @@ function Profiilepage() {
 }
 <div className='col-lg-7'>
 <div className='borderradius-lg'>
-  <div className='center'><h3>Student Progress</h3></div>
+  <div className='center1'><h3>Student Progress</h3></div>
 </div>
 
 <div className='row'>
