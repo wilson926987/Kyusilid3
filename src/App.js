@@ -1,3 +1,4 @@
+import './Libot.css';
 import './App.css';
 import './chart.css'
 import './assets/css/bootstrap-grid.css';
@@ -16,6 +17,7 @@ import ClassContainer from './1general/containerpages/ClassContainer';
 import MyclassesDefault from './1general/containerpages/MyclassesDefault';
 import ClassStats from './1general/containerpages/ClassStats';
 import ClassInfo from './1general/containerpages/ClassInfo';
+import Quiz from './1general/containerpages/Quiz';
 import ClassActivity from './1general/containerpages/ClassActivity';
 import Classmarks from './2prof/Classmarks';
 import ClassModules from './2prof/ClassModules';
@@ -55,6 +57,7 @@ function App() {
       <div className='appbody background'>
         <BrowserRouter>
             <Routes>
+            <Route path='/Quiz' element={<Quiz/>} />
               <Route path={'/'} element={userinfo!=null ? <Container/> : <Login/> } > 
                 <Route path={''} element={<Dashboard/>}></Route>  {/*this is the dashboard*/}
                 <Route path={'classes'} element={<MyClasses/>}>  {/*this is the class list*/}
