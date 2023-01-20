@@ -8,11 +8,10 @@ function statprofstud() {
 
         <Chart
         
-            height = '250%'
+            height = '170%'
             width = '88%'
-            type= "line"
+            type= "area"
             stacked = "false"
-  
        
             series= {[
               
@@ -31,9 +30,10 @@ function statprofstud() {
             
             //toolbar
             chart: {
+              //background: '#00ff00',
                 toolbar:{
               show:true,
-              offsetX: 150,
+              offsetX: 140,
               tools: {
                 download: true,
                 selection: false,
@@ -64,7 +64,17 @@ function statprofstud() {
               },
               autoSelected: 'menu' 
             
-            }
+            },
+            dropShadow: {
+              enabled: true,
+              enabledOnSeries: undefined,
+              top: 0,
+              left: 0,
+              blur: 3,
+              color: '#000',
+              opacity: 0.35
+          }
+
             },
 
 
@@ -74,7 +84,9 @@ function statprofstud() {
               
               colors: ["#0000FF", "#00FF00"],
               stroke: {
-                width: [4, 4]
+                width: [4, 4],
+                          curve: 'smooth'
+
               },
               plotOptions: {
                toolbar:{
@@ -82,7 +94,7 @@ function statprofstud() {
                }
               },
               xaxis: {
-                categories: [' ', 'AL101','AL102','CC106','SAM101','SIA101'],
+                categories: ['', 'AL101','AL102','CC106','SAM101','SIA101'],
                 labels: {
                     style: {
                       fontSize:  '15px',
@@ -143,7 +155,37 @@ function statprofstud() {
               legend: {
                 fontSize: '15px',
                 horizontalAlign: "center",
-            }
+            },
+            grid: {
+              show: true,
+              borderColor: 'green',
+              strokeDashArray: 2,
+              position: 'back',
+              xaxis: {
+                  lines: {
+                      show: false
+                  }
+              },   
+              yaxis: {
+                  lines: {
+                      show: true
+                  }
+              },  
+              row: {
+                  colors: undefined,
+                  opacity: 0.5
+              },  
+              column: {
+                  colors: undefined,
+                  opacity: 0.5
+              },  
+              padding: {
+                  top: 0,
+                  right: 0,
+                  bottom: 10,
+                  left: 25
+              },  
+          }
               
           
           }}

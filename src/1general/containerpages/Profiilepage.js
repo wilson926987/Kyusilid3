@@ -122,7 +122,7 @@ function Profiilepage() {
 
 
 
-<div className='col-lg-4 margintop12'>
+<div className='col-lg-4 margintop11'>
   <div className='currentsempanel margintop12'>
   {
   //progress stud "MISSING"
@@ -179,18 +179,25 @@ function Profiilepage() {
 
   </div>
 
-{
-  //line graph
-}
+
   <div className='row'>
   <div className='col-lg-12'>
-<div className='"tertiary attendancepanel borderradius-lg LineChart"'>
-<h2 className="center1">Student Profile Performance</h2>
+<div className='currentsempanel borderradius-lg margintop11'>
+
+  <h2 className="center1">Student Profile Performance</h2>
+  <div className=' currentsempanel borderradius-lg margintop11 height1'>
   <div className='LineChart'><StudProfile></StudProfile></div>
+    
+
+
 </div>
   </div>
   </div>
- 
+  </div>
+
+  {
+  //line graph
+}
 
     </div>
   )

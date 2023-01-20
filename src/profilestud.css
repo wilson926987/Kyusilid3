@@ -1,5 +1,8 @@
 .margintop10{
-    margin-top: -110px;
+    margin-top: -120px;
+}
+.height1{
+    height: 35vh;
 }
 .margintop11{
     margin-top: 30px;
@@ -71,7 +74,7 @@ circle{
 
 @keyframes anim{
     100%{
-        stroke-dashoffset: 165;
+        stroke-dashoffset: 150;
     }
 }
 
