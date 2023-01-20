@@ -1,6 +1,7 @@
 import './Libot.css';
 import './App.css';
 import './chart.css'
+import './profilestud.css'
 import './assets/css/bootstrap-grid.css';
 import { useState } from 'react';
 import { themeContext , userInfoContext} from './Globalcontext';

@@ -112,7 +112,7 @@ labels:['Total Discussions','Total Attended'],
 
 legend:{
 position:"right",
-offsetX: 5
+offsetX: 25
 },
 dataLabels: {
 enabled: false,
