@@ -1,35 +1,37 @@
-
-
-import React, { useContext , useState} from 'react'
+import axios from 'axios'
+import React, { useContext , useState, useEffect} from 'react'
 import { userInfoContext } from '../../Globalcontext'
 import logoiconimage from '../../assets/images/Kyusilid.jpg'
 import logoiconimage1 from '../../assets/images/avatarlogo.webp'
+import { useHistory } from 'react-router-dom'
 
 function Login() {
 
   const {setuserinfo} = useContext(userInfoContext);
   const [username, setusername] = useState();
   const [password, setpassword] = useState();
+
+  //Message for validation
   const [usernamemessage, setusermessage] = useState()
   const [passmessage, setpassmessage] = useState()
 
   
 
   const handleUsernameChange=(e)=>{
-    setusername(e.target.value)
+    setusername(e.target.value);
     setusermessage('');
   }
   
   const handlePasswordChange=(e)=>{
-    setpassword(e.target.value)
+    setpassword(e.target.value);
     setpassmessage('');
   }
 
 
 
-  const handleFormSubmit=(e)=>{
-    e.preventDefault();
-  }
+  // const handleFormSubmit=(e)=>{
+  //   e.preventDefault();
+  // }
 
   const trylogin = ()=>{
 
@@ -46,18 +48,69 @@ function Login() {
     }
 
 
-    if(!(username===undefined || password === undefined)){
-      setuserinfo({
-        'username' : "wilson",
-        'password' : 'password',
-        'usertype' : username
-      })
-    }
+    // if(!(username===undefined || password === undefined)){
+    //   setuserinfo({
+    //     'username' : "wilson",
+    //     'password' : 'password',
+    //     'acc_type' : username
+    //   })
+    // }
  
 
   }
   
-  
+  //API Code
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+        const response = await axios.post('http://localhost:8000/api/login', {
+            'acc_username': username,
+            'acc_password': password
+        });
+
+        if (response.data.status === 'success') {
+            console.log('Authentication Successful!');
+            console.log(response.data);
+            // Store user data in local storage or use it as needed
+        } else {
+            console.log('Authentication Failed!');
+        }
+    } catch (error) {
+        console.error(error.response.data);
+    }
+};
+
+
+
+
+// function LogSession() {
+//   const [username ,setUsername]=useState("");
+//   const [password ,setPassword]=useState("");
+//   const history = useHistory();
+//   useEffect(()=>{
+//     if (localStorage.getItem('user-info')){
+//         history.push("/add")
+//     }
+//   })
+// }
+
+// async function login(){
+//   console.warn(username, password)
+//   let item = {username, password};
+//   let result = await fetch("http://localhost:8000/api/login", {
+//       method: 'POST',
+//       headers:{
+//         "Content-Type": "application/json",
+//         "Accept": 'application/json'
+//       },
+//       body: JSON.stringify(item) 
+//       });
+//       result = await result.json();
+//       localStorage.setItem("user-info", JSON.stringify(result))
+//       history.push("/add")
+// }
   
  
   return (
@@ -85,7 +138,7 @@ function Login() {
             
            
        
-        <button onClick={trylogin} className='buttonsubmit secondary'>login
+        <button type="submit" className='buttonsubmit secondary'>login
         </button>
         <center> <a href="EMS.forget.html">Forgot Password...</a></center> 
         </form>
@@ -95,6 +148,7 @@ function Login() {
   )
   
 }
+
 
 
 export default Login
