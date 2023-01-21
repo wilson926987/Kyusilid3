@@ -3,7 +3,7 @@ import React, { useContext , useState, useEffect} from 'react'
 import { userInfoContext } from '../../Globalcontext'
 import logoiconimage from '../../assets/images/Kyusilid.jpg'
 import logoiconimage1 from '../../assets/images/avatarlogo.webp'
-import { useHistory } from 'react-router-dom'
+
 
 function Login() {
 
@@ -33,56 +33,48 @@ function Login() {
   //   e.preventDefault();
   // }
 
-  const trylogin = ()=>{
-
-    if(username=== undefined){
-     alert('Username Required');
-    }else{
-      setusermessage('')
-    }
-
-    if(password === undefined){
-      alert('Password Required');
-    }else{
-      setpassmessage('')
-    }
-
-
-    // if(!(username===undefined || password === undefined)){
-    //   setuserinfo({
-    //     'username' : "wilson",
-    //     'password' : 'password',
-    //     'acc_type' : username
-    //   })
-    // }
  
-
-  }
-  
   //API Code
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
+    //validation
+    if(username=== undefined){
+      alert('Username Required');
+     }else{
+       setusermessage('')
+     }
+ 
+     if(password === undefined){
+       alert('Password Required');
+     }else{
+       setpassmessage('')
+     }
+ 
+
+   if(username!==undefined && password!==undefined){
     try {
-        const response = await axios.post('http://localhost:8000/api/login', {
-            'acc_username': username,
-            'acc_password': password
-        });
+      const response = await axios.post('http://localhost:8000/api/login', {
+          'acc_username': username,
+          'acc_password': password
+      });
 
-        if (response.data.status === 'success') {
-            console.log('Authentication Successful!');
-            console.log(response.data);
-            // Store user data in local storage or use it as needed
-        } else {
-            console.log('Authentication Failed!');
-        }
-    } catch (error) {
-        console.error(error.response.data);
-    }
+      if (response.data.status === 'success') {
+          console.log('Authentication Successful!');
+          setuserinfo(response.data);
+          console.log(response.data);
+          // Store user data in local storage or use it as needed
+      } else {
+        alert("Username and password didn't match");
+          console.log('Authentication Failed!');
+      }
+  } catch (error) {
+      console.error(error.response.data);
+  }
+
+   }
 };
-
-
 
 
 // function LogSession() {
