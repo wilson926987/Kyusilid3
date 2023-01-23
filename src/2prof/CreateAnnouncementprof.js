@@ -6,6 +6,7 @@ import { announcementlistContext } from '../Globalcontext';
 
 function CreateAnnouncementprof() {
     const[announcementcontent, setannouncementcontent] = useState();
+    const[announcementtitle, setannouncementtitle] = useState();
     const[dateposted, setdateposted] = useState();
     const {announcementlist, setannouncementlist} = useContext(announcementlistContext);
     const [saveannouncementready, setsaveannouncement] = useState(true);
@@ -17,12 +18,14 @@ function CreateAnnouncementprof() {
             e.preventDefault();
             var temp = {
                 'an_content' : announcementcontent,
+                'an_title' : announcementtitle
             }  
             const response = axios.post('http://localhost:8000/api/add-announcement', temp);
-            alert('Saved');
+            alert('Announcement posted');
             console.log(response); 
             e.target.reset();
             setannouncementcontent();
+            setannouncementtitle();
             axios.get('http://localhost:8000/api/get-announcement')
             .then(response => {
             setannouncementlist(response.data)
@@ -123,7 +126,7 @@ function CreateAnnouncementprof() {
                 </div>
                 <form action="" onSubmit={(e)=>{saveAnnouncement(e)}}>
                 <div className='margintop12'>
-                
+                <textarea name="" id="" cols="30" rows="3" className='commontextarea primaryborder' placeholder='Enter title...' onChange={(e)=>{setannouncementtitle(e.target.value)}}></textarea>
                 <textarea name="" id="" cols="30" rows="3" className='commontextarea primaryborder' placeholder='Enter content...' onChange={(e)=>{setannouncementcontent(e.target.value)}}></textarea>
 
    
@@ -132,7 +135,6 @@ function CreateAnnouncementprof() {
    <div className="postannouncementfooter flex">
                    <button onClick={temp2} className='secondary lighttext commonbutton'> Cancel</button>
                    <input type="submit" className='secondary  lighttext commonbutton' value="Post" />
-                   <input type="submit" className='secondary lighttext commonbutton' value="Post" />
    </div>  
                 </form>
                 
