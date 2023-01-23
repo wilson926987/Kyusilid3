@@ -117,8 +117,8 @@ function Profilenotif() {
         </div>
         <div className="notificationicon"> <GrMail  onClick={()=>{navigate('messages')}}/></div>
         <div className='profilenotifcontent'>
-             <h5>##username # </h5>
-             <h6>##user id or position if prof#</h6>
+             <h5>{userinfo.user.acc_username}</h5>
+             <h6>{userinfo.temp}</h6>
         </div>
         
         <div className='profileicon' >
