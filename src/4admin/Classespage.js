@@ -2,15 +2,15 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
 
-
-function Subjects() {
+function Classespage() {
   const navigate = useNavigate()
+
   return (
     <div className='tertiary borderradius-lg padding12'>
      
      <div className="flex"> 
       <div>
-      <h4>Subjects table</h4>
+      <h4>Classes table</h4>
       <p className='smallfont'> last updated : September 2  by Juan dela Cruz</p>
       </div>
 
@@ -20,23 +20,29 @@ function Subjects() {
       <div className="persontable margintop12 width100">
       <table className='width100' cellSpacing={0}>
        <thead className='primary'>
-        <th>Year</th>
-        <th>Subject code</th>
-        <th>Subject name</th>
-        <th>Classes</th>
+      
+        <th>Class Id</th>
+        <th>Year and Section</th>
+        <th>Subject</th>
+        <th>Professor</th>
+        <th>Schedule</th>
+        <th>Number of Students</th>
         <th></th>
         
        </thead>
        <tbody>
         <tr>
-          <td>4</td>
-          <td>WEB101</td>
-          <td>Web systems and Development</td>
-          <td>234</td>
-          <td><button className='commonbutton lighttext secondary' onClick={ ()=>{navigate('/kyusilidAdmin/department/sections')}}>View Classes</button></td>
+          <td>1</td>
+          <td>SBIT- 4J</td>
+          <td>Practicum</td>
+          <td>juan Dela Cruz</td>
+          <td>Schedule</td>
+          <td>40</td>
+          <td> <button className="secondary lighttext commonbutton" onClick={()=>{navigate('/kyusilidAdmin/department/sections/samplesection')}}>View Class</button></td>
         </tr>
-        
+       
        </tbody>
+
      
       </table>
     </div>
@@ -45,6 +51,9 @@ function Subjects() {
     
       </div>
   )
+ 
+
+
 }
 
-export default Subjects
+export default Classespage

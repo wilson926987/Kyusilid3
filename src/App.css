@@ -176,6 +176,10 @@ box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.75);
   margin-right: 20px;
 }
 
+.padding12{
+  padding: 12px;
+}
+
 .sidebarnotactive{
   width: 0px !important;
   margin-right: 60px;
@@ -796,7 +800,10 @@ justify-content: space-around;
 }
 
 .margintop12{
-  margin-top: 18px;
+  margin-top: 14px;
+}
+.margintop4{
+  margin-top: 4px;
 }
 
 .samplebox{
@@ -950,6 +957,21 @@ justify-content: space-around;
 
 .persontable{
   margin-bottom: 40px;
+}
+
+
+.persontable table *{
+  padding-top: 4px;
+  padding-bottom: 4px;
+  text-align: center;
+}
+
+.default .persontable table tr:nth-child(even){
+  background-color: var(--defaultbackground);
+}
+
+.dark .persontable table tr:nth-child(even){
+  background-color: var(--darkthemebackground);
 }
 
 .adminpostpanel{
@@ -1534,8 +1556,6 @@ padding: 12px;
   margin-bottom: 12px;
 }
 
-
-
 .materialpanel{
   height: 110px;
   width: 90px;
@@ -1549,7 +1569,6 @@ padding: 12px;
 }
 
 .materialpanel:hover , .questionnairepanel:hover , .questionnairepanel button:hover , .submissionpanel button:hover
-
 {
   box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.75);
   -webkit-box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.75);
@@ -1575,7 +1594,6 @@ padding: 12px;
   margin-top: 20px;
 }
 
-
 .questionnairefooter button{
   margin-left: auto;
   margin-right: auto;
@@ -1585,7 +1603,6 @@ padding: 12px;
   color: #e2e4fa;
   font-weight: bold;
 }
-
 
 .activitycomments{
   margin-top: 20px;
@@ -1628,9 +1645,6 @@ padding: 12px;
 
 }
 
-
-
-
 .attendancetable{
   table-layout: fixed;
   position: absolute;
@@ -1649,8 +1663,6 @@ padding: 12px;
   left: 0;
 }
 
-
-
 .temp2{
   position: absolute;
   z-index: 4;
@@ -1659,8 +1671,6 @@ padding: 12px;
   left: 2px;
   height: 38px;
 }
-
-
 
 .tddate {
   width: 20px;
@@ -1684,7 +1694,6 @@ padding: 12px;
 
 }
 
-
 .materialcontent{
   overflow: hidden;
   max-height: 0;
@@ -1699,7 +1708,6 @@ padding: 12px;
   max-height: 230px !important;
 }
 
-
 .postsourcematerial{
   position: absolute;
   top: 0;
@@ -1709,6 +1717,41 @@ padding: 12px;
 .postsourcematerial button{
   color: var(--lighttextsecondary);
 }
+
+.adminheader{
+  height: 180px;
+  align-items: flex-end;
+  padding: 12px;
+}
+
+.overviewpanel, .overviewlist{
+  padding: 12px;
+}
+
+.overviewpanel{
+  height: 180px;
+}
+
+.overviewlist{
+  min-height: 200px;
+}
+
+.commonpanel{
+  min-height: 200px;
+  padding: 12px;
+}
+
+
+
+
+.adminupdatepanel{
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-direction: column;
+}
+
+
 
 
 

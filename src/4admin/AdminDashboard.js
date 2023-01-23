@@ -1,8 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
+import avatar from '../assets/images/avatar.jpg';
 
 function AdminDashboard() {
+
   return (
-    <div>AdminDashboard</div>
+    <div>
+      Admin Dashboard
+    </div>
   )
 }
 

@@ -40,6 +40,11 @@ import Classloading from './1general/loadingscreen/Classloading';
 import Departmentoverview from './4admin/Departmentoverview';
 import Adminlog from './4admin/Adminlog';
 import Events from './4admin/Events';
+import Subjects from './4admin/Subjects';
+import Classespage from './4admin/Classespage';
+import Accountsstud from './4admin/Accountsstud';
+import SectionContainer from './4admin/SectionContainer';
+import SampleSection from './4admin/SampleSection';
 
 
 
@@ -81,11 +86,20 @@ function App() {
               <Route path='/kyusilidAdmin' element={userinfo!=null ? <AdminContainer/> : <Login/>}>
                 <Route path='' element={<AdminDashboard/>} />
                 <Route path='department' element={<Department/>}> 
-                  <Route path='' element={<Departmentoverview/>}></Route>
+                  <Route path='' element={<Departmentoverview/>} />
+                  <Route path='subjects' element={<Subjects/>} />
                   <Route path='accounts' element={<Accountsprof/>} />
+                  <Route path='sections' element={<SectionContainer/>}>
+                        <Route path='' element={<Classespage/>}> </Route>
+                        <Route path='samplesection' element={<SampleSection/>} > </Route>
+                  </Route>
+                  <Route path='accounts_prof' element={<Accountsprof/>}></Route>
+                  <Route path='accounts_stud' element ={<Accountsstud/>}></Route>
+                  <Route path='eventcalendar' element={<Events/>}></Route>
+                  
                 </Route>
                 <Route path='adminlog' element={<Adminlog/>}/>
-                <Route  path='events' element={<Events/>  }/>
+             
                 
                 
              
