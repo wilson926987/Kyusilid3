@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Avater from '../../assets/images/avatar.jpg'
 import {BsFillGearFill} from 'react-icons/bs'
+import StudProfile from '../components/statprofstud'
 
 function Profiilepage() {
 
@@ -44,13 +45,13 @@ function Profiilepage() {
 {
   //this is for the progress of student
 }
-<div className='col-lg-7'>
+<div className='col-lg-7 margintop13'>
 <div className='borderradius-lg'>
   <div className='center1'><h3>Student Progress</h3></div>
 </div>
 
 <div className='row'>
-<div className='col-lg-4'>
+<div className='col-lg-4 margintop12'>
   <div className='currentsempanel margintop12'>
 
 {
@@ -85,7 +86,7 @@ function Profiilepage() {
 <div className='profilestud1'><center>Done</center></div>
 </div>
 
-<div className='col-lg-4'>
+<div className='col-lg-4 margintop12'>
   <div className='currentsempanel margintop12'>
   {
   //progress stud "Pending"
@@ -121,7 +122,7 @@ function Profiilepage() {
 
 
 
-<div className='col-lg-4'>
+<div className='col-lg-4 margintop12'>
   <div className='currentsempanel margintop12'>
   {
   //progress stud "MISSING"
@@ -173,11 +174,24 @@ function Profiilepage() {
     <p>Section : J</p>
     <p>Units : 12</p>
   </div>
-
+</div>
 </div>
 
+  </div>
+
+{
+  //line graph
+}
+  <div className='row'>
+  <div className='col-lg-12'>
+<div className='"tertiary attendancepanel borderradius-lg LineChart"'>
+<h2 className="center1">Student Profile Performance</h2>
+  <div className='LineChart'><StudProfile></StudProfile></div>
 </div>
   </div>
+  </div>
+ 
+
     </div>
   )
 }

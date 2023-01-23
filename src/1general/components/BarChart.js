@@ -29,6 +29,7 @@ function Barchart() {
               },
             ]}
           options={{
+            
             dataLabels: {
               enabled: false
             },
