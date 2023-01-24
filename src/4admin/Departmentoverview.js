@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import avatar from '../assets/images/avatar.jpg';
+import AreaChart from '../1general/components/areachart'
 
 
 function Departmentoverview() {
@@ -9,8 +10,8 @@ function Departmentoverview() {
   return (
     <div className="row">
     <div className="col-lg-12 ">
-      <div className="tertiary borderradius-md overviewpanel" >
-        sobrang habang graph dito pra maganda tingnan
+      <div className="tertiary borderradius-md paneladd" >
+        <div className='area'><AreaChart></AreaChart></div>
         </div> 
     </div>
 

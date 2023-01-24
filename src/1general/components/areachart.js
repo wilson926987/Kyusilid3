@@ -2,29 +2,28 @@
 import React from "react";
 import Chart from "react-apexcharts";
 
-function statprofstud() {
+function areachart() {
   return (
     <React.Fragment>
 
         <Chart
         
-            height = '170%'
-            width = '88%'
-            type= "area"
-            stacked = "false"
+        height = '120%'
+        width = '88%'
+        type= "area"
+        stacked = "false"
        
-            series= {[
-              
-                {
-                    name: "Middle Term",
-                    data: [0,90,87,97,85,89]
-                  },
-                  {
-                    name: "Final Term",
-                    data: [0,80,82,87,90,95]
-                  },
-                  
-            ]}
+        series = {[
+            {
+            name: 'Student Enrolled',
+            data: [3100, 4000, 2008, 5100, 4200, 1090, 1000]
+          }, 
+          {
+            name: 'Professor Employed',
+            data: [11, 32, 45, 32, 34, 52, 41]
+          }]
+        }
+    
             
           options={{
             
@@ -33,7 +32,8 @@ function statprofstud() {
               //background: '#00ff00',
                 toolbar:{
               show:true,
-              offsetX: 140,
+              offsetX: 125,
+              offsetY: 22,
               tools: {
                 download: true,
                 selection: false,
@@ -94,10 +94,20 @@ function statprofstud() {
                }
               },
               xaxis: {
-                categories: ['', 'AL101','AL102','CC106','SAM101','SIA101'],
+                tickPlacement: 'on',
+                type: "datetime",
+                categories: [
+                  "2023-01-19T00:00:00.000Z",
+                  "2023-01-19T01:30:00.000Z",
+                  "2023-01-19T02:30:00.000Z",
+                  "2023-01-19T03:30:00.000Z",
+                  "2023-01-19T04:30:00.000Z",
+                  "2023-01-19T05:30:00.000Z",
+                  "2023-01-19T06:30:00.000Z"
+                ],
                 labels: {
                     style: {
-                      fontSize:  '15px',
+                      fontSize:  '12px',
                       fontWeight: '600',
                     }
                   }
@@ -133,13 +143,13 @@ function statprofstud() {
                       colors: "#00008B"
                     }
                   },
-                                 title: {
-                                    text: "Semestral Period",
-                                    style: {
-                                        color: "#00008B",
-                                        fontSize: '13px',
-                                    }
-                                  }
+                                //  title: {
+                                //     text: "Semestral Period",
+                                //     style: {
+                                //         color: "#00008B",
+                                //         fontSize: '13px',
+                                //     }
+                                //   }
                  
                 }
               ],
@@ -149,11 +159,12 @@ function statprofstud() {
                 intersect: false,
 
                 x: {
-                  show: false
+                  show: true,
+                  format: "dd/MMM/yy HH:mm"
                 }
               },  
               legend: {
-                fontSize: '15px',
+                fontSize: '12px',
                 horizontalAlign: "center",
             },
             grid: {
@@ -162,6 +173,7 @@ function statprofstud() {
               strokeDashArray: 2,
               position: 'back',
               xaxis: {
+            
                   lines: {
                       show: false
                   }
@@ -180,10 +192,10 @@ function statprofstud() {
                   opacity: 0.5
               },  
               padding: {
-                  top: 0,
-                  right: 0,
-                  bottom: 10,
-                  left: 25
+                top: 10,
+                right: 0,
+                bottom: 0,
+                left: 25
               },  
           }
               
@@ -196,4 +208,4 @@ function statprofstud() {
   );
 }
 
-export default statprofstud;
+export default areachart;
