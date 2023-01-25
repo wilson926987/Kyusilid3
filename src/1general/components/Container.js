@@ -4,6 +4,7 @@ import Profilenotif from './Profilenotif'
 
 import { Outlet , useNavigate} from 'react-router-dom'
 import { userInfoContext , myClasesContext  , currentclassContext} from '../../Globalcontext'
+import axios from 'axios'
 
 
 
@@ -20,9 +21,7 @@ function Container() {
       'classDay' : 'Monday',
       'classbanner' : 1,
       'subjectcode' : 'Prc101',
-      'profname' : 'Juan delacruz'
-
-      
+      'profname' : 'Juan delacruz'   
     },
     {
       'classId' : 2,
@@ -39,13 +38,27 @@ function Container() {
       'classname' : 'Automata',
       'classSched_from' : '6:00',
       'classSched_to' : '8:00',
-      'classDay' : 'Monday',
+      'classDay' : 'Wednesday',
       'classbanner' : 1,
       'subjectcode' : 'Auto1111',
       'profname' : 'Juan delacruz'
     }
 
   ]);
+
+
+
+useEffect(() => {
+  axios.get('http://localhost:8000/api/getclasslist/3')
+    .then(response => {
+      setmyclasses(response.data);
+      console.log(response.data)
+    })
+    .catch(error => {
+      console.log(error);
+    });
+}, []);
+
 
   const [currentclass, setcurrentclass] = useState()
 

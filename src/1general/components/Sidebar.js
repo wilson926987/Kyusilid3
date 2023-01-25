@@ -71,8 +71,8 @@ function Sidebar() {
     <ul>
         <li className='sidebarmenu' onClick={()=>{navigate('/')}}> <div className={`highlight ${isactive('/') && ' sidebarhighlightactive'}`}></div> <MdSpaceDashboard />  Dashboard</li>
         <li className="sidebarmenu" onClick={()=>{navigate('/classes')}}> <div className={`highlight ${isactive('/classes') && ' sidebarhighlightactive'}`}></div> <FaBookReader />All Classes</li> 
-        {myclasses.map(classitem =>(
-             <li className="sidebarsubmenu" key={classitem.classId} onClick={()=>{gotoclass(classitem)}}><div className="highlight"></div> {shorten(classitem.classname)} </li>
+        {myclasses.map((classitem , key) =>(
+             <li className="sidebarsubmenu" key={key} onClick={()=>{gotoclass(classitem)}}><div className="highlight"></div> {shorten(classitem.sub_name)} </li>
         ))} 
    
        

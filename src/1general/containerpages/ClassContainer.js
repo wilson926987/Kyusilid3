@@ -121,14 +121,14 @@ function ClassContainer() {
         <div className='row'> 
             <div className="col-md-12 " >
               <div className={`primary classheader borderradius-lg dbpanelmargin ${((isactive('/classes/sampleclass/createnew') || isactive('/classes/sampleclass/activity/activityId')) ? ' classheader-md' : ' classheader-lg')}`}>
-                <div><h3 id='top'>{currentclass.classname}</h3>
+                <div><h3 id='top'>{currentclass.sub_name}</h3>
                   {!(isactive('/classes/sampleclass/createnew')|| isactive('/classes/sampleclass/activity/activityId') ) ?
                      <div>
-                     <h4>Subject code : {currentclass.subjectcode}</h4>
-                    <h4>{currentclass.classDay}s {currentclass.classSched_to} - {currentclass.classSched_from}</h4>
-                    <h4>Professor name : {currentclass.profname}</h4>
+                     <h4>{currentclass.sub_code}</h4>
+                    <h4>{currentclass.day_label} {currentclass.sched_from} - {currentclass.sched_to}</h4>
+                    <h4>{currentclass.pf_firstname +' ' +  currentclass.pf_lastname}</h4>
                    </div> :
-                   <h5>Saturdays 5am - 12pm</h5>
+                   <h5>{currentclass.day_label} {currentclass.sched_from} - {currentclass.sched_to}</h5>
                   }
                 </div>
               </div>

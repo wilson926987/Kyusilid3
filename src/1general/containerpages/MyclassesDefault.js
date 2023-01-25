@@ -5,20 +5,18 @@ import { myClasesContext } from '../../Globalcontext'
 
 function MyclassesDefault() {
   const {myclasses} = useContext(myClasesContext);
+  
+   
+    var curday = new Date().getDay() -1;
+    const dayList = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday' , 'Saturday', 'Sunday'];
+
+
+    const upcomingclass= myclasses.map(temp=>{
+      
+    })
+
+
  
-  const tempclass = {
-    'classId' : 3,
-    'classname' : 'Automata',
-    'classSched_from' : '6:00',
-    'classSched_to' : '8:00',
-    'classDay' : 'Monday',
-    'classbanner' : 1,
-    'subjectcode' : 'Auto1111',
-    'profname' : 'Juan delacruz'
-  }
-
-
-
 
   return (
     <div>
@@ -29,18 +27,15 @@ function MyclassesDefault() {
 
 
     <h4 className='title'>Upcoming</h4>
+    
 
     <div className='classcontainer'>
    <div className="row">
-        <Classpanel classitem={tempclass}/>
-        <div className="col-lg-3 classpanel-min">
-          <div className='classpanelsched' >
-            <div className='borderradius-md'>
-              <h4>Monday , 4:00 am</h4>
-              <button className='primary'>View Schedule</button>
-            </div>
-          </div>
-        </div>
+   {myclasses.filter(temp=>{
+     return dayList[curday] === temp.classDay;
+   }).map((item)=>(
+        <Classpanel key={item.classId}  classitem ={item}/>
+      ))}
   
 
     </div>
@@ -52,7 +47,7 @@ function MyclassesDefault() {
 
    <div className='classcontainer'>
    <div className="row">
-      {myclasses.map((item)=>(
+   {myclasses.map((item)=>(
         <Classpanel key={item.classId}  classitem ={item}/>
       ))}
        

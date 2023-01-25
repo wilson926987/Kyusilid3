@@ -13,16 +13,16 @@ function Classpanel({classitem}) {
                     <div className='classpanelprofile'>
                     <img src={Avatar} alt="" />
                     </div>
-                <h4>{classitem.classname}</h4>
+                <h4>{classitem.sub_name}</h4>
                 <div className='classpanelclosed'>
                 <h6>{classitem.classDay}</h6>
 
                 </div>
          
                 <div className='classpanelopen'>
-                    <h5>{classitem.subjectcode}</h5>
-                    <h5>{classitem.profname}</h5>
-                    <h5>{classitem.classDay} {classitem.classSched_from} - {classitem.classSched_to}</h5>
+                    <h5>{classitem.sub_code}</h5>
+                    <h5>{classitem.pf_firstname} {classitem.pf_lastname}</h5>
+                    <h5>{classitem.day_label} {classitem.sched_from} - {classitem.sched_to}</h5>
 
                 </div>
                

@@ -78,9 +78,9 @@ function Login() {
 
 const handleFormSubmit = async (e) =>{
   setuserinfo({'status': 'success', 'user': {'acc_email' : 
-  "student@gmail.com" , 'acc_id'
-  : 
-  3},
+  "student@gmail.com" , 'acc_id' : 3 , 'acc_username': "Jysreal"
+  
+ },
    'usertype': username, 'temp': '17-6928'})
 }
 
