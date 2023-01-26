@@ -37,6 +37,7 @@ function Sidebar() {
 
    const navigate = useNavigate();
 
+ 
    const gotoclass =(e)=>{
     setcurrentclass(e)
     navigate('/classes/sampleclass')
@@ -71,9 +72,13 @@ function Sidebar() {
     <ul>
         <li className='sidebarmenu' onClick={()=>{navigate('/')}}> <div className={`highlight ${isactive('/') && ' sidebarhighlightactive'}`}></div> <MdSpaceDashboard />  Dashboard</li>
         <li className="sidebarmenu" onClick={()=>{navigate('/classes')}}> <div className={`highlight ${isactive('/classes') && ' sidebarhighlightactive'}`}></div> <FaBookReader />All Classes</li> 
-        {myclasses.map((classitem , key) =>(
-             <li className="sidebarsubmenu" key={key} onClick={()=>{gotoclass(classitem)}}><div className="highlight"></div> {shorten(classitem.sub_name)} </li>
-        ))} 
+        {myclasses!== undefined &&
+            myclasses.map((classitem , key) =>(
+            <li className="sidebarsubmenu" key={key} onClick={()=>{gotoclass(classitem)}}><div className="highlight"></div> {shorten(classitem.sub_name)} </li>
+             ))
+        
+        }
+      
    
        
         <li className="sidebarmenu" onClick={()=>{navigate('/archived')}}> <div className= {`highlight ${isactive('/archived') && ' sidebarhighlightactive'}`}></div>  <FaBookReader /> Archived</li>

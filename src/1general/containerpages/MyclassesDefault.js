@@ -1,19 +1,31 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import Classpanel from '../components/Classpanel'
 import { myClasesContext } from '../../Globalcontext'
 
 
 function MyclassesDefault() {
   const {myclasses} = useContext(myClasesContext);
-  
-   
-    var curday = new Date().getDay() -1;
-    const dayList = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday' , 'Saturday', 'Sunday'];
 
-
-    const upcomingclass= myclasses.map(temp=>{
       
-    })
+  var days = {'Sunday': 0, 'Monday': 1, 'Tuesday': 2, 'Wednesday': 3, 'Thursday': 4, 'Friday': 5, 'Saturday': 6};
+  
+    function gettheday(day) {
+      return days[day];
+  }
+
+    const [upcoming, setupcoming] = useState(
+   
+    );
+
+
+    useEffect(()=>{
+      
+ 
+
+       
+    },[])
+   
+   
 
 
  
@@ -31,11 +43,9 @@ function MyclassesDefault() {
 
     <div className='classcontainer'>
    <div className="row">
-   {myclasses.filter(temp=>{
-     return dayList[curday] === temp.classDay;
-   }).map((item)=>(
-        <Classpanel key={item.classId}  classitem ={item}/>
-      ))}
+
+
+ 
   
 
     </div>
@@ -47,8 +57,9 @@ function MyclassesDefault() {
 
    <div className='classcontainer'>
    <div className="row">
-   {myclasses.map((item)=>(
-        <Classpanel key={item.classId}  classitem ={item}/>
+   {myclasses!==undefined &&
+       myclasses.map((item, key)=>(
+        <Classpanel key={key}  classitem ={item}/>
       ))}
        
     </div>

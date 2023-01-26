@@ -11,40 +11,7 @@ import axios from 'axios'
 function Container() {
 
   const {userinfo} = useContext(userInfoContext);
-  const [myclasses, setmyclasses] = useState([
-
-    {
-      'classId' : 1,
-      'classname' : 'Practicum',
-      'classSched_from' : '6:00',
-      'classSched_to' : '8:00',
-      'classDay' : 'Monday',
-      'classbanner' : 1,
-      'subjectcode' : 'Prc101',
-      'profname' : 'Juan delacruz'   
-    },
-    {
-      'classId' : 2,
-      'classname' : 'Capstone',
-      'classSched_from' : '6:00',
-      'classSched_to' : '8:00',
-      'classDay' : 'Monday',
-      'classbanner' : 1,
-      'subjectcode' : 'Capstone111',
-      'profname' : 'Juan delacruz'
-    },
-    {
-      'classId' : 3,
-      'classname' : 'Automata',
-      'classSched_from' : '6:00',
-      'classSched_to' : '8:00',
-      'classDay' : 'Wednesday',
-      'classbanner' : 1,
-      'subjectcode' : 'Auto1111',
-      'profname' : 'Juan delacruz'
-    }
-
-  ]);
+  const [myclasses, setmyclasses] = useState();
 
 
 
@@ -52,7 +19,7 @@ useEffect(() => {
   axios.get('http://localhost:8000/api/getclasslist/3')
     .then(response => {
       setmyclasses(response.data);
-      console.log(response.data)
+     
     })
     .catch(error => {
       console.log(error);
