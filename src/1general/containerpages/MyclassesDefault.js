@@ -18,12 +18,7 @@ function MyclassesDefault() {
     );
 
 
-    useEffect(()=>{
-      
- 
-
-       
-    },[])
+   
    
    
 

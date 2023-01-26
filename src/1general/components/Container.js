@@ -16,7 +16,7 @@ function Container() {
 
 
 useEffect(() => {
-  axios.get('http://localhost:8000/api/getclasslist/3')
+  axios.get('http://localhost:8000/api/getclasslist/' + userinfo.user.acc_id)
     .then(response => {
       setmyclasses(response.data);
      

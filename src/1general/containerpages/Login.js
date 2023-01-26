@@ -36,84 +36,55 @@ function Login() {
  
   //API Code
 
-//   const handleFormSubmit = async (e) => {
-//     e.preventDefault();
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
 
-//     //validation
-//     if(username=== undefined){
-//       alert('Username Required');
-//      }else{
-//        setusermessage('')
-//      }
+    //validation
+    if(username=== undefined){
+      alert('Username Required');
+     }else{
+       setusermessage('')
+     }
  
-//      if(password === undefined){
-//        alert('Password Required');
-//      }else{
-//        setpassmessage('')
-//      }
+     if(password === undefined){
+       alert('Password Required');
+     }else{
+       setpassmessage('')
+     }
  
 
-//    if(username!==undefined && password!==undefined){
-//     try {
-//       const response = await axios.post('http://localhost:8000/api/login', {
-//           'acc_username': username,
-//           'acc_password': password
-//       });
+   if(username!==undefined && password!==undefined){
+    try {
+      const response = await axios.post('http://localhost:8000/api/login', {
+          'acc_username': username,
+          'acc_password': password
+      });
 
-//       if (response.data.status === 'success') {
-//           console.log('Authentication Successful!');
-//           setuserinfo(response.data);
-//           console.log(response.data);
-//           // Store user data in local storage or use it as needed
-//       } else {
-//         alert("Username and password didn't match");
-//           console.log('Authentication Failed!');
-//       }
-//   } catch (error) {
-//       console.error(error.response.data);
-//   }
+      if (response.data.status === 'success') {
+          console.log('Authentication Successful!');
+          setuserinfo(response.data);
+          console.log(response.data);
+          // Store user data in local storage or use it as needed
+      } else {
+        alert("Username and password didn't match");
+          console.log('Authentication Failed!');
+      }
+  } catch (error) {
+      console.error(error.response.data);
+  }
 
-//    }
-// };
+   }
+};
 
-const handleFormSubmit = async (e) =>{
-  setuserinfo({'status': 'success', 'user': {'acc_email' : 
-  "student@gmail.com" , 'acc_id' : 3 , 'acc_username': "Jysreal"
+// const handleFormSubmit = async (e) =>{
+//   setuserinfo({'status': 'success', 'user': {'acc_email' : 
+//   "student@gmail.com" , 'acc_id' : 3 , 'acc_username': "Jysreal"
   
- },
-   'usertype': username, 'temp': '17-6928'})
-}
-
-
-
-
-// function LogSession() {
-//   const [username ,setUsername]=useState("");
-//   const [password ,setPassword]=useState("");
-//   const history = useHistory();
-//   useEffect(()=>{
-//     if (localStorage.getItem('user-info')){
-//         history.push("/add")
-//     }
-//   })
+//  },
+//    'usertype': username, 'temp': '17-6928'})
 // }
 
-// async function login(){
-//   console.warn(username, password)
-//   let item = {username, password};
-//   let result = await fetch("http://localhost:8000/api/login", {
-//       method: 'POST',
-//       headers:{
-//         "Content-Type": "application/json",
-//         "Accept": 'application/json'
-//       },
-//       body: JSON.stringify(item) 
-//       });
-//       result = await result.json();
-//       localStorage.setItem("user-info", JSON.stringify(result))
-//       history.push("/add")
-// }
-  
+
  
   return (
     <div className='Backgroundlog'>

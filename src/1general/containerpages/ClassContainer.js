@@ -22,30 +22,25 @@ function ClassContainer() {
 
 
   const [announcementlist, setannouncementlist] = useState([
-    {
-      'postId' : 0,
-      'dateposted' : '' ,
-      'postedBy' : '',
-      'content' : ''
-    }
   ]
   );
 
-   useEffect(() => {
-    axios.get('http://localhost:8000/api/get-announcement')
-      .then(response => {
-        setannouncementlist(response.data)
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }, []);
+ 
 
-
+  
 
 
   useEffect(()=>{   
       setcurrentpage(location.pathname);
+      if(currentclass !== undefined){
+        axios.get('http://localhost:8000/api/get-announcement/' + currentclass.classes_id)
+        .then(response => {
+          setannouncementlist(response.data)
+        })
+        .catch(error => {
+          console.log(error);
+        });
+      }
   },[location])
 
   function isactive(e){
