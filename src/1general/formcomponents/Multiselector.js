@@ -2,9 +2,13 @@ import React, { useEffect, useState } from 'react'
 import {AiOutlineCaretDown} from 'react-icons/ai'
 import {ImCheckboxUnchecked , ImCheckboxChecked} from 'react-icons/im'
 
-function Multiselector({options, menuClass, itemClass, mainClass , controlClass, onChangeHandler, placeholderValue,mainActiveClass, controlActiveClass ,controlCloseClass}) {
+function Multiselector({options, menuClass, itemClass, mainClass , controlClass, onChangeHandler, placeholderValue,mainActiveClass, controlActiveClass ,controlCloseClass, selectedAndDisabled}) {
+  
   const [selecteditems, setselecteditems] = useState(options.map(item=>({
-    'selected' : false , 'value' : item  
+    'selected' : item===selectedAndDisabled ? true : false  ,
+     'value' : item
+
+   
   })));
 
   const[classesselected, setclassesselected] = useState();
@@ -13,14 +17,14 @@ function Multiselector({options, menuClass, itemClass, mainClass , controlClass,
     let count = 0;
     selecteditems.forEach(temp => {
       if (temp.selected ===true){
-
         count ++;
       }
     });
     setclassesselected(count)
-    onChangeHandler(classesselected)
+    onChangeHandler(selecteditems)
  
   },[selecteditems])
+
 
 
    const [dropdownopen, setdropdownopen] = useState(false);
@@ -29,17 +33,19 @@ function Multiselector({options, menuClass, itemClass, mainClass , controlClass,
    }
 
    const togglethisitem= (ett)=>{
-   
-    setselecteditems(selecteditems.map(item=>{
-      if(ett=== item.value){
-        return {'selected' : (!item.selected) , 'value' : item.value}
-      }else{
-        return item
+    if(ett !=selectedAndDisabled){
+      setselecteditems(selecteditems.map(item1=>{
+        if(ett=== item1.value){
+          return {'selected' : (!item1.selected) , 'value' : item1.value }
+        }else{
+          return item1
+        }
       }
-    }
-      
-    ))
         
+      )) 
+    }
+   
+       
    }
 
   return (
@@ -55,7 +61,10 @@ function Multiselector({options, menuClass, itemClass, mainClass , controlClass,
        {dropdownopen &&
             <div className={menuClass}>
                {selecteditems.map((optionitem , key) =>(
-                <div key={key} className={`flex ${itemClass}`} onClick={()=>{togglethisitem(optionitem.value)}}>  <div className='marginright12'>{optionitem.selected ? <ImCheckboxChecked /> : <ImCheckboxUnchecked/>  } </div> {optionitem.value} </div>
+                <div key={key} className={`flex ${itemClass}`} onClick={()=>{togglethisitem(optionitem.value)}} > 
+                 <div className='marginright12'>{optionitem.selected ? <ImCheckboxChecked /> : <ImCheckboxUnchecked/>  } </div >
+                <div className='ellipsis '> {optionitem.value.sub_name} <p className='smallfont'> {optionitem.value.day_label}</p></div>
+                </div>
                ))}
             </div>
        }

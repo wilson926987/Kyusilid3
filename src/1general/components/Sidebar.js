@@ -15,10 +15,6 @@ function Sidebar() {
     const {theme} = useContext(themeContext);
     const [sidebar, setsidebar] = useState(true);
 
-    const shorten = (text)=>{
-        return text.length>20 ? text.slice(0,18)+ "..." : text
-    }
-
     const togglesidebar=()=>{
         setsidebar(!sidebar)
     }
@@ -71,10 +67,14 @@ function Sidebar() {
 {sidebar && <div className='sidebarcontent'>
     <ul>
         <li className='sidebarmenu' onClick={()=>{navigate('/')}}> <div className={`highlight ${isactive('/') && ' sidebarhighlightactive'}`}></div> <MdSpaceDashboard />  Dashboard</li>
-        <li className="sidebarmenu" onClick={()=>{navigate('/classes')}}> <div className={`highlight ${isactive('/classes') && ' sidebarhighlightactive'}`}></div> <FaBookReader />All Classes</li> 
+        <li className="sidebarmenu"> <div></div> <FaBookReader />All Classes</li> 
         {myclasses!== undefined &&
             myclasses.map((classitem , key) =>(
-            <li className="sidebarsubmenu" key={key} onClick={()=>{gotoclass(classitem)}}><div className="highlight"></div> {shorten(classitem.sub_name)} </li>
+            <li className="sidebarsubmenu " key={key} onClick={()=>{gotoclass(classitem)}}><div className="highlight"></div> 
+                        <div className='ellipsis' >
+                            {classitem.sub_code +'- ' + classitem.sub_name}
+                            <p className='smallfont'> {classitem.yearlvl + classitem.sec_name +' | ' + classitem.day_label + ' | ' + classitem.sched_from + '-' + classitem.sched_to }</p> 
+                        </div></li>
              ))
         
         }

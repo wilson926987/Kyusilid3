@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Outlet , useNavigate, useLocation} from 'react-router-dom'
 import Activitylogpanel from '../components/Activitylogpanel';
-import { announcementlistContext, userInfoContext, topicfilterContext, activitytypefilterContext , topiclistContext , currentActivityContext , sourceMaterialContext , currentclassContext, myClasesContext } from '../../Globalcontext';
+import { announcementlistContext, userInfoContext, topicfilterContext, activitytypefilterContext , topiclistContext , currentActivityContext , sourceMaterialContext , currentclassContext, myClasesContext , personlistContext } from '../../Globalcontext';
 import {FaPlusCircle ,FaArrowCircleLeft} from  'react-icons/fa'
 import ClassSelectionitem from '../components/ClassSelectionitem';
 import axios from 'axios';
@@ -18,6 +18,7 @@ function ClassContainer() {
   const [currentactivity, setcurrentactivity] = useState();
   const [sourcematerial,setsourcematerial] = useState();
   const [currentpage, setcurrentpage] = useState();
+  const [personlist, setpersonlist] = useState();
   const location = useLocation()
 
 
@@ -36,10 +37,21 @@ function ClassContainer() {
         axios.get('http://localhost:8000/api/get-announcement/' + currentclass.classes_id)
         .then(response => {
           setannouncementlist(response.data)
+         
         })
         .catch(error => {
           console.log(error);
         });
+
+        axios.get('http://localhost:8000/api/getpersonlist/' + currentclass.classes_id)
+        .then(response => {
+          setpersonlist(response.data)
+        
+        })
+        .catch(error => {
+          console.log(error);
+        });
+
       }
   },[location])
 
@@ -115,15 +127,21 @@ function ClassContainer() {
       <div className='classcontentmain'>
         <div className='row'> 
             <div className="col-md-12 " >
-              <div className={`primary classheader borderradius-lg dbpanelmargin ${((isactive('/classes/sampleclass/createnew') || isactive('/classes/sampleclass/activity/activityId')) ? ' classheader-md' : ' classheader-lg')}`}>
-                <div><h3 id='top'>{currentclass.sub_name}</h3>
+              <div id='top' className={`primary classheader borderradius-lg dbpanelmargin ${((isactive('/classes/sampleclass/createnew') || isactive('/classes/sampleclass/activity/activityId')) ? ' classheader-md' : ' classheader-lg')}`}>
+                <div>
                   {!(isactive('/classes/sampleclass/createnew')|| isactive('/classes/sampleclass/activity/activityId') ) ?
                      <div>
-                     <h4>{currentclass.sub_code}</h4>
+                      <h3 >{currentclass.sub_name}</h3>
+                     <h4 className='margintop12'>{currentclass.sub_code}</h4>
                     <h4>{currentclass.day_label} {currentclass.sched_from} - {currentclass.sched_to}</h4>
-                    <h4>{currentclass.pf_firstname +' ' +  currentclass.pf_lastname}</h4>
+                    <h4>{currentclass.title + ' '+ currentclass.firstname +' ' +  currentclass.lastname + ' ' + currentclass.suffix}</h4>
                    </div> :
-                   <h5>{currentclass.day_label} {currentclass.sched_from} - {currentclass.sched_to}</h5>
+           
+
+                    <div>
+                       <h3 > {currentclass.sub_code + '- '+ currentclass.sub_name}</h3>
+                       <h5>{currentclass.day_label} {currentclass.sched_from} - {currentclass.sched_to}</h5>
+                    </div>
                   }
                 </div>
               </div>
@@ -216,7 +234,8 @@ function ClassContainer() {
                     <div className="tertiary borderradius-md outletcontainer">
 
 
-                                <announcementlistContext.Provider value={{announcementlist, setannouncementlist}}> 
+                               <personlistContext.Provider value={{personlist}}>
+                               <announcementlistContext.Provider value={{announcementlist, setannouncementlist}}> 
                                   <sourceMaterialContext.Provider value={{sourcematerial, setsourcematerial}}>
                                 <currentActivityContext.Provider value={{currentactivity, setcurrentactivity}}>
                                 <topiclistContext.Provider value={{topiclist, settopiclist}}>
@@ -229,6 +248,7 @@ function ClassContainer() {
                                 </currentActivityContext.Provider>
                                 </sourceMaterialContext.Provider>
                                 </announcementlistContext.Provider>
+                               </personlistContext.Provider>
                                 
                                                 
                           <div>

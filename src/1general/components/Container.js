@@ -15,6 +15,7 @@ function Container() {
 
 
 
+
 useEffect(() => {
   axios.get('http://localhost:8000/api/getclasslist/' + userinfo.user.acc_id)
     .then(response => {
@@ -24,8 +25,9 @@ useEffect(() => {
     .catch(error => {
       console.log(error);
     });
-}, []);
 
+    
+}, []);
 
   const [currentclass, setcurrentclass] = useState()
 
@@ -37,14 +39,12 @@ useEffect(() => {
     }
   })
 
-  
-  return (
 
-   
-     <myClasesContext.Provider value={{myclasses, setmyclasses}}>
+  return (
+ 
+    <myClasesContext.Provider value={{myclasses, setmyclasses}}>
     <currentclassContext.Provider value={{currentclass, setcurrentclass}}>
     <div className='maincontainer'>
-        
         <Sidebar/>
         <div className='content'>
             <Profilenotif />
@@ -52,9 +52,8 @@ useEffect(() => {
         </div> 
         </div>
     </currentclassContext.Provider>     
-    </myClasesContext.Provider>
-
-    
+    </myClasesContext.Provider> 
+  
   )
 }
 

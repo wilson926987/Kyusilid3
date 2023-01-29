@@ -66,9 +66,7 @@ function App() {
             <Route path='/Quiz' element={<Quiz/>} />
               <Route path={'/'} element={userinfo!=null ? <Container/> : <Login/> } > 
                 <Route path={''} element={<Dashboard/>}></Route>  {/*this is the dashboard*/}
-                <Route path={'classes'} element={<MyClasses/>}>  {/*this is the class list*/}
-                    <Route path='' element={<MyclassesDefault/>} />
-                    <Route path={'sampleclass'} element={<ClassContainer/>}>          
+                <Route path={'classes/sampleclass'} element={<ClassContainer/>}>          
                         <Route path='' element ={ <ClassStats/>} />
                         <Route path='createnew' element={<Createnew/> }/>
                         <Route path='info'  element={<ClassInfo/>} />
@@ -78,7 +76,7 @@ function App() {
                         <Route  path='attendance' element={<Attendance/> }/>
                         <Route path= 'activity/activityId' element={<ClassActivity/>} />
                     </Route>
-                </Route>        
+                     
                 <Route path={'archived'} element={<Archived/>} /> 
                 <Route path={'profile'} element={<Profiilepage/> } />
                 <Route path={'messages'} element={<MessagesPage/>} />              
