@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from 'react'
+import { useContext } from 'react';
 import {AiOutlineCaretDown} from 'react-icons/ai'
-import {ImCheckboxUnchecked , ImCheckboxChecked} from 'react-icons/im'
+import {ImCheckboxUnchecked , ImCheckboxChecked } from 'react-icons/im'
+import { currentclassContext } from '../../Globalcontext';
 
 function Multiselector({options, menuClass, itemClass, mainClass , controlClass, onChangeHandler, placeholderValue,mainActiveClass, controlActiveClass ,controlCloseClass, selectedAndDisabled}) {
   
   const [selecteditems, setselecteditems] = useState(options.map(item=>({
     'selected' : item===selectedAndDisabled ? true : false  ,
      'value' : item
-
-   
   })));
 
   const[classesselected, setclassesselected] = useState();
+  const {currentclass} = useContext(currentclassContext);
 
+  
   useEffect(()=>{
     let count = 0;
     selecteditems.forEach(temp => {
@@ -24,6 +26,13 @@ function Multiselector({options, menuClass, itemClass, mainClass , controlClass,
     onChangeHandler(selecteditems)
  
   },[selecteditems])
+
+  useEffect(()=>{
+    setselecteditems(options.map(item=>({
+      'selected' : item===selectedAndDisabled ? true : false  ,
+       'value' : item
+    })))
+  },[currentclass])
 
 
 

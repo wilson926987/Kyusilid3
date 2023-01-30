@@ -71,7 +71,7 @@ function ClassContainer() {
  function makeSelection(){
   let currenttemp = myclasses.map(item=>{
     if(item.classId ===currentclass.classId){
-      return { 'subjectname' : item.classname , 'classschedule' : item.classDay + ' ' + item.classSched_to + ' - ' + item.classSched_to}
+      return { 'subjectname' : item.sub_code+ " " + item.sub_name , 'classschedule' : item.day_label + ' ' + item.sched_from + ' - ' + item.sched_to}
     }
   })
 

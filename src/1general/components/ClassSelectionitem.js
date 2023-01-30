@@ -22,8 +22,8 @@ function ClassSelectionitem({classsched1, classname1, ifchecked1}) {
       <div className='classSelectionitem borderradius-md ' onClick={togglecheck}>
           {tempcheck ? <ImCheckboxChecked /> : <ImCheckboxUnchecked /> }
         <div> 
-            <h4>{classname1}</h4>
-            <p>{classsched1}</p>
+            <h4 className='ellipsis'>{classname1}</h4>
+            <p className='ellipsis'>{classsched1}</p>
         </div>
       </div>
 
