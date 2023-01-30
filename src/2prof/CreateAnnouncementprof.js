@@ -89,6 +89,8 @@ function CreateAnnouncementprof() {
                         'classes_id' : selectedclass[x].value.classes_id,
                         'created_at' : posttype==='fixed' ? new Date(postdate) : setfuturedate(selectedclass[x].value.day_label, selectedclass[x].value.sched_from)
                     }
+
+                    
                     console.log(ggt) // dito na maglalagay ng axios
 
                 }

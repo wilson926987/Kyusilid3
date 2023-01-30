@@ -34,10 +34,10 @@ body::-webkit-scrollbar{
 }
 
 :root{
-  --defaultprimary : #1da2d8;
+  --defaultprimary : #6893ee;
   --defaultsecondary: #064273;
   --defaulttertiary: rgb(255, 255, 255);
-  --defaultbackground: rgb(233, 233, 233);
+  --defaultbackground: rgb(243, 242, 242);
 
 
   --lighttextprimary: rgb(207, 207, 207);
@@ -256,6 +256,7 @@ box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.75);
     cursor: pointer;
     font-weight: bold;  
 }
+
 
 .sidebarcontent li svg{
    margin-left: 12px;
