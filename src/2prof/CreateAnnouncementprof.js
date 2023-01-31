@@ -7,7 +7,7 @@ import { announcementlistContext , myClasesContext , currentclassContext, userIn
 function CreateAnnouncementprof() {
     const[announcementcontent, setannouncementcontent] = useState();
     const[announcementtitle, setannouncementtitle] = useState();
-    const {setannouncementlist} = useContext(announcementlistContext);
+    const {announcementlist, setannouncementlist} = useContext(announcementlistContext);
     const {currentclass} = useContext(currentclassContext);
     const {userinfo} = useContext(userInfoContext);
     const {myclasses} = useContext(myClasesContext);
@@ -74,7 +74,7 @@ function CreateAnnouncementprof() {
     }
 
 
-    function saveAnnouncement(e){
+    async function saveAnnouncement(e){
         e.preventDefault();
     
     
@@ -83,32 +83,43 @@ function CreateAnnouncementprof() {
               for(let x =0 ; x < selectedclass.length; x++){
                 if(selectedclass[x].selected){
                     let ggt = {
-                        'title' : announcementtitle,
-                        'content' : announcementcontent,
-                        'add_id' : userinfo.user.acc_id,
-                        'classes_id' : selectedclass[x].value.classes_id,
-                        'created_at' : posttype==='fixed' ? new Date(postdate) : setfuturedate(selectedclass[x].value.day_label, selectedclass[x].value.sched_from)
+                        "an_title" : announcementtitle,
+                        "an_content" : announcementcontent,
+                        "acc_id" : userinfo.user.acc_id,
+                        "classes_id" : selectedclass[x].value.classes_id,
+                        "created_at" : new Date(postdate).toISOString().slice(0, 19).replace('T', ' '),
+                        "schedule" : posttype==='fixed' ? new Date(postdate).toISOString().slice(0, 19).replace('T', ' ') : setfuturedate(selectedclass[x].value.day_label, selectedclass[x].value.sched_from).toISOString().slice(0, 19).replace('T', ' ')
                     }
+                    //     
+                    console.log(ggt)    
+                    await axios.post('http://localhost:8000/api/add-announcement/' , ggt)
+                    .then(response => {    
+                        console.log(response.data)   ;    
+                     
+                    })
+                    .catch(error => {
+                      console.log(error);
+                    });
 
-                    
-                    console.log(ggt) // dito na maglalagay ng axios
 
                 }
-    
-             
+       
               }
+              
+              await axios.get('http://localhost:8000/api/get-announcement/' + currentclass.classes_id)
+              .then(response => {
+                setannouncementlist(response.data)
+               
+              })
+              .catch(error => {
+                console.log(error);
+              });
+
      
                 e.target.reset();
                 setannouncementcontent();
                 setannouncementtitle();
-                axios.get('http://localhost:8000/api/get-announcement/' + currentclass.classes_id)
-                .then(response => {
-                setannouncementlist(response.data)
-          })
-          .catch(error => {
-            console.log(error);
-          });
-          setsaveannouncement(true);
+                setsaveannouncement(true);
         }
     }
 

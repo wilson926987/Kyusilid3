@@ -50,7 +50,7 @@ function Announcementpanel({announcementitem}) {
                       <h5>{commentitem.title + " " + commentitem.firstname + ' ' + commentitem.lastname + ' '  + commentitem.suffix }</h5>
                       <p className='smallfont marginleftauto'>{commentitem.date_posted}</p>
                     </div>
-                    <div className='ellipsis'>
+                    <div className='ellipsis '>
                           {commentitem.com_content}
                     </div>
            

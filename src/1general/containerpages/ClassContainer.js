@@ -26,6 +26,9 @@ function ClassContainer() {
   ]
   );
 
+  const url = userinfo.user.usertype ==='prof' ?  'http://localhost:8000/api/get-announcement/' : 'http://localhost:8000/api/get-announcementforstudent/'
+  
+
  
 
   
@@ -34,7 +37,7 @@ function ClassContainer() {
   useEffect(()=>{   
       setcurrentpage(location.pathname);
       if(currentclass !== undefined){
-        axios.get('http://localhost:8000/api/get-announcement/' + currentclass.classes_id)
+        axios.get(url + currentclass.classes_id)
         .then(response => {
           setannouncementlist(response.data)
          
