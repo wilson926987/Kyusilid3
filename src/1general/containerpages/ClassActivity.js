@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { currentActivityContext , userInfoContext} from '../../Globalcontext'
+import { currentActivityContext , userInfoContext } from '../../Globalcontext'
 import {FaClipboardList} from 'react-icons/fa'
 import {RiBookFill} from 'react-icons/ri'
 import {MdQuiz ,MdAssignment} from 'react-icons/md'
@@ -42,12 +42,12 @@ function ClassActivity() {
                        </div>
         </div>
           
-        <h4> { currentactivity.topicId}: {currentactivity.activityname}</h4>
+        <h4 className='ellipsis'> { currentactivity.topic_name}: {currentactivity.activity_name}</h4>
 
        </div>
 
 
-       {userinfo.usertype ==='prof' && (currentactivity.activitytype !== 'material') &&
+       {userinfo.usertype ==='prof' && (currentactivity.activity_type !== 'material') &&
         <div className= {`flex activitytab ${responsepage ? 'primary' : 'background'}`} onClick={()=>{setresponsepage(true)}}>
             
          <h4>Responses</h4>
@@ -57,8 +57,8 @@ function ClassActivity() {
        }
 
         <div className="marginleftauto smallfont">
-          <p>Date posted : {currentactivity.datePosted}</p>
-          <p>Date Due : {currentactivity.dateDue}</p>
+          <p>Date posted : {currentactivity.date_posted}</p>
+          <p>Date Due : {currentactivity.date_due}</p>
         </div>
         </div>
         <hr/>

@@ -13,12 +13,14 @@ function ClassContainer() {
   const navigate = useNavigate();
   const {userinfo} = useContext(userInfoContext);
   const {currentclass} = useContext(currentclassContext);
+
   const {myclasses} = useContext(myClasesContext);
   const [navcreate, setnavcreate] = useState(false);
   const [currentactivity, setcurrentactivity] = useState();
   const [sourcematerial,setsourcematerial] = useState();
   const [currentpage, setcurrentpage] = useState();
   const [personlist, setpersonlist] = useState();
+  const [topiclist, settopiclist] = useState([]);
   const location = useLocation()
 
 
@@ -29,15 +31,15 @@ function ClassContainer() {
   const url = userinfo.user.usertype ==='prof' ?  'http://localhost:8000/api/get-announcement/' : 'http://localhost:8000/api/get-announcementforstudent/'
   
 
- 
-
-  
-
-
   useEffect(()=>{   
       setcurrentpage(location.pathname);
       if(currentclass !== undefined){
-        axios.get(url + currentclass.classes_id)
+        filldata();
+      }
+  },[location])
+
+  async function filldata(){
+        await axios.get(url + currentclass.classes_id)
         .then(response => {
           setannouncementlist(response.data)
          
@@ -46,7 +48,7 @@ function ClassContainer() {
           console.log(error);
         });
 
-        axios.get('http://localhost:8000/api/getpersonlist/' + currentclass.classes_id)
+        await axios.get('http://localhost:8000/api/getpersonlist/' + currentclass.classes_id)
         .then(response => {
           setpersonlist(response.data)
         
@@ -55,8 +57,16 @@ function ClassContainer() {
           console.log(error);
         });
 
-      }
-  },[location])
+        await axios.get('http://localhost:8000/api/get-topiclist/' + currentclass.classes_id)
+        .then(response => {
+          settopiclist(response.data);
+        
+        })
+        .catch(error => {
+          console.log(error);
+        });
+
+  }
 
   function isactive(e){
     return e===currentpage ? true : false;
@@ -95,21 +105,6 @@ function ClassContainer() {
  },[currentclass])
 
 
- const [topiclist, settopiclist] = useState([
-  {
-    'topicId' : 1,
-    'topicname' : 'Topic 1'
-  },
-  {
-    'topicId' : 2,
-    'topicname' : 'Topic 2'
-  },
-  {
-    'topicId' : 3,
-    'topicname' : 'Topic 3'
-  }
- 
- ])
 
 
  const [activitytypefilter, setactivitytypefilter] = useState('none')
@@ -120,7 +115,8 @@ function ClassContainer() {
     navigate('/')
   }
  })
- 
+
+
  
  if(currentclass===undefined){
   return <div></div>
@@ -136,7 +132,7 @@ function ClassContainer() {
                      <div>
                       <h3 >{currentclass.sub_name}</h3>
                      <h4 className='margintop12'>{currentclass.sub_code}</h4>
-                    <h4>{currentclass.day_label} {currentclass.sched_from} - {currentclass.sched_to}</h4>
+                    <h4>{currentclass.day_label} {currentclass.sched_from} - {currentclass.sched_to} {currentclass.sessionname2 !== "" && (', ' + currentclass.sched_from2 + ' - ' + currentclass.sched_to2)}</h4>
                     <h4>{currentclass.title + ' '+ currentclass.firstname +' ' +  currentclass.lastname + ' ' + currentclass.suffix}</h4>
                    </div> :
            
@@ -185,7 +181,7 @@ function ClassContainer() {
 
                          {topiclist.map((topicitem, key)=>(
                           <React.Fragment key={key}> 
-                              <li key={key} className='classnavsubitem' onClick={()=>{settopicfilter(topicitem.topicId) ; navigate('modules')}}>{topicitem.topicname}</li>
+                              <li key={key} className='classnavsubitem' onClick={()=>{settopicfilter(topicitem.topic_id) ; navigate('modules')}}>{topicitem.topic_name}</li>
                               <li><hr /></li>
                           </React.Fragment>
   

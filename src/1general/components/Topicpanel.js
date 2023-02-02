@@ -1,6 +1,7 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState , useEffect} from 'react'
 import ActivityItempanel from './ActivityItempanel'
-import { activitytypefilterContext } from '../../Globalcontext';
+import { activitytypefilterContext, topicfilterContext } from '../../Globalcontext';
+import axios from 'axios';
 
 
 
@@ -8,64 +9,25 @@ import { activitytypefilterContext } from '../../Globalcontext';
 function Topicpanel({topicitem}) {
 
   const {activitytypefilter} = useContext(activitytypefilterContext)
+  const {topicfilter} = useContext(topicfilterContext);
 
   const [ClassActivitylist , setClassActivitylist] = useState([
-    {
-      'topicId' : topicitem.topicname,
-      'activityID' :1,
-      'activitytype' : 'assignment',
-      'category' : 'Lecture',
-      'activityname' :'Introduction to Database assignment',
-      'commentcount' : 20,
-      'materialcount' : 0,
-      'datePosted': 'November 6 , 2pm',
-      'dateDue' : 'November 8 , 2pm',
-      'description' :"This is a sample description for assignment"
-
-    },
-    {
-      'activityID' :2,
-      'topicId' : topicitem.topicname,
-      'activitytype' : 'questionnaire',
-      'category' : 'Lecture',
-      'activityname' :'Introduction to Database Quizz',
-      'commentcount' : 0,
-      'materialcount' : 0,
-      'datePosted': 'November 6 , 2pm',
-      'dateDue' : 'November 8 , 2pm',
-      'description' :"This is a sample description for questionnaire"
-
-    },
-    {
-      'topicId' : topicitem.topicname,
-      'activityID' :3,
-      'activitytype' : 'material',
-      'category' : 'Laboratory',
-      'activityname' :'Introduction to Database lesson 1',
-      'commentcount' : 6,
-      'materialcount' : 4,
-      'datePosted': 'November 6 , 2pm',
-      'dateDue' : 'November 8 , 2pm',
-      'description' :"This is a sample description for material"
-
-    },
-    {
-      'topicId' : topicitem.topicname,
-      'activityID' :4,
-      'activitytype' : 'activity',
-      'category' : 'Laboratory',
-      'activityname' :'Introduction to Database Seatwork',
-      'commentcount' : 0,
-      'materialcount' : 0,
-      'datePosted': 'November 6 , 2pm',
-      'dateDue' : 'November 8 , 2pm',
-      'description' :"This is a sample description for activity"
-    }
   ]);
 
+  useEffect(()=>{
+    axios.get('http://localhost:8000/api/get-activitylist/' + topicitem.topic_id)
+    .then(response => {
+      setClassActivitylist(response.data)
+    
+    })
+    .catch(error => {
+      console.log(error);
+    });
+  },[])
+
   return (
-    <div className='topicpanel borderradius-md'>
-       <h4>{topicitem.topicname}</h4> <hr />
+    <div className={`topicpanel borderradius-md ${topicfilter!=='none' && topicfilter !== topicitem.topic_id && 'displaynone'}`}>
+       <h4>{topicitem.topic_name}</h4> <hr />
     
        <ul className='topiclist'>
          
@@ -73,10 +35,10 @@ function Topicpanel({topicitem}) {
                 if(activitytypefilter==='none'){
                   return vartemp2;
                 }else{
-                  return vartemp2.activitytype===activitytypefilter;
+                  return vartemp2.activity_type===activitytypefilter;
                 }
               }).map((actItem)=>(
-                <li className='relative flex activitypanel borderradius-md' key={actItem.activityID}>
+                <li className='relative flex activitypanel borderradius-md' key={actItem.activity_id}>
                     <ActivityItempanel actItem = {actItem}/>
                 </li>
                 

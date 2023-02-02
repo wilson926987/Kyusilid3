@@ -3,7 +3,7 @@ import Sidebar from './Sidebar'
 import Profilenotif from './Profilenotif'
 
 import { Outlet , useNavigate} from 'react-router-dom'
-import { userInfoContext , myClasesContext  , currentclassContext} from '../../Globalcontext'
+import { userInfoContext , myClasesContext  , currentclassContext , myArchivedContext} from '../../Globalcontext'
 import axios from 'axios'
 
 
@@ -12,12 +12,17 @@ function Container() {
 
   const {userinfo} = useContext(userInfoContext);
   const [myclasses, setmyclasses] = useState();
+  const [myarchive, setmyarchive] = useState();
 
 
 
 
 useEffect(() => {
-  axios.get('http://localhost:8000/api/getclasslist/' + userinfo.user.acc_id)
+  filldata();  
+}, []);
+
+async function filldata(){
+  await axios.get('http://localhost:8000/api/getclasslist/' + userinfo.user.acc_id)
     .then(response => {
       setmyclasses(response.data);
      
@@ -26,8 +31,16 @@ useEffect(() => {
       console.log(error);
     });
 
-    
-}, []);
+    await axios.get('http://localhost:8000/api/getclasslist_archived/' + userinfo.user.acc_id)
+    .then(response => {
+      setmyarchive(response.data);
+     
+    })
+    .catch(error => {
+      console.log(error);
+    });
+
+}
 
   const [currentclass, setcurrentclass] = useState()
 
@@ -42,7 +55,8 @@ useEffect(() => {
 
   return (
  
-    <myClasesContext.Provider value={{myclasses, setmyclasses}}>
+    <myArchivedContext.Provider value={{myarchive, setmyarchive}}>
+      <myClasesContext.Provider value={{myclasses, setmyclasses}}>
     <currentclassContext.Provider value={{currentclass, setcurrentclass}}>
     <div className='maincontainer'>
         <Sidebar/>
@@ -53,6 +67,7 @@ useEffect(() => {
         </div>
     </currentclassContext.Provider>     
     </myClasesContext.Provider> 
+    </myArchivedContext.Provider>
   
   )
 }

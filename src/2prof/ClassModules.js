@@ -1,12 +1,13 @@
 
 import Topicpanel from '../1general/components/Topicpanel'
 import { useContext, useState } from 'react';
-import { topicfilterContext ,activitytypefilterContext, topiclistContext} from '../Globalcontext';
+import { activitytypefilterContext, topiclistContext} from '../Globalcontext';
 import Dropdown from '../1general/formcomponents/Dropdown';
+import {FaPlusCircle} from 'react-icons/fa'
 
 
 function ClassModules() {
- const {topicfilter} = useContext(topicfilterContext)
+ 
  const { setactivitytypefilter} = useContext(activitytypefilterContext)
  const {topiclist} = useContext(topiclistContext)
   const [tempactivityfilter, settempactivityfilter] = useState([
@@ -19,7 +20,12 @@ function ClassModules() {
     <div>
      <div className="flex">
      <h4>Classwork</h4> 
+
      <div className='marginleftauto'>
+      <button className='commonbutton lighttext borderradius-md secondary'> <FaPlusCircle/> Create Topic</button>
+     </div>
+
+     <div>
       <Dropdown 
         options={tempactivityfilter} 
         placeholderValue='select filter '
@@ -36,14 +42,15 @@ function ClassModules() {
 
 
         <div className='col-md-12 margintop12'>
-          {topiclist.filter((temp=>{
-            if(topicfilter==='none'){
-              return temp
-            }else{
-              return temp.topicId===topicfilter;
-            }
-          })).map((topicitem)=>(
-            <Topicpanel key={topicitem.topicId} topicitem={topicitem}/>
+
+          {topiclist.length ===0 &&
+          
+            <div className="emptylist">
+              <h4>No Classworks yet</h4>
+            </div>
+          }
+          {topiclist.map((topicitem)=>(
+            <Topicpanel key={topicitem.topic_id} topicitem={topicitem}/>
 
           ))}
             

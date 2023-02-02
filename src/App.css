@@ -824,7 +824,6 @@ justify-content: space-around;
 
 
 .announcementpanel{
-  margin-bottom: 12px;
   padding:8px; 
 }
 
@@ -847,6 +846,18 @@ justify-content: space-around;
   user-select: text;
 }
 
+
+.displaynone{
+  display: none;
+}
+
+.emptylist{
+  display: flex;
+  text-align: center;
+  height: 100px;
+  line-height: 100px;
+  justify-content: center;
+}
 
 
 

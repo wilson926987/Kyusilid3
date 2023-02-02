@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 
 function Announcementpanel({announcementitem}) {
   const [commentslist, setcommentslist] = useState();
+  const  currentdatestamp =   new Date().toISOString().slice(0, 19).replace('T', ' ');
 
   useEffect(()=>{
     axios.get('http://localhost:8000/api/getcomments/'+ announcementitem.an_id)
@@ -14,8 +15,7 @@ function Announcementpanel({announcementitem}) {
     .catch(error => {
       console.log(error);
     });
-    console.log(' ahsdfjhaskfh'+announcementitem.an_id)
-    console.log(commentslist)
+
   },[])
 
 
@@ -23,26 +23,27 @@ function Announcementpanel({announcementitem}) {
 
 
   return (
-    <div className="announcementpanel primaryborder borderradius-md">
+    <div className="announcementpanel borderradius-md background margintop12">
     <div className="announcementheader">
       <div>
           <h5>{announcementitem.an_title}</h5>
       </div>
       <div>
-        <h6>Posted {announcementitem.dateposted} by {announcementitem.postedBy}</h6>
+        <h6>Created {announcementitem.created_at} by {announcementitem.firstname} {announcementitem.lastname}</h6>
+    
       </div>
     </div>
 
     <div className='announcementcontent'>
         {announcementitem.an_content}
     </div>
-    <hr />
+    <hr className='margintop12'/>
 
     <div className="announcementcomment relative"> 
-      {commentslist != undefined &&
+      {commentslist !== undefined && commentslist.length>0 &&
       
         <div>
-            <h4>Class Comments</h4>
+            <h5>Class Comments</h5>
             <div className="">
                {commentslist.map((commentitem , key)=>(
                  <div key={key} className='padding12'>
@@ -63,9 +64,24 @@ function Announcementpanel({announcementitem}) {
 
 
 
-        <textarea name="Text1"  cols='1' rows="2"  placeholder='Enter comment' className='commontextarea primaryborder'></textarea>
-        <div className='sendbutton'>  <MdSend/></div>
+{announcementitem.schedule < currentdatestamp ?
+ <>
+ <textarea name="Text1"  cols='1' rows="2"  placeholder='Enter comment' className='commontextarea primaryborder margintop12'></textarea>
+   <div className='sendbutton'>  <MdSend/></div>
+   </>
+   :
+   <div className='flex '>
+      <div className='marginleftauto flex'>
+     
+        <h6>To be posted at :  {announcementitem.schedule}</h6> 
+        <button className='commonbutton secondary borderradius-md lighttext'> Post now</button>
       
+      </div>
+    
+   </div>
+
+}
+     
     </div>
 
   </div>

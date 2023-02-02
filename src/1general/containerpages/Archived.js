@@ -1,53 +1,22 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Classpanel from '../components/Classpanel'
+import { myArchivedContext } from '../../Globalcontext'
 
 function Archived() {
-  const tempclass = {
-    'classId' : 3,
-    'classname' : 'Automata',
-    'classSched_from' : '6:00',
-    'classSched_to' : '8:00',
-    'classDay' : 'Monday',
-    'classbanner' : 1,
-    'subjectcode' : 'Auto1111',
-    'profname' : 'Juan delacruz'
-  }
+  const {myarchive} = useContext(myArchivedContext);
 
   return (
     <div>
 
     <div className='classcontainer'>
         <div className="row">
-            <Classpanel classitem = {tempclass}/>  
-            <Classpanel classitem = {tempclass}/>  
-            <Classpanel classitem = {tempclass}/>  
-            <Classpanel classitem = {tempclass}/>  
-            <Classpanel classitem = {tempclass}/>  
-            <Classpanel classitem = {tempclass}/>  
-            <Classpanel classitem = {tempclass}/>  
-            <Classpanel classitem = {tempclass}/>  
-            <Classpanel classitem = {tempclass}/>  
-            <Classpanel classitem = {tempclass}/>  
-            <Classpanel classitem = {tempclass}/>  
-            <Classpanel classitem = {tempclass}/>  
-            <Classpanel classitem = {tempclass}/>  
-            <Classpanel classitem = {tempclass}/>  
-            <Classpanel classitem = {tempclass}/>  
-            <Classpanel classitem = {tempclass}/>  
-            <Classpanel classitem = {tempclass}/>  
-            <Classpanel classitem = {tempclass}/>  
-            <Classpanel classitem = {tempclass}/>  
-            <Classpanel classitem = {tempclass}/>  
-            <Classpanel classitem = {tempclass}/>  
-            <Classpanel classitem = {tempclass}/>  
-            <Classpanel classitem = {tempclass}/>  
-            <Classpanel classitem = {tempclass}/>  
-            <Classpanel classitem = {tempclass}/>  
-            <Classpanel classitem = {tempclass}/>  
-            <Classpanel classitem = {tempclass}/>  
-            <Classpanel classitem = {tempclass}/>  
-            <Classpanel classitem = {tempclass}/>  
-            <Classpanel classitem = {tempclass}/>  
+
+          {myarchive !== undefined && myarchive.map((element, key)=>(
+              <Classpanel  key ={key} classitem = {element}/> 
+
+          ))}
+           
+      
             
         </div>
       </div>

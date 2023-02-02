@@ -9,10 +9,16 @@ function ClassStats() {
   const [openpost, setopenpost] = useState(false);
   const {announcementlist} = useContext(announcementlistContext)
   return (
-    <div>
+    <div className=''>
       <h4>Announcements</h4>
       {userinfo.usertype==='prof' &&<CreateAnnouncementprof /> }
       <div className="col-lg-12 margintop12 ">
+
+        {announcementlist.length ===0 &&
+          <div className='emptylist'>
+            <h4>No announcements yet</h4>
+          </div>
+        }
 
         {announcementlist.map((announcementitem , key)=>(
               <Announcementpanel key={key} announcementitem= {announcementitem}/>
