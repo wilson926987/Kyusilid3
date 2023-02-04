@@ -1,17 +1,43 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { userInfoContext } from '../Globalcontext'
+import { userInfoContext , myClasesContext } from '../Globalcontext'
 
 
 function Welcomebannerstud() {
    const { userinfo} = useContext(userInfoContext)
-   const navigate = useNavigate();
+  const {myclasses} = useContext(myClasesContext);
+ 
+const currday = new Date().getDay();
+
+
+  var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+ 
+
+  const [upcomingclass, setupcomingclass] = useState();
+ 
+  useEffect(()=>{
+   
+      if(myclasses !== undefined ){
+        
+      setupcomingclass(myclasses.filter(item => item.day_label === days[currday]).length)
+      }
+  },[myclasses])
+
+  
+  const navigate = useNavigate();
 
 
   return (
     <div className='primary borderradius-lg welcomebanner dbpanelmargin'>                       
     <h2>Welcome, {userinfo.user.firstname}</h2>
-    <h4>You have ## classes today</h4>
+    <h3>{upcomingclass > 1 ?
+     'you have ' + upcomingclass + ' classes today' :
+     upcomingclass === 1?
+     'you have a class today' : 'you have no classes today'
+  }</h3>
+   
+    
+ 
    
     <button className='secondary' onClick={()=>{navigate('/profile')}}>View Progress</button>
     <div className='welcomebannerdesign'>

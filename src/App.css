@@ -1399,6 +1399,7 @@ background-color: var(--defaultprimary);
 .dropdownmain{
   position: relative;
   transition: none;
+  width: 100%;
 }
 
 .sendbutton{
@@ -1541,7 +1542,7 @@ padding: 12px;
 }
 
 .createactivitystudentlist{
-  min-height: 0;
+
   max-height: 0;
   margin-right: 20px;
   overflow:hidden;
@@ -1549,8 +1550,7 @@ padding: 12px;
 }
 
 .createactivitystudentlist-active{
-  min-height: 80px;
-  max-height: 400px;
+  max-height: 300px;
   overflow: auto;
 }
 
@@ -1589,6 +1589,7 @@ padding: 12px;
 }
 
 .materialpanel:hover , .questionnairepanel:hover , .questionnairepanel button:hover , .submissionpanel button:hover
+,.createtopicmodal
 {
   box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.75);
   -webkit-box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.75);
@@ -1761,9 +1762,6 @@ padding: 12px;
   padding: 12px;
 }
 
-
-
-
 .adminupdatepanel{
   align-items: center;
   justify-content: center;
@@ -1771,6 +1769,44 @@ padding: 12px;
   flex-direction: column;
 }
 
+
+.createtopicmodal{
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  width: 200%;
+  transform:  translate(-50% ,100%);
+  height: 200px;
+  z-index: 12;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+}
+
+
+.infobox{
+  margin: 0px 12px;
+  position: relative;
+ 
+}
+
+.infobox-content{
+  padding: 6px;
+  background-color: rgba(0, 0, 0, 0.658);
+  color: var(--lighttextprimary);
+  position: absolute  ;
+  z-index: 4;
+  right: 0;
+  top: 20px;
+  width: 250px;
+ 
+  display: none;
+}
+
+.infobox:hover .infobox-content{
+  display: flex !important;
+}
 
 
 

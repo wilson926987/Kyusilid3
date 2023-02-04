@@ -1,21 +1,41 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { userInfoContext , sourceMaterialContext} from '../Globalcontext'
+import { useActionData, useNavigate } from 'react-router-dom'
+import { userInfoContext , sourceMaterialContext , currentclassContext, topiclistContext} from '../Globalcontext'
 import {AiFillFile} from 'react-icons/ai'
-import {FiLink} from 'react-icons/fi'
+import axios from 'axios'
 import ArrowSelector from '../1general/formcomponents/ArrowSelector'
+import Dropdown from '../1general/formcomponents/Dropdown'
+import {FaPlusCircle} from 'react-icons/fa'
+import Infobox from '../1general/formcomponents/Infobox'
+
 
 function Createnew() {
   const {userinfo} = useContext(userInfoContext)
   const {sourcematerial} = useContext(sourceMaterialContext)
+  const {currentclass} = useContext(currentclassContext)
+  const {topiclist , settopiclist} = useContext(topiclistContext)
   const navigate = useNavigate()
+  const [recordingtype, setrecordingtype] = useState('form');
+
+  const [topiclistemp, settopiclisttem]= useState(
+   
+     
+  )
 
   useEffect(()=>{
     if(userinfo.usertype!== 'prof'){
       navigate('/');
     }
- 
   },[])
+
+  useEffect(()=>{
+    settopiclisttem(
+      topiclist.map(function (obj) {
+      
+        return {'value': obj.topic_id, 'label': obj.topic_name}
+       })
+    )
+  },[topiclist])
 
   
   const [postscheduletype, setpostscheduletype] = useState('fixed');
@@ -32,8 +52,33 @@ function Createnew() {
   const [posttimer, setposttimer] = useState(0);
   const [duescheduletype, setduescheduletype] = useState('fixed');
   const [duetimer, setduetimer] = useState(0);
-  const [availability, setavailability] = useState();
 
+  const [formduration, setformduration] = useState();
+  const availabilitylist= [
+    {
+      'value' : 'all' , 'label' : 'All selected'
+    },
+    { 
+      'value': 'attended', 'label' : 'All attended'
+    }
+  ]
+
+  const graceperiodlist= [
+    {
+      'value' : '15 mins' , 'label' : '15 minutes'
+    },
+    {
+      'value' : 'rest' , 'label' : 'until the end of class'
+    },
+    {
+      'value' : 'none' , 'label' : 'no grace period'
+    }
+  ]
+
+  const [graceperiod, setgraceperiod] = useState(graceperiodlist[0])
+  const [availability, setavailability] = useState(availabilitylist[0]);
+
+ 
 
 
   const Postoptions = [ {
@@ -111,96 +156,253 @@ const Dueoptions =[
 
 
 
+ const activitytpelist = [
+  {'value' : 'Material',
+   'label' : 'Material'
+  },
+  {'value' : 'Assignment',
+   'label' : 'Assignment'
+  },
+  {'value' : 'Activity',
+  'label' : 'Activity'
+  },
+  {'value' : 'Questionnaire',
+  'label' : 'Questionnaire'
+  },
+  {'value' : 'Attendance',
+  'label' : 'Attendance'
+ }
+
+]
+
+
+const [inputtopicname, setinputtopicname] = useState();
+const [createtopic, setcreatetopic]= useState(false);
+
+async function createnewtopic(e){
+  setcreatetopic(false);
+  e.preventDefault();
+
+  let newtopicitem={
+    'topic_name' : inputtopicname,
+    'classes_id' :  currentclass.classes_id
+  }
+
+  await axios.post('http://localhost:8000/api/createtopic/' , newtopicitem)
+  .then(response => {    
+      console.log(response.data)  ;    
+
+  })
+  .catch(error => {
+    console.log(error);
+  });
+
+  await axios.get('http://localhost:8000/api/get-topiclist/' + currentclass.classes_id)
+  .then(response => {
+    settopiclist(response.data);
+  
+  })
+  .catch(error => {
+    console.log(error);
+  });
+
+
+
+
+
+}
+
+
+
+
 
 
   return (
     <div>
                 <div className='row margintop12'>
                         <div className="col-lg-7 createactivitytitle">
-                          <div>
+
+                          {activitytype !== 'Attendance' ?
+                           <div>
                                    
-                          <label htmlFor="">Title</label> <br /><input type="text"  disabled={sourcematerial!==undefined} className='primaryborder' placeholder='title' defaultValue={posttitle} /> <br />
-                          <br />
-                          <label htmlFor="">Description</label> <br /> <textarea name="" id="" cols="30" rows="6" className='primaryborder' placeholder='description'></textarea><br />
-                          <br />
+                          <p className="smallfont">Title</p><input type="text"  disabled={sourcematerial!==undefined} className='primaryborder' placeholder='title' defaultValue={posttitle} /> <br />
+                           <br />
+                           <p className="smallfont">Description</p><textarea name="" id="" cols="30" rows="6" className='primaryborder' placeholder='description'></textarea><br />
+                           <br />
+                           
+ 
+ 
+                           {!(activitytype==='Questionnaire' || activitytype==='Attendance') &&
+                               (  (sourcematerial !== undefined )?
+                              
+                               
+                                 <div className='uploadedfile flex primary borderradius-md'>
+                                     <AiFillFile/>
+                                     <h5>sample uploaded file</h5>
+ 
+                                 </div>
+                                :
+                                 <>
+                                <label htmlFor="">Upload</label>
+                                 <div className="flex">
+                                 <div className='primary uploadpanel borderradius-md'>
+                               
+                                   <h4>File</h4>
+                                 </div>                    
+                                 </div> 
+                                 
+                                </> )                               
+                         }
                           
-
-
-                          {!(activitytype==='Questionnaire' || activitytype==='Attendance') &&
-                              (  (sourcematerial !== undefined )?
-                             
-                              
-                                <div className='uploadedfile flex primary borderradius-md'>
-                                    <AiFillFile/>
-                                    <h5>sample uploaded file</h5>
-
-                                </div>
-                               :
-                                <>
-                               <label htmlFor="">Upload</label>
-                                <div className="flex">
-                                <div className='primary uploadpanel borderradius-md'>
-                              
-                                  <h4>File</h4>
-                                </div>                    
-                                </div> 
-                                
-                               </> )                               
-                        }
-                         
-                             {activitytype==='Questionnaire' &&
-                             <label htmlFor="" className='primary'>Questionaire( pag questionaire ung type)</label>}
-                          </div>                  
+                              {activitytype==='Questionnaire' &&
+                              <label htmlFor="" className='primary'>Questionaire( pag questionaire ung type)</label>}
+                           </div> 
+                           :
+                           <div>
+                            <h4>New Attendance</h4>
+                            <p className='smallfont'> {currentdate}</p>
+                           </div>
+                          }
+                                          
                         </div>
 
                         <div className="col-lg-5 createactivitytitle">
                           <div>
                             <div>
-                              <label htmlFor="activitytype">Activity type</label> <br />
-                              <select name="activitytype" disabled={sourcematerial!==undefined} className='primary primaryborder' id="activitytype" onChange={(e)=>{setactivitytype(e.target.value)}} defaultValue={activitytype} >
-                
-                               <option value="Material" >Material</option>
-                               <option value="Assignment" >Assignment</option>
-                               <option value="Activity">Activity</option>
-                               <option value="Questionnaire">Questionnaire</option>
-                               <option value="Attendance">Attendance</option>
-                              </select>
+                              < p className=' smallfont'>Activity type</p>
+                       
+
+
+                              <Dropdown
+                                options={activitytpelist}
+                                onChangeHandler= {setactivitytype}
+                                mainClass= 'dropdownmain primary borderradius-md'
+                                itemClass= 'dropdownitem'
+                                placeholderValue= 'select activity type'
+                                controlClass='dropdowncontrol'
+                                menuClass='dropdownmenu primary'
+                                controlActiveClass='dropdowncontrolactive'
+                                mainActiveClass='dropdownmain-active'
+                                disabled ={sourcematerial !== undefined}
+                            />   
+
                             </div>
                             <br />
 
-                            <div>
-                              <label htmlFor="category">Category</label> <br />
-                              <select name="category" id="category" className='primary primaryborder' disabled={sourcematerial!==undefined} defaultValue={category}>
-                                <option value="Lab">Laboratory</option>
-                                <option value="Lecture">Lecture</option>
-                              </select>
-                            </div>
-                            <br />
-
-                            <div>
-                              <label htmlFor="module">Module</label><br />
-                              <select name="module" id="module" className='primary primaryborder' disabled={sourcematerial!== undefined } defaultValue={''}>
-                                <option value="Week1">Week 1</option>
-                                <option value="Week2">Week 2</option>
-                                <option value="Week3">Week 3</option>
-                              </select>
-                            </div>
+                            
                
                             {activitytype!== 'Attendance' &&
                             <>
+
+<div>
+                             <p className='smallfont'> Category</p>
+
+                              
+                              <Dropdown
+                                options={[
+                                  {'value' :'Lecture',
+                                  'label' : 'Lecture'  
+                                  },
+                                  {'value' :'Laboratory',
+                                    'label' : 'Laboratory'  
+                                  }
+                                 
+                                ]}
+
+
+                                onChangeHandler= {setcategory}
+                                mainClass= 'dropdownmain primary borderradius-md'
+                                itemClass= 'dropdownitem'
+                                controlClass='dropdowncontrol'
+                                menuClass='dropdownmenu primary'
+                                controlActiveClass='dropdowncontrolactive'
+                                mainActiveClass='dropdownmain-active'
+                                disabled ={sourcematerial !== undefined}
+                            />
+                            </div>
+                            <br />
+
+                            <div>
+                              <p className="smallfont">Module</p>
+                              <div className="row">
+                              <div className='col-lg-6'>
+                              <Dropdown
+                                   options={topiclistemp}
+                                onChangeHandler= {setmodulename}
+                                mainClass= 'dropdownmain primary borderradius-md'
+                                itemClass= 'dropdownitem'
+                                controlClass='dropdowncontrol'
+                                placeholderValue= 'select topic '
+                                menuClass='dropdownmenu primary'
+                                controlActiveClass='dropdowncontrolactive'
+                                mainActiveClass='dropdownmain-active'
+                                disabled ={sourcematerial !== undefined}
+                            />
+                              </div>
+
+                              <div className="col-lg-6">
+                              <button className='commonbutton lighttext borderradius-md secondary' onClick={()=>{setcreatetopic(!createtopic)}}> <FaPlusCircle/> Create Topic</button>
+    
+                          {createtopic && 
+                            <div className='createtopicmodal tertiary borderradius-md flex'>
+                            <input type="text"  onChange={(e)=> {setinputtopicname(e.target.value)}}/>
+
+                            <button className='commonbutton secondary borderradius-md lighttext margintop12' onClick={()=>{setcreatetopic(false)}}>Cancel</button>
+
+                          <form action="" onSubmit={(e)=>{createnewtopic(e)}}>
+                          <button className='commonbutton secondary borderradius-md lighttext' >Create</button>
+
+                          </form>
+
+                              
+                          </div>
+                          }
+                            
+                              </div>
+
+                              </div>
+
+                           
+                            </div>
+
+
+
                             <br />
                              
-                                 <label htmlFor="schedule">Schedule</label> <br />
-                                 <select name="schedule" id="schedule" className='primaryborder' onChange={(e)=>{setpostscheduletype(e.target.value)}}>
-                                    <option value="fixed">fixed</option>
-                                    <option value="timed">timed</option>           
-                                  </select>                        
+                                 <p className="smallfont">Schedule</p>
+                               
+                                  <div className="flex">
+                                  <Dropdown
+                                   options={[
+                                    {'value' :'fixed',
+                                      'label' : 'fixed'  
+                                    },
+                                    {'value' :'relative',
+                                    'label' : 'relative schedule'  
+                                    }
+                                  ]}
+                                onChangeHandler= {setpostscheduletype}
+                                mainClass= 'dropdownmain primary borderradius-md'
+                                itemClass= 'dropdownitem'
+                                placeholderValue='select option'
+                                controlClass='dropdowncontrol'
+                                menuClass='dropdownmenu primary'
+                                controlActiveClass='dropdowncontrolactive'
+                                mainActiveClass='dropdownmain-active'
+                                defaultValue={ {'value' :'fixed',
+                                'label' : 'fixed'  
+                              }}
+                         
+                                  /> 
+                                  
+                                  <Infobox infocontent={'select whether it will be a fixed date or will be based by the class schedule'}/></div>                   
                             
                           
                             <div>
                             {postscheduletype==='fixed' &&
-                             <input type="datetime-local" name="" className='primaryborder' id="postdate" defaultValue={postdate}  min={currentdate} /> 
                        
+                       
+                             <input type="datetime-local" className='dropdowncontrol primary borderradius-md margintop12' defaultValue={postdate}  min={currentdate} onChange={(e)=>{setpostdate(e.target.value)}}/>
                                                  
                             }
                             {postscheduletype==='timed' &&                           
@@ -220,11 +422,26 @@ const Dueoptions =[
                                 <input type="checkbox" name="" id="allowedit" /> <label htmlFor="allowedit">Allow Students to edit once submitted</label> <br />
                                 <input type="checkbox" name='' id='allowlate'/> <label htmlFor="allowlate">Allow late submissions</label> <br />
                                <br />
-                               <label htmlFor="limitavailability">Limit availability</label>  
-                                <select name="" id="" className=' primaryborder'>
-                                    <option value="none">All Selected</option>
-                                    <option value="present">Only present</option>
-                                </select>
+                               <p className="smallfont">Limit availability</p>
+
+                              <div className="flex">
+                              <Dropdown
+                                options={availabilitylist}
+                                onChangeHandler= {setavailability}
+                                mainClass= 'dropdownmain primary borderradius-md'
+                                itemClass= 'dropdownitem'
+                              
+                                controlClass='dropdowncontrol'
+                                menuClass='dropdownmenu primary'
+                                controlActiveClass='dropdowncontrolactive'
+                                mainActiveClass='dropdownmain-active'
+                                defaultValue={availabilitylist[0]} /> 
+
+                                <Infobox infocontent={'available only to students who filled up the attendance. Automatically creates an attendance form if there is none'} />
+                              </div>
+                             
+                              
+                               
                                 <br />
 
                               </div>
@@ -233,19 +450,121 @@ const Dueoptions =[
                       
                         
                              <br />
-                             <label htmlFor="">Due Date</label> 
-                             <br />
+                            <p className="smallfont">Due Date</p>
+                      
                                <ArrowSelector  options={Dueoptions} startingvalue={0}/>
                             
 
-                              </>
-
-                            
-                            
+                              </>                     
                             }
+                              {(activitytype=== 'Attendance') &&
+                                <>
+                                <p className="smallfont">recording type</p>
+                                <div className="flex">
+                                <Dropdown
+                                   options={[
+                                    {'value' :'form',
+                                      'label' : 'form'  
+                                    },
+                                    {'value' :'manual',
+                                    'label' : 'manual recording'  
+                                    }
+                                  ]}
+                                onChangeHandler= {setrecordingtype}
+                                mainClass= 'dropdownmain primary borderradius-md'
+                                itemClass= 'dropdownitem'
+                                placeholderValue='select option'
+                                controlClass='dropdowncontrol'
+                                menuClass='dropdownmenu primary'
+                                controlActiveClass='dropdowncontrolactive'
+                                mainActiveClass='dropdownmain-active'
+                                defaultValue= {{'value' : 'form' , 'label' : 'form'}}
+                         
+                                  /> 
+                                  <Infobox infocontent={'set if the attendance will be displayed as form or will be tallied by the professor . Attendance can still be edited by the professor regardless of the type of form'} />
+                               
+                                 
+
+                                </div>
+
+                               
+
+
+                                  <br/>
+                                 {activitytype ==='Attendance' && recordingtype ==='form' &&
+                                 <>
+                                  <p className="smallfont">Form duration</p>
+
+                                  <div className="flex">
+                                  <Dropdown
+                                            options={[
+                                          
+                                            {'value' :'15 mins',
+                                            'label' : '15 minutes'  
+                                            },
+                                            {'value' :'30 mins',
+                                            'label' : '30 minutes'  
+                                            },
+                                            {'value' :'class duration',
+                                            'label' : 'class duration'  
+                                            }
+                                          ]}
+                                        onChangeHandler= {setformduration}
+                                        mainClass= 'dropdownmain primary borderradius-md'
+                                        itemClass= 'dropdownitem'
+                                        placeholderValue='select option'
+                                        controlClass='dropdowncontrol'
+                                        menuClass='dropdownmenu primary'
+                                        controlActiveClass='dropdowncontrolactive'
+                                        mainActiveClass='dropdownmain-active'
+                                        defaultValue= { 
+                                          {'value' :'15 mins',
+                                          'label' : '15 minutes'  
+                                          }}
+                    
+                             />
+                             <Infobox  infocontent={'Set the duration before the attendance form marks the rests of the students late'}/>
+                                  </div>
+
+                                  <br />
+                                  <p className='smallfont'> Grace period</p>
+                                  <div className="flex">
+                                  <Dropdown
+                                    options={graceperiodlist}
+                                    onChangeHandler= {setformduration}
+                                    mainClass= 'dropdownmain primary borderradius-md'
+                                    itemClass= 'dropdownitem'
+                                    placeholderValue='select option'
+                                    controlClass='dropdowncontrol'
+                                    menuClass='dropdownmenu primary'
+                                    controlActiveClass='dropdowncontrolactive'
+                                    mainActiveClass='dropdownmain-active'
+                                    defaultValue= { 
+                                            {'value' :'15 mins',
+                                            'label' : '15 minutes'  
+                                            }}  />
+
+                                    <Infobox  infocontent={'Set the duration before the attendance form marks the rests of the students as absent'}/>
+                     
+                            
+                                  </div>
+                             
+                             </>
+                                 
+                                 }
+
+
+
+
+                                </>
+
+                            }
+
+                           
 
                               
                          </div>
+                       
                         </div>
 
                 </div> 

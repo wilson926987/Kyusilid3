@@ -1,19 +1,20 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Outlet , useNavigate, useLocation} from 'react-router-dom'
 import Activitylogpanel from '../components/Activitylogpanel';
-import { announcementlistContext, userInfoContext, topicfilterContext, activitytypefilterContext , topiclistContext , currentActivityContext , sourceMaterialContext , currentclassContext, myClasesContext , personlistContext } from '../../Globalcontext';
+import {classAndstudentselectionContext, announcementlistContext, userInfoContext, topicfilterContext, activitytypefilterContext , topiclistContext , currentActivityContext , sourceMaterialContext , currentclassContext, myClasesContext , personlistContext } from '../../Globalcontext';
 import {FaPlusCircle ,FaArrowCircleLeft} from  'react-icons/fa'
 import ClassSelectionitem from '../components/ClassSelectionitem';
 import axios from 'axios';
 
 function ClassContainer() {
 
+
   
 
   const navigate = useNavigate();
   const {userinfo} = useContext(userInfoContext);
   const {currentclass} = useContext(currentclassContext);
-
+  const [studentselection ,setstudentselection] = useState();
   const {myclasses} = useContext(myClasesContext);
   const [navcreate, setnavcreate] = useState(false);
   const [currentactivity, setcurrentactivity] = useState();
@@ -21,12 +22,9 @@ function ClassContainer() {
   const [currentpage, setcurrentpage] = useState();
   const [personlist, setpersonlist] = useState();
   const [topiclist, settopiclist] = useState([]);
-  const location = useLocation()
-
-
-  const [announcementlist, setannouncementlist] = useState([
-  ]
-  );
+  const location = useLocation();
+  const [announcementlist, setannouncementlist] = useState([]);
+  
 
   const url = userinfo.user.usertype ==='prof' ?  'http://localhost:8000/api/get-announcement/' : 'http://localhost:8000/api/get-announcementforstudent/'
   
@@ -36,7 +34,13 @@ function ClassContainer() {
       if(currentclass !== undefined){
         filldata();
       }
-  },[location])
+  },[location , currentclass])
+
+  useEffect(()=>{
+    if(currentclass===undefined){
+      navigate('/')
+    }
+   })
 
   async function filldata(){
         await axios.get(url + currentclass.classes_id)
@@ -66,6 +70,18 @@ function ClassContainer() {
           console.log(error);
         });
 
+        if(userinfo.usertype==='prof'){
+          await axios.get('http://localhost:8000/api/getstudentlist/' + userinfo.user.acc_id)
+          .then(response => {
+            setstudentselection(response.data);
+            console.log(response.data)
+          
+          })
+          .catch(error => {
+            console.log(error);
+          });
+        }
+
   }
 
   function isactive(e){
@@ -78,43 +94,24 @@ function ClassContainer() {
     console.log(navcreate)
  }
 
- const [classSelection , setClassSelection] = useState( (myclasses!== undefined && currentclass!== undefined) && makeSelection() )
-
-
- function makeSelection(){
-  let currenttemp = myclasses.map(item=>{
-    if(item.classId ===currentclass.classId){
-      return { 'subjectname' : item.sub_code+ " " + item.sub_name , 'classschedule' : item.day_label + ' ' + item.sched_from + ' - ' + item.sched_to}
-    }
-  })
-
-  let temp = myclasses.map(item =>{
-    if(item.classId !== currentclass.classId){
-      return { 'subjectname' : item.classname , 'classschedule' : item.classDay + ' ' + item.classSched_to + ' - ' + item.classSched_to}
-    }
-  }) 
-  currenttemp = currenttemp.filter( x => x!== undefined);
-  temp = temp.filter( x => x!== undefined);
-  var fin = currenttemp.concat(temp)
-  return fin;
- }
-
-
- useEffect(()=>{
-  setClassSelection((myclasses!== undefined && currentclass!== undefined) && makeSelection())
- },[currentclass])
-
-
-
 
  const [activitytypefilter, setactivitytypefilter] = useState('none')
  const [topicfilter, settopicfilter] = useState('none')
 
- useEffect(()=>{
-  if(currentclass===undefined){
-    navigate('/')
-  }
- })
+
+
+
+
+function handleclassSelect(){
+  
+}
+
+
+
+
+
+
+
 
 
  
@@ -125,7 +122,7 @@ function ClassContainer() {
     <div className='classcontent'>
       <div className='classcontentmain'>
         <div className='row'> 
-            <div className="col-md-12 " >
+            <div className="col-lg-12 " >
               <div id='top' className={`primary classheader borderradius-lg dbpanelmargin ${((isactive('/classes/sampleclass/createnew') || isactive('/classes/sampleclass/activity/activityId')) ? ' classheader-md' : ' classheader-lg')}`}>
                 <div>
                   {!(isactive('/classes/sampleclass/createnew')|| isactive('/classes/sampleclass/activity/activityId') ) ?
@@ -147,20 +144,28 @@ function ClassContainer() {
 
             <div className="classcontentsub">
               <div className="row">
-                  <div className="col-lg-3 classnav-min">
+                  <div className="col-lg-4 classnav-min">
 
-                  {userinfo.usertype==='prof' &&
-                      !isactive('/classes/sampleclass/createnew') ?
-                      <div className="secondary lighttext navcreatenew borderradius-lg dbpanelmargin" onClick={()=>{setsourcematerial(); navigate('createnew')}}>
-                      <FaPlusCircle /><h4>Create New</h4>
-                     </div>
-                     :
-                    userinfo.usertype==='prof' &&
-                    <div className="secondary lighttext navcreatenew borderradius-lg dbpanelmargin" onClick={()=>{navigate('/classes/sampleclass')}}>
-                    <FaArrowCircleLeft /><h4>Cancel</h4>
-                   </div>
+                    {currentclass.isarchived ===0 &&
+                    
+                      
+                          (  userinfo.usertype==='prof' && 
+                            !isactive('/classes/sampleclass/createnew') ?
+                            <div className="secondary lighttext navcreatenew borderradius-lg dbpanelmargin" onClick={()=>{setsourcematerial(); navigate('createnew')}}>
+                            <FaPlusCircle /><h4>Create New</h4>
+                            
+                          </div>
+                          :
+                          userinfo.usertype==='prof' &&
+                          <div className="secondary lighttext navcreatenew borderradius-lg dbpanelmargin" onClick={()=>{navigate('/classes/sampleclass')}}>
+                          <FaArrowCircleLeft /><h4>Cancel</h4>
+                        </div>)
+                    }
+
+
+
                   
-                  }
+                  
 
                   {!isactive('/classes/sampleclass/createnew') ?
                    <div className="classnav tertiary borderradius-md dbpanelmargin">
@@ -216,11 +221,18 @@ function ClassContainer() {
 
 <div className='classnav tertiary borderradius-md dbpanelmargin '>
 
-<ul className='notransition'>
+<ul className='notransition '>
 
-  {classSelection.map((item, key)=>(
-      <ClassSelectionitem key={key} classname1={item.subjectname} classsched1={item.classschedule} ifchecked1 = {item.checked}/>
-  ))}
+  {studentselection!== undefined &&
+      studentselection.map((item, key)=>(
+      <ClassSelectionitem key={key} classitems={item} />
+    
+  ))} 
+
+  {studentselection=== undefined && 
+    <h5>Loading student list...</h5>
+  }
+
 
 
 </ul>
@@ -229,10 +241,11 @@ function ClassContainer() {
                 
                 }
                   </div>
-                  <div className="col-lg-9 outletcontainer-min">
+                  <div className="col-lg-8 outletcontainer-min">
                     <div className="tertiary borderradius-md outletcontainer">
 
 
+                               <classAndstudentselectionContext.Provider value={{studentselection, setstudentselection}}> 
                                <personlistContext.Provider value={{personlist}}>
                                <announcementlistContext.Provider value={{announcementlist, setannouncementlist}}> 
                                   <sourceMaterialContext.Provider value={{sourcematerial, setsourcematerial}}>
@@ -248,6 +261,7 @@ function ClassContainer() {
                                 </sourceMaterialContext.Provider>
                                 </announcementlistContext.Provider>
                                </personlistContext.Provider>
+                               </classAndstudentselectionContext.Provider>
                                 
                                                 
                           <div>

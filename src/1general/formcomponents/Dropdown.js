@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react'
 import {AiOutlineCaretDown} from 'react-icons/ai'
 import './formcomponents.css'
 
-function Dropdown({options, menuClass, itemClass, mainClass , controlClass, onChangeHandler, placeholderValue,mainActiveClass, controlActiveClass ,controlCloseClass}) {
-   const [valuetemp, setvalue] = useState();
+function Dropdown({options, menuClass, itemClass, mainClass , controlClass, onChangeHandler, placeholderValue,mainActiveClass, controlActiveClass ,controlCloseClass , disabled = false , defaultValue = undefined }) {
+   const [valuetemp, setvalue] = useState(defaultValue);
    const [dropdownopen, setdropdownopen] = useState(false);
    const toggledropdown = ()=>{
-    setdropdownopen(!dropdownopen)
+    if(disabled=== false){
+        setdropdownopen(!dropdownopen)
+    }
    }
 
  
@@ -15,13 +17,13 @@ function Dropdown({options, menuClass, itemClass, mainClass , controlClass, onCh
   return (
     <div className={`${mainClass} " " ${dropdownopen && mainActiveClass }`}>
         <div className={` flex ${controlClass} ' ' ${dropdownopen ? controlActiveClass : controlCloseClass}`} onClick={toggledropdown}>
-            {valuetemp!== undefined ? valuetemp : placeholderValue !==undefined ? placeholderValue : 'choose option'}
+            {valuetemp!== undefined ? valuetemp.label : placeholderValue !==undefined ? placeholderValue : 'choose option'}
             <AiOutlineCaretDown />
         </div>
        {dropdownopen &&
             <div className={menuClass}>
                 {options.map((item, key)=>(
-                    <div key={key} className={itemClass} onClick={()=>{onChangeHandler(item); setvalue(item); toggledropdown()}}>{item}</div>
+                    <div key={key} className={itemClass} onClick={()=>{onChangeHandler(item.value); setvalue(item); toggledropdown()}}>{item.label}</div>
                 ))}
             </div>
        }

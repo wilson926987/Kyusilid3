@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {ImCheckboxUnchecked , ImCheckboxChecked} from 'react-icons/im'
 import  {RiUserSettingsFill} from 'react-icons/ri'
 import StudentSelectionitem from './StudentSelectionitem'
 
-function ClassSelectionitem({classsched1, classname1, ifchecked1}) {
+function ClassSelectionitem({classitems}) {
     const [tempcheck, settempcheck] = useState(false)
     const [studentlist , setstudentlist] = useState(false)
 
@@ -17,13 +17,18 @@ function ClassSelectionitem({classsched1, classname1, ifchecked1}) {
       studentlist && tempcheck && setstudentlist(false);
     }
 
+    useEffect(()=>{
+      console.log('class sample : ' + classitems.classitem.sub_name)
+      console.log(classitems.studentlist)
+    },[])
+
   return (
     <li className='relative'>
       <div className='classSelectionitem borderradius-md ' onClick={togglecheck}>
           {tempcheck ? <ImCheckboxChecked /> : <ImCheckboxUnchecked /> }
-        <div> 
-            <h4 className='ellipsis'>{classname1}</h4>
-            <p className='ellipsis'>{classsched1}</p>
+        <div className='ellipsis'> 
+            <h4 className='ellipsis'>{classitems.classitem.sub_name}</h4>
+            <p className='ellipsis'>{classitems.classitem.day_label}</p>
         </div>
       </div>
 
@@ -34,34 +39,11 @@ function ClassSelectionitem({classsched1, classname1, ifchecked1}) {
           <div className={`createactivitystudentlist tertiary ${studentlist && 'createactivitystudentlist-active' }`}>
 
               <ul>
-                <StudentSelectionitem />
-                <StudentSelectionitem />
-                <StudentSelectionitem />
-                <StudentSelectionitem />
-                <StudentSelectionitem />
-                <StudentSelectionitem />
-                <StudentSelectionitem />
-                <StudentSelectionitem />
-                <StudentSelectionitem />
-                <StudentSelectionitem />
-                <StudentSelectionitem />
-                <StudentSelectionitem />
-                <StudentSelectionitem />
-                <StudentSelectionitem />
-                <StudentSelectionitem />
-                <StudentSelectionitem />
-                <StudentSelectionitem />
-                <StudentSelectionitem />
-                <StudentSelectionitem />
-                <StudentSelectionitem />
-                <StudentSelectionitem />
-                <StudentSelectionitem />
-                <StudentSelectionitem />
-                <StudentSelectionitem />
-                <StudentSelectionitem />
-                <StudentSelectionitem />
-                <StudentSelectionitem />
-                <StudentSelectionitem />
+                {classitems.studentlist.map((item, key)=>(
+                      <StudentSelectionitem key={key}  studitem = {item}/>
+                ))}
+             
+            
               </ul>
 
 

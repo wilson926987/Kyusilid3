@@ -12,7 +12,14 @@ function CreateAnnouncementprof() {
     const {userinfo} = useContext(userInfoContext);
     const {myclasses} = useContext(myClasesContext);
     const [saveannouncementready, setsaveannouncement] = useState(true);
-    const posttypes = ['fixed' , 'timed']
+    const posttypes = [
+        {
+            'value' : 'fixed', 'label' : 'fixed schedule' 
+        },
+        {
+            'value' : 'timed' , 'label' : 'relative schedule'
+        }
+    ]
     const [posttype, setposttype] = useState('fixed')
     const [selectedclass, setselectedclass] =useState([]) 
 
@@ -91,7 +98,7 @@ function CreateAnnouncementprof() {
                         "schedule" : posttype==='fixed' ? new Date(postdate).toISOString().slice(0, 19).replace('T', ' ') : setfuturedate(selectedclass[x].value.day_label, selectedclass[x].value.sched_from).toISOString().slice(0, 19).replace('T', ' ')
                     }
                     //     
-                    console.log(ggt)    
+                
                     await axios.post('http://localhost:8000/api/add-announcement/' , ggt)
                     .then(response => {    
                         console.log(response.data)   ;    
@@ -120,14 +127,19 @@ function CreateAnnouncementprof() {
                 setannouncementcontent();
                 setannouncementtitle();
                 setsaveannouncement(true);
+                setactiv(false)
+                
+
         }
     }
 
     const [activ, setactiv] = useState(false)
 
-    const temp2 = ()=>{
+    const temp2= ()=>[
         setactiv(!activ)
-    }
+    ]
+
+  
 
   
 

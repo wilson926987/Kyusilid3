@@ -1,42 +1,74 @@
 
 import Topicpanel from '../1general/components/Topicpanel'
 import { useContext, useState } from 'react';
-import { activitytypefilterContext, topiclistContext} from '../Globalcontext';
+import { activitytypefilterContext, topiclistContext ,currentclassContext} from '../Globalcontext';
 import Dropdown from '../1general/formcomponents/Dropdown';
-import {FaPlusCircle} from 'react-icons/fa'
 
 
 function ClassModules() {
  
  const { setactivitytypefilter} = useContext(activitytypefilterContext)
+
  const {topiclist} = useContext(topiclistContext)
   const [tempactivityfilter, settempactivityfilter] = useState([
-    'none' , 'activity' , 'assignment' , 'questionnaire' ,'material'
+    {'value' : 'none',
+    'label' : 'All activities'
+   },
+    {'value' : 'Material',
+    'label' : 'Material'
+   },
+   {'value' : 'Assignment',
+    'label' : 'Assignment'
+   },
+   {'value' : 'Activity',
+   'label' : 'Activity'
+   },
+   {'value' : 'Questionnaire',
+   'label' : 'Questionnaire'
+   },
+   {'value' : 'Attendance',
+   'label' : 'Attendance'
+  }
+
+
   ])
 
 
 
+
+
+
+
+
+
   return (
-    <div>
+    <div >
      <div className="flex">
      <h4>Classwork</h4> 
 
-     <div className='marginleftauto'>
-      <button className='commonbutton lighttext borderradius-md secondary'> <FaPlusCircle/> Create Topic</button>
+     <div className='marginleftauto relative'>
+    
+
      </div>
 
-     <div>
-      <Dropdown 
-        options={tempactivityfilter} 
-        placeholderValue='select filter '
-        onChangeHandler={setactivitytypefilter}
-        mainClass= 'dropdownmain primary borderradius-md width200px'
-        itemClass= 'dropdownitem'
-        controlClass='dropdowncontrol'
-        menuClass='dropdownmenu primary'
-        controlActiveClass='dropdowncontrolactive'
-        mainActiveClass='dropdownmain-active'
-     /></div>
+
+     <div className='col-lg-4'>
+   
+
+                        <Dropdown
+                                options={tempactivityfilter}
+                                onChangeHandler= {setactivitytypefilter}
+                                placeholderValue='select filter'
+                                mainClass= 'dropdownmain primary borderradius-md'
+                                itemClass= 'dropdownitem'
+                                controlClass='dropdowncontrol'
+                                menuClass='dropdownmenu primary'
+                                controlActiveClass='dropdowncontrolactive'
+                                mainActiveClass='dropdownmain-active'                         
+                            />  
+     
+     
+     </div>
      </div>
 
 
@@ -55,6 +87,11 @@ function ClassModules() {
           ))}
             
         </div>
+
+     
+
+
+       
         
 
       
