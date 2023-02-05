@@ -29,7 +29,44 @@ function Barchart() {
               },
             ]}
           options={{
+            chart: {
+              //background: '#00ff00',
+                toolbar:{
+              show:true,
+              offsetX: 35,
+              tools: {
+                download: true,
+                selection: false,
+                home:false,
+                zoom: false,
+                zoomin: false,
+                zoomout: false,
+                pan: false,
+                reset: false | '<img src="/static/icons/reset.png" width="20">',
+                customIcons: []
+              },
+              export: {
+                csv: {
+                  filename: undefined,
+                  columnDelimiter: ',',
+                  headerCategory: 'category',
+                  headerValue: 'value',
+                  dateFormatter(timestamp) {
+                    return new Date(timestamp).toDateString()
+                  }
+                },
+                svg: {
+                  filename: undefined,
+                },
+                png: {
+                  filename: undefined,
+                }
+              },
+              autoSelected: 'menu' 
             
+                }
+
+            },
             dataLabels: {
               enabled: false
             },
@@ -38,6 +75,7 @@ function Barchart() {
             stroke: {
               width: [2, 2, 2]
             },
+      
             plotOptions: {
               bar: {
                 columnWidth: "50%",
