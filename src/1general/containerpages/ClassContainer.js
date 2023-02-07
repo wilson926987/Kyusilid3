@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Outlet , useNavigate, useLocation} from 'react-router-dom'
 import Activitylogpanel from '../components/Activitylogpanel';
-import {classAndstudentselectionContext, announcementlistContext, userInfoContext, topicfilterContext, activitytypefilterContext , topiclistContext , currentActivityContext , sourceMaterialContext , currentclassContext, myClasesContext , personlistContext } from '../../Globalcontext';
+import {  classAndstudentselectionContext, announcementlistContext, userInfoContext, topicfilterContext, activitytypefilterContext , topiclistContext , currentActivityContext , sourceMaterialContext , currentclassContext, myClasesContext , personlistContext } from '../../Globalcontext';
 import {FaPlusCircle ,FaArrowCircleLeft} from  'react-icons/fa'
 import ClassSelectionitem from '../components/ClassSelectionitem';
 import axios from 'axios';
@@ -14,8 +14,6 @@ function ClassContainer() {
   const navigate = useNavigate();
   const {userinfo} = useContext(userInfoContext);
   const {currentclass} = useContext(currentclassContext);
-  const [studentselection ,setstudentselection] = useState();
-  const {myclasses} = useContext(myClasesContext);
   const [navcreate, setnavcreate] = useState(false);
   const [currentactivity, setcurrentactivity] = useState();
   const [sourcematerial,setsourcematerial] = useState();
@@ -24,6 +22,14 @@ function ClassContainer() {
   const [topiclist, settopiclist] = useState([]);
   const location = useLocation();
   const [announcementlist, setannouncementlist] = useState([]);
+
+  const [studentselection ,setstudentselection] = useState();
+
+ 
+ 
+ 
+
+
   
 
   const url = userinfo.user.usertype ==='prof' ?  'http://localhost:8000/api/get-announcement/' : 'http://localhost:8000/api/get-announcementforstudent/'
@@ -34,6 +40,9 @@ function ClassContainer() {
       if(currentclass !== undefined){
         filldata();
       }
+
+    
+
   },[location , currentclass])
 
   useEffect(()=>{
@@ -43,6 +52,7 @@ function ClassContainer() {
    })
 
   async function filldata(){
+ 
         await axios.get(url + currentclass.classes_id)
         .then(response => {
           setannouncementlist(response.data)
@@ -73,15 +83,26 @@ function ClassContainer() {
         if(userinfo.usertype==='prof'){
           await axios.get('http://localhost:8000/api/getstudentlist/' + userinfo.user.acc_id)
           .then(response => {
-            setstudentselection(response.data);
-            console.log(response.data)
-          
+      
+            const temp = response.data.map( item=>({
+                'selected' :   item.classitem.classes_id == currentclass.classes_id , 
+                'classitem' : item.classitem ,
+              
+                'studentlist': item.studentlist.map(item2=>({
+                'selected' : true, 'studentitem' : item2
+                }))
+              })
+              );
+              setstudentselection(temp);
           })
           .catch(error => {
             console.log(error);
           });
         }
+  }
 
+  function updateselection(){
+    console.log('wilson updated')
   }
 
   function isactive(e){
@@ -102,8 +123,27 @@ function ClassContainer() {
 
 
 
-function handleclassSelect(){
+function classSelection(classitem){
+
+
+  setstudentselection(studentselection.map(item=>({
+    'selected' :  item.classitem.classes_id === classitem.classitem.classes_id ? !classitem.selected : item.selected,
+    'classitem' : item.classitem,
+    'studentlist' : item.studentlist
+  })))
   
+}
+
+function toggleStudentselect(studentitem){
+  setstudentselection(studentselection.map(item=>({
+    'selected' :  item.selected,
+    'classitem' : item.classitem,
+    'studentlist' : item.studentlist.map(item2=>({
+      'selected' : studentitem.studentitem.acc_id === item2.studentitem.acc_id ? !studentitem.selected : item2.selected, 
+      'studentitem' : item2.studentitem
+      }))
+  })))
+
 }
 
 
@@ -223,10 +263,14 @@ function handleclassSelect(){
 
 <ul className='notransition '>
 
-  {studentselection!== undefined &&
+{studentselection!== undefined &&
       studentselection.map((item, key)=>(
-      <ClassSelectionitem key={key} classitems={item} />
-    
+     <ClassSelectionitem key={key} classitems={item} handleClassSelection= {classSelection}  handlestudentselect={toggleStudentselect}
+      selectedstudcount = {item.studentlist.filter(temp =>{ return temp.selected=== true}).length}
+      totalstudents = {item.studentlist.length}
+     
+      />
+       
   ))} 
 
   {studentselection=== undefined && 
@@ -245,6 +289,7 @@ function handleclassSelect(){
                     <div className="tertiary borderradius-md outletcontainer">
 
 
+                            
                                <classAndstudentselectionContext.Provider value={{studentselection, setstudentselection}}> 
                                <personlistContext.Provider value={{personlist}}>
                                <announcementlistContext.Provider value={{announcementlist, setannouncementlist}}> 
@@ -262,6 +307,7 @@ function handleclassSelect(){
                                 </announcementlistContext.Provider>
                                </personlistContext.Provider>
                                </classAndstudentselectionContext.Provider>
+                  
                                 
                                                 
                           <div>

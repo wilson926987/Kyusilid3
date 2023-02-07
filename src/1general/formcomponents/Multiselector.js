@@ -24,7 +24,7 @@ function Multiselector({options, menuClass, itemClass, mainClass , controlClass,
     });
     setclassesselected(count)
     onChangeHandler(selecteditems)
- 
+  
   },[selecteditems])
 
   useEffect(()=>{
@@ -36,13 +36,13 @@ function Multiselector({options, menuClass, itemClass, mainClass , controlClass,
 
 
 
-   const [dropdownopen, setdropdownopen] = useState(false);
+   const [dropdownopen, setdropdownopen] = useState(false); 
    const toggledropdown = ()=>{
     setdropdownopen(!dropdownopen)
    }
 
    const togglethisitem= (ett)=>{
-    if(ett !=selectedAndDisabled){
+    if(ett !==selectedAndDisabled){
       setselecteditems(selecteditems.map(item1=>{
         if(ett=== item1.value){
           return {'selected' : (!item1.selected) , 'value' : item1.value }
@@ -53,8 +53,7 @@ function Multiselector({options, menuClass, itemClass, mainClass , controlClass,
         
       )) 
     }
-   
-       
+    
    }
 
   return (

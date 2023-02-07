@@ -46,7 +46,7 @@ function ActivityItempanel({actItem}) {
           
                     <div className="col-lg-7 ">
                       <div className=' activitypanelsub1'>
-                      <h5>{actItem.activity_name}</h5>
+                      <h5>{actItem.activity_title}</h5>
                       <p>{actItem.category} {actItem.activity_type} {actItem.activitytype==='material' && `, ${actItem.materialcount} files`}</p>
                     </div>
                     </div>

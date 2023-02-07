@@ -90,19 +90,10 @@ function Profilenotif() {
 
   return (
     <div className='profilenotif'>
-        <div><h3>{currentpage}</h3>
-            <div className="pnsearchbar" onMouseEnter={()=>{setsearchbar(true)}} onMouseLeave={()=>{setsearchbar(false)}}>
-                <div className={`pnsearchbaropen ${searchbar ||searchfilled ? ' pnsearchbaropen-active' :""}`}>
-                    <input type="text" placeholder='search here' defaultValue={search}  onChange={(e)=>{setsearch(e.target.value) }} />
-                </div>
-                <div className="pnsearchbarclosed primary ">
-                    <FaSearch />
-                </div>             
-            </div>
-        </div>
+     
         
-        <div className='notificationicon'><FaBell /></div>
-        <div className='notificationicon' >  <BsFillGearFill onClick={togglecontainer}/>
+        
+        <div className='notificationicon marginleftauto' >  <BsFillGearFill onClick={togglecontainer}/>
             {themecontainer && 
                     <div>
                    

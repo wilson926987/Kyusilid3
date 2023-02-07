@@ -42,7 +42,7 @@ function ClassActivity() {
                        </div>
         </div>
           
-        <h4 className='ellipsis'> { currentactivity.topic_name}: {currentactivity.activity_name}</h4>
+        <h4 className='ellipsis'> { currentactivity.topic_name}: {currentactivity.activity_title}</h4>
 
        </div>
 
