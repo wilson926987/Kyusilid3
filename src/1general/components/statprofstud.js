@@ -8,8 +8,8 @@ function statprofstud() {
 
         <Chart
         
-            height = '170%'
-            width = '88%'
+            height = '140%'
+            width = '95%'
             type= "area"
             stacked = "false"
        
@@ -33,7 +33,8 @@ function statprofstud() {
               //background: '#00ff00',
                 toolbar:{
               show:true,
-              offsetX: 140,
+              offsetX: 65,
+              offsetY: 10,
               tools: {
                 download: true,
                 selection: false,
@@ -133,13 +134,7 @@ function statprofstud() {
                       colors: "#00008B"
                     }
                   },
-                                 title: {
-                                    text: "Semestral Period",
-                                    style: {
-                                        color: "#00008B",
-                                        fontSize: '13px',
-                                    }
-                                  }
+                    
                  
                 }
               ],
@@ -181,7 +176,7 @@ function statprofstud() {
               },  
               padding: {
                   top: 0,
-                  right: 0,
+                  right: 20,
                   bottom: 10,
                   left: 25
               },  
