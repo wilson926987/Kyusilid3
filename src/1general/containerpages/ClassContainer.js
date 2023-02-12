@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Outlet , useNavigate, useLocation} from 'react-router-dom'
 import Activitylogpanel from '../components/Activitylogpanel';
-import {  classAndstudentselectionContext, announcementlistContext, userInfoContext, topicfilterContext, activitytypefilterContext , topiclistContext , currentActivityContext , sourceMaterialContext , currentclassContext, myClasesContext , personlistContext } from '../../Globalcontext';
+import { forcerefreshContext, classAndstudentselectionContext, announcementlistContext, userInfoContext, topicfilterContext, activitytypefilterContext , topiclistContext , currentActivityContext , sourceMaterialContext , currentclassContext, myClasesContext , personlistContext } from '../../Globalcontext';
 import {FaPlusCircle ,FaArrowCircleLeft} from  'react-icons/fa'
 import ClassSelectionitem from '../components/ClassSelectionitem';
 import axios from 'axios';
@@ -25,6 +25,19 @@ function ClassContainer() {
 
   const [studentselection ,setstudentselection] = useState();
 
+  const forecerefreshHandler= async()=>{
+    await axios.get(url + currentclass.classes_id)
+    .then(response => {
+      setannouncementlist(response.data)
+     
+    })
+    .catch(error => {
+      console.log(error);
+    });
+
+  }
+
+
  
  
  
@@ -40,6 +53,8 @@ function ClassContainer() {
       if(currentclass !== undefined){
         filldata();
       }
+
+console.log(announcementlist)
 
     
 
@@ -154,6 +169,11 @@ function toggleStudentselect(studentitem){
 
 
 
+
+
+
+
+
  
  if(currentclass===undefined){
   return <div></div>
@@ -186,9 +206,16 @@ function toggleStudentselect(studentitem){
               <div className="row">
                   <div className="col-lg-4 classnav-min">
 
+                  {currentclass.isarchived === 0 && userinfo.usertype === 'stud' && 
+                        <div className="secondary lighttext navcreatenew borderradius-lg dbpanelmargin">
+                        <h4>Attendance</h4>
+                        
+                      </div>
+                    }
+
                     {currentclass.isarchived ===0 &&
-                    
                       
+              
                           (  userinfo.usertype==='prof' && 
                             !isactive('/classes/sampleclass/createnew') ?
                             <div className="secondary lighttext navcreatenew borderradius-lg dbpanelmargin" onClick={()=>{setsourcematerial(); navigate('createnew')}}>
@@ -201,6 +228,9 @@ function toggleStudentselect(studentitem){
                           <FaArrowCircleLeft /><h4>Cancel</h4>
                         </div>)
                     }
+
+
+                 
 
 
 
@@ -289,8 +319,10 @@ function toggleStudentselect(studentitem){
                     <div className="tertiary borderradius-md outletcontainer">
 
 
-                            
-                               <classAndstudentselectionContext.Provider value={{studentselection, setstudentselection}}> 
+
+
+                                <forcerefreshContext.Provider value ={{forecerefreshHandler}}>
+                                <classAndstudentselectionContext.Provider value={{studentselection, setstudentselection}}> 
                                <personlistContext.Provider value={{personlist}}>
                                <announcementlistContext.Provider value={{announcementlist, setannouncementlist}}> 
                                   <sourceMaterialContext.Provider value={{sourcematerial, setsourcematerial}}>
@@ -307,6 +339,9 @@ function toggleStudentselect(studentitem){
                                 </announcementlistContext.Provider>
                                </personlistContext.Provider>
                                </classAndstudentselectionContext.Provider>
+                                </forcerefreshContext.Provider>
+                            
+                               
                   
                                 
                                                 

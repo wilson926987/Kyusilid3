@@ -3,6 +3,7 @@ import { Outlet, useNavigate } from 'react-router-dom'
 import { userInfoContext , departmentsContext , currentdeptContext} from '../Globalcontext'
 import Adminsidebar from './Adminsidebar'
 import Profilenotif from '../1general/components/Profilenotif'
+import axios from 'axios'
 
 function AdminContainer() {
   const {userinfo} = useContext(userInfoContext)
@@ -18,30 +19,24 @@ function AdminContainer() {
 
 
   const [departments, setdepartments] =useState([
-    {
-        'departmentId' : 1,
-        'departmentname' : "Information Technology"
-    },
-    {
-      'departmentId' : 2,
-      'departmentname' : "Industrial Engineering"
-    },
-    {
-      'departmentId' : 3,
-      'departmentname' : "Entrepreneurship"
-    },
-    {
-      'departmentId' : 4,
-      'departmentname' : "Business Administration"
-    }
+   
   ])
 
   const [currentdept, setcurrentdept] = useState();
 
 
+  useEffect(()=>{
+    axios.get('http://localhost:8000/api/getdepartment/' +userinfo.user.acc_id).then(response=>{
+      setdepartments(response.data)
+      console.log(response.data)
+    
+    }).catch();
+  },[])
+
+
   return (
 
-    <currentdeptContext.Provider>
+    <currentdeptContext.Provider value={{currentdept, setcurrentdept}}>
       <departmentsContext.Provider value={{departments, setdepartments}}>
         <div className='maincontainer'>
         <Adminsidebar/>

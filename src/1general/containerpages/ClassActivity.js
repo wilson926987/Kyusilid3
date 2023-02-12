@@ -3,8 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { currentActivityContext , userInfoContext } from '../../Globalcontext'
 import {FaClipboardList} from 'react-icons/fa'
 import {RiBookFill} from 'react-icons/ri'
-import {MdQuiz ,MdAssignment} from 'react-icons/md'
+import {MdQuiz ,MdAssignment, MdSend} from 'react-icons/md'
 import {BiCommentDetail} from 'react-icons/bi'
+import axios from 'axios';
 
 
 
@@ -15,11 +16,48 @@ function ClassActivity() {
   const {userinfo} = useContext(userInfoContext);
   const [responsepage, setresponsepage] = useState(false);
 
+  const [act_commentlist, set_actcommnentlist] = useState([]);
+  const [commentinput, setcommentinput] = useState();
+
+
+  const postcomments = async ()=>{
+
+    if(commentinput != ""){
+      const temp = {
+        "acc_id" : userinfo.user.acc_id,
+        "activity_id" : currentactivity.activity_id,
+        "comment_content" : commentinput
+      }
+  
+      await axios.put('http://localhost:8000/api/createactivitycomment', temp).then(response =>{
+        set_actcommnentlist(response.data);
+        
+        
+      }).catch(error => {
+        console.log(error);
+      });
+
+      setcommentinput('');
+    }
+
+
+
+  
+
+  }
+  
+
   useEffect(()=>{
     if(currentactivity===undefined){
         navigate('/')
     }
-  },[])
+     axios.get('http://localhost:8000/api/getactivitycommentlist/' + currentactivity.activity_id).then(response=>
+      {set_actcommnentlist(response.data)}
+     )
+
+
+
+  },[currentactivity])
   
   if(currentactivity=== undefined){
     return (<div></div>)
@@ -119,8 +157,22 @@ function ClassActivity() {
 
         <div className="activitycomments">
           <h4>Class comments</h4>
+          <hr/>  
+          {act_commentlist.map((item)=>(
+            <div key={item.comment_id} className='margintop12'>
+              <div className='flex'> <h6>{item.firstname} {item.middle} {item.lastname} {item.suffix}</h6> <p className='smallfont marginleftauto'>{item.date_posted}</p></div>
+              <div> {item.comment_content}</div>
+            </div>
+          ))}
+
+<div className='relative'>
+<textarea name="Text1"  cols='1' rows="2"  placeholder='Enter comment' className='commontextarea primaryborder margintop12' value={commentinput} onChange={(e)=> setcommentinput(e.target.value)} ></textarea>
+   
+   <div className='sendbutton' onClick={postcomments}>   <MdSend/></div> 
+</div>
+        
           
-          (comments here)
+        
         </div>
         </React.Fragment> :
         <div>

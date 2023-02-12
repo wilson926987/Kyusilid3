@@ -20,7 +20,7 @@ function ClassStats() {
           </div>
         }
 
-        {announcementlist.map((announcementitem , key)=>(
+        {announcementlist.map((announcementitem, key)=>(
               <Announcementpanel key={key} announcementitem= {announcementitem}/>
         ))}
       

@@ -1,13 +1,29 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import avatar from '../assets/images/avatar.jpg';
 import AreaChart from '../1general/components/areachart'
+import { useOutletContext } from 'react-router-dom';
+import { deptInfoContext } from '../Globalcontext';
+
+
 
 
 function Departmentoverview() {
-  const [subjectnav, setsubjectnav] = useState(false)
-  const [classesnav, setclassesnav] = useState(false)
+
+ const {departmentinfo} = useContext(deptInfoContext);
+
+ useEffect(()=>{
+    console.log(departmentinfo);
+ },[departmentinfo])
+
+
+ 
+
 
   return (
+    departmentinfo != undefined ?
+
+
+
     <div className="row">
     <div className="col-lg-12 ">
       <div className="tertiary borderradius-md paneladd" >
@@ -22,10 +38,10 @@ function Departmentoverview() {
           <h4>Classes</h4>
           <p>
             <ul>
-              <li>4th year classes (section)</li>
-              <li>3rd year </li>
-              <li> 2nd</li>
-              <li> 1st</li>
+              <li>4th year {departmentinfo.fourthyear}</li>
+              <li>3rd year {departmentinfo.thirdyear}</li>
+              <li>2nd year {departmentinfo.secondyear}</li>
+              <li>1st year {departmentinfo.firstyear}</li>
             </ul>
             </p>
           </div> 
@@ -35,8 +51,8 @@ function Departmentoverview() {
           <h4>Accounts</h4>
           <p>
             <ul>
-              <li>Prof</li>
-              <li>Students</li>           
+              <li>Professors : {departmentinfo.profcount}</li>
+              <li>Students : {departmentinfo.studcount}</li>           
             </ul>
             </p>
           </div> 
@@ -66,66 +82,24 @@ function Departmentoverview() {
          <div className='flex'> <h4>Department Admin</h4>  <input type="text" className='marginleftauto'/></div>
 
           <ul className='margintop12'>
-            <li>
-              <div class="personpanel">
-                <div>
-                  <img src={avatar} alt="" /></div>
-                <div class="personpanelcontent">
-                  <p>Person name</p>
-                  <p>Person info</p>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div class="personpanel">
-                <div>
-                  <img src={avatar} alt="" /></div>
-                <div class="personpanelcontent">
-                  <p>Person name</p>
-                  <p>Person info</p>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div class="personpanel">
-                <div>
-                  <img src={avatar} alt="" /></div>
-                <div class="personpanelcontent">
-                  <p>Person name</p>
-                  <p>Person info</p>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div class="personpanel">
-                <div>
-                  <img src={avatar} alt="" /></div>
-                <div class="personpanelcontent">
-                  <p>Person name</p>
-                  <p>Person info</p>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div class="personpanel">
-                <div>
-                  <img src={avatar} alt="" /></div>
-                <div class="personpanelcontent">
-                  <p>Person name</p>
-                  <p>Person info</p>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div class="personpanel">
-                <div>
-                  <img src={avatar} alt="" /></div>
-                <div class="personpanelcontent">
-                  <p>Person name</p>
-                  <p>Person info</p>
-                </div>
-              </div>
-            </li>
+
+
+           { departmentinfo.depadminlist != undefined && departmentinfo.depadminlist.map((item, key)=>(
+                 <li key={key}>
+                  <div class="personpanel">
+                    <div>
+                      <img src={avatar} alt="" /></div>
+                    <div class="personpanelcontent">
+                      <h5>{item.title} {item.firstname} {item.lastname} {item.suffix}</h5>
+                      
+                    </div>
+                  </div>
+               </li>
+            ))} 
+          
+       
+           
+         
           </ul>  
                        
         </div> 
@@ -140,10 +114,19 @@ function Departmentoverview() {
 
 
     </div>
+    :
+    <div>loading department overview</div>
    
    
     
   )
+
 }
+ 
+ 
+
+
+  
+
 
 export default Departmentoverview

@@ -26,3 +26,8 @@ export const currentdeptContext = createContext();
 
 export const announcementlistContext = createContext();
 export const classAndstudentselectionContext = createContext();
+
+export const forcerefreshContext = createContext();
+export const currentdepartment = createContext();
+
+export const deptInfoContext = createContext();

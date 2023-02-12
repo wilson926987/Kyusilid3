@@ -167,7 +167,6 @@ async function createActivity(){
     'activity_type' : activitytype,
     'category' : category,
     'topic' : module,
-    'post_schedule': postdate,
     'allowedit' : allowedit,
     'allowlate' : allowlate,
     'availability' : availability,
