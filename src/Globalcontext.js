@@ -10,6 +10,7 @@ export const currentpageContext = createContext();
 export const topicfilterContext = createContext();
 export const activitytypefilterContext = createContext();
 export const topiclistContext = createContext();
+export const modulelistContext = createContext();
 
 export const currentActivityContext = createContext();
 export const sourceMaterialContext = createContext();

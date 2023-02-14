@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Outlet , useNavigate, useLocation} from 'react-router-dom'
 import Activitylogpanel from '../components/Activitylogpanel';
-import { forcerefreshContext, classAndstudentselectionContext, announcementlistContext, userInfoContext, topicfilterContext, activitytypefilterContext , topiclistContext , currentActivityContext , sourceMaterialContext , currentclassContext, myClasesContext , personlistContext } from '../../Globalcontext';
+import {modulelistContext, forcerefreshContext, classAndstudentselectionContext, announcementlistContext, userInfoContext, topicfilterContext, activitytypefilterContext , topiclistContext , currentActivityContext , sourceMaterialContext , currentclassContext, myClasesContext , personlistContext } from '../../Globalcontext';
 import {FaPlusCircle ,FaArrowCircleLeft} from  'react-icons/fa'
 import ClassSelectionitem from '../components/ClassSelectionitem';
 import axios from 'axios';
@@ -20,10 +20,12 @@ function ClassContainer() {
   const [currentpage, setcurrentpage] = useState();
   const [personlist, setpersonlist] = useState();
   const [topiclist, settopiclist] = useState([]);
+  const [modulelist, setmodulelist] = useState([]);
   const location = useLocation();
   const [announcementlist, setannouncementlist] = useState([]);
 
   const [studentselection ,setstudentselection] = useState();
+  const [class_log, setclass_log] = useState([]);
 
   const forecerefreshHandler= async()=>{
     await axios.get(url + currentclass.classes_id)
@@ -54,9 +56,7 @@ function ClassContainer() {
         filldata();
       }
 
-console.log(announcementlist)
 
-    
 
   },[location , currentclass])
 
@@ -95,6 +95,8 @@ console.log(announcementlist)
           console.log(error);
         });
 
+        
+
         if(userinfo.usertype==='prof'){
           await axios.get('http://localhost:8000/api/getstudentlist/' + userinfo.user.acc_id)
           .then(response => {
@@ -113,12 +115,26 @@ console.log(announcementlist)
           .catch(error => {
             console.log(error);
           });
+
+
+          await axios.get('http://localhost:8000/api/get-topiclist/' + currentclass.moduleSource)
+        .then(response => {
+          setmodulelist(response.data);
+        
+        })
+        .catch(error => {
+          console.log(error);
+        });
         }
+
+        await axios.get('http://localhost:8000/api/getclass_log/' + currentclass.classes_id)
+        .then(response=>{
+            setclass_log(response.data)
+        }).catch(error=>{console.log(error)})
   }
 
-  function updateselection(){
-    console.log('wilson updated')
-  }
+
+
 
   function isactive(e){
     return e===currentpage ? true : false;
@@ -127,7 +143,7 @@ console.log(announcementlist)
 
  const togglenavcreate = ()=>{
     setnavcreate(!navcreate)
-    console.log(navcreate)
+   
  }
 
 
@@ -191,6 +207,7 @@ function toggleStudentselect(studentitem){
                      <h4 className='margintop12'>{currentclass.sub_code}</h4>
                     <h4>{currentclass.day_label} {currentclass.sched_from} - {currentclass.sched_to} {currentclass.sessionname2 !== "" && (', ' + currentclass.sched_from2 + ' - ' + currentclass.sched_to2)}</h4>
                     <h4>{currentclass.title + ' '+ currentclass.firstname +' ' +  currentclass.lastname + ' ' + currentclass.suffix}</h4>
+                
                    </div> :
            
 
@@ -330,7 +347,9 @@ function toggleStudentselect(studentitem){
                                 <topiclistContext.Provider value={{topiclist, settopiclist}}>
                                   <activitytypefilterContext.Provider value={{activitytypefilter, setactivitytypefilter}}>
                                  <topicfilterContext.Provider value={{topicfilter, settopicfilter}}>
-                                    <Outlet /> 
+                                <modulelistContext.Provider value={{modulelist, setmodulelist}}>
+                                <Outlet /> 
+                                </modulelistContext.Provider>                                  
                                  </topicfilterContext.Provider>
                                   </activitytypefilterContext.Provider>
                                   </topiclistContext.Provider>
@@ -360,9 +379,12 @@ function toggleStudentselect(studentitem){
      {!(isactive('/classes/sampleclass/createnew') || isactive('/classes/sampleclass/activity/activityId') )  ?
          <div className='activitylog borderradius-md tertiary'>
          <h4>Class Activity log</h4>
-         <Activitylogpanel /><Activitylogpanel /><Activitylogpanel /><Activitylogpanel /><Activitylogpanel /><Activitylogpanel />
 
-        </div>
+         {class_log.map(item=>
+              (<Activitylogpanel key={item.classlog_id} classlog= {item}/>)
+         )}
+         
+       </div>
       :
         <div>
         </div>    

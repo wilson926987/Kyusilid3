@@ -3,6 +3,7 @@ import {MdSend} from 'react-icons/md'
 import axios from 'axios'
 import { useEffect } from 'react';
 import { announcementlistContext, userInfoContext , currentclassContext , forcerefreshContext } from '../../Globalcontext';
+import {AiFillEdit} from 'react-icons/ai'
 
 
 function Announcementpanel({announcementitem , forcerefresh}) {
@@ -64,6 +65,8 @@ function Announcementpanel({announcementitem , forcerefresh}) {
 
   }
 
+  const [editmenu, setedditmenu] = useState(false);
+
 
 
  
@@ -75,9 +78,11 @@ function Announcementpanel({announcementitem , forcerefresh}) {
       <div>
           <h5>{announcementitem.announcementitem.an_title}</h5>
       </div>
-      <div>
+      <div className='flex'>
         <h6>Created {announcementitem.announcementitem.created_at} by {announcementitem.announcementitem.firstname} {announcementitem.announcementitem.lastname}</h6>
-    
+          <div className='marginleft12 relative'> <AiFillEdit onClick={()=>{setedditmenu(!editmenu)}}/>
+            {editmenu && <div className='absolute tertiary editmenu  borderradius-md'> <ul><li className='padding12 borderradius-md'>edit</li> <li className='padding12 borderradius-md'>delete</li></ul> </div>  }
+          </div>
       </div>
     </div>
 

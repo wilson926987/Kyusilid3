@@ -33,11 +33,11 @@ function ActivityItempanel({actItem}) {
           <div className="row width100" onClick={()=>{navigate2(actItem)}}>
                     <div className='col-lg-1 activityiconcontainer'>  
                       <div className='activityicon tertiary '>
-                        {actItem.activity_type==='material' ?
+                        {actItem.activity_type==='Material' ?
                           <RiBookFill />:
-                          actItem.activity_type==='questionnaire' ?
+                          actItem.activity_type==='Questionnaire' ?
                           <MdQuiz/> :
-                          actItem.activity_type==='assignment' ?
+                          actItem.activity_type==='Assignment' ?
                           <MdAssignment/> :
                           <FaClipboardList/>                                 
                       }
@@ -47,14 +47,14 @@ function ActivityItempanel({actItem}) {
                     <div className="col-lg-7 ">
                       <div className=' activitypanelsub1'>
                       <h5>{actItem.activity_title}</h5>
-                      <p>{actItem.category} {actItem.activity_type} {actItem.activitytype==='material' && `, ${actItem.materialcount} files`}</p>
+                      <p>{actItem.category} {actItem.activity_type} {actItem.activitytype==='Material' && `, ${actItem.materialcount} files`}</p>
                     </div>
                     </div>
 
                     <div className="col-lg-4 ">                   
                       <div className=' activitypanelsub2 marginleftauto'>
-                        <p>Date posted : {actItem.date_posted}</p>
-                        {actItem.activitytype!=='material' ? <p>Date due : {actItem.date_due}</p> : <p>&nbsp;</p>}   
+                        <p>Date posted : {actItem.date_schedule}</p>
+                        {actItem.activity_type!=='Material' ? <p>Date due: {actItem.date_due !== null ? actItem.date_due : 'no due date'}</p> : <p>&nbsp;</p>}   
                       </div>
                     </div>
               </div>

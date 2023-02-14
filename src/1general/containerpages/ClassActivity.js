@@ -28,6 +28,7 @@ function ClassActivity() {
         "activity_id" : currentactivity.activity_id,
         "comment_content" : commentinput
       }
+      console.log(JSON.stringify(temp))
   
       await axios.put('http://localhost:8000/api/createactivitycomment', temp).then(response =>{
         set_actcommnentlist(response.data);
@@ -69,11 +70,11 @@ function ClassActivity() {
         <div className={`flex activitytab ${(!responsepage || userinfo.usertype==='stud') ? 'primary' : 'background'}`} onClick={()=>{setresponsepage(false)}}>
        <div className='activityiconcontainer'>  
                       <div className='activityicon tertiary marginright12'>
-                        {currentactivity.activitytype==='material' ?
+                        {currentactivity.activitytype==='Material' ?
                           <RiBookFill />:
-                          currentactivity.activitytype==='questionnaire' ?
+                          currentactivity.activitytype==='Questionnaire' ?
                           <MdQuiz/> :
-                          currentactivity.activitytype==='assignment' ?
+                          currentactivity.activitytype==='Assignment' ?
                           <MdAssignment/> :
                           <FaClipboardList/>                                 
                       }
@@ -85,7 +86,7 @@ function ClassActivity() {
        </div>
 
 
-       {userinfo.usertype ==='prof' && (currentactivity.activity_type !== 'material') &&
+       {userinfo.usertype ==='prof' && (currentactivity.activity_type !== 'Material') &&
         <div className= {`flex activitytab ${responsepage ? 'primary' : 'background'}`} onClick={()=>{setresponsepage(true)}}>
             
          <h4>Responses</h4>
@@ -95,8 +96,8 @@ function ClassActivity() {
        }
 
         <div className="marginleftauto smallfont">
-          <p>Date posted : {currentactivity.date_posted}</p>
-          <p>Date Due : {currentactivity.date_due}</p>
+          <p>Date posted : {currentactivity.date_schedule}</p>
+         {currentactivity.activity_type !== 'Material' ?  <p>Date Due : {currentactivity.date_due !== null ? currentactivity.date_due : 'no due date' }</p> : <p>&nbsp;</p>}
         </div>
         </div>
         <hr/>

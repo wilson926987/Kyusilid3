@@ -30,6 +30,8 @@ function Createnew() {
 
 
   useEffect(()=>{
+    console.log(sourcematerial)
+
     if(userinfo.usertype!== 'prof'){
       navigate('/');
     }
@@ -42,6 +44,7 @@ function Createnew() {
     if(currentclass.sessionname2 !== ''){
       setcategorylist(categorylist=> [...categorylist, { 'value' : currentclass.sessionname2 ,  'label' : currentclass.sessionname2}])
     }
+    setpostdate(new Date(Date.now() -tzoffset).toISOString().slice(0, -8));
    
   },[])
 
@@ -62,27 +65,40 @@ function Createnew() {
   
   const [postscheduletype, setpostscheduletype] = useState('fixed');
   var tzoffset = (new Date()).getTimezoneOffset() * 60000;
-  const [postdate, setpostdate] = useState(new Date(Date.now() -tzoffset).toISOString().slice(0, -8));
+  const [postdate, setpostdate] = useState();
   const [currentdate  , setcurrentdate] = useState(new Date(Date.now() -tzoffset).toISOString().slice(0, -8));
 
 
-  const [posttitle, setposttitle] = useState(sourcematerial!==undefined ? sourcematerial.activityname : '');
-  const [description, setdescription] = useState();
+  const [posttitle, setposttitle] = useState(sourcematerial!==undefined ? sourcematerial.activity_title : '');
+  const [description, setdescription] = useState(sourcematerial !== undefined ? sourcematerial.description : '');
   const [category, setcategory] = useState( sourcematerial!==undefined ? sourcematerial.category : categorylist[0])
-  const [module, setmodulename] = useState(sourcematerial !== undefined ? sourcematerial.topicname :'')
-  const [activitytype, setactivitytype] = useState(sourcematerial !==undefined ? sourcematerial.activitytype : "Material");
-  const [duedate, setduedate] = useState();
+  const [module, setmodulename] = useState(sourcematerial !== undefined ? sourcematerial.topic_name :'')
+  const [activitytype, setactivitytype] = useState(sourcematerial !==undefined ? sourcematerial.activity_type : "Material");
+  const [duedate, setduedate] = useState('none');
   const [allowedit, setallowedit] = useState(false);
   const [allowlate, setallowlate] = useState(false)
   const [formduration, setformduration] = useState();
+
+  
+  const Postoptions = [
+    {'text': "1 hr before the start of class",'value' : -60},
+    {'text': "30 mins before the start of class",'value' : -30},
+    {'text': "10 mins before the start of class",'value' : -10},
+    {'text': "5 mins before the start of class",'value' : -5},
+    {'text': "at the start of class", 'value' : 0},
+    {'text': "5 mins after the start of class",'value' : 5},
+    {'text': "10 mins after the start of class",'value' : 10},
+    {'text': "30 mins after the start of class",'value' : 30},
+    {'text': "1 hr after the start of class",'value' :60} ]
+
+  const [schedoffset, setschedoffst] = useState(0);
   const availabilitylist= [
     {'value' : 'all' , 'label' : 'All selected'},
     { 'value': 'attended', 'label' : 'All attended'}
   ]
 
   const graceperiodlist= [
-    {
-      'value' : '15 mins' , 'label' : '15 minutes'},
+    {'value' : '15 mins' , 'label' : '15 minutes'},
     {'value' : 'rest' , 'label' : 'until the end of class'},
     {'value' : 'none' , 'label' : 'no grace period'}
   ]
@@ -92,28 +108,15 @@ function Createnew() {
 
  
 
-
-  const Postoptions = [
-    {'text': "1 hr before the start of class",'value' : -60},
-{'text': "30 mins before the start of class",'value' : -30},
-{'text': "10 mins before the start of class",'value' : -10},
-{'text': "5 mins before the start of class",'value' : -5},
-{'text': "at the start of class", 'value' : 0},
-{'text': "5 mins after the start of class",'value' : 5},
-{'text': "10 mins after the start of class",'value' : 10},
-{'text': "30 mins after the start of class",'value' : 30},
-{'text': "1 hr after the start of class",'value' :60} ]
-  
+    
 
 const Dueoptions =[ 
-{'text' : 'no due date','value' : 999},
-{'text': "30 mins after posted",'value' : 30},
-{'text': "45 mins after posted",'value' : 45},
-{'text': "1 hour after posted",'value' : 60},
-{'text': "2 hours after posted",'value' : 120},
-{'text': "3 hours after posted",'value' : 180},
-{'text': 'today','value' : 999},
-{'text' : 'before the next discussion','value' : 999}
+{'label' : 'no due date','value' : 'none'},
+{'label': "30 mins after posted",'value' : 30},
+{'label': "1 hour after posted",'value' : 60},
+{'label': "within this class",'value' : 'withinclass'},
+{'label': 'today','value' : 'today'},
+{'label' : 'before the next discussion','value' : 'nextweek'}
  ]
 
 
@@ -161,35 +164,44 @@ async function createnewtopic(e){
 }
 
 async function createActivity(){
-  let temp = {
-    'title' : posttitle,
-    'description': description,
-    'activity_type' : activitytype,
-    'category' : category,
-    'topic' : module,
+
+  let newtopicitem = {
+    'created_by' : sourcematerial !== undefined ? sourcematerial.createdby : userinfo.user.acc_id,
+    'posted_by': userinfo.user.acc_id,
+    'title' :    posttitle.length!== 0 ? posttitle : 'new ' + activitytype,
+    'description':  description,
+    'activity_type' :  activitytype,
+    'category' : sourcematerial!==undefined ? sourcematerial.category   :  category['value'] ,
+    'topic' :    module.length !== 0 ? module :  'no topic',
     'allowedit' : allowedit,
     'allowlate' : allowlate,
     'availability' : availability,
     'duedate' : duedate,
     'questionnaire_link' : 'google.com',
-    'studentselection' : studentselection
+    'studentselection' : studentselection,
+    'schedule' : postdate,
+    'postschedtype' : postscheduletype,
+    'scheduleoffset' : schedoffset, 
   }
+  //console.log(JSON.stringify(newtopicitem));
 
 
-  // await axios.post('http://localhost:8000/api/createtopic/' , newtopicitem)
-  // .then(response => {    
-  //     console.log(response.data)  ;    
 
-  // })
-  // .catch(error => {
-  //   console.log(error);
-  // });
-  console.log(JSON.stringify(temp));
+  await axios.post('http://localhost:8000/api/createactivity' , newtopicitem)
+  .then(response => {    
+      console.log(response.data)  ;    
+
+  })
+  .catch(error => {
+    console.log(error);
+  });
+  
 }   
 
 
 const handlecreateactivity=()=>{
    createActivity();
+   navigate('/classes/sampleclass')
 }
 
 
@@ -207,7 +219,7 @@ const handlecreateactivity=()=>{
                                    
                           <p className="smallfont">Title</p><input type="text"  disabled={sourcematerial!==undefined} className='primaryborder' placeholder='title' defaultValue={posttitle}  onChange={(e)=>{setposttitle(e.target.value)}}/> <br />
                            <br />
-                           <p className="smallfont">Description</p><textarea name="" id="" cols="30" rows="6" className='primaryborder' placeholder='description' onChange={(e)=>{setdescription(e.target.value)}}></textarea><br />
+                           <p className="smallfont">Description</p><textarea name="" id="" cols="30" rows="6" className='primaryborder'  value={description} placeholder='description' onChange={(e)=>{setdescription(e.target.value)}}></textarea><br />
                            <br />
                            
  
@@ -288,6 +300,8 @@ const handlecreateactivity=()=>{
                                 controlActiveClass='dropdowncontrolactive'
                                 mainActiveClass='dropdownmain-active'
                                 disabled ={sourcematerial !== undefined}
+                                defaultValue= {sourcematerial !== undefined ? {'value' : sourcematerial.category , 'label' : sourcematerial.category} : undefined}
+                         
                             />
                             </div>
                             <br />
@@ -311,8 +325,8 @@ const handlecreateactivity=()=>{
                               </div>
 
                               <div className="col-lg-6">
-                              <button className='commonbutton lighttext borderradius-md secondary' onClick={()=>{setcreatetopic(!createtopic)}}> <FaPlusCircle/> Create Topic</button>
-    
+                            {sourcematerial === undefined &&   <button className='commonbutton lighttext borderradius-md secondary' onClick={()=>{setcreatetopic(!createtopic)}}> <FaPlusCircle/> Create Topic</button>
+    }
                           {createtopic && 
                             <div className='createtopicmodal tertiary borderradius-md flex'>
                             <input type="text"  onChange={(e)=> {setinputtopicname(e.target.value)}}/>
@@ -347,7 +361,7 @@ const handlecreateactivity=()=>{
                                     {'value' :'fixed',
                                       'label' : 'fixed'  
                                     },
-                                    {'value' :'relative',
+                                    {'value' :'timed',
                                     'label' : 'relative schedule'  
                                     }
                                   ]}
@@ -376,7 +390,7 @@ const handlecreateactivity=()=>{
                                                  
                             }
                             {postscheduletype==='timed' &&                           
-                                <ArrowSelector options={Postoptions} startingvalue={4} />
+                                <ArrowSelector options={Postoptions} startingvalue={4}  selectorHandler= {setschedoffst}/>
                             }
                   
                             </div>
@@ -431,9 +445,13 @@ const handlecreateactivity=()=>{
                                 menuClass='dropdownmenu primary'
                                 controlActiveClass='dropdowncontrolactive'
                                 mainActiveClass='dropdownmain-active'
-                                defaultValue={Dueoptions[0]} /> 
-                                        
-                              </>                     
+                                defaultValue={Dueoptions[0]} 
+                                placeholderValue='select due option'/> 
+                                
+                                      
+                              </> 
+                              
+                              
                             }
                               {(activitytype=== 'Attendance') &&
                                 <>

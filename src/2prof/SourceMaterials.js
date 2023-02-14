@@ -1,27 +1,19 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Sourcetopicpanel from './Sourcetopicpanel'
+import { modulelistContext } from '../Globalcontext'
 
 function SourceMaterials() {
 
-  const [sourcetopiclist , setsourcetopiclist] = useState([   
-    {'sourcetopicID' : 1,
-      'sourcetopicname' : 'Week 1'
-    },
-    {'sourcetopicID' : 2,
-    'sourcetopicname' : 'Week 2'
-    },
-    {'sourcetopicID' : 3,
-    'sourcetopicname' : 'Week 3'
-    },
-    {'sourcetopicID' : 4,
-    'sourcetopicname' : 'Week 4'
-}
-  ])
+  const {modulelist} = useContext(modulelistContext);
+  useEffect(()=>{
+    console.log(modulelist)
+  },[modulelist])
+  
 
 
   return (
     <div className='topicpanel borderradius-md'>
-      <div className='flex'>   <h4>Materials for ##subject_name#</h4> <p className='smallfont marginleftauto'>last updated: November 4</p></div>
+      <div className='flex'>   <h4>Materials</h4> <p className='smallfont marginleftauto'>last updated: November 4</p></div>
   
     
     <ul className='topiclist'>
@@ -31,9 +23,9 @@ function SourceMaterials() {
 
     <div className='col-md-12 margintop12'>
     
-      {sourcetopiclist.map(sourcetopicitem=>(
+      {modulelist.map(sourcetopicitem=>(
            
-             <Sourcetopicpanel  key={sourcetopicitem.sourcetopicID} sourcetopicitem = {sourcetopicitem}/>
+             <Sourcetopicpanel  key={sourcetopicitem.topic_id} sourcetopicitem = {sourcetopicitem}/>
         
 
       ))}

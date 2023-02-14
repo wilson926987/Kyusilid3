@@ -159,6 +159,14 @@ box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.75);
   width: 100vw;
 }
 
+.absolute{
+  position: absolute;
+}
+
+.editmenu{
+  right: 0;
+}
+
 .sidebarbody{
   display: block;
   overflow: hidden;
@@ -632,7 +640,7 @@ justify-content: space-around;
   position: relative; 
 }
 
-.classpanel:hover{
+.classpanel:hover , .editmenu li:hover{
   box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.75);
   -webkit-box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.75);
   -moz-box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.75);
@@ -735,7 +743,7 @@ justify-content: space-around;
 
 .activitylog{
   width: 350px;
-  height: 90vh;
+  min-height: 90vh;
   padding: 18px;
   margin-left: 20px;
 }
@@ -1244,6 +1252,7 @@ justify-content: space-around;
 
 
 
+
 .classSelectionitem input{
   transform: scale(1.4);
 
@@ -1442,6 +1451,10 @@ background-color: var(--defaultprimary);
 
 .marginleftauto{
   margin-left: auto;
+}
+
+.marginleft12{
+  margin-left: 12px;
 }
 
 .profilemodal{
