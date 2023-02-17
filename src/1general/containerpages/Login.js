@@ -100,8 +100,7 @@ function Login() {
       <form className='form-group-form' autoComplete="off"
       onSubmit={handleFormSubmit}>
 
-     <h2>Note: Type usertype dun sa username (student, prof, admin)</h2>
-    
+  
         <label> Username:<div className='errortext'>{usernamemessage}</div></label>
             <input type="text" placeholder='Username...' defaultValue ={username} onChange={handleUsernameChange}/>
             
@@ -113,7 +112,7 @@ function Login() {
        
         <button type="submit" className='buttonsubmit secondary'>login
         </button>
-        <center> <a href="EMS.forget.html">Forgot Password...</a></center> 
+  {/* <center> <a href="EMS.forget.html">Forgot Password...</a></center>  */}
         </form>
          
     </div> 

@@ -10,7 +10,7 @@ function CalendarAnnouncements() {
            <h4> Announcements</h4>
 
 
-           <Adminpostpanel /><Adminpostpanel /><Adminpostpanel /><Adminpostpanel /><Adminpostpanel />
+           {/* <Adminpostpanel /><Adminpostpanel /><Adminpostpanel /><Adminpostpanel /><Adminpostpanel /> */}
             
         </div>
     

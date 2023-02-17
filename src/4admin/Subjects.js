@@ -1,17 +1,25 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import axios from 'axios';
 
 
 
 function Subjects() {
-  const navigate = useNavigate()
+ 
+  const [subject, setsubjects] = useState();
+
+  useEffect(()=>{
+    axios.get('https:api.kyusilid.online/getallsubjects/1').then(result=>{
+      setsubjects(result.data)
+    }).catch()
+  },[])
+
   return (
     <div className='tertiary borderradius-lg padding12'>
      
      <div className="flex"> 
       <div>
       <h4>Subjects table</h4>
-      <p className='smallfont'> last updated : September 2  by Juan dela Cruz</p>
+      <p className='smallfont'> last updated :</p>
       </div>
 
       <input type="text" placeholder='Search' className='marginleftauto' />
@@ -28,13 +36,22 @@ function Subjects() {
         
        </thead>
        <tbody>
-        <tr>
-          <td>4</td>
-          <td>WEB101</td>
-          <td>Web systems and Development</td>
-          <td>234</td>
-          <td><button className='commonbutton lighttext secondary' onClick={ ()=>{navigate('/kyusilidAdmin/department/sections')}}>View Classes</button></td>
-        </tr>
+
+        {subject !== undefined  && subject.map((item, key)=>(
+            <tr>
+
+        
+            <td>{item.units}</td>
+            <td>{item.sub_code}</td>
+            <td>{item.sub_name}</td>
+            <td></td>
+            <td>
+              {/* <button className='commonbutton lighttext secondary' onClick={ ()=>{navigate('/kyusilidAdmin/department/sections')}}>View Classes</button>
+               */}</td>
+          </tr>
+
+        ))}
+      
         
        </tbody>
      

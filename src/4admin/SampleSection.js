@@ -1,5 +1,6 @@
-import React from 'react'
-import Classpanel from '../1general/components/Classpanel'
+import React, { useEffect, useState } from 'react'
+import Adminclasspanel from '../1general/components/Classpanel'
+import axios from 'axios'
 
 function SampleSection() {
 
@@ -14,18 +15,20 @@ function SampleSection() {
         'profname' : 'Juan delacruz'
       }
 
+
+
   return (
     <div>
         <div className="flex primary borderradius-lg padding12"> <h4>SBIT - 4J</h4></div>
         <div className="margintop12">
             <div className="row">
-                <Classpanel classitem={tempclass} />      <Classpanel classitem={tempclass} />   
-                <Classpanel classitem={tempclass} />   
-                <Classpanel classitem={tempclass} />   
-                <Classpanel classitem={tempclass} />   
-                <Classpanel classitem={tempclass} />   
-                <Classpanel classitem={tempclass} />   
-                <Classpanel classitem={tempclass} />   
+   
+{/* 
+        {allclasses.map((item ,key)=>(
+            <Adminclasspanel classitem={tempclass} />
+        ))
+        } */}
+               
             </div>
         </div>
     </div>
