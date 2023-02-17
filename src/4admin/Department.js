@@ -19,7 +19,7 @@ function Department() {
 
     useEffect(()=>{
      if(currentdept != undefined){
-      axios.get('http://localhost:8000/api/getdeptinfo/' + currentdept.dep_id ).then(response =>{  
+      axios.get('http://api.kyusillid.online/api/getdeptinfo/' + currentdept.dep_id ).then(response =>{  
         setdepartmentinfo(response.data)
       
       }).catch(

@@ -81,11 +81,7 @@ function ClassContainer() {
           console.log(error);
         });
 
-<<<<<<< HEAD
         await axios.get('https://api.kyusillid.online/api/getpersonlist/' + currentclass.classes_id)
-=======
-        await axios.get('https://kyusillid.online/api/getpersonlist/' + currentclass.classes_id)
->>>>>>> 2e1da572e8095c5e3e0537914aab504abc15afc4
         .then(response => {
           setpersonlist(response.data)
         
@@ -94,11 +90,7 @@ function ClassContainer() {
           console.log(error);
         });
 
-<<<<<<< HEAD
         await axios.get('https://api.kyusillid.online/api/get-topiclist/' + currentclass.classes_id)
-=======
-        await axios.get('https://kyusillid.online/api/get-topiclist/' + currentclass.classes_id)
->>>>>>> 2e1da572e8095c5e3e0537914aab504abc15afc4
         .then(response => {
           settopiclist(response.data);
         
@@ -110,11 +102,7 @@ function ClassContainer() {
         
 
         if(userinfo.usertype==='prof'){
-<<<<<<< HEAD
           await axios.get('https://api.kyusillid.online/api/getstudentlist/' + userinfo.user.acc_id)
-=======
-          await axios.get('https://kyusillid.online/api/getstudentlist/' + userinfo.user.acc_id)
->>>>>>> 2e1da572e8095c5e3e0537914aab504abc15afc4
           .then(response => {
       
             const temp = response.data.map( item=>({
@@ -133,12 +121,7 @@ function ClassContainer() {
           });
 
 
-<<<<<<< HEAD
           await axios.get('https://api.kyusillid.online/api/get-topiclist/' + currentclass.moduleSource)
-=======
-
-          await axios.get('https://kyusillid.online/api/get-topiclist/' + currentclass.moduleSource)
->>>>>>> 2e1da572e8095c5e3e0537914aab504abc15afc4
         .then(response => {
           setmodulelist(response.data);
         
@@ -148,11 +131,7 @@ function ClassContainer() {
         });
         }
 
-<<<<<<< HEAD
         await axios.get('https://api.kyusillid.online/api/getclass_log/' + currentclass.classes_id)
-=======
-        await axios.get('https://kyusillid.online/api/getclass_log/' + currentclass.classes_id)
->>>>>>> 2e1da572e8095c5e3e0537914aab504abc15afc4
         .then(response=>{
             setclass_log(response.data)
         }).catch(error=>{console.log(error)})

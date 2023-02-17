@@ -22,11 +22,7 @@ useEffect(() => {
 }, []);
 
 async function filldata(){
-<<<<<<< HEAD
   await axios.get('https://api.kyusillid.online/api/getclasslist/' + userinfo.user.acc_id)
-=======
-  await axios.get('https://kyusillid.online/api/getclasslist/' + userinfo.user.acc_id)
->>>>>>> 2e1da572e8095c5e3e0537914aab504abc15afc4
     .then(response => {
       setmyclasses(response.data);
      
@@ -35,11 +31,7 @@ async function filldata(){
       console.log(error);
     });
 
-<<<<<<< HEAD
     await axios.get('https://api.kyusillid.online/api/getclasslist_archived/' + userinfo.user.acc_id)
-=======
-    await axios.get('https://kyusillid.online/api/getclasslist_archived/' + userinfo.user.acc_id)
->>>>>>> 2e1da572e8095c5e3e0537914aab504abc15afc4
     .then(response => {
       setmyarchive(response.data);
      

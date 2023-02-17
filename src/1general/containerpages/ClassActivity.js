@@ -30,11 +30,7 @@ function ClassActivity() {
       }
       console.log(JSON.stringify(temp))
   
-<<<<<<< HEAD
       await axios.put('https://api.kyusillid.online/api/createactivitycomment', temp).then(response =>{
-=======
-      await axios.put('https://kyusillid.online/api/createactivitycomment', temp).then(response =>{
->>>>>>> 2e1da572e8095c5e3e0537914aab504abc15afc4
         set_actcommnentlist(response.data);
         
         
