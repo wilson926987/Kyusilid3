@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext} from "react";
 
 
 export const themeContext = createContext();
@@ -10,6 +10,7 @@ export const currentpageContext = createContext();
 export const topicfilterContext = createContext();
 export const activitytypefilterContext = createContext();
 export const topiclistContext = createContext();
+export const modulelistContext = createContext();
 
 export const currentActivityContext = createContext();
 export const sourceMaterialContext = createContext();
@@ -26,3 +27,8 @@ export const currentdeptContext = createContext();
 
 export const announcementlistContext = createContext();
 export const classAndstudentselectionContext = createContext();
+
+export const forcerefreshContext = createContext();
+export const currentdepartment = createContext();
+
+export const deptInfoContext = createContext();

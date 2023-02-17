@@ -17,8 +17,11 @@ function Sourcematerialpanel({actItem}) {
   const navigate = useNavigate()
 
   const postsource=()=>{
-    setsourcematerial(actItem)
+   
+
     navigate('/classes/sampleclass/createnew');
+    setsourcematerial(actItem)
+    console.log(actItem);
   }
 
   return (
@@ -27,11 +30,11 @@ function Sourcematerialpanel({actItem}) {
             <div className="row " onClick={togglematerialcontent}>
                     <div className='col-lg-1 activityiconcontainer'>  
                       <div className='activityicon tertiary '>
-                        {actItem.activitytype==='material' ?
+                        {actItem.activity_type==='Material' ?
                           <RiBookFill />:
-                          actItem.activitytype==='questionnaire' ?
+                          actItem.activity_type==='Questionnaire' ?
                           <MdQuiz/> :
-                          actItem.activitytype==='assignment' ?
+                          actItem.activity_type==='Assignment' ?
                           <MdAssignment/> :
                           <FaClipboardList/>                                 
                       }
@@ -40,8 +43,8 @@ function Sourcematerialpanel({actItem}) {
           
                     <div className="col-lg-7 ">
                       <div className=' activitypanelsub1'>
-                      <h5>{actItem.activityname}</h5>
-                      <p>{actItem.category} {actItem.activitytype} {actItem.activitytype==='material' && `, ${actItem.materialcount} files`}</p>
+                      <h5>{actItem.activity_title}</h5>
+                      <p>{actItem.category} {actItem.activity_type} {actItem.activitytype==='material' && `, ${actItem.materialcount} files`}</p>
                     </div>
                     </div>
 
@@ -54,7 +57,7 @@ function Sourcematerialpanel({actItem}) {
                       <div className='margintop12'>
                              
               
-                          {actItem.activitytype==='questionnaire' &&
+                          {actItem.activitytype==='Questionnaire' &&
                                   <div className="flex">
                                   <div className='questionnairepanel primary borderradius-md'>
                                     <h4>Quizz 1</h4>

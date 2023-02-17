@@ -7,7 +7,6 @@ function areachart() {
     <React.Fragment>
 
         <Chart
-        
         height = '120%'
         width = '88%'
         type= "area"

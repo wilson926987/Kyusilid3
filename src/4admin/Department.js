@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react'
-import { Outlet , useNavigate , useLocation} from 'react-router-dom'
+import axios from 'axios'
+import React, { useState, useEffect, useContext } from 'react'
+import { Outlet , useNavigate , useLocation, useOutletContext} from 'react-router-dom'
+import { currentdeptContext , userInfoContext , departmentsContext , deptInfoContext} from '../Globalcontext'
 
 
 
@@ -10,20 +12,30 @@ function Department() {
     const [accountsnav, setaccountsnav] = useState(false)
     const [currentpage, setcurrentpage] = useState();
     const location = useLocation()
+    const {currentdept} = useContext(currentdeptContext);
+    const [departmentinfo, setdepartmentinfo] = useState({}
+    );
 
-    useEffect(()=>{   
-      let temp = location.pathname.split('/')
-      if(temp.includes('subjects')){
-        setcurrentpage('subjects');
-      }else if(temp.includes('sections')){
-        setcurrentpage('sections')
-      }else if(temp.includes('accounts_stud') || temp.includes('accounts_prof')){
-        setcurrentpage('accounts')
-      }else{
-        setcurrentpage('department')
-      }
+
+    useEffect(()=>{
+     if(currentdept != undefined){
+      axios.get('http://localhost:8000/api/getdeptinfo/' + currentdept.dep_id ).then(response =>{  
+        setdepartmentinfo(response.data)
       
-  },[location])
+      }).catch(
+
+      );   
+     }
+
+    } , [currentdept])
+   
+
+
+
+
+    
+
+  
 
 
   function isactive(e){
@@ -33,16 +45,21 @@ function Department() {
  }
 
 
-  
-    return (
+
+
+  return (
+
+    currentdept != undefined ?
       <div>
       <div className='col-lg-12 primary borderradius-lg adminheader flex'>
-        <div className='lighttext'><h2>Bachelor of Science in Information Technology</h2>
+        <div className='lighttext'>
+          <h2> </h2>
           <h4 className='margintop12'>School year : 2022 - 2023 , 1st sem</h4>
+         
         </div>
       </div>
-
-
+  
+  
       <div className="row">
         <div className="col-lg-3 margintop12">
             <div class="classnav tertiary borderradius-md dbpanelmargin">
@@ -91,7 +108,7 @@ function Department() {
          
               </ul>
             </div>
-
+  
             <div className="tertiary flex  margintop12 borderradius-md padding12 adminupdatepanel">
               <button className='commonbutton secondary lighttext width100'>Update Class list</button>
               <button className='commonbutton secondary lighttext width100'>Update Student list</button>
@@ -101,20 +118,35 @@ function Department() {
             </div>
         </div>
         <div className="col-lg-9 margintop12">
-         <Outlet/>  
-
+  
+          <deptInfoContext.Provider value ={{departmentinfo, setdepartmentinfo}}>
+          <Outlet />
+          </deptInfoContext.Provider>
+        
+     
+           
+  
         </div>
       </div>
    
+  
+  
+  
+  
+  
+  
+    </div>
+
+    :
+    <div>loading</div>
+    
+    
 
 
+)
 
-
-
-
-</div>
-
-  )
+  
+ 
 }
 
 export default Department

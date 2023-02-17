@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Outlet , useNavigate, useLocation} from 'react-router-dom'
 import Activitylogpanel from '../components/Activitylogpanel';
-import {classAndstudentselectionContext, announcementlistContext, userInfoContext, topicfilterContext, activitytypefilterContext , topiclistContext , currentActivityContext , sourceMaterialContext , currentclassContext, myClasesContext , personlistContext } from '../../Globalcontext';
+import {modulelistContext, forcerefreshContext, classAndstudentselectionContext, announcementlistContext, userInfoContext, topicfilterContext, activitytypefilterContext , topiclistContext , currentActivityContext , sourceMaterialContext , currentclassContext, myClasesContext , personlistContext } from '../../Globalcontext';
 import {FaPlusCircle ,FaArrowCircleLeft} from  'react-icons/fa'
 import ClassSelectionitem from '../components/ClassSelectionitem';
 import axios from 'axios';
@@ -14,19 +14,40 @@ function ClassContainer() {
   const navigate = useNavigate();
   const {userinfo} = useContext(userInfoContext);
   const {currentclass} = useContext(currentclassContext);
-  const [studentselection ,setstudentselection] = useState();
-  const {myclasses} = useContext(myClasesContext);
   const [navcreate, setnavcreate] = useState(false);
   const [currentactivity, setcurrentactivity] = useState();
   const [sourcematerial,setsourcematerial] = useState();
   const [currentpage, setcurrentpage] = useState();
   const [personlist, setpersonlist] = useState();
   const [topiclist, settopiclist] = useState([]);
+  const [modulelist, setmodulelist] = useState([]);
   const location = useLocation();
   const [announcementlist, setannouncementlist] = useState([]);
+
+  const [studentselection ,setstudentselection] = useState();
+  const [class_log, setclass_log] = useState([]);
+
+  const forecerefreshHandler= async()=>{
+    await axios.get(url + currentclass.classes_id)
+    .then(response => {
+      setannouncementlist(response.data)
+     
+    })
+    .catch(error => {
+      console.log(error);
+    });
+
+  }
+
+
+ 
+ 
+ 
+
+
   
 
-  const url = userinfo.user.usertype ==='prof' ?  'http://localhost:8000/api/get-announcement/' : 'http://localhost:8000/api/get-announcementforstudent/'
+  const url = userinfo.user.usertype ==='prof' ?  'http://kyusillid.online/api/get-announcement/' : 'http://kyusillid.online/api/get-announcementforstudent/'
   
 
   useEffect(()=>{   
@@ -34,6 +55,9 @@ function ClassContainer() {
       if(currentclass !== undefined){
         filldata();
       }
+
+
+
   },[location , currentclass])
 
   useEffect(()=>{
@@ -43,6 +67,7 @@ function ClassContainer() {
    })
 
   async function filldata(){
+ 
         await axios.get(url + currentclass.classes_id)
         .then(response => {
           setannouncementlist(response.data)
@@ -52,7 +77,7 @@ function ClassContainer() {
           console.log(error);
         });
 
-        await axios.get('http://localhost:8000/api/getpersonlist/' + currentclass.classes_id)
+        await axios.get('http://kyusillid.online/api/getpersonlist/' + currentclass.classes_id)
         .then(response => {
           setpersonlist(response.data)
         
@@ -61,7 +86,7 @@ function ClassContainer() {
           console.log(error);
         });
 
-        await axios.get('http://localhost:8000/api/get-topiclist/' + currentclass.classes_id)
+        await axios.get('http://kyusillid.online/api/get-topiclist/' + currentclass.classes_id)
         .then(response => {
           settopiclist(response.data);
         
@@ -70,19 +95,46 @@ function ClassContainer() {
           console.log(error);
         });
 
+        
+
         if(userinfo.usertype==='prof'){
-          await axios.get('http://localhost:8000/api/getstudentlist/' + userinfo.user.acc_id)
+          await axios.get('http://kyusillid.online/api/getstudentlist/' + userinfo.user.acc_id)
           .then(response => {
-            setstudentselection(response.data);
-            console.log(response.data)
-          
+      
+            const temp = response.data.map( item=>({
+                'selected' :   item.classitem.classes_id == currentclass.classes_id , 
+                'classitem' : item.classitem ,
+              
+                'studentlist': item.studentlist.map(item2=>({
+                'selected' : true, 'studentitem' : item2
+                }))
+              })
+              );
+              setstudentselection(temp);
           })
           .catch(error => {
             console.log(error);
           });
+
+
+          await axios.get('http://kyusillid.online/api/get-topiclist/' + currentclass.moduleSource)
+        .then(response => {
+          setmodulelist(response.data);
+        
+        })
+        .catch(error => {
+          console.log(error);
+        });
         }
 
+        await axios.get('http://kyusillid.online/api/getclass_log/' + currentclass.classes_id)
+        .then(response=>{
+            setclass_log(response.data)
+        }).catch(error=>{console.log(error)})
   }
+
+
+
 
   function isactive(e){
     return e===currentpage ? true : false;
@@ -91,7 +143,7 @@ function ClassContainer() {
 
  const togglenavcreate = ()=>{
     setnavcreate(!navcreate)
-    console.log(navcreate)
+   
  }
 
 
@@ -102,9 +154,33 @@ function ClassContainer() {
 
 
 
-function handleclassSelect(){
+function classSelection(classitem){
+
+
+  setstudentselection(studentselection.map(item=>({
+    'selected' :  item.classitem.classes_id === classitem.classitem.classes_id ? !classitem.selected : item.selected,
+    'classitem' : item.classitem,
+    'studentlist' : item.studentlist
+  })))
   
 }
+
+function toggleStudentselect(studentitem){
+  setstudentselection(studentselection.map(item=>({
+    'selected' :  item.selected,
+    'classitem' : item.classitem,
+    'studentlist' : item.studentlist.map(item2=>({
+      'selected' : studentitem.studentitem.acc_id === item2.studentitem.acc_id ? !studentitem.selected : item2.selected, 
+      'studentitem' : item2.studentitem
+      }))
+  })))
+
+}
+
+
+
+
+
 
 
 
@@ -131,6 +207,7 @@ function handleclassSelect(){
                      <h4 className='margintop12'>{currentclass.sub_code}</h4>
                     <h4>{currentclass.day_label} {currentclass.sched_from} - {currentclass.sched_to} {currentclass.sessionname2 !== "" && (', ' + currentclass.sched_from2 + ' - ' + currentclass.sched_to2)}</h4>
                     <h4>{currentclass.title + ' '+ currentclass.firstname +' ' +  currentclass.lastname + ' ' + currentclass.suffix}</h4>
+                
                    </div> :
            
 
@@ -146,9 +223,16 @@ function handleclassSelect(){
               <div className="row">
                   <div className="col-lg-4 classnav-min">
 
+                  {currentclass.isarchived === 0 && userinfo.usertype === 'stud' && 
+                        <div className="secondary lighttext navcreatenew borderradius-lg dbpanelmargin">
+                        <h4>Attendance</h4>
+                        
+                      </div>
+                    }
+
                     {currentclass.isarchived ===0 &&
-                    
                       
+              
                           (  userinfo.usertype==='prof' && 
                             !isactive('/classes/sampleclass/createnew') ?
                             <div className="secondary lighttext navcreatenew borderradius-lg dbpanelmargin" onClick={()=>{setsourcematerial(); navigate('createnew')}}>
@@ -161,6 +245,9 @@ function handleclassSelect(){
                           <FaArrowCircleLeft /><h4>Cancel</h4>
                         </div>)
                     }
+
+
+                 
 
 
 
@@ -223,10 +310,14 @@ function handleclassSelect(){
 
 <ul className='notransition '>
 
-  {studentselection!== undefined &&
+{studentselection!== undefined &&
       studentselection.map((item, key)=>(
-      <ClassSelectionitem key={key} classitems={item} />
-    
+     <ClassSelectionitem key={key} classitems={item} handleClassSelection= {classSelection}  handlestudentselect={toggleStudentselect}
+      selectedstudcount = {item.studentlist.filter(temp =>{ return temp.selected=== true}).length}
+      totalstudents = {item.studentlist.length}
+     
+      />
+       
   ))} 
 
   {studentselection=== undefined && 
@@ -245,7 +336,10 @@ function handleclassSelect(){
                     <div className="tertiary borderradius-md outletcontainer">
 
 
-                               <classAndstudentselectionContext.Provider value={{studentselection, setstudentselection}}> 
+
+
+                                <forcerefreshContext.Provider value ={{forecerefreshHandler}}>
+                                <classAndstudentselectionContext.Provider value={{studentselection, setstudentselection}}> 
                                <personlistContext.Provider value={{personlist}}>
                                <announcementlistContext.Provider value={{announcementlist, setannouncementlist}}> 
                                   <sourceMaterialContext.Provider value={{sourcematerial, setsourcematerial}}>
@@ -253,7 +347,9 @@ function handleclassSelect(){
                                 <topiclistContext.Provider value={{topiclist, settopiclist}}>
                                   <activitytypefilterContext.Provider value={{activitytypefilter, setactivitytypefilter}}>
                                  <topicfilterContext.Provider value={{topicfilter, settopicfilter}}>
-                                    <Outlet /> 
+                                <modulelistContext.Provider value={{modulelist, setmodulelist}}>
+                                <Outlet /> 
+                                </modulelistContext.Provider>                                  
                                  </topicfilterContext.Provider>
                                   </activitytypefilterContext.Provider>
                                   </topiclistContext.Provider>
@@ -262,6 +358,10 @@ function handleclassSelect(){
                                 </announcementlistContext.Provider>
                                </personlistContext.Provider>
                                </classAndstudentselectionContext.Provider>
+                                </forcerefreshContext.Provider>
+                            
+                               
+                  
                                 
                                                 
                           <div>
@@ -279,9 +379,12 @@ function handleclassSelect(){
      {!(isactive('/classes/sampleclass/createnew') || isactive('/classes/sampleclass/activity/activityId') )  ?
          <div className='activitylog borderradius-md tertiary'>
          <h4>Class Activity log</h4>
-         <Activitylogpanel /><Activitylogpanel /><Activitylogpanel /><Activitylogpanel /><Activitylogpanel /><Activitylogpanel />
 
-        </div>
+         {class_log.map(item=>
+              (<Activitylogpanel key={item.classlog_id} classlog= {item}/>)
+         )}
+         
+       </div>
       :
         <div>
         </div>    

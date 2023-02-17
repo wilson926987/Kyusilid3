@@ -1,7 +1,7 @@
 import React, { useContext,  useState } from 'react'
 import kyusilidlogo from '../assets/images/Kyusilid.jpg'
 import {MdSpaceDashboard , MdBrightness1} from 'react-icons/md'
-import { themeContext , departmentsContext } from '../Globalcontext'
+import { themeContext , departmentsContext, currentdeptContext } from '../Globalcontext'
 import {BiChevronsLeft ,BiChevronsRight} from 'react-icons/bi'
 import { useNavigate } from 'react-router-dom'
 
@@ -9,10 +9,9 @@ import { useNavigate } from 'react-router-dom'
 function Adminsidebar() {
     const {theme} = useContext(themeContext);
     const {departments} = useContext(departmentsContext)
+    const {setcurrentdept} = useContext(currentdeptContext);
     const [sidebar, setsidebar] = useState(true);
-    const shorten = (text)=>{
-      return text.length>20 ? text.slice(0,18)+ "..." : text
-  }
+
 
 
 
@@ -52,7 +51,7 @@ function Adminsidebar() {
     <ul>
         <li className='sidebarmenu' onClick={()=>{navigate('/kyusilidAdmin')}}> <div className="highlight"></div> <MdSpaceDashboard />  Dashboard</li>
         {departments.map((item)=>(
-             <li key={item.departmentId} className='sidebarmenu' onClick={()=>{navigate('department')}}> <div className="highlight"></div> <MdBrightness1 className='clear'/> {shorten(item.departmentname)}</li>
+             <li key={item.dep_id} className='sidebarmenu' onClick={()=>{setcurrentdept(item);console.log(item); navigate('department')}}> <div className="highlight"></div> <MdBrightness1 className='clear ellipsis'/> {item.dep_name} </li>
         ))}
         <li className='sidebarmenu' onClick={()=>{navigate('adminlog')}}> <div className="highlight"></div> <MdSpaceDashboard /> Admin log</li>
 

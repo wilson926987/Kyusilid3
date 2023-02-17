@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { useActionData, useNavigate } from 'react-router-dom'
-import { userInfoContext , sourceMaterialContext , currentclassContext, topiclistContext} from '../Globalcontext'
+import { useNavigate } from 'react-router-dom'
+import { userInfoContext , sourceMaterialContext , currentclassContext, topiclistContext , classAndstudentselectionContext} from '../Globalcontext'
 import {AiFillFile} from 'react-icons/ai'
 import axios from 'axios'
 import ArrowSelector from '../1general/formcomponents/ArrowSelector'
@@ -14,164 +14,119 @@ function Createnew() {
   const {sourcematerial} = useContext(sourceMaterialContext)
   const {currentclass} = useContext(currentclassContext)
   const {topiclist , settopiclist} = useContext(topiclistContext)
+  const {studentselection} = useContext(classAndstudentselectionContext)
   const navigate = useNavigate()
   const [recordingtype, setrecordingtype] = useState('form');
+  const [topiclistemp, settopiclisttem]= useState()
 
-  const [topiclistemp, settopiclisttem]= useState(
+  const [categorylist, setcategorylist] = useState([{
+    'value' : currentclass.sessionname1, 'label' : currentclass.sessionname1
+  }])
+
+
+ 
    
      
-  )
+
 
   useEffect(()=>{
+    console.log(sourcematerial)
+
     if(userinfo.usertype!== 'prof'){
       navigate('/');
     }
+
+    setcategorylist([{
+      'value' : currentclass.sessionname1, 'label' : currentclass.sessionname1
+    }])
+    
+    
+    if(currentclass.sessionname2 !== ''){
+      setcategorylist(categorylist=> [...categorylist, { 'value' : currentclass.sessionname2 ,  'label' : currentclass.sessionname2}])
+    }
+    setpostdate(new Date(Date.now() -tzoffset).toISOString().slice(0, -8));
+   
   },[])
+
+ 
+
 
   useEffect(()=>{
     settopiclisttem(
       topiclist.map(function (obj) {
       
-        return {'value': obj.topic_id, 'label': obj.topic_name}
+        return {'value': obj.topic_name, 'label': obj.topic_name}
        })
     )
   },[topiclist])
 
   
+
+  
   const [postscheduletype, setpostscheduletype] = useState('fixed');
   var tzoffset = (new Date()).getTimezoneOffset() * 60000;
-  const [postdate, setpostdate] = useState(new Date(Date.now() -tzoffset).toISOString().slice(0, -8));
+  const [postdate, setpostdate] = useState();
   const [currentdate  , setcurrentdate] = useState(new Date(Date.now() -tzoffset).toISOString().slice(0, -8));
 
 
-  const [posttitle, setposttitle] = useState(sourcematerial!==undefined ? sourcematerial.activityname : '');
-  const [category, setcategory] = useState(sourcematerial !== undefined ? sourcematerial.category : '')
-  const [module, setmodulename] = useState(sourcematerial !== undefined ? sourcematerial.topicname :'')
-  const [activitytype, setactivitytype] = useState(sourcematerial !==undefined ? sourcematerial.activitytype : "Material");
-  const [duedate, setduedate] = useState();
-  const [posttimer, setposttimer] = useState(0);
-  const [duescheduletype, setduescheduletype] = useState('fixed');
-  const [duetimer, setduetimer] = useState(0);
-
+  const [posttitle, setposttitle] = useState(sourcematerial!==undefined ? sourcematerial.activity_title : '');
+  const [description, setdescription] = useState(sourcematerial !== undefined ? sourcematerial.description : '');
+  const [category, setcategory] = useState( sourcematerial!==undefined ? sourcematerial.category : categorylist[0])
+  const [module, setmodulename] = useState(sourcematerial !== undefined ? sourcematerial.topic_name :'')
+  const [activitytype, setactivitytype] = useState(sourcematerial !==undefined ? sourcematerial.activity_type : "Material");
+  const [duedate, setduedate] = useState('none');
+  const [allowedit, setallowedit] = useState(false);
+  const [allowlate, setallowlate] = useState(false)
   const [formduration, setformduration] = useState();
+
+  
+  const Postoptions = [
+    {'text': "1 hr before the start of class",'value' : -60},
+    {'text': "30 mins before the start of class",'value' : -30},
+    {'text': "10 mins before the start of class",'value' : -10},
+    {'text': "5 mins before the start of class",'value' : -5},
+    {'text': "at the start of class", 'value' : 0},
+    {'text': "5 mins after the start of class",'value' : 5},
+    {'text': "10 mins after the start of class",'value' : 10},
+    {'text': "30 mins after the start of class",'value' : 30},
+    {'text': "1 hr after the start of class",'value' :60} ]
+
+  const [schedoffset, setschedoffst] = useState(0);
   const availabilitylist= [
-    {
-      'value' : 'all' , 'label' : 'All selected'
-    },
-    { 
-      'value': 'attended', 'label' : 'All attended'
-    }
+    {'value' : 'all' , 'label' : 'All selected'},
+    { 'value': 'attended', 'label' : 'All attended'}
   ]
 
   const graceperiodlist= [
-    {
-      'value' : '15 mins' , 'label' : '15 minutes'
-    },
-    {
-      'value' : 'rest' , 'label' : 'until the end of class'
-    },
-    {
-      'value' : 'none' , 'label' : 'no grace period'
-    }
+    {'value' : '15 mins' , 'label' : '15 minutes'},
+    {'value' : 'rest' , 'label' : 'until the end of class'},
+    {'value' : 'none' , 'label' : 'no grace period'}
   ]
 
   const [graceperiod, setgraceperiod] = useState(graceperiodlist[0])
-  const [availability, setavailability] = useState(availabilitylist[0]);
+  const [availability, setavailability] = useState(availabilitylist[0].value);
 
  
 
-
-  const Postoptions = [ {
-    'text': "1 hr before the start of class",
-    'value' : -60
-},
-{
-    'text': "30 mins before the start of class",
-    'value' : -30
-},
-{
-    'text': "10 mins before the start of class",
-    'value' : -10
-},
-{
-    'text': "5 mins before the start of class",
-    'value' : -5
-},
-{
-    'text': "at the start of class",
-    'value' : 0
-},
-{
-    'text': "5 mins after the start of class",
-    'value' : 5
-},
-{
-    'text': "10 mins after the start of class",
-    'value' : 10
-},
-{
-    'text': "30 mins after the start of class",
-    'value' : 30
-},
-{
-    'text': "1 hr after the start of class",
-    'value' :60
-} ]
-  
+    
 
 const Dueoptions =[ 
-{
-  'text' : 'no due date',
-  'value' : 999
-},
-{
-  'text': "30 mins after posted",
-  'value' : 30
-},
-{
-  'text': "45 mins after posted",
-  'value' : 45
-},
-{
-  'text': "1 hour after posted",
-  'value' : 60
-},
-{
-  'text': "2 hours after posted",
-  'value' : 120
-},
-{
-  'text': "3 hours after posted",
-  'value' : 180
-},
-{
-  'text': 'today',
-  'value' : 999
-},
-{
-  'text' : 'before the next discussion',
-  'value' : 999
-}
+{'label' : 'no due date','value' : 'none'},
+{'label': "30 mins after posted",'value' : 30},
+{'label': "1 hour after posted",'value' : 60},
+{'label': "within this class",'value' : 'withinclass'},
+{'label': 'today','value' : 'today'},
+{'label' : 'before the next discussion','value' : 'nextweek'}
  ]
 
 
 
  const activitytpelist = [
-  {'value' : 'Material',
-   'label' : 'Material'
-  },
-  {'value' : 'Assignment',
-   'label' : 'Assignment'
-  },
-  {'value' : 'Activity',
-  'label' : 'Activity'
-  },
-  {'value' : 'Questionnaire',
-  'label' : 'Questionnaire'
-  },
-  {'value' : 'Attendance',
-  'label' : 'Attendance'
- }
+  {'value' : 'Material','label' : 'Material'},
+  {'value' : 'Assignment','label' : 'Assignment'},
+  {'value' : 'Activity','label' : 'Activity'},
+  {'value' : 'Questionnaire','label' : 'Questionnaire'},
+  {'value' : 'Attendance','label' : 'Attendance'}
 
 ]
 
@@ -188,7 +143,7 @@ async function createnewtopic(e){
     'classes_id' :  currentclass.classes_id
   }
 
-  await axios.post('http://localhost:8000/api/createtopic/' , newtopicitem)
+  await axios.post('http://kyusillid.online/api/createtopic/' , newtopicitem)
   .then(response => {    
       console.log(response.data)  ;    
 
@@ -197,7 +152,7 @@ async function createnewtopic(e){
     console.log(error);
   });
 
-  await axios.get('http://localhost:8000/api/get-topiclist/' + currentclass.classes_id)
+  await axios.get('http://kyusillid.online/api/get-topiclist/' + currentclass.classes_id)
   .then(response => {
     settopiclist(response.data);
   
@@ -206,10 +161,47 @@ async function createnewtopic(e){
     console.log(error);
   });
 
+}
+
+async function createActivity(){
+
+  let newtopicitem = {
+    'created_by' : sourcematerial !== undefined ? sourcematerial.createdby : userinfo.user.acc_id,
+    'posted_by': userinfo.user.acc_id,
+    'title' :    posttitle.length!== 0 ? posttitle : 'new ' + activitytype,
+    'description':  description,
+    'activity_type' :  activitytype,
+    'category' : sourcematerial!==undefined ? sourcematerial.category   :  category['value'] ,
+    'topic' :    module.length !== 0 ? module :  'no topic',
+    'allowedit' : allowedit,
+    'allowlate' : allowlate,
+    'availability' : availability,
+    'duedate' : duedate,
+    'questionnaire_link' : 'google.com',
+    'studentselection' : studentselection,
+    'schedule' : postdate,
+    'postschedtype' : postscheduletype,
+    'scheduleoffset' : schedoffset, 
+  }
+  console.log(JSON.stringify(newtopicitem));
 
 
 
+  await axios.post('http://kyusillid.online/api/createactivity' , newtopicitem)
+  .then(response => {    
+      console.log(response.data)  ;    
 
+  })
+  .catch(error => {
+    console.log(error);
+  });
+  
+}   
+
+
+const handlecreateactivity=()=>{
+   createActivity();
+   navigate('/classes/sampleclass')
 }
 
 
@@ -225,9 +217,9 @@ async function createnewtopic(e){
                           {activitytype !== 'Attendance' ?
                            <div>
                                    
-                          <p className="smallfont">Title</p><input type="text"  disabled={sourcematerial!==undefined} className='primaryborder' placeholder='title' defaultValue={posttitle} /> <br />
+                          <p className="smallfont">Title</p><input type="text"  disabled={sourcematerial!==undefined} className='primaryborder' placeholder='title' defaultValue={posttitle}  onChange={(e)=>{setposttitle(e.target.value)}}/> <br />
                            <br />
-                           <p className="smallfont">Description</p><textarea name="" id="" cols="30" rows="6" className='primaryborder' placeholder='description'></textarea><br />
+                           <p className="smallfont">Description</p><textarea name="" id="" cols="30" rows="6" className='primaryborder'  value={description} placeholder='description' onChange={(e)=>{setdescription(e.target.value)}}></textarea><br />
                            <br />
                            
  
@@ -299,17 +291,7 @@ async function createnewtopic(e){
 
                               
                               <Dropdown
-                                options={[
-                                  {'value' :'Lecture',
-                                  'label' : 'Lecture'  
-                                  },
-                                  {'value' :'Laboratory',
-                                    'label' : 'Laboratory'  
-                                  }
-                                 
-                                ]}
-
-
+                                options={categorylist}
                                 onChangeHandler= {setcategory}
                                 mainClass= 'dropdownmain primary borderradius-md'
                                 itemClass= 'dropdownitem'
@@ -318,6 +300,8 @@ async function createnewtopic(e){
                                 controlActiveClass='dropdowncontrolactive'
                                 mainActiveClass='dropdownmain-active'
                                 disabled ={sourcematerial !== undefined}
+                                defaultValue= {sourcematerial !== undefined ? {'value' : sourcematerial.category , 'label' : sourcematerial.category} : undefined}
+                         
                             />
                             </div>
                             <br />
@@ -341,8 +325,8 @@ async function createnewtopic(e){
                               </div>
 
                               <div className="col-lg-6">
-                              <button className='commonbutton lighttext borderradius-md secondary' onClick={()=>{setcreatetopic(!createtopic)}}> <FaPlusCircle/> Create Topic</button>
-    
+                            {sourcematerial === undefined &&   <button className='commonbutton lighttext borderradius-md secondary' onClick={()=>{setcreatetopic(!createtopic)}}> <FaPlusCircle/> Create Topic</button>
+    }
                           {createtopic && 
                             <div className='createtopicmodal tertiary borderradius-md flex'>
                             <input type="text"  onChange={(e)=> {setinputtopicname(e.target.value)}}/>
@@ -377,7 +361,7 @@ async function createnewtopic(e){
                                     {'value' :'fixed',
                                       'label' : 'fixed'  
                                     },
-                                    {'value' :'relative',
+                                    {'value' :'timed',
                                     'label' : 'relative schedule'  
                                     }
                                   ]}
@@ -406,7 +390,7 @@ async function createnewtopic(e){
                                                  
                             }
                             {postscheduletype==='timed' &&                           
-                                <ArrowSelector options={Postoptions} startingvalue={4} />
+                                <ArrowSelector options={Postoptions} startingvalue={4}  selectorHandler= {setschedoffst}/>
                             }
                   
                             </div>
@@ -419,8 +403,8 @@ async function createnewtopic(e){
                               <>
                               <br />
                               <div>
-                                <input type="checkbox" name="" id="allowedit" /> <label htmlFor="allowedit">Allow Students to edit once submitted</label> <br />
-                                <input type="checkbox" name='' id='allowlate'/> <label htmlFor="allowlate">Allow late submissions</label> <br />
+                                <input type="checkbox" name="" id="allowedit" onChange={(e)=> {setallowedit(e.target.checked)}} /> <label htmlFor="allowedit">Allow Students to edit once submitted</label> <br />
+                                <input type="checkbox" name='' id='allowlate' onChange={(e)=> {setallowlate(e.target.checked)}}/> <label htmlFor="allowlate">Allow late submissions</label> <br />
                                <br />
                                <p className="smallfont">Limit availability</p>
 
@@ -442,6 +426,7 @@ async function createnewtopic(e){
                              
                               
                                
+
                                 <br />
 
                               </div>
@@ -451,11 +436,22 @@ async function createnewtopic(e){
                         
                              <br />
                             <p className="smallfont">Due Date</p>
-                      
-                               <ArrowSelector  options={Dueoptions} startingvalue={0}/>
-                            
-
-                              </>                     
+                            <Dropdown
+                                options={Dueoptions}
+                                onChangeHandler= {setduedate}
+                                mainClass= 'dropdownmain primary borderradius-md'
+                                itemClass= 'dropdownitem'                           
+                                controlClass='dropdowncontrol'
+                                menuClass='dropdownmenu primary'
+                                controlActiveClass='dropdowncontrolactive'
+                                mainActiveClass='dropdownmain-active'
+                                defaultValue={Dueoptions[0]} 
+                                placeholderValue='select due option'/> 
+                                
+                                      
+                              </> 
+                              
+                              
                             }
                               {(activitytype=== 'Attendance') &&
                                 <>
@@ -573,7 +569,7 @@ async function createnewtopic(e){
                 <div className="createactivityfooter">
                   
                    
-                <button className='primary createactivityconfirm'>Confirm</button>
+                <button className='primary createactivityconfirm' onClick={handlecreateactivity}>Confirm</button>
                 
 
                 </div>

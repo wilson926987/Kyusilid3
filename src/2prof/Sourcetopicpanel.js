@@ -1,56 +1,28 @@
-import React, { useState } from 'react'
+import React, { useState , useEffect, useContext} from 'react'
 import Sourcematerialpanel from './Sourcematerialpanel'
+import { currentclassContext } from '../Globalcontext';
+import axios from 'axios';
 
 function Sourcetopicpanel({sourcetopicitem}) {
+  const [ClassActivitylist , setClassActivitylist] = useState([
+  ]);
+  const {currentclass} = useContext(currentclassContext)
+
+  useEffect(()=>{
+    console.log("module source :" + sourcetopicitem.topic_id)
+    axios.get('http://localhost:8000/api/get-activitylist/' + sourcetopicitem.topic_id)
+    .then(response => {
+      setClassActivitylist(response.data)
+    })
+    .catch(error => {
+      console.log(error);
+    });
+
+
+  },[])
 
  
   
-  const [SourceModulelist , setSourceModulelist] = useState([
-    {
-      'topicname' : sourcetopicitem.sourcetopicname,
-      'activityID' :1,
-      'activitytype' : 'Assignment',
-      'category' : 'Lecture',
-      'activityname' :'Introduction to Database assignment',
-      'commentcount' : 20,
-      'materialcount' : 0,
-      'description' :"This is a sample description for assignment"
-
-    },
-    {
-      'activityID' :2,
-      'topicname' : sourcetopicitem.sourcetopicname,
-      'activitytype' : 'Questionnaire',
-      'category' : 'Lecture',
-      'activityname' :'Introduction to Database Quizz',
-      'commentcount' : 0,
-      'materialcount' : 0,
-      'description' :"This is a sample description for questionnaire"
-
-    },
-    {
-      'topicname' : sourcetopicitem.sourcetopicname,
-      'activityID' :3,
-      'activitytype' : 'Material',
-      'category' : 'Laboratory',
-      'activityname' :'Introduction to Database lesson 1',
-      'commentcount' : 6,
-      'materialcount' : 4,
-      'description' :"This is a sample description for material"
-
-    },
-    {
-      'topicname' : sourcetopicitem.sourcetopicname,
-      'activityID' :4,
-      'activitytype' : 'Activity',
-      'category' : 'Laboratory',
-      'activityname' :'Introduction to Database Seatwork',
-      'commentcount' : 0,
-      'materialcount' : 0,
-      'description' :"This is a sample description for activity"
-    }
-  ]);
-
 
   return (
     <div className='topicpanel borderradius-md'>
@@ -60,8 +32,8 @@ function Sourcetopicpanel({sourcetopicitem}) {
      <ul className="topiclist">
 
 
-     {SourceModulelist.map((temp2)=>(
-          <li className='relative flex activitypanel borderradius-md' key={temp2.activityID}>
+     {ClassActivitylist.map((temp2)=>(
+          <li className='relative flex activitypanel borderradius-md' key={temp2.activity_id}>
                 <Sourcematerialpanel  actItem = {temp2}/>
           </li>
 
