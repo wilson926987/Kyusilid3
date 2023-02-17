@@ -55,7 +55,7 @@ function Login() {
 
    if(username!==undefined && password!==undefined){
     try {
-      const response = await axios.post('https://76.76.21.21:8000/api/login', {
+      const response = await axios.post('https://kyusillid.online:8000/api/login', {
           'acc_username': username,
           'acc_password': password
       });
