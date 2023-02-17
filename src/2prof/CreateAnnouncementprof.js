@@ -99,11 +99,7 @@ function CreateAnnouncementprof() {
                     }
                     //     
                 
-<<<<<<< HEAD
                     await axios.post('https://api.kyusillid.online/api/add-announcement/' , ggt)
-=======
-                    await axios.post('https://kyusillid.online/api/add-announcement/' , ggt)
->>>>>>> 2e1da572e8095c5e3e0537914aab504abc15afc4
                     .then(response => {    
                         console.log(response.data)   ;    
                      
@@ -117,11 +113,7 @@ function CreateAnnouncementprof() {
        
               }
               
-<<<<<<< HEAD
               await axios.get('https://api.kyusillid.online/api/get-announcement/' + currentclass.classes_id)
-=======
-              await axios.get('https://kyusillid.online/api/get-announcement/' + currentclass.classes_id)
->>>>>>> 2e1da572e8095c5e3e0537914aab504abc15afc4
               .then(response => {
                 setannouncementlist(response.data)
                

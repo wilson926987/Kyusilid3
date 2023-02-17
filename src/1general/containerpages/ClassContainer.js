@@ -47,11 +47,7 @@ function ClassContainer() {
 
   
 
-<<<<<<< HEAD
   const url = userinfo.user.usertype ==='prof' ?  'https://api.kyusillid.online/api/get-announcement/' : 'https://api.kyusillid.online/api/get-announcementforstudent/'
-=======
-  const url = userinfo.user.usertype ==='prof' ?  'https://kyusillid.online/api/get-announcement/' : 'https://kyusillid.online/api/get-announcementforstudent/'
->>>>>>> 2e1da572e8095c5e3e0537914aab504abc15afc4
   
 
   useEffect(()=>{   

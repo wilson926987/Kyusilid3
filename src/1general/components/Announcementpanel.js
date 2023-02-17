@@ -73,78 +73,86 @@ function Announcementpanel({announcementitem , forcerefresh}) {
 
 
   return (
-    <div className="announcementpanel borderradius-md background margintop12">
-    <div className="announcementheader">
-      <div>
-          <h5>{announcementitem.announcementitem.an_title}</h5>
-      </div>
-      <div className='flex'>
-        <h6>Created {announcementitem.announcementitem.created_at} by {announcementitem.announcementitem.firstname} {announcementitem.announcementitem.lastname}</h6>
-          <div className='marginleft12 relative'> <AiFillEdit onClick={()=>{setedditmenu(!editmenu)}}/>
-            {editmenu && <div className='absolute tertiary editmenu  borderradius-md'> <ul><li className='padding12 borderradius-md'>edit</li> <li className='padding12 borderradius-md'>delete</li></ul> </div>  }
-          </div>
-      </div>
-    </div>
 
-    <div className='announcementcontent'>
-        {announcementitem.announcementitem.an_content}
-    </div>
-    <hr className='margintop12'/>
-
-    <div className="announcementcomment relative"> 
-      {announcementitem.commentlist !== undefined && announcementitem.commentlist.length>0 &&
-      
-        <div>
-            <h5>Class Comments</h5>
-            <div className="">
-               {announcementitem.commentlist.map((commentitem , key)=>(
-                 <div key={key} className='padding12'>
-                    <div className="flex">
-                      <h5>{commentitem.title + " " + commentitem.firstname + ' ' + commentitem.lastname + ' '  + commentitem.suffix }</h5>
-                      <p className='smallfont marginleftauto'>{commentitem.date_posted}</p>
-                    </div>
-                    <div className='ellipsis '>
-                          {commentitem.com_content}
-                    </div>
-           
-                 </div>
-               ))}
-                  
+    <div>
+          {announcementitem !== undefined ? 
+            <div className="announcementpanel borderradius-md background margintop12">
+            <div className="announcementheader">
+              <div>
+                  <h5>{ announcementitem !== undefined  && announcementitem.announcementitem.an_title}</h5>
+              </div>
+              <div className='flex'>
+                <h6>Created {announcementitem !== undefined  && announcementitem.announcementitem.created_at} by {announcementitem !== undefined  && announcementitem.announcementitem.firstname} { announcementitem !== undefined  && announcementitem.announcementitem.lastname}</h6>
+                  <div className='marginleft12 relative'> <AiFillEdit onClick={()=>{setedditmenu(!editmenu)}}/>
+                    {editmenu && <div className='absolute tertiary editmenu  borderradius-md'> <ul><li className='padding12 borderradius-md'>edit</li> <li className='padding12 borderradius-md'>delete</li></ul> </div>  }
+                  </div>
+              </div>
             </div>
-        </div>
-      }
-
-      
-
-
-
-{announcementitem.announcementitem.schedule < currentdatestamp ?
-
-
-
- <> 
-  <textarea name="Text1"  cols='1' rows="2"  placeholder='Enter comment' className='commontextarea primaryborder margintop12' value={commentinput} onChange={(e)=> setcommentinput(e.target.value)} ></textarea>
-   
-   <div className='sendbutton' onClick={postcomments}>   <MdSend/></div> 
-
-   </>
-  
-   :
-   <div className='flex '>
-      <div className='marginleftauto flex'>
-     
-        <h6>To be posted at :  {announcementitem.announcementitem.schedule}</h6> 
-        <button className='commonbutton secondary borderradius-md lighttext' onClick={postnow}> Post now</button>
-      
-      </div>
-    
-   </div>
-
-}
-     
+        
+            <div className='announcementcontent'>
+                {announcementitem !== undefined  && announcementitem.announcementitem.an_content}
+            </div>
+            <hr className='margintop12'/>
+        
+            <div className="announcementcomment relative"> 
+              {announcementitem !== undefined  && announcementitem.commentlist !== undefined && announcementitem.commentlist.length>0 &&
+              
+                <div>
+                    <h5>Class Comments</h5>
+                    <div className="">
+                       {announcementitem !== undefined  && announcementitem.commentlist.map((commentitem , key)=>(
+                         <div key={key} className='padding12'>
+                            <div className="flex">
+                              <h5>{commentitem.title + " " + commentitem.firstname + ' ' + commentitem.lastname + ' '  + commentitem.suffix }</h5>
+                              <p className='smallfont marginleftauto'>{commentitem.date_posted}</p>
+                            </div>
+                            <div className='ellipsis '>
+                                  {commentitem.com_content}
+                            </div>
+                   
+                         </div>
+                       ))}
+                          
+                    </div>
+                </div>
+              }
+        
+              
+        
+        
+        
+        {announcementitem !== undefined  && announcementitem.announcementitem.schedule < currentdatestamp ?
+        
+        
+        
+         <> 
+          <textarea name="Text1"  cols='1' rows="2"  placeholder='Enter comment' className='commontextarea primaryborder margintop12' value={commentinput} onChange={(e)=> setcommentinput(e.target.value)} ></textarea>
+           
+           <div className='sendbutton' onClick={postcomments}>   <MdSend/></div> 
+        
+           </>
+          
+           :
+           <div className='flex '>
+              <div className='marginleftauto flex'>
+             
+                <h6>To be posted at :  {announcementitem !== undefined  && announcementitem.announcementitem.schedule}</h6> 
+                <button className='commonbutton secondary borderradius-md lighttext' onClick={postnow}> Post now</button>
+              
+              </div>
+            
+           </div>
+        
+        }
+             
+            </div>
+        
+          </div>
+          : <div></div> }
     </div>
 
-  </div>
+
+  
     
   )
 }

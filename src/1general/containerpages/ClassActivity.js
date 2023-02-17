@@ -52,11 +52,7 @@ function ClassActivity() {
     if(currentactivity===undefined){
         navigate('/')
     }
-<<<<<<< HEAD
      axios.get('https://api.kyusillid.online/api/getactivitycommentlist/' + currentactivity.activity_id).then(response=>
-=======
-     axios.get('https://kyusillid.online/api/getactivitycommentlist/' + currentactivity.activity_id).then(response=>
->>>>>>> 2e1da572e8095c5e3e0537914aab504abc15afc4
       {set_actcommnentlist(response.data)}
      )
 
