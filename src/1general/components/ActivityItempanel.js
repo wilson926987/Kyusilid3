@@ -19,7 +19,7 @@ function ActivityItempanel({actItem}) {
 
 
   useEffect(()=>{
-    axios.get('http://kyusillid.online/api/getcommentcount_act/'+ actItem.activity_id)
+    axios.get('https://kyusillid.online/api/getcommentcount_act/'+ actItem.activity_id)
     .then(response => {
     setcommentcount(response.data)})
     .catch(error => {

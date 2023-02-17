@@ -47,7 +47,7 @@ function ClassContainer() {
 
   
 
-  const url = userinfo.user.usertype ==='prof' ?  'http://kyusillid.online/api/get-announcement/' : 'http://kyusillid.online/api/get-announcementforstudent/'
+  const url = userinfo.user.usertype ==='prof' ?  'https://kyusillid.online/api/get-announcement/' : 'https://kyusillid.online/api/get-announcementforstudent/'
   
 
   useEffect(()=>{   
@@ -77,7 +77,7 @@ function ClassContainer() {
           console.log(error);
         });
 
-        await axios.get('http://kyusillid.online/api/getpersonlist/' + currentclass.classes_id)
+        await axios.get('https://kyusillid.online/api/getpersonlist/' + currentclass.classes_id)
         .then(response => {
           setpersonlist(response.data)
         
@@ -86,7 +86,7 @@ function ClassContainer() {
           console.log(error);
         });
 
-        await axios.get('http://kyusillid.online/api/get-topiclist/' + currentclass.classes_id)
+        await axios.get('https://kyusillid.online/api/get-topiclist/' + currentclass.classes_id)
         .then(response => {
           settopiclist(response.data);
         
@@ -98,7 +98,7 @@ function ClassContainer() {
         
 
         if(userinfo.usertype==='prof'){
-          await axios.get('http://kyusillid.online/api/getstudentlist/' + userinfo.user.acc_id)
+          await axios.get('https://kyusillid.online/api/getstudentlist/' + userinfo.user.acc_id)
           .then(response => {
       
             const temp = response.data.map( item=>({
@@ -117,11 +117,8 @@ function ClassContainer() {
           });
 
 
-<<<<<<< HEAD
-          await axios.get('http://kyusillid.online/api/get-topiclist/' + currentclass.moduleSource)
-=======
-          await axios.get('http://localhost:8000/api/get-topiclist/' + currentclass.moduleSource)
->>>>>>> 95c37ac4c9afbd6bff19e6de69f072c9bd8115ee
+
+          await axios.get('https://kyusillid.online/api/get-topiclist/' + currentclass.moduleSource)
         .then(response => {
           setmodulelist(response.data);
         
@@ -131,11 +128,7 @@ function ClassContainer() {
         });
         }
 
-<<<<<<< HEAD
-        await axios.get('http://kyusillid.online/api/getclass_log/' + currentclass.classes_id)
-=======
-        await axios.get('http://localhost:8000/api/getclass_log/' + currentclass.classes_id)
->>>>>>> 95c37ac4c9afbd6bff19e6de69f072c9bd8115ee
+        await axios.get('https://kyusillid.online/api/getclass_log/' + currentclass.classes_id)
         .then(response=>{
             setclass_log(response.data)
         }).catch(error=>{console.log(error)})
