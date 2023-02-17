@@ -25,15 +25,6 @@ function AdminContainer() {
   const [currentdept, setcurrentdept] = useState();
 
 
-  useEffect(()=>{
-    axios.get('http://kyusillid.online/api/getdepartment/' +userinfo.user.acc_id).then(response=>{
-      setdepartments(response.data)
-      console.log(response.data)
-    
-    }).catch();
-  },[])
-
-
   return (
 
     <currentdeptContext.Provider value={{currentdept, setcurrentdept}}>

@@ -183,11 +183,19 @@ async function createActivity(){
     'postschedtype' : postscheduletype,
     'scheduleoffset' : schedoffset, 
   }
+<<<<<<< HEAD
   console.log(JSON.stringify(newtopicitem));
 
 
 
   await axios.post('http://kyusillid.online/api/createactivity' , newtopicitem)
+=======
+  //console.log(JSON.stringify(newtopicitem));
+
+
+
+  await axios.post('http://localhost:8000/api/createactivity' , newtopicitem)
+>>>>>>> 95c37ac4c9afbd6bff19e6de69f072c9bd8115ee
   .then(response => {    
       console.log(response.data)  ;    
 

@@ -15,7 +15,11 @@ function Announcementpanel({announcementitem , forcerefresh}) {
   const {currentclass} = useContext(currentclassContext);
   const {forecerefreshHandler} = useContext(forcerefreshContext);
 
+<<<<<<< HEAD
   const url = userinfo.user.usertype ==='prof' ?  'http://kyusillid.online/api/get-announcement/' : 'http://kyusillid.online/api/get-announcementforstudent/'
+=======
+  const url = userinfo.user.usertype ==='prof' ?  'http://localhost:8000/api/get-announcement/' : 'http://localhost:8000/api/get-announcementforstudent/'
+>>>>>>> 95c37ac4c9afbd6bff19e6de69f072c9bd8115ee
   
  
 

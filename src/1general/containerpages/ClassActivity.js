@@ -30,7 +30,11 @@ function ClassActivity() {
       }
       console.log(JSON.stringify(temp))
   
+<<<<<<< HEAD
       await axios.put('http://kyusillid.online/api/createactivitycomment', temp).then(response =>{
+=======
+      await axios.put('http://localhost:8000/api/createactivitycomment', temp).then(response =>{
+>>>>>>> 95c37ac4c9afbd6bff19e6de69f072c9bd8115ee
         set_actcommnentlist(response.data);
         
         
@@ -52,7 +56,11 @@ function ClassActivity() {
     if(currentactivity===undefined){
         navigate('/')
     }
+<<<<<<< HEAD
      axios.get('http://kyusillid.online/api/getactivitycommentlist/' + currentactivity.activity_id).then(response=>
+=======
+     axios.get('http://localhost:8000/api/getactivitycommentlist/' + currentactivity.activity_id).then(response=>
+>>>>>>> 95c37ac4c9afbd6bff19e6de69f072c9bd8115ee
       {set_actcommnentlist(response.data)}
      )
 

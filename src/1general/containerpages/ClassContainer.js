@@ -117,7 +117,11 @@ function ClassContainer() {
           });
 
 
+<<<<<<< HEAD
           await axios.get('http://kyusillid.online/api/get-topiclist/' + currentclass.moduleSource)
+=======
+          await axios.get('http://localhost:8000/api/get-topiclist/' + currentclass.moduleSource)
+>>>>>>> 95c37ac4c9afbd6bff19e6de69f072c9bd8115ee
         .then(response => {
           setmodulelist(response.data);
         
@@ -127,7 +131,11 @@ function ClassContainer() {
         });
         }
 
+<<<<<<< HEAD
         await axios.get('http://kyusillid.online/api/getclass_log/' + currentclass.classes_id)
+=======
+        await axios.get('http://localhost:8000/api/getclass_log/' + currentclass.classes_id)
+>>>>>>> 95c37ac4c9afbd6bff19e6de69f072c9bd8115ee
         .then(response=>{
             setclass_log(response.data)
         }).catch(error=>{console.log(error)})
