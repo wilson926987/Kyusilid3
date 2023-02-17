@@ -99,7 +99,7 @@ function CreateAnnouncementprof() {
                     }
                     //     
                 
-                    await axios.post('http://localhost:8000/api/add-announcement/' , ggt)
+                    await axios.post('https://api.kyusillid.online/api/add-announcement/' , ggt)
                     .then(response => {    
                         console.log(response.data)   ;    
                      
@@ -113,7 +113,7 @@ function CreateAnnouncementprof() {
        
               }
               
-              await axios.get('http://localhost:8000/api/get-announcement/' + currentclass.classes_id)
+              await axios.get('https://api.kyusillid.online/api/get-announcement/' + currentclass.classes_id)
               .then(response => {
                 setannouncementlist(response.data)
                

@@ -1,5 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap');
 
+::-webkit-scrollbar-thumb {
+  background-color: #6893ee;
+  border-radius: 20px;
+  border: 6px solid transparent;
+  background-clip: content-box;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -1676,49 +1683,122 @@ padding: 12px;
   overflow: auto;
   position: relative;
   margin-bottom: 12px;
-
+  
+}
+.attendancecontainer::-webkit-scrollbar {
+  width: 20px;
+}
+.attendancecontainer::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+.attendancecontainer::-webkit-scrollbar-thumb {
+  background-color: #6893ee;
+  border-radius: 20px;
+  border: 6px solid transparent;
+  background-clip: content-box;
+}
+.attendancecontainer::-webkit-scrollbar-thumb:hover {
+  background-color: #a8bbbf;
 }
 
 .attendancetable{
   table-layout: fixed;
   position: absolute;
+  margin-top: 10px;
+  text-align: left;
+  border-collapse: collapse; 
+  
  
 }
 
-.attendancetable>tr:first-child{
+/* .attendancetable>th:first-child{
+  background: red;
   position: sticky;
-  z-index: 3;
-  top: 0;
-}
+  left: 0;
+} */
+.stickheader{
+  
+    background: white;
+    position: sticky;
+    top: 0; /* Don't forget this, required for the stickiness */
+    z-index: 3;
+   left: 0;
 
+
+}
 .attendancetable>tr>td:first-child{
+
   position: sticky;
-  z-index: 3;
   left: 0;
 }
-
-.temp2{
-  position: absolute;
-  z-index: 4;
+.attendancetable tr th{ 
+  padding-left: 40px;
+}
+.attendancetable .th { 
+  position: fixed;
+}
+.Calendar{ 
+  text-decoration: none;
+  background-color: #6893ee;
+  color: black;
+  border: none;
+  height: 30px;
+  width: 130px;
+  margin-left: 30px;
+}
+.Calendar .date{ 
+  border: none;
+  background-color: #e2e4fa;
+}
+.Searrchh{ 
+  display: flex;
+}
+.search1{ 
+  margin-left: 70%;
+}
+.search1 input{ 
   width: 200px;
-  top: 2px;
-  left: 2px;
-  height: 38px;
+  height: 33px;
+  border-radius: 50px;
+  font-size: 16px;
+  font-family: 'Century Gothic';
+  text-align: center;
+  border-color: #6893ee;
+}
+.temp2{
+  position: sticky;
+  width: 200px;
+  height: 39px;
+  text-align: center;
+  font-size: 18px;
+  padding-top: 8px;
+  border-radius: 50px;
+  background-color: #6893ee;
+  overflow-y: visible;
+  display: block;
+
 }
 
-.tddate {
+.attendancetable thead{
   width: 20px;
   text-align: center;
-  padding: 0px 12px;
-
+  font-size: 14px;
+  border: 5px;
+  overflow: hidden;
+  position: absolute;
+  display: block;
 }
 
+
 .tdname{
-  white-space: nowrap;
   padding: 0px 8px;
   gap: 8px;
   width: 200px;
-  overflow: hidden;
+  z-index: 2;
+  display: block;
+  white-space: nowrap;
+  position:sticky;
+
 }
 
 .tdname img{

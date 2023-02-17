@@ -26,7 +26,7 @@ function AdminContainer() {
 
 
   useEffect(()=>{
-    axios.get('http://localhost:8000/api/getdepartment/' +userinfo.user.acc_id).then(response=>{
+    axios.get('https://api.kyusillid.online/api/getdepartment/' +userinfo.user.acc_id).then(response=>{
       setdepartments(response.data)
       console.log(response.data)
     

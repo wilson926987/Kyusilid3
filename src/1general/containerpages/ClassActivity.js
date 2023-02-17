@@ -30,7 +30,7 @@ function ClassActivity() {
       }
       console.log(JSON.stringify(temp))
   
-      await axios.put('http://localhost:8000/api/createactivitycomment', temp).then(response =>{
+      await axios.put('https://api.kyusillid.online/api/createactivitycomment', temp).then(response =>{
         set_actcommnentlist(response.data);
         
         
@@ -52,7 +52,7 @@ function ClassActivity() {
     if(currentactivity===undefined){
         navigate('/')
     }
-     axios.get('http://localhost:8000/api/getactivitycommentlist/' + currentactivity.activity_id).then(response=>
+     axios.get('https://api.kyusillid.online/api/getactivitycommentlist/' + currentactivity.activity_id).then(response=>
       {set_actcommnentlist(response.data)}
      )
 

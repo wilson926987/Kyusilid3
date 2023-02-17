@@ -1,4 +1,5 @@
 import './Libot.css';
+import './Aira.css';
 import './App.css';
 import './chart.css'
 import './profilestud.css'
@@ -24,14 +25,14 @@ import Classmarks from './2prof/Classmarks';
 import ClassModules from './2prof/ClassModules';
 import Createnew from './2prof/Createnew';
 import Attendance from './1general/containerpages/Attendance';
+import ClassMarkPage from './1general/containerpages/ClassMarkPage';
+
 
 import AdminContainer from './4admin/AdminContainer';
 import AdminDashboard from './4admin/AdminDashboard';
 import Accountsprof from './4admin/Accountsprof';
 import Department from './4admin/Department';
 import FileManager from './4admin/FileManager';
-
-
 
 import Profiilepage from './1general/containerpages/Profiilepage';
 import MessagesPage from './1general/containerpages/MessagesPage';
@@ -45,6 +46,7 @@ import Classespage from './4admin/Classespage';
 import Accountsstud from './4admin/Accountsstud';
 import SectionContainer from './4admin/SectionContainer';
 import SampleSection from './4admin/SampleSection';
+
 
 
 
@@ -64,6 +66,7 @@ function App() {
         <BrowserRouter>
             <Routes>
             <Route path='/Quiz' element={<Quiz/>} />
+            <Route path='/ClassMarkPage' element={<ClassMarkPage/>} />
               <Route path={'/'} element={userinfo!=null ? <Container/> : <Login/> } > 
                 <Route path={''} element={<Dashboard/>}></Route>  {/*this is the dashboard*/}
                 <Route path={'classes/sampleclass'} element={<ClassContainer/>}>          
@@ -75,7 +78,7 @@ function App() {
                         <Route path='sourcematerials' element={<SourceMaterials/>} />
                         <Route  path='attendance' element={<Attendance/> }/>
                         <Route path= 'activity/activityId' element={<ClassActivity/>} />
-                    </Route>
+                  </Route>
                      
                 <Route path={'archived'} element={<Archived/>} /> 
                 <Route path={'profile'} element={<Profiilepage/> } />

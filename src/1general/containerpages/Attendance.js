@@ -3,68 +3,8 @@ import React, { useContext, useState } from 'react'
 import { userInfoContext } from '../../Globalcontext'
 import Avatar from '../../assets/images/avatar.jpg'
 
+
 function Attendance() {
-
-  const [discussionlist , setdiscussionlist] = useState([
-    'Jan 1' ,'Jan 2' ,'Jan 3' ,'Jan 4' ,'Jan 5' ,'Jan 6' ,
-    'Jan 7' ,'Jan 8' ,'Jan 9' ,'Jan 10' ,'Jan 11' ,'Jan 12' ,
-    'Jan 7' ,'Jan 8' ,'Jan 9' ,'Jan 10' ,'Jan 11' ,'Jan 12' ,
-    'Jan 7' ,'Jan 8' ,'Jan 9' ,'Jan 10' ,'Jan 11' ,'Jan 12' ,
-    'Jan 7' ,'Jan 8' ,'Jan 9' ,'Jan 10' ,'Jan 11' ,'Jan 12' ,
-    'Jan 7' ,'Jan 8' ,'Jan 9' ,'Jan 10' ,'Jan 11' ,'Jan 12' ,
-    'Jan 7' ,'Jan 8' ,'Jan 9' ,'Jan 10' ,'Jan 11' ,'Jan 12' ,
-    'Jan 7' ,'Jan 8' ,'Jan 9' ,'Jan 10' ,'Jan 11' ,'Jan 12' ,
-    'Jan 7' ,'Jan 8' ,'Jan 9' ,'Jan 10' ,'Jan 11' ,'Jan 12' ,
-    'Jan 7' ,'Jan 8' ,'Jan 9' ,'Jan 10' ,'Jan 11' ,'Jan 12' ,
-    'Jan 7' ,'Jan 8' ,'Jan 9' ,'Jan 10' ,'Jan 11' ,'Jan 12' ,
-    'Jan 7' ,'Jan 8' ,'Jan 9' ,'Jan 10' ,'Jan 11' ,'Jan 12' ,
-    'Jan 7' ,'Jan 8' ,'Jan 9' ,'Jan 10' ,'Jan 11' ,'Jan 12' ,
-    'Jan 7' ,'Jan 8' ,'Jan 9' ,'Jan 10' ,'Jan 11' ,'Jan 12' ,
-    'Jan 7' ,'Jan 8' ,'Jan 9' ,'Jan 10' ,'Jan 11' ,'Jan 12' ,
-    'Jan 7' ,'Jan 8' ,'Jan 9' ,'Jan 10' ,'Jan 11' ,'Jan 12' ,
-    'Jan 7' ,'Jan 8' ,'Jan 9' ,'Jan 10' ,'Jan 11' ,'Jan 12' ,
-    'Jan 7' ,'Jan 8' ,'Jan 9' ,'Jan 10' ,'Jan 11' ,'Jan 12' ,
-    'Jan 7' ,'Jan 8' ,'Jan 9' ,'Jan 10' ,'Jan 11' ,'Jan 12' ,
-    'Jan 7' ,'Jan 8' ,'Jan 9' ,'Jan 10' ,'Jan 11' ,'Jan 12' ,
-    'Jan 7' ,'Jan 8' ,'Jan 9' ,'Jan 10' ,'Jan 11' ,'Jan 12' ,
-    'Jan 7' ,'Jan 8' ,'Jan 9' ,'Jan 10' ,'Jan 11' ,'Jan 12' ,
-    'Jan 7' ,'Jan 8' ,'Jan 9' ,'Jan 10' ,'Jan 11' ,'Jan 12' ,
-    'Jan 7' ,'Jan 8' ,'Jan 9' ,'Jan 10' ,'Jan 11' ,'Jan 12' ,
-    'Jan 7' ,'Jan 8' ,'Jan 9' ,'Jan 10' ,'Jan 11' ,'Jan 12' ,
-    'Jan 7' ,'Jan 8' ,'Jan 9' ,'Jan 10' ,'Jan 11' ,'Jan 12' ,
-    'Jan 7' ,'Jan 8' ,'Jan 9' ,'Jan 10' ,'Jan 11' ,'Jan 12' ,
-    'Jan 7' ,'Jan 8' ,'Jan 9' ,'Jan 10' ,'Jan 11' ,'Jan 12' ,
-    'Jan 7' ,'Jan 8' ,'Jan 9' ,'Jan 10' ,'Jan 11' ,'Jan 12' ,
-    'Jan 7' ,'Jan 8' ,'Jan 9' ,'Jan 10' ,'Jan 11' ,'Jan 12' ,
-    'Jan 7' ,'Jan 8' ,'Jan 9' ,'Jan 10' ,'Jan 11' ,'Jan 12' ,
-    'Jan 7' ,'Jan 8' ,'Jan 9' ,'Jan 10' ,'Jan 11' ,'Jan 12' ,
-    'Jan 7' ,'Jan 8' ,'Jan 9' ,'Jan 10' ,'Jan 11' ,'Jan 12' ,
-    'Jan 7' ,'Jan 8' ,'Jan 9' ,'Jan 10' ,'Jan 11' ,'Jan 12' ,
-    'Jan 7' ,'Jan 8' ,'Jan 9' ,'Jan 10' ,'Jan 11' ,'Jan 12' ,
-    'Jan 7' ,'Jan 8' ,'Jan 9' ,'Jan 10' ,'Jan 11' ,'Jan 12' ,
-    'Jan 7' ,'Jan 8' ,'Jan 9' ,'Jan 10' ,'Jan 11' ,'Jan 12' ,
-    'Jan 7' ,'Jan 8' ,'Jan 9' ,'Jan 10' ,'Jan 11' ,'Jan 12' ,
-    'Jan 7' ,'Jan 8' ,'Jan 9' ,'Jan 10' ,'Jan 11' ,'Jan 12' ,
-    'Jan 7' ,'Jan 8' ,'Jan 9' ,'Jan 10' ,'Jan 11' ,'Jan 12' ,
-    'Jan 7' ,'Jan 8' ,'Jan 9' ,'Jan 10' ,'Jan 11' ,'Jan 12' ,
-    'Jan 7' ,'Jan 8' ,'Jan 9' ,'Jan 10' ,'Jan 11' ,'Jan 12' ,
-    'Jan 7' ,'Jan 8' ,'Jan 9' ,'Jan 10' ,'Jan 11' ,'Jan 12' ,
-    'Jan 7' ,'Jan 8' ,'Jan 9' ,'Jan 10' ,'Jan 11' ,'Jan 12' ,
-    'Jan 7' ,'Jan 8' ,'Jan 9' ,'Jan 10' ,'Jan 11' ,'Jan 12' ,
-    'Jan 7' ,'Jan 8' ,'Jan 9' ,'Jan 10' ,'Jan 11' ,'Jan 12' ,
-    'Jan 7' ,'Jan 8' ,'Jan 9' ,'Jan 10' ,'Jan 11' ,'Jan 12' ,
-    'Jan 7' ,'Jan 8' ,'Jan 9' ,'Jan 10' ,'Jan 11' ,'Jan 12' ,
-    'Jan 7' ,'Jan 8' ,'Jan 9' ,'Jan 10' ,'Jan 11' ,'Jan 12' ,
-    'Jan 7' ,'Jan 8' ,'Jan 9' ,'Jan 10' ,'Jan 11' ,'Jan 12' ,
-    'Jan 7' ,'Jan 8' ,'Jan 9' ,'Jan 10' ,'Jan 11' ,'Jan 12' ,
-    
-  ])
-
-
-
-
-
-
 
 
   const {userinfo} = useContext(userInfoContext)
@@ -72,29 +12,41 @@ function Attendance() {
     <div>
       <div className='flex'> <h4>Attendance</h4> {userinfo.usertype==='stud' && <p className='marginleftauto smallfont'>## out of ## discussions attended</p>}</div>
 
-    
-    <div className='relative margintop12'>
-        <div className='temp2 primary'>
-            adfkjsldkafj
+  <div class="Searrchh">     
+      <div class="search1">
+        <input
+          type="text"
+          placeholder="Search by name"
+          name="search"
+        />
         </div>
+
+</div>
+
  
         <div className="attendancecontainer">
-        <table className="attendancetable">  
 
-<tr className='primary'><td > 
-  <div>
-     
-  </div>
-</td>
-{discussionlist.map((item , key)=>(
-<td key={key} className='tddate '> 
-  <div className=''> {item}</div>
-  
-  </td>
-))}
 
-</tr>
+<table className="attendancetable">  
 
+  <tr className="stickheader">
+            <th>Name</th>
+            <th> 1 </th>
+            <th> 2 </th>
+            <th> 3 </th>
+            <th> 4 </th>
+            <th> 5 </th>
+            <th> 6 </th>
+            <th> 7 </th>
+            <th> 8 </th>
+            <th> 9 </th>
+            <th> 10 </th>
+            <th> 11 </th>
+            <th> 12 </th>
+            <th> 13 </th>
+            <th> 14 </th>
+            <th> 15 </th>
+  </tr>
 
 
 <tr>
@@ -145,7 +97,7 @@ function Attendance() {
       </div>
     
     
-    </div>
+
   )
 }
 

@@ -143,7 +143,7 @@ async function createnewtopic(e){
     'classes_id' :  currentclass.classes_id
   }
 
-  await axios.post('http://localhost:8000/api/createtopic/' , newtopicitem)
+  await axios.post('https://api.kyusillid.online/api/createtopic/' , newtopicitem)
   .then(response => {    
       console.log(response.data)  ;    
 
@@ -152,7 +152,7 @@ async function createnewtopic(e){
     console.log(error);
   });
 
-  await axios.get('http://localhost:8000/api/get-topiclist/' + currentclass.classes_id)
+  await axios.get('https://api.kyusillid.online/api/get-topiclist/' + currentclass.classes_id)
   .then(response => {
     settopiclist(response.data);
   
@@ -183,11 +183,11 @@ async function createActivity(){
     'postschedtype' : postscheduletype,
     'scheduleoffset' : schedoffset, 
   }
-  //console.log(JSON.stringify(newtopicitem));
+  console.log(JSON.stringify(newtopicitem));
 
 
 
-  await axios.post('http://localhost:8000/api/createactivity' , newtopicitem)
+  await axios.post('https://api.kyusillid.online/api/createactivity' , newtopicitem)
   .then(response => {    
       console.log(response.data)  ;    
 

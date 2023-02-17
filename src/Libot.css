@@ -206,3 +206,138 @@
 	padding-bottom:8px;
 
 }
+
+
+.App {
+	font-family: sans-serif;
+	text-align: center;
+  }
+  
+  .container-message {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	height: 100vh;
+	width: 70%;
+	max-width: 70vw;
+  }
+  
+  .header-message {
+	width: 100%;
+	
+	color: #fff;
+	padding: 10px;
+	text-align: center;
+  }
+  
+  .messages-section {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	padding: 20px;
+	overflow-y: scroll;
+	height: 60%;
+  }
+  
+  .message {
+	display: flex;
+	margin-bottom: 20px;
+  }
+  
+  .message img {
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	margin-right: 20px;
+  }
+  
+  .message-info {
+	display: flex;
+	flex-direction: column;
+  }
+  
+  .input-section {
+	width: 100%;
+	display: flex;
+	padding: 20px;
+	box-sizing: border-box;
+  }
+  
+  .input-section input[type="text"] {
+	flex-grow: 1;
+	padding: 10px;
+	font-size: 16px;
+	margin-right: 10px;
+  }
+  
+  .btn-message {
+	padding: 10px 20px;
+	background-color: #333;
+	color: #fff;
+	border: none;
+	cursor: pointer;
+  }
+  
+  .message.right {
+	display: flex;
+	flex-direction: row-reverse;
+	margin-bottom: 20px;
+  }
+  
+  .main-message-container {
+	display: flex;
+	flex-wrap: wrap;
+  }
+  
+  .sidebar-message {
+	margin-right: 50px;
+	width: 100%;
+	max-width: 310px;
+	border: 1px solid black;
+	height: 660px;
+  }
+  
+  .sidebar-message h2 {
+	padding-left: 20px;
+  }
+  
+  .group-names-container {
+	border: 1px solid black;
+	height: 10%;
+	width: 90%;
+	max-width: 270px;
+	display: inline-flex;
+	margin-left: 10px;
+	margin-top: 20px;
+	
+  }
+  
+  .group-names-container h3 {
+	padding-left: 30px;
+	padding-top: 20px;
+	color: white;
+  }
+  
+  .group-names-container img {
+	margin-left: 10px;
+	margin-top: 5px;
+	height: 50px;
+	width: 50px;
+	border-radius: 50%;
+  }
+  
+  @media only screen and (max-width: 400px) {
+	.container-message {
+	  width: 100%;
+	}
+  
+	.sidebar-message {
+	  width: 100%;
+	}
+  
+	.group-names-container {
+	  width: 100%;
+	  padding-top: 20px;
+	}
+}

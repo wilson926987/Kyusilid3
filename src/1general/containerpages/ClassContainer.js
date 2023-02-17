@@ -47,7 +47,7 @@ function ClassContainer() {
 
   
 
-  const url = userinfo.user.usertype ==='prof' ?  'http://localhost:8000/api/get-announcement/' : 'http://localhost:8000/api/get-announcementforstudent/'
+  const url = userinfo.user.usertype ==='prof' ?  'https://api.kyusillid.online/api/get-announcement/' : 'https://api.kyusillid.online/api/get-announcementforstudent/'
   
 
   useEffect(()=>{   
@@ -77,7 +77,7 @@ function ClassContainer() {
           console.log(error);
         });
 
-        await axios.get('http://localhost:8000/api/getpersonlist/' + currentclass.classes_id)
+        await axios.get('https://api.kyusillid.online/api/getpersonlist/' + currentclass.classes_id)
         .then(response => {
           setpersonlist(response.data)
         
@@ -86,7 +86,7 @@ function ClassContainer() {
           console.log(error);
         });
 
-        await axios.get('http://localhost:8000/api/get-topiclist/' + currentclass.classes_id)
+        await axios.get('https://api.kyusillid.online/api/get-topiclist/' + currentclass.classes_id)
         .then(response => {
           settopiclist(response.data);
         
@@ -98,7 +98,7 @@ function ClassContainer() {
         
 
         if(userinfo.usertype==='prof'){
-          await axios.get('http://localhost:8000/api/getstudentlist/' + userinfo.user.acc_id)
+          await axios.get('https://api.kyusillid.online/api/getstudentlist/' + userinfo.user.acc_id)
           .then(response => {
       
             const temp = response.data.map( item=>({
@@ -117,7 +117,7 @@ function ClassContainer() {
           });
 
 
-          await axios.get('http://localhost:8000/api/get-topiclist/' + currentclass.moduleSource)
+          await axios.get('https://api.kyusillid.online/api/get-topiclist/' + currentclass.moduleSource)
         .then(response => {
           setmodulelist(response.data);
         
@@ -127,7 +127,7 @@ function ClassContainer() {
         });
         }
 
-        await axios.get('http://localhost:8000/api/getclass_log/' + currentclass.classes_id)
+        await axios.get('https://api.kyusillid.online/api/getclass_log/' + currentclass.classes_id)
         .then(response=>{
             setclass_log(response.data)
         }).catch(error=>{console.log(error)})
