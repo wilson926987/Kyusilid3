@@ -97,9 +97,10 @@ function CreateAnnouncementprof() {
                         "created_at" : new Date(postdate).toISOString().slice(0, 19).replace('T', ' '),
                         "schedule" : posttype==='fixed' ? new Date(postdate).toISOString().slice(0, 19).replace('T', ' ') : setfuturedate(selectedclass[x].value.day_label, selectedclass[x].value.sched_from).toISOString().slice(0, 19).replace('T', ' ')
                     }
-                    //     
+                    //    
+                    console.log(JSON.stringify(ggt)); 
                 
-                    await axios.post('https://api.kyusillid.online/api/add-announcement/' , ggt)
+                    await axios.post('https://api.kyusillid.online/api/add-announcement' , ggt)
                     .then(response => {    
                         console.log(response.data)   ;    
                      

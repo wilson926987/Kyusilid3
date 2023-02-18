@@ -25,7 +25,7 @@ function Announcementpanel({announcementitem , forcerefresh}) {
   const postcomments = async (e)=>{
     
     if (commentinput != undefined){
-      await axios.post('http://localhost:8000/api/postcomment/' , 
+      await axios.post('https://api.kyusillid.online/api/postcomment' , 
         {
           "an_id": announcementitem.announcementitem.an_id,
           "acc_id": userinfo.user.acc_id,
@@ -56,7 +56,7 @@ function Announcementpanel({announcementitem , forcerefresh}) {
   const postnow = async ()=>{
   
 
-  await axios.put('http://localhost:8000/api/updateannouncement/' , {"an_id" : announcementitem.announcementitem.an_id}).then(
+  await axios.put('https://api.kyusillid.online/api/updateannouncement/' , {"an_id" : announcementitem.announcementitem.an_id}).then(
     forecerefreshHandler()
   ).catch();
 

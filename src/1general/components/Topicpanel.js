@@ -15,7 +15,7 @@ function Topicpanel({topicitem}) {
   ]);
 
   useEffect(()=>{
-    axios.get('http://localhost:8000/api/get-activitylist/' + topicitem.topic_id)
+    axios.get('https://api.kyusillid.online/api/get-activitylist/' + topicitem.topic_id)
     .then(response => {
       setClassActivitylist(response.data)
     

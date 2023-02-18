@@ -10,7 +10,7 @@ function Sourcetopicpanel({sourcetopicitem}) {
 
   useEffect(()=>{
     console.log("module source :" + sourcetopicitem.topic_id)
-    axios.get('http://localhost:8000/api/get-activitylist/' + sourcetopicitem.topic_id)
+    axios.get('https://api.kyusillid.online/api/get-activitylist/' + sourcetopicitem.topic_id)
     .then(response => {
       setClassActivitylist(response.data)
     })
