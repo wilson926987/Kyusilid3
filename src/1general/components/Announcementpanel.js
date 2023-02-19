@@ -56,7 +56,7 @@ function Announcementpanel({announcementitem , forcerefresh}) {
   const postnow = async ()=>{
   
 
-  await axios.put('https://api.kyusillid.online/api/updateannouncement/' , {"an_id" : announcementitem.announcementitem.an_id}).then(
+  await axios.put('https://api.kyusillid.online/api/updateannouncement' , {"an_id" : announcementitem.announcementitem.an_id}).then(
     forecerefreshHandler()
   ).catch();
 
