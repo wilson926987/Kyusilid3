@@ -18,9 +18,6 @@ function Announcementpanel({announcementitem , forcerefresh}) {
   const url = userinfo.user.usertype ==='prof' ?  'https://api.kyusillid.online/api/get-announcement/' : 'https://api.kyusillid.online/api/get-announcementforstudent/'
   
  
-
-
- 
  
   const postcomments = async (e)=>{
     
@@ -47,9 +44,6 @@ function Announcementpanel({announcementitem , forcerefresh}) {
       });
 
       setcommentinput("");
-  
-  
-      
     }
   }
 
@@ -60,12 +54,29 @@ function Announcementpanel({announcementitem , forcerefresh}) {
     forecerefreshHandler()
   ).catch();
 
-
-
-
   }
 
   const [editmenu, setedditmenu] = useState(false);
+
+  const confirmdelete = async (e)=>{
+    if(window.confirm('delete this post?') === true){
+      await axios.delete('https://api.kyusillid.online/api/deleteannouncement/' + e).then(
+        forecerefreshHandler()
+      ).catch();
+
+      await axios.get(url + currentclass.classes_id)
+      .then(response => {
+        setannouncementlist(response.data)
+       
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    
+    }
+
+
+  }
 
 
 
@@ -83,9 +94,9 @@ function Announcementpanel({announcementitem , forcerefresh}) {
               </div>
               <div className='flex'>
                 <h6>Created {announcementitem !== undefined  && announcementitem.announcementitem.created_at} by {announcementitem !== undefined  && announcementitem.announcementitem.firstname} { announcementitem !== undefined  && announcementitem.announcementitem.lastname}</h6>
-                  <div className='marginleft12 relative'> <AiFillEdit onClick={()=>{setedditmenu(!editmenu)}}/>
-                    {editmenu && <div className='absolute tertiary editmenu  borderradius-md'> <ul><li className='padding12 borderradius-md'>edit</li> <li className='padding12 borderradius-md'>delete</li></ul> </div>  }
-                  </div>
+                 {userinfo.user.usertype ==='prof' &&  <div className='marginleft12 relative'> <AiFillEdit onClick={()=>{setedditmenu(!editmenu)}}/>
+                    {editmenu && <div className='absolute tertiary editmenu  borderradius-md'> <ul><li className='padding12 borderradius-md'>edit</li> <li className='padding12 borderradius-md' onClick={()=>{ setedditmenu(!editmenu) ;confirmdelete(announcementitem.announcementitem.an_id) }}>delete</li></ul> </div>  }
+                  </div>}
               </div>
             </div>
         

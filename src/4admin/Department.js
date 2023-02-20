@@ -53,7 +53,7 @@ function Department() {
       <div>
       <div className='col-lg-12 primary borderradius-lg adminheader flex'>
         <div className='lighttext'>
-          <h2> </h2>
+          <h2> {currentdept!== undefined && currentdept.dep_name}</h2>
           <h4 className='margintop12'>School year : 2022 - 2023 , 1st sem</h4>
          
         </div>
@@ -65,6 +65,8 @@ function Department() {
             <div class="classnav tertiary borderradius-md dbpanelmargin">
               <ul>
                 <li class={`classnavitem ${isactive('department') &&' classnav-active' }`} onClick={()=>{navigate('/kyusilidAdmin/department')}}>  Overview </li>
+                <li><hr/></li>
+                <li class="classnavitem " onClick={()=>{navigate('admin_announcements')}}>  Announcements </li>
                 <li><hr/></li>
                 <li class={`classnavitem ${isactive('subjects') &&' classnav-active' }`} onClick={()=>{setaccountsnav(false);setclassesnav(false); setsubjectnav(!subjectnav) ;setcurrentpage('subjects')}}>  Subjects</li>
                 <li><hr/></li>
@@ -104,7 +106,7 @@ function Department() {
                 }
                
                 <li class="classnavitem " onClick={()=>{navigate('eventcalendar')}}>  Event calendar </li>
-          
+              
          
               </ul>
             </div>

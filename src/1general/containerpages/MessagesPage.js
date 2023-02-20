@@ -1,10 +1,13 @@
 
 
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { currentclassContext } from "../../Globalcontext";
 
 function MessagesPage() {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
+
+  const {currentclass} = useContext(currentclassContext)
 
   const sendMessage = () => {
     setMessages([
@@ -20,10 +23,13 @@ function MessagesPage() {
     setMessage("");
   };
 
+  useEffect(()=>{
+    console.log(currentclass)
+  })
 
-  // const enterbutton= ()=>{
-  //   alert('')
-  // }
+
+
+ 
 
   return (
 
@@ -33,7 +39,7 @@ function MessagesPage() {
     <h2>Classes</h2>
     <div className="group-names-container secondary borderradius-md">
       <img src="https://www.w3schools.com/howto/img_avatar.png" alt="avatar" className="avatar"></img>
-      <h3>IPT 101</h3>
+      <h3>{currentclass !== undefined && currentclass.sub_name}</h3>
      </div>
     
     </div>
@@ -43,7 +49,7 @@ function MessagesPage() {
 
     <div className="container-message">
       <div className="header-message primary borderradius-md">
-        <h1>IPT 101</h1>
+        <h1>{currentclass !== undefined && currentclass.sub_name}</h1>
       </div>
       <section className="messages-section">
         {messages.map((message, index) => (

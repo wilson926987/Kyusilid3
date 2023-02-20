@@ -2,7 +2,7 @@ import React from 'react'
 import {HiSpeakerphone} from 'react-icons/hi'
 import Avatar from '../../assets/images/avatar.jpg'
 
-function Adminpostpanel() {
+function Adminpostpanel({item}) {
   return (
     <div className='adminpostpanel borderradius-md'>
       <div className='adminposticons'>
@@ -16,13 +16,13 @@ function Adminpostpanel() {
       </div>
       <div>
           
-                <h5>Admin Juan delaCruz</h5>
-                <p className='smallfont'>posted on December 25, 2022</p>
+                <h5>{item.title} {item.firstname} {item.middle} {item.lastname} {item.suffix}</h5>
+                <p className='smallfont'>posted on {item.created_at}</p>
                
       
 
           <div className='adminpostcontent margintop4'>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque laudantium velit officiis placeat maiores iure dolores blanditiis cumque itaque veritatis!</p>
+            <p>{item.announcement_content}</p>
           </div>
 
     

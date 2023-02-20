@@ -25,8 +25,8 @@ function Departmentoverview() {
 
 
     <div className="row">
-    <div className="col-lg-12 ">
-      <div className="tertiary borderradius-md paneladd" >
+    <div className="col-lg-12 displaynone ">
+      <div className="tertiary borderradius-md paneladd " >
         <div className='area'><AreaChart></AreaChart></div>
         </div> 
     </div>

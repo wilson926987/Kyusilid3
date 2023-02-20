@@ -36,7 +36,7 @@ function MyclassesDefault() {
  
     {upcomingclasses.length > 0 && 
     <div>
-    <h4 className='title'>Upcoming</h4>
+    <h4 className='title'>Classes today</h4>
 
 
     <div className='classcontainer'>

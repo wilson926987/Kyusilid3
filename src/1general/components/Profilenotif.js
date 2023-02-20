@@ -106,7 +106,11 @@ function Profilenotif() {
             }
         
         </div>
-        <div className="notificationicon"> <GrMail  onClick={()=>{navigate('messages')}}/></div>
+
+        {userinfo.user.usertype !== 'admin' && 
+        <div className="notificationicon"> <GrMail  onClick={()=>{navigate('messages')}}/></div> }
+
+
         <div className='profilenotifcontent'>
              <h5>{userinfo.user.acc_username}</h5>
              <h6>{userinfo.temp}</h6>
@@ -122,7 +126,9 @@ function Profilenotif() {
                 </div>
                 <div className='profilemodal background borderradius-md'>
                         <img src={Profilepic} alt=""/>
-                    <button className='secondary commonbutton' onClick={ gotoprofile}>Go to Account</button>
+
+                        {userinfo.user.usertype !== 'admin' && <button className='secondary commonbutton' onClick={ gotoprofile}>Go to Account</button>}
+                    
                     <button className='secondary commonbutton' onClick={logout}>Logout</button>
 
                 </div>
