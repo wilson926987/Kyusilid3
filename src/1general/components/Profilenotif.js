@@ -8,31 +8,27 @@ import { useLocation } from 'react-router-dom'
 import {GrMail} from 'react-icons/gr'
 import { useNavigate } from 'react-router-dom'
 import { userInfoContext } from '../../Globalcontext'
+import {RiSunFill ,RiMoonFill} from 'react-icons/ri'
 
 
 
 
 function Profilenotif() {
     const {theme, settheme} = useContext(themeContext);
-    const [themecontainer, setthemecontainer] = useState(false);
     const [searchbar, setsearchbar] = useState(false);
     const [searchfilled,setfilled] = useState(false);
     const [search, setsearch]= useState('');
     const [currentpage, setcurrentpage] = useState();
     const location = useLocation();
     const {userinfo, setuserinfo}= useContext(userInfoContext);
-    const [theme1 , settheme1] = useState('themeactive');
-    const [theme2, settheme2] = useState();
+ 
 
     const [profilepanel, setprofilepanel] = useState(false);
 
 
     const navigate = useNavigate()
 
-    const togglecontainer = ()=>{
-        setthemecontainer(!themecontainer)
-        console.log('hello');
-    }
+   
 
     const toggleprofilepanel= ()=>{
         setprofilepanel(!profilepanel)
@@ -59,56 +55,38 @@ function Profilenotif() {
         search.length>0 ? setfilled(true) : setfilled(false)
     },[search])
   
-    const switchtheme =(e)=>{
-       if(e==='default'){
-        settheme1('themeactive');
-        settheme2('')
-        settheme('default')
-       }else{
-        settheme1('')
-        settheme2('themeactive');
-        settheme('dark');
-       }
-    }
+    const switchtheme =()=>{
 
-
-
-    useEffect(()=>{   
-        setcurrentpage(
-            temp(location.pathname)
-        );
-    },[location])
-
-    function temp(r){
-        switch(r){
-            case '/' : return "Dashboard";
-            case '/classes' : return 'Classes';
-            case '/archived' : return 'Archived' ;
-            default: return 'Classname' ; 
+        if(theme ==='dark'){
+            settheme('default');
+        }else{
+            settheme('dark')
         }
+    
     }
+
+
+
+    
+
+   
 
   return (
     <div className='profilenotif'>
      
         
         
-        <div className='notificationicon marginleftauto' >  <BsFillGearFill onClick={togglecontainer}/>
-            {themecontainer && 
-                    <div>
-                   
-                    <div className="modalbackground" onClick={togglecontainer}></div>
-                    <div className='themegroupbody background'>
-                        <div className={`themeitem ${theme1}`} onClick={()=>{switchtheme('default')}} > <img src={RGB} alt="" /> </div>
-                        <div className={`themeitem ${theme2}`} onClick={()=>{switchtheme('dark')}}> <div className='darkicon'></div></div>
-                    </div>
-                    </div>
-            }
+        <div className='notificationicon marginleftauto' >
+            {theme==='default' ?
+            <RiSunFill onClick={switchtheme}/> : <RiMoonFill onClick={switchtheme}/>    
+        }
+         
+
+            
         
         </div>
 
-        {userinfo.user.usertype !== 'admin' && 
-        <div className="notificationicon"> <GrMail  onClick={()=>{navigate('messages')}}/></div> }
+    
 
 
         <div className='profilenotifcontent'>

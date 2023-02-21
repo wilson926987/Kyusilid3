@@ -294,9 +294,17 @@ function toggleStudentselect(studentitem){
                      <li className={`classnavitem ${isactive('/classes/sampleclass/info') && 'classnav-active'}`} onClick={()=>{navigate('info')}}>  Class info </li>
                      <li><hr /></li>
                      {userinfo.usertype=== 'prof' &&
+                        <>
                           <li className={`classnavitem ${isactive('/classes/sampleclass/marks') && 'classnav-active'}`} onClick={()=>{navigate('marks')}}> Marks </li>
-                     
+                          <hr/>
+                     </>
                      }
+                     <li className={`classnavitem ${isactive('/classes/sampleclass/messages') && 'classnav-active'}`} onClick={()=>{navigate('messages')}}> Messages </li>
+                 
+                     
+
+
+
                      
                   
                    </ul>

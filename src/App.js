@@ -47,6 +47,8 @@ import Accountsstud from './4admin/Accountsstud';
 import SectionContainer from './4admin/SectionContainer';
 import SampleSection from './4admin/SampleSection';
 import Adminannouncements from './4admin/Adminannouncements';
+import CreateClass from './4admin/CreateClass';
+import Createproff from './4admin/Createproff';
 
 
 
@@ -79,11 +81,12 @@ function App() {
                         <Route path='sourcematerials' element={<SourceMaterials/>} />
                         <Route  path='attendance' element={<Attendance/> }/>
                         <Route path= 'activity/activityId' element={<ClassActivity/>} />
+                        <Route path='messages' element={<MessagesPage/>} />          
                   </Route>
                      
                 <Route path={'archived'} element={<Archived/>} /> 
                 <Route path={'profile'} element={<Profiilepage/> } />
-                <Route path={'messages'} element={<MessagesPage/>} />              
+                    
               </Route> 
               <Route path='/kyusilidAdmin' element={userinfo!=null ? <AdminContainer/> : <Login/>}>
                 <Route path='' element={<AdminDashboard/>} />
@@ -99,7 +102,8 @@ function App() {
                   <Route path='accounts_prof' element={<Accountsprof/>}></Route>
                   <Route path='accounts_stud' element ={<Accountsstud/>}></Route>
                   <Route path='eventcalendar' element={<Events/>}></Route>
-                  
+                  <Route  path='createclass' element={<CreateClass/>}/>
+                  <Route  path='createacc_prof' element={<Createproff/>}/>
                 </Route>
                 <Route path='adminlog' element={<Adminlog/>}/>
              

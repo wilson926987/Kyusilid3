@@ -1,31 +1,63 @@
 
 
-import React, { useContext, useEffect, useState } from "react";
-import { currentclassContext } from "../../Globalcontext";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { currentclassContext, userInfoContext } from "../../Globalcontext";
+import {MdSend} from 'react-icons/md'
+import axios from "axios";
+import Chatmessage from "../components/Chatmessage";
+
 
 function MessagesPage() {
+  const {currentclass} = useContext(currentclassContext)
+  const {userinfo} = useContext(userInfoContext);
+  const bottomRef = useRef(null);
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
 
-  const {currentclass} = useContext(currentclassContext)
+  useEffect(()=>{
+      axios.get('https://api.kyusillid.online/api/getmessages/' + currentclass.classes_id).then(response=>
+        setMessages(response.data)
+       
+      ).catch();
+      console.log("classesid: " + currentclass.classes_id);
+      console.log(messages)
+  },[])
 
-  const sendMessage = () => {
-    setMessages([
-      ...messages,
-      {
-        text: message,
-        time: new Date().toLocaleTimeString(),
-        name: "You",
-        profilePic: "https://i.pravatar.cc/50",
-        isOwn: true
+
+
+  const handlesubmit = async ()=>{
+
+    if(message !== undefined && message !== '' ){
+      const temp={
+      "acc_id" : userinfo.user.acc_id,
+      "classes_id" : currentclass.classes_id,
+      "message_content" : message 
       }
-    ]);
-    setMessage("");
+
+      await axios.put('https://api.kyusillid.online/api/createmessage' , temp)
+      .then( response=>
+        setMessages([...messages , response.data])
+
+      ).catch();
+      setMessage('')
+    }
+    
+  }
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      handlesubmit();
+    }
   };
 
-  useEffect(()=>{
-    console.log(currentclass)
-  })
+  useEffect(() => {
+    // 👇️ scroll to bottom every time messages change
+    bottomRef.current?.scrollIntoView({behavior: 'smooth'});
+  }, [messages]);
+
+ 
+
+  
 
 
 
@@ -33,58 +65,33 @@ function MessagesPage() {
 
   return (
 
+    <div className="messagespage">
 
-    <div className="main-message-container">
-    <div className="sidebar-message primary borderradius-md">
-    <h2>Classes</h2>
-    <div className="group-names-container secondary borderradius-md">
-      <img src="https://www.w3schools.com/howto/img_avatar.png" alt="avatar" className="avatar"></img>
-      <h3>{currentclass !== undefined && currentclass.sub_name}</h3>
-     </div>
-    
-    </div>
+      <div className="width100 row">
 
-
-
-
-    <div className="container-message">
-      <div className="header-message primary borderradius-md">
-        <h1>{currentclass !== undefined && currentclass.sub_name}</h1>
-      </div>
-      <section className="messages-section">
-        {messages.map((message, index) => (
-          <div
-            className={
-              message.isOwn ? "message right" : "message left"
-            }
-            key={index}
-          >
-            {!message.isOwn && (
-              <img src={message.profilePic} alt="Profile Pic" />
-            )}
-            <div className="message-info">
-              <h4>{message.name}</h4>
-              <p>{message.text}</p>
-              <span>{message.time}</span>
-            </div>
-            {message.isOwn && (
-              <img src={message.profilePic} alt="Profile Pic" />
-            )}
-          </div>
+        {messages.map((item, key)=>(
+          <Chatmessage key={key}  item={item}/>
         ))}
-      </section>
-      <section className="input-section">
-        <input
-          type="text"  
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          
-          // onKeyDownCapture={enterbutton}
-        />
-        <button className="btn-message primary borderradius-md" onClick={sendMessage}>Send</button>
-      </section>
+        <div ref={bottomRef}></div>
+       
+      
+      </div>
+
+  
+        <div className="relative">
+        <textarea name="Text1"  cols='1' rows="2"  placeholder='Enter comment'  value={message} className='commontextarea primaryborder margintop12' onChange={(e)=> {setMessage(e.target.value)}} onKeyDown={handleKeyDown}  ></textarea>
+           
+           <div className='sendbutton' onClick={handlesubmit} >  <MdSend/></div> 
+        </div>
+        
+       
+
+      
+      
     </div>
-  </div>
+
+
+   
   );
 }
 

@@ -2,7 +2,8 @@ import axios from 'axios'
 import React, { useState, useEffect, useContext } from 'react'
 import { Outlet , useNavigate , useLocation, useOutletContext} from 'react-router-dom'
 import { currentdeptContext , userInfoContext , departmentsContext , deptInfoContext} from '../Globalcontext'
-
+import {BiEdit} from 'react-icons/bi'
+import {FaUpload} from 'react-icons/fa'
 
 
 function Department() {
@@ -11,6 +12,7 @@ function Department() {
     const [classesnav, setclassesnav] = useState(false)
     const [accountsnav, setaccountsnav] = useState(false)
     const [currentpage, setcurrentpage] = useState();
+    const [creatclassmodal, setcreateclassmodal] = useState(false);
     const location = useLocation()
     const {currentdept} = useContext(currentdeptContext);
     const [departmentinfo, setdepartmentinfo] = useState({}
@@ -83,7 +85,7 @@ function Department() {
                 }
                
                 <li class={`classnavitem ${isactive('sections') &&' classnav-active' }`} onClick={()=>{setaccountsnav(false); setsubjectnav(false); setclassesnav(!classesnav) ;setcurrentpage('sections')}} >  Classes</li>
-                <li><hr/></li>
+                <li><hr/></li> 
               {classesnav&&
                   <><li class="classnavsubitem" onClick={()=>{navigate('sections')}}>4th year</li>
                   <li><hr/></li>
@@ -112,11 +114,9 @@ function Department() {
             </div>
   
             <div className="tertiary flex  margintop12 borderradius-md padding12 adminupdatepanel">
-              <button className='commonbutton secondary lighttext width100'>Update Class list</button>
+              <button className='commonbutton secondary lighttext width100'  onClick={()=>{setcreateclassmodal(true)}}>Update Class list</button>
               <button className='commonbutton secondary lighttext width100'>Update Student list</button>
               <button className='commonbutton secondary lighttext width100'>Update Professor list</button>
-  
-     
             </div>
         </div>
         <div className="col-lg-9 margintop12">
@@ -124,12 +124,24 @@ function Department() {
           <deptInfoContext.Provider value ={{departmentinfo, setdepartmentinfo}}>
           <Outlet />
           </deptInfoContext.Provider>
-        
-     
-           
+             
   
         </div>
       </div>
+
+
+     {creatclassmodal &&
+      <div className='adminmodal' > 
+      <div className='modalbackground-lgt' onClick={()=>{setcreateclassmodal(false)}}>
+
+      </div>
+      <div className='tertiary borderradius-md padding12 modal-body flex'>
+          <div className='sideoption borderradius-md'onClick={()=>{navigate('createclass') ; setcreateclassmodal(false)}} > <BiEdit/><h2>Manual Adding</h2></div>
+          <div className='sideoption borderradius-md'> <FaUpload/><h2>Upload file</h2></div>
+      </div>
+          
+</div>
+     }
    
   
   

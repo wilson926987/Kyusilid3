@@ -1856,6 +1856,32 @@ padding: 12px;
   padding: 12px;
 }
 
+.commontextbox{
+  width: 100%;
+  padding: 4px 12px;
+  border-radius: 4px;
+  margin: 8px;
+}
+
+.commontextboxplaceholder{
+  position:absolute;
+  pointer-events: none;
+  padding: 0px 14px;
+  transition: .6s;
+}
+
+.textplaceholder-lg{
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
+}
+.textplaceholder-sm{
+  top: 15%;
+  left: -10px;
+  transform: translateY(-50%) scale(.7);
+
+}
+
 .adminupdatepanel{
   align-items: center;
   justify-content: center;
@@ -1901,6 +1927,148 @@ padding: 12px;
 .infobox:hover .infobox-content{
   display: flex !important;
 }
+
+
+.messagespage > div:first-child{
+  max-height: 800px;
+  overflow: auto;
+
+
+}
+
+.chatmessage{
+  display: flex;
+}
+
+
+
+.mychat .chatmessage{
+  flex-direction: row-reverse;
+  margin-left: auto;
+}
+
+.mychat .chatdate{
+  display: none;
+}
+.chatdate{
+  margin-left: auto;
+}
+
+.mychat .chatmessagecontent h5{
+  margin-left: auto;
+}
+
+.mychat .chatmessagecontent p{
+  text-align: right;
+}
+
+.chatmessage img{
+  height: 45px;
+  width: 45px;
+  border-radius: 50%;
+  margin:  0px 12px;
+  
+}
+
+.chatmessage> p{
+  margin: auto;
+}
+
+.chatmessagecontent{
+  max-width: 70%;
+
+}
+.chatmessagecontent h5{
+  margin-right:  12px;
+}
+
+.deletechat{
+  margin-top: 12px;
+  margin-right: 20px;
+  display: none;
+ 
+}
+
+.chatmessage:hover .deletechat{
+  display: block;
+}
+
+.adminmodal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 12;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.288);
+
+}
+
+
+
+.modal-body{
+  height: 400px;
+  width: 700px;
+  margin-bottom: 100px;
+  
+  animation:  fadein .6s;
+  position: absolute;
+  z-index: 13;
+
+}
+
+.modal-body .sideoption{
+  width: 50%;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 80px;
+}
+
+.sideoption svg{
+  font-size: 70px;
+  transition: none;
+}
+
+.default .sideoption:hover{
+  background-color: var(--defaultprimary);
+}
+.dark .sideoption:hover{
+  background-color: var(--darkthemeprimary);
+}
+
+.default .sideoption:hover h2{
+  color: white;
+}
+
+.default .sideoption:hover svg{
+  fill : white;
+}
+
+
+
+
+
+@keyframes fadein{
+  0%{
+    transform: translateY(-20%);
+    opacity: 0;
+  }
+  100%{
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+
+
+
+
 
 
 
