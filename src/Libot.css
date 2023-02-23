@@ -138,206 +138,166 @@
 }
 
 
-
-.question_form{
-	background-color:#d5d1e9;
-	height: 100%;
-	padding-bottom: 30px;
-
-}
-
-.section{
-	margin: auto;
-	width: 50%;
-}
-
-.question_form_top{
-	background-color: white;
-	border-top: 8px solid rgb(103, 58, 183);
-	border-radius: 8px;
-	padding: 30px 25px;
-	text-transform: capitalize;
-
-}
-
-.question_form_top_name{
-	box-sizing: border-box;
-	font-family: 'Google Sans' ,Roboto,Arial,sans-serif;
-	font-size: 32px;
-	font-weight: 400;
-	line-height: 40px;
-	line-height: 135%;
-	width: 100%;
-	border: none;
-	outline: none;
-	border-bottom: 1px solid #f4f4f9;
-	color: black;
-	height: 35px;
-
-}
-
-.question_form_top_desc{
-	box-sizing: border-box;
-	margin-top: 10px;
-	font-family: 'Google Sans' ,Roboto,Arial,sans-serif;
-	font-size: 13px;
-	font-weight: 400;
-	line-height: 40px;
-	width: 100%;
-	border: none;
-	outline: none;
-	border-bottom: 1px solid #f4f4f9;
-	color: black;
-	height: 20px;
-
-}
-
-.AccordionSummaryaria{
-	width:100%;
-
-
-}
-
-.saved_questions_typo{
-	font-size:15px;
-	font-weight:400;
-	letter-spacing:.1px;
-	line-height:24px;
-	padding-bottom:8px;
-
-}
-
-
-.App {
-	font-family: sans-serif;
+/*-----------Quiz-----------*/
+.QuizData { 
+	background: #6893ee;
+	height: 160px;
 	text-align: center;
-  }
-  
-  .container-message {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	height: 100vh;
 	width: 70%;
-	max-width: 70vw;
-  }
-  
-  .header-message {
-	width: 100%;
-	
-	color: #fff;
-	padding: 10px;
-	text-align: center;
-  }
-  
-  .messages-section {
-	width: 100%;
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	padding: 20px;
-	overflow-y: scroll;
-	height: 60%;
-  }
-  
-  .message {
-	display: flex;
-	margin-bottom: 20px;
-  }
-  
-  .message img {
-	width: 50px;
-	height: 50px;
-	border-radius: 50%;
-	margin-right: 20px;
-  }
-  
-  .message-info {
-	display: flex;
-	flex-direction: column;
-  }
-  
-  .input-section {
-	width: 100%;
-	display: flex;
-	padding: 20px;
-	box-sizing: border-box;
-  }
-  
-  .input-section input[type="text"] {
-	flex-grow: 1;
-	padding: 10px;
-	font-size: 16px;
-	margin-right: 10px;
-  }
-  
-  .btn-message {
-	padding: 10px 20px;
-	background-color: #333;
-	color: #fff;
-	border: none;
-	cursor: pointer;
-  }
-  
-  .message.right {
-	display: flex;
-	flex-direction: row-reverse;
-	margin-bottom: 20px;
-  }
-  
-  .main-message-container {
-	display: flex;
-	flex-wrap: wrap;
-  }
-  
-  .sidebar-message {
-	margin-right: 50px;
-	width: 100%;
-	max-width: 310px;
-	border: 1px solid black;
-	height: 660px;
-  }
-  
-  .sidebar-message h2 {
-	padding-left: 20px;
-  }
-  
-  .group-names-container {
-	border: 1px solid black;
-	height: 10%;
-	width: 90%;
-	max-width: 270px;
-	display: inline-flex;
-	margin-left: 10px;
-	margin-top: 20px;
-	
-  }
-  
-  .group-names-container h3 {
-	padding-left: 30px;
-	padding-top: 20px;
-	color: white;
-  }
-  
-  .group-names-container img {
-	margin-left: 10px;
-	margin-top: 5px;
-	height: 50px;
-	width: 50px;
-	border-radius: 50%;
-  }
-  
-  @media only screen and (max-width: 400px) {
-	.container-message {
-	  width: 100%;
-	}
-  
-	.sidebar-message {
-	  width: 100%;
-	}
-  
-	.group-names-container {
-	  width: 100%;
-	  padding-top: 20px;
-	}
+	border-radius: 20px;
+	margin-left: 15%;
 }
+.Data{ 
+	padding-top: 12px;
+}
+.QuizData input{ 
+	text-decoration: none;
+	background: none;
+	height: 60px;
+	width: 700px;	
+	padding: 0px 5px 0px 10px;
+	border: none;
+	outline: none;
+	border-bottom: 2px solid #fff;
+	border-radius: 10px;
+	font-size: 20px;
+	color: black;
+}
+.Ques{ 
+	text-align: center;
+	margin-top: 20px;
+	height: 150px;
+	width: 70%;
+	margin-left: 15%;
+	border-radius: 20px;
+}
+.Ques input{
+	text-decoration: none;
+	background: none;
+	height: 60px;
+	width: 600px;	
+	border: none;
+	border-radius: 10px;
+	border: none;
+	outline: none;
+	border-bottom: 2px solid #fff;
+	font-size: 16px;
+}
+.Lahaat{ 
+	padding-top: 30px;
+}
+.Tion{ 
+	padding-top: 12px;
+}
+.All{ 
+	background: #b5caf8;
+	width: 1180px;
+	margin-left: 15%;
+	margin-top: 10px;
+	font-size: 16px;
+	border: none;
+	outline: none;
+	border-bottom: 2px solid #fff;
+	border-radius: 10px;
+}
+.All .textt{
+	text-decoration: none;
+	background: none;
+	height: 60px;
+	width: 700px;	
+	border: none;
+	outline: none;
+	border-bottom: 2px solid #fff;
+	border-radius: 10px;
+	font-size: 20px;
+	color: black;
+	margin-left: 10%;
+}
+.All .Opt{ 
+	text-decoration: none;
+	background: none;
+	height: 30px;
+	width: 100px;	
+	border: none;
+	outline: none;
+	border-bottom: 2px solid #fff;
+	border-radius: 10px;
+	font-size: 20px;
+	color: black;
+	margin-left: 5%;
+}
+.All .Opt2{ 
+	text-decoration: none;
+	background: none;
+	height: 30px;
+	width: 500px;	
+	border: none;
+	outline: none;
+	border-bottom: 2px solid #0004fa;
+	border-radius: 10px;
+	font-size: 20px;
+	color: black;
+	margin-left: 20%;
+	margin-top: 10px;
+}
+.All .Opt3{ 
+	text-decoration: none;
+	background: none;
+	height: 20px;
+	width: 80px;	
+	border: 2px solid #fa0000;
+	border-radius: 10px;
+	font-size: 14px;
+	color: black;
+	margin-left: 2%;
+	margin-top: 10px;
+}
+.All .Opt4{ 
+	text-decoration: none;
+	background: #3171fc;
+	height: 30px;
+	width: 200px;	
+	border-radius: 10px;
+	font-size: 14px;
+	border: none;
+	color: black;
+	margin-left: 64%;
+	margin-top: 10px;
+}
+.All .Opt5{ 
+	text-decoration: none;
+	background: #4b72c5;
+	height: 30px;
+	width: 200px;	
+	border-radius: 10px;
+	font-size: 14px;
+	border: none;
+	color: black;
+	margin-left: 20%;
+	margin-top: 10px;
+}
+.All .Opt6{ 
+	text-decoration: none;
+	background: #4b72c5;
+	height: 30px;
+	width: 200px;	
+	border-radius: 10px;
+	font-size: 14px;
+	border: none;
+	color: black;
+	margin-left: 80%;
+	margin-top: 10px;
+}
+.All .Opt7{ 
+	text-decoration: none;
+	background: #4b72c5;
+	height: 30px;
+	width: 200px;	
+	border-radius: 10px;
+	font-size: 14px;
+	border: none;
+	color: black;
+	margin-left: 40%;
+	margin-top: 10px;
+}
+

@@ -6,7 +6,7 @@ import LoginHistoryProf from '../1general/components/LoginHistoryProf';
 
 
 
-function Adminlog() {
+function AdminAddClass() {
 
   const [accountsnav, setaccountsnav] = useState(false)
 
@@ -22,14 +22,19 @@ function Adminlog() {
          <div className="col-lg-3 margintop12">
             <div class="classnav tertiary borderradius-md dbpanelmargin">
               <ul>
-                <li class={`classnavitem ${isactive('subjects') &&' classnav-active' }`} > Log in History</li>
+                <li class={`classnavitem ${isactive('subjects') &&' classnav-active' }`} > Add Classes</li>
                 <li><hr/></li>
                
-                   <><li class="classnavsubitem" >Professors</li>
+                   <><li class="classnavsubitem" >1st Year</li>
                    <li>
                     <hr/></li>
-                   <li class="classnavsubitem" >Student</li>
+                   <li class="classnavsubitem" >2nd Year</li>
                    <li><hr/></li>
+                   <li class="classnavsubitem" >3rd Year</li>
+                   <li><hr/></li>
+                   <li class="classnavsubitem" >4th Year</li>
+                   <li><hr/></li>
+                
                    </>
               
               </ul>
@@ -50,4 +55,4 @@ function Adminlog() {
   
 
 
-export default Adminlog
+export default AdminAddClass

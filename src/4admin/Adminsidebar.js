@@ -42,7 +42,7 @@ function Adminsidebar() {
         </div>
      
     }
-    <div className= {`sidebarbody borderradius-lg  primary ${theme==='default' ? 'darktext lightinset' :'lighttext'}   ${!sidebar ? ' sidebarnotactive' : 'sidebaractive'}` }>
+<div className= {`sidebarbody borderradius-lg  primary ${theme==='default' ? 'darktext lightinset' :'lighttext'}   ${!sidebar ? ' sidebarnotactive' : 'sidebaractive'}` }>
 <div className='sidebardesign'></div>
 <img src={kyusilidlogo} alt=""  className='rounded'/>
 {sidebar && <h4>Kyusilid</h4>}
@@ -54,6 +54,8 @@ function Adminsidebar() {
              <li key={item.dep_id} className='sidebarmenu' onClick={()=>{setcurrentdept(item);console.log(item); navigate('department')}}> <div className="highlight"></div> <MdBrightness1 className='clear ellipsis'/> {item.dep_name} </li>
         ))}
         <li className='sidebarmenu' onClick={()=>{navigate('adminlog')}}> <div className="highlight"></div> <MdSpaceDashboard /> Admin log</li>
+        <li className='sidebarmenu' onClick={()=>{navigate('adminlog')}}> <div className="highlight"></div> <MdSpaceDashboard /> Add Classes </li>
+        <li className='sidebarmenu' onClick={()=>{navigate('adminlog')}}> <div className="highlight"></div> <MdSpaceDashboard /> Addd Course</li>
 
     </ul>              
 </div>}

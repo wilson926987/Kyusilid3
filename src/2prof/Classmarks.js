@@ -1,16 +1,14 @@
 import React, { useState } from 'react'
 
-function ClassMarkPage() {
+function Classmarks() {
   const [data, setData] = useState([
-    { name: 'Wilson Capistrano', date: '01-24-2023', status: 'Missed', Type: 'Assignment'},
-    { name: 'Ronald Carlo Libot', date: '01-24-2023', status: 'Late', Type:'Assignment' },
-    { name: 'Carlo Acotin', date: '01-24-2023', status: 'On-Time' , Type: 'Assignment'},
-    { name: 'Aira Mae Encarnado', date: '01-24-2023', status: 'On-Time', Type: 'Assignment' },
-    { name: 'Nino Olegario', date: '01-24-2023', status: 'Late', Type: 'Assignment' },
-    { name: 'Melrose Lastimosa', date: '01-24-2023', status: 'Missed', Type: 'Assignment' },
-    { name: 'Cheyt Feliciano', date: '01-24-2023', status: 'On-Time', Type: 'Assignment'},
-    { name: 'Cheyt Feliciano', date: '01-24-2023', status: 'On-Time', Type: 'Assignment'},
-    { name: 'Cheyt Felicianoeuo029403928e0232-0381-280294723987e23ew24234353533259', date: '01-24-2023', status: 'On-Time', Type: 'Assignment'}
+    { name: 'Wilson Capistrano', date: '01-24-2023', status: 'Missed' },
+    { name: 'Ronald Carlo Libot', date: '01-24-2023', status: 'Late' },
+    { name: 'Carlo Acotin', date: '01-24-2023', status: 'On-Time' },
+    { name: 'Aira Mae Encarnado', date: '01-24-2023', status: 'On-Time' },
+    { name: 'Nino Olegario', date: '01-24-2023', status: 'Late' },
+    { name: 'Melrose Lastimosa', date: '01-24-2023', status: 'Missed' },
+    { name: 'Cheyt Feliciano', date: '01-24-2023', status: 'On-Time' }
   ]);
   const [filteredData, setFilteredData] = useState(data);
 
@@ -80,10 +78,9 @@ function ClassMarkPage() {
       <table class="table">
         <thead>
           <tr>
-            <th className=" ellipsis">Name</th>
-            <th>Date</th>
+            <th>Name</th>
+            <th>Date Passed</th>
             <th>Status</th>
-            <th>Type</th>
             <th></th>
 
           </tr>
@@ -91,10 +88,9 @@ function ClassMarkPage() {
         <tbody>
           {filteredData.map((item, index) => (
             <tr key={index}>
-              <td data-label="Name" className='ellipsis name'>{item.name}</td>
+              <td data-label="Name">{item.name}</td>
               <td data-label="Date Passed">{item.date}</td>
               <td data-label="Status">{item.status}</td>
-              <td data-label="Type">{item.Type}</td>
               <td data-label="#">
                 <button class="view">
                   View
@@ -119,4 +115,4 @@ function ClassMarkPage() {
   );
 }
 
-export default ClassMarkPage;
+export default Classmarks;

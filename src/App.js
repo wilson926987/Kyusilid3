@@ -26,6 +26,7 @@ import ClassModules from './2prof/ClassModules';
 import Createnew from './2prof/Createnew';
 import Attendance from './1general/containerpages/Attendance';
 import ClassMarkPage from './1general/containerpages/ClassMarkPage';
+import AdminAddClass from './4admin/AdminAddClass';
 
 
 import AdminContainer from './4admin/AdminContainer';
@@ -67,6 +68,7 @@ function App() {
             <Routes>
             <Route path='/Quiz' element={<Quiz/>} />
             <Route path='/ClassMarkPage' element={<ClassMarkPage/>} />
+            <Route path='/AdminAddClass' element={<AdminAddClass/>} />
               <Route path={'/'} element={userinfo!=null ? <Container/> : <Login/> } > 
                 <Route path={''} element={<Dashboard/>}></Route>  {/*this is the dashboard*/}
                 <Route path={'classes/sampleclass'} element={<ClassContainer/>}>          
@@ -100,11 +102,9 @@ function App() {
                   
                 </Route>
                 <Route path='adminlog' element={<Adminlog/>}/>
-             
-                
-                
-             
+            
               </Route>
+
             </Routes>   
             
               <div className='createNewbutton secondary'>

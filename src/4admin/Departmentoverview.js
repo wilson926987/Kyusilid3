@@ -9,14 +9,11 @@ import { deptInfoContext } from '../Globalcontext';
 
 function Departmentoverview() {
 
- const {departmentinfo} = useContext(deptInfoContext);
+ const departmentinfo = useContext(deptInfoContext);
 
  useEffect(()=>{
     console.log(departmentinfo);
  },[departmentinfo])
-
-
- 
 
 
   return (

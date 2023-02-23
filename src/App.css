@@ -1458,6 +1458,13 @@ background-color: var(--defaultprimary);
 
 .marginleftauto{
   margin-left: auto;
+  width: 250px;
+  height: 35px;
+  border-radius: 50px;
+  font-size: 16px;
+  font-family: 'Century Gothic';
+  text-align: center;
+  border-color: #6893ee;
 }
 
 .marginleft12{
