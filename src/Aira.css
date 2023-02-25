@@ -1,3 +1,4 @@
+
 .all{ 
     background: #6893ee;
     border-radius: 20%;
@@ -95,7 +96,7 @@
     margin-left: 5px;
     margin-top: 3%;
     text-align: center;
-    width: 97%;
+    width: 90%;
     border-collapse: collapse;
     font-family: 'Century Gothic';
     overflow: scroll;
@@ -182,39 +183,277 @@
 .iconn-case{ 
     border-radius: 50px;
     display: block;
+    margin-top: -40px;
 }
 .iconn-case img{ 
     position: relative;
     margin-top: 10px;
     height: 90px;
     width: 90px;
-    margin-left: -130px;
+    margin-left: -100px;
 }
 .iconn-case .boxes { 
-    padding: 20px 50px;
-    display: flex;
+    padding: 20px 10px;
+    display: inline-flex;
     align-items: center;
 }
-
+.iconn-case .boxes a{
+    text-decoration: none;
+}
+.iconn-case .boxes a .linkk:hover{ 
+    background-color: aliceblue;
+}
 .iconn-case .boxes .box{ 
-    padding: 20px 70px;
+    padding: 20px 50px;
     display: flex;
     align-items: center;
 }
 .iconn-case .boxes .box .cards{ 
     width: 300px;
-    height: 150px;
+    height: 120px;
     background: #6893ee;
-    margin: 20px 10px;
-    border-radius: 30px;
+    margin: 20px -25px;
+    border-radius: 10px;
 
 
 }
 .iconn-case .boxes .box .cards h2{ 
-    margin-top: 50px;
+    margin-top: 30px;
     margin-left: 50px;
 }
 .iconn-case .boxes .box .cards h3{ 
     margin-top: 10px;
     margin-left: 50px;
+}
+
+/*Time and Date*/ 
+.boxess{ 
+    margin-left: 5%;
+    margin-top: -220px;
+}
+.box2{ 
+    background-color: #6893ee;
+    height: 30px;
+    width: 1300px;
+    text-align: center;
+    margin-top: 170px;
+    margin-left: 5%;
+    padding-top: 5px;
+
+}
+.box2 h2{ 
+    font-size: 18px;
+    display:inline-flex;
+    padding:0px 10px 0px 19px;
+}
+
+.box3 {
+    padding: 20px;
+    transition: 0.3s ease;
+    width: 220px;
+    height: 150px;
+    border-radius: 10px;
+    background-color: rgba(93, 129, 207, 0.5);
+    margin-top: -180px;
+    margin-left: 40px;
+  }
+  
+.box3:hover {
+    background-color: #6893ee;
+  }
+.box3 h2{ 
+    font-weight: 400;
+    font-size: 14px;
+}
+.box3 img{ 
+    height: 50px;
+    width: 50px;
+    align-items: flex-end;
+}
+
+.box4 {
+    padding: 20px;
+    transition: 0.3s ease;
+    width: 220px;
+    height: 150px;
+    border-radius: 10px;
+    background-color: rgba(93, 129, 207, 0.5);
+    margin-top: -150px;
+    margin-left: 280px;
+  }
+  
+.box4:hover {
+    background-color: #6893ee;
+  }
+.box4 h2{ 
+    font-weight: 400;
+    font-size: 14px;
+}
+.box4 img{ 
+    height: 50px;
+    width: 50px;
+    align-items: flex-end;
+}
+.box4 {
+    padding: 20px;
+    transition: 0.3s ease;
+    width: 220px;
+    height: 150px;
+    border-radius: 10px;
+    background-color: rgba(93, 129, 207, 0.5);
+    margin-top: -150px;
+    margin-left: 280px;
+  }
+  
+.box4:hover {
+    background-color: #6893ee;
+  }
+  .box5 {
+    padding: 20px;
+    transition: 0.3s ease;
+    width: 220px;
+    height: 150px;
+    border-radius: 10px;
+    background-color: rgba(93, 129, 207, 0.5);
+    margin-top: -150px;
+    margin-left: 520px;
+  }
+  
+.box5:hover {
+    background-color: #6893ee;
+  }
+.box5 h2{ 
+    font-weight: 400;
+    font-size: 14px;
+}
+.box5 img{ 
+    height: 50px;
+    width: 50px;
+    align-items: flex-end;
+}
+.box6 {
+    padding: 20px;
+    transition: 0.3s ease;
+    width: 220px;
+    height: 150px;
+    border-radius: 10px;
+    background-color: rgba(93, 129, 207, 0.5);
+    margin-top: -150px;
+    margin-left: 760px;
+  }
+  
+.box6:hover {
+    background-color: #6893ee;
+  }
+.box6 h2{ 
+    font-weight: 400;
+    font-size: 14px;
+}
+.box6 img{ 
+    height: 50px;
+    width: 50px;
+    align-items: flex-end;
+}
+.box7 {
+    padding: 20px;
+    transition: 0.3s ease;
+    width: 220px;
+    height: 150px;
+    border-radius: 10px;
+    background-color: rgba(93, 129, 207, 0.5);
+    margin-top: -150px;
+    margin-left: 1000px;
+  }
+  
+.box7:hover {
+    background-color: #6893ee;
+  }
+.box7 h2{ 
+    font-weight: 400;
+    font-size: 14px;
+}
+.box7 img{ 
+    height: 50px;
+    width: 50px;
+    align-items: flex-end;
+}
+.Dele{ 
+    text-decoration: none;
+    line-height: 30px;
+    width: 40%;
+    background-color: #6893ee;
+    border-radius: 10px;
+    color: black;
+    margin-left: 10px;
+    display:inline-block;
+    font-size: 14px;
+    align-items: center;
+    border: none;
+}
+.Edit{
+    text-decoration: none;
+    line-height: 30px;
+    width: 40%;
+    background-color: #6893ee;
+    border-radius: 10px;
+    color: black;
+    margin-left: 10px;
+    display:inline-block;
+    font-size: 14px;
+    align-items: center;
+    border: none;
+}
+.Savee{
+    text-decoration: none;
+    line-height: 20px;
+    width: 10%;
+    background-color: #6893ee;
+    border-radius: 10px;
+    color: black;
+    margin-left: 5px;
+    display:inline-block;
+    font-size: 14px;
+    align-items: center;
+    border: none;
+}
+.Cancel{
+    text-decoration: none;
+    line-height: 30px;
+    width: 10%;
+    background-color: #6893ee;
+    border-radius: 10px;
+    color: black;
+    margin-left: 10px;
+    display:inline-block;
+    font-size: 14px;
+    align-items: center;
+    border: none;
+}
+.Editext{
+    text-decoration: none;
+    line-height: 45px;
+    width: 45%;
+    background-color: #6893ee;
+    border-radius: 10px;
+    color: black;
+    margin-left: 10px;
+    display:inline-block;
+    font-size: 14px;
+    align-items: center;
+    border: none;
+    margin-top: 5px;
+}
+.Editext .Inputext{ 
+    text-decoration: none;
+	background: none;
+	height: 30px;
+	width: 400px;	
+	border: none;
+	outline: none;
+	border-bottom: 2px solid #fff;
+	border-radius: 10px;
+	font-size: 16px;
+	color: black;
+	margin-left: 5%;
+    margin-top: 10px;
 }

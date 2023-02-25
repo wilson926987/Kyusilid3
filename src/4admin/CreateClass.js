@@ -1,8 +1,13 @@
-import React, { useState } from 'react'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
 import Dropdown from '../1general/formcomponents/Dropdown';
 import Textbox from '../1general/formcomponents/Textbox'
 
 function CreateClass() {
+
+    const[subjectlist, setsubjectlist] = useState([
+        {'value' : '', 'label': ''}
+    ])
  
     const yearoption = [
         {'value' : 1 ,'label' : 1},
@@ -31,11 +36,14 @@ function CreateClass() {
     
     const [sessionname1, setsessionname1] = useState();
     const [sessionname2, setsessionname2] = useState();
+    const [sectionlist, setsectionlist] = useState();
+    const [sec_id, setsec_id] = useState();
     const [yearlvl, setyearlvl] = useState(yearoption[0].value);
     const [day, setday] = useState(dayoption[0].value);
+    const [sub_id , setsub_id] = useState(null);
 
 
-    const handleSubmit = (e)=>{
+    const handleSubmit = async(e)=>{
         e.preventDefault();
 
         const temp = {
@@ -50,13 +58,33 @@ function CreateClass() {
             'sched_from2' :schedfrom2,
             'sched_to2' : schedto2 ,
             'moduleSource' :5,
-            'yearlvl' : yearlvl
+            'yearlvl' : yearlvl,
+            'sub_id' : sub_id,
+            'sec_id' : sec_id,
+            'comment' : classcomment
 
-
-           
         }
-        console.log(temp);
+        console.log(JSON.stringify(temp));
+        await axios.put('https://api.kyusillid.online/api/createclass' , temp).catch();
+
     }
+
+        useEffect(()=>{
+            axios.get('https://api.kyusillid.online/api/getcreateclassvalue/1')
+            .then(response=>
+                {setsubjectlist(response.data.subjectlist.map(function (obj) {
+                    return {'value': obj.sub_id, 'label': obj.sub_code + "-" + obj.sub_name}
+                   }) );
+                   setsectionlist(response.data.sectionlist.map(function (obj){
+                    return {'value' : obj.sec_id, 'label' : obj.sec_name}
+                })) 
+
+                }                  
+            )
+            .catch();
+            console.log(sectionlist)
+        
+        },[])
     
 
 
@@ -93,7 +121,7 @@ function CreateClass() {
 <Textbox 
     value={sessionname2}
     handleChange={setsessionname2}
-    placeholdervalue={'session name 2'}
+    placeholdervalue={'session name 2 (optional)'}
   />
 </div>
 <div className="col-lg-3">
@@ -132,6 +160,38 @@ function CreateClass() {
                               
                             />  
 </div>
+
+<div className="col-lg-6">
+    subject
+<Dropdown
+                                options={subjectlist}
+                                onChangeHandler= {setsub_id}
+                                mainClass= 'dropdownmain primary borderradius-md'
+                                itemClass= 'dropdownitem'
+                               
+                                controlClass='dropdowncontrol'
+                                menuClass='dropdownmenu primary'
+                                controlActiveClass='dropdowncontrolactive'
+                                mainActiveClass='dropdownmain-active'
+                              
+                            />  
+</div>
+<div className="col-lg-6">
+    section
+<Dropdown
+                                options={sectionlist}
+                                onChangeHandler= {setsec_id}
+                                mainClass= 'dropdownmain primary borderradius-md'
+                                itemClass= 'dropdownitem'                           
+                                controlClass='dropdowncontrol'
+                                menuClass='dropdownmenu primary'
+                                controlActiveClass='dropdowncontrolactive'
+                                mainActiveClass='dropdownmain-active'
+                              
+                            />  
+</div>
+
+
 
 
 

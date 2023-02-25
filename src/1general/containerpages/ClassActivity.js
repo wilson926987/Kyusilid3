@@ -4,8 +4,10 @@ import { currentActivityContext , userInfoContext } from '../../Globalcontext'
 import {FaClipboardList} from 'react-icons/fa'
 import {RiBookFill} from 'react-icons/ri'
 import {MdQuiz ,MdAssignment, MdSend} from 'react-icons/md'
-import {BiCommentDetail} from 'react-icons/bi'
+
+import {BsGearFill} from 'react-icons/bs'
 import axios from 'axios';
+import Textbox from '../formcomponents/Textbox';
 
 
 
@@ -14,10 +16,13 @@ function ClassActivity() {
 
   const {currentactivity} = useContext(currentActivityContext);
   const {userinfo} = useContext(userInfoContext);
-  const [responsepage, setresponsepage] = useState(false);
+  const [activitytab ,setactivitytab] = useState( 'default');
 
   const [act_commentlist, set_actcommnentlist] = useState([]);
   const [commentinput, setcommentinput] = useState();
+  const [activitysettings, setactivitysettings] = useState(false);
+  const [edittitle, setedittitle] = useState(currentactivity.activity_title)
+  const [editdescription, seteditdescription] = useState(currentactivity.description);
 
 
   const postcomments = async ()=>{
@@ -39,12 +44,11 @@ function ClassActivity() {
       });
 
       setcommentinput('');
-    }
+    } 
+  }
 
-
-
-  
-
+  const handledit = (e)=>{
+    e.preventDefault();
   }
   
 
@@ -67,7 +71,7 @@ function ClassActivity() {
       <div>
 
         <div className='flex'>
-        <div className={`flex activitytab ${(!responsepage || userinfo.usertype==='stud') ? 'primary' : 'background'}`} onClick={()=>{setresponsepage(false)}}>
+        <div className={`flex activitytab ${(activitytab ==='default' || userinfo.usertype==='stud') ? 'primary' : 'background'}`} onClick={()=>{setactivitytab('default') ; setactivitysettings(false)}}>
        <div className='activityiconcontainer'>  
                       <div className='activityicon tertiary marginright12'>
                         {currentactivity.activitytype==='Material' ?
@@ -85,15 +89,39 @@ function ClassActivity() {
 
        </div>
 
+       
+
 
        {userinfo.usertype ==='prof' && (currentactivity.activity_type !== 'Material') &&
-        <div className= {`flex activitytab ${responsepage ? 'primary' : 'background'}`} onClick={()=>{setresponsepage(true)}}>
+        <div className= {`flex activitytab ${activitytab === 'responses'  ? 'primary' : 'background'}`} onClick={()=>{setactivitytab('responses') ; setactivitysettings(false)}}>
             
          <h4>Responses</h4>
  
         </div>
        
        }
+
+
+{userinfo.usertype === 'prof' &&
+   
+   <div className='flex activitytab background relative' >
+      <div  onClick={()=>{setactivitysettings(!activitysettings)}}>
+      <BsGearFill />
+      </div>
+    
+       {activitysettings && 
+  
+           <div className='activitysettings tertiary borderradius-md'>
+        <ul>
+          <li className='padding12' onClick={()=>{setactivitytab('edit') ; setactivitysettings(false) }}>Edit {currentactivity.activity_type}</li>
+          <li className='padding12'>Delete {currentactivity.activity_type}</li>
+          <li className='padding12'>Post to Source Modules</li>
+
+         </ul>
+         </div>        
+      }
+   </div>  
+   }
 
         <div className="marginleftauto smallfont">
           <p>Date posted : {currentactivity.date_schedule}</p>
@@ -102,7 +130,7 @@ function ClassActivity() {
         </div>
         <hr/>
 
-       {!responsepage ?
+       {activitytab === 'default' ?
         <React.Fragment>
       
 
@@ -176,15 +204,45 @@ function ClassActivity() {
         
         </div>
         </React.Fragment> :
+
+        activitytab ==='responses' ?
         <div>
             <h4>Response here</h4>
+        </div>
+        :
+        <div> 
+          {/* edit activity */}
+
+          <form onSubmit={handledit} >
+            <div className="col-lg-6">
+            <Textbox value={edittitle}  handleChange={setedittitle} placeholdervalue={'new title'}/> 
+            </div>
+
+            <div className="col-lg-6 creatactivitytitle">
+            <textarea name="" id="" cols="30" rows="6" className='primaryborder commontextarea width100 marginleft10'  value={editdescription} placeholder='new description' onChange={(e)=>{seteditdescription(e.target.value)}}></textarea>
+          
+            </div>
+
+          <div className='flex editactivityfooter'>
+           <button type='submit' className='commonbutton secondary lighttext '>Confirm changes</button>
+
+          </div>
+            
+
+
+          </form>
+
+
+
+
+
         </div>
 
       
       
       }
-  
-           
+
+     
   
   
       </div>

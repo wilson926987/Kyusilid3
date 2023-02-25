@@ -137,7 +137,7 @@ function Announcementpanel({announcementitem , forcerefresh}) {
         
         
          <> 
-          <textarea name="Text1"  cols='1' rows="2"  placeholder='Enter comment' className='commontextarea primaryborder margintop12' value={commentinput} onChange={(e)=> setcommentinput(e.target.value)} ></textarea>
+          <textarea name="Text1"  cols='1' rows="2"  placeholder='Enter comment' className='commontextarea tertiary primaryborder margintop12' value={commentinput} onChange={(e)=> setcommentinput(e.target.value)} ></textarea>
            
            <div className='sendbutton' onClick={postcomments}>   <MdSend/></div> 
         

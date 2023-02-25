@@ -1278,6 +1278,21 @@ background-color: var(--defaultprimary);
   font-size: 12px;
 }
 
+.marginleft10{
+  margin-left: 9px;
+}
+
+
+.editactivityfooter{
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.editactivityfooter button{
+  font-size: 17px;
+}
+
 
 .createactivitytitle input[type=text], .createactivitytitle input[type=datetime-local] , .createactivitytitle textarea, .createactivitytitle select
 ,.commontextarea{
@@ -1650,12 +1665,29 @@ padding: 12px;
   margin-top: 20px;
   margin-bottom: 40px;
 }
+
+
 .activitytab{
   padding :4px 12px;
   border-top-left-radius: 8px;
   border-top-right-radius:8px;
   height: 45px;
+  cursor: pointer;
 }
+
+.activitysettings{
+  position: absolute;
+  display: block;
+  width: 230px;
+  top: 40px;
+  left: 0;
+  z-index: 2;
+  box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.75);
+-webkit-box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.75);
+  
+}
+
 
 .submissionpanel{
   padding : 12px;
@@ -1868,9 +1900,11 @@ padding: 12px;
   pointer-events: none;
   padding: 0px 14px;
   transition: .6s;
+  font-style: italic;
 }
 
 .textplaceholder-lg{
+ 
   top: 50%;
   left: 20px;
   transform: translateY(-50%);
@@ -2063,6 +2097,45 @@ padding: 12px;
     transform: translateY(0);
     opacity: 1;
   }
+}
+
+.themeimageminwidth{
+  min-width: 200px;
+
+}
+
+.themeimage{
+  border-width: 2px;
+  border-radius: 8px;
+  height:80px;
+  margin: 6px;
+  overflow: hidden;
+  padding: 8px;
+  
+
+}
+
+
+.themeimage img{
+  height: 100%;
+  width: 100%;
+}
+
+
+.schoolyearbutton{
+  transform:translateY(4px);
+}
+
+.schoolyearoption{
+  position: absolute;
+  top: 30px;
+  z-index: 2;
+  right: 0;
+
+  width: 200px;
+  box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.75);
+-webkit-box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.75);
 }
 
 

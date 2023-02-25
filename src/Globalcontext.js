@@ -30,5 +30,5 @@ export const classAndstudentselectionContext = createContext();
 
 export const forcerefreshContext = createContext();
 export const currentdepartment = createContext();
-
+export const settingsContext = createContext();
 export const deptInfoContext = createContext();

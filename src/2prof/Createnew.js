@@ -343,10 +343,7 @@ const handlecreateactivity=()=>{
                           }
                             
                               </div>
-
-                              </div>
-
-                           
+                              </div>                         
                             </div>
 
 

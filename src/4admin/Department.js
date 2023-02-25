@@ -4,6 +4,7 @@ import { Outlet , useNavigate , useLocation, useOutletContext} from 'react-route
 import { currentdeptContext , userInfoContext , departmentsContext , deptInfoContext} from '../Globalcontext'
 import {BiEdit} from 'react-icons/bi'
 import {FaUpload} from 'react-icons/fa'
+import {GoTriangleDown ,GoTriangleUp} from 'react-icons/go'
 
 
 function Department() {
@@ -17,6 +18,7 @@ function Department() {
     const {currentdept} = useContext(currentdeptContext);
     const [departmentinfo, setdepartmentinfo] = useState({}
     );
+    const [schoolyear, setschoolyear] = useState( '2022 - 2023 , 1st sem')
 
 
     useEffect(()=>{
@@ -41,11 +43,17 @@ function Department() {
 
 
   function isactive(e){
+    console.log(currentpage)
 
     return e===currentpage ? true : false;
 
  }
 
+ const [schoolyearoption, setschoolyearoption] = useState(false);
+const[schoolyearlist, setschoolyearlist] = useState([
+  '2022 - 2023 , 2nd sem', '2022 - 2023 , 1st sem' , '2021 - 2022 , 2nd sem', '2021 - 2022 , 1st sem' ,'2020 - 2021 , 2nd sem'
+
+])
 
 
 
@@ -56,58 +64,70 @@ function Department() {
       <div className='col-lg-12 primary borderradius-lg adminheader flex'>
         <div className='lighttext'>
           <h2> {currentdept!== undefined && currentdept.dep_name}</h2>
-          <h4 className='margintop12'>School year : 2022 - 2023 , 1st sem</h4>
-         
+    <div className="relative">
+    <h4 className='margintop12' onClick={()=>{setschoolyearoption(!schoolyearoption)}}>School year :  {schoolyear} {schoolyearoption ? <GoTriangleUp className='schoolyearbutton'/> : <GoTriangleDown className='schoolyearbutton'/> }</h4>
+        {schoolyearoption && 
+          <div className='schoolyearoption primary borderradius-md'> 
+            <ul>
+              {schoolyearlist.map((item , key)=>(
+                <li className='padding12' onClick={()=>{setschoolyear(item) ; setschoolyearoption(false)}}> <h4>{item}</h4></li>
+              ))}
+              
+            </ul>
+          </div>
+        }
+
+    </div>
         </div>
       </div>
   
   
       <div className="row">
         <div className="col-lg-3 margintop12">
-            <div class="classnav tertiary borderradius-md dbpanelmargin">
+            <div className="classnav tertiary borderradius-md dbpanelmargin">
               <ul>
-                <li class={`classnavitem ${isactive('department') &&' classnav-active' }`} onClick={()=>{navigate('/kyusilidAdmin/department')}}>  Overview </li>
+                <li className={`classnavitem ${isactive('department') &&' classnav-active' }`} onClick={()=>{navigate('/kyusilidAdmin/department') ;setcurrentpage('department')}}>  Overview </li>
                 <li><hr/></li>
-                <li class="classnavitem " onClick={()=>{navigate('admin_announcements')}}>  Announcements </li>
+                <li className={`classnavitem ${isactive('admin_announcements') &&' classnav-active' }`} onClick={()=>{navigate('admin_announcements') ;setcurrentpage('admin_announcements')}}>  Announcements </li>
                 <li><hr/></li>
-                <li class={`classnavitem ${isactive('subjects') &&' classnav-active' }`} onClick={()=>{setaccountsnav(false);setclassesnav(false); setsubjectnav(!subjectnav) ;setcurrentpage('subjects')}}>  Subjects</li>
+                <li className={`classnavitem ${isactive('subjects') &&' classnav-active' }`} onClick={()=>{setaccountsnav(false);setclassesnav(false); setsubjectnav(!subjectnav) ;setcurrentpage('subjects')}}>  Subjects</li>
                 <li><hr/></li>
                 {subjectnav &&
-                   <><li class="classnavsubitem" onClick={()=>{navigate('subjects')}}>4th year</li>
+                   <><li className="classnavsubitem" onClick={()=>{navigate('subjects')}}>4th year</li>
                    <li><hr/></li>
-                   <li class="classnavsubitem" onClick={()=>{navigate('subjects')}}>3rd year</li>
+                   <li className="classnavsubitem" onClick={()=>{navigate('subjects')}}>3rd year</li>
                    <li><hr/></li>
-                   <li class="classnavsubitem" onClick={()=>{navigate('subjects')}}>2nd year</li>
+                   <li className="classnavsubitem" onClick={()=>{navigate('subjects')}}>2nd year</li>
                    <li><hr/></li>
-                   <li class="classnavsubitem" onClick={()=>{navigate('subjects')}}>1st year</li>
+                   <li className="classnavsubitem" onClick={()=>{navigate('subjects')}}>1st year</li>
                    <li><hr/></li>
                    </>
                 }
                
-                <li class={`classnavitem ${isactive('sections') &&' classnav-active' }`} onClick={()=>{setaccountsnav(false); setsubjectnav(false); setclassesnav(!classesnav) ;setcurrentpage('sections')}} >  Classes</li>
+                <li className={`classnavitem ${isactive('sections') &&' classnav-active' }`} onClick={()=>{setaccountsnav(false); setsubjectnav(false); setclassesnav(!classesnav) ;setcurrentpage('sections')}} >  Classes</li>
                 <li><hr/></li> 
               {classesnav&&
-                  <><li class="classnavsubitem" onClick={()=>{navigate('sections')}}>4th year</li>
+                  <><li className="classnavsubitem" onClick={()=>{navigate('sections')}}>4th year</li>
                   <li><hr/></li>
-                  <li class="classnavsubitem" onClick={()=>{navigate('sections')}}>3rd year</li>
+                  <li className="classnavsubitem" onClick={()=>{navigate('sections')}}>3rd year</li>
                   <li><hr/></li>
-                  <li class="classnavsubitem" onClick={()=>{navigate('sections')}}>2nd year</li>
+                  <li className="classnavsubitem" onClick={()=>{navigate('sections')}}>2nd year</li>
                   <li><hr/></li>
-                  <li class="classnavsubitem" onClick={()=>{navigate('sections')}}>1st year</li>
+                  <li className="classnavsubitem" onClick={()=>{navigate('sections')}}>1st year</li>
                   <li><hr/></li>
                   </>
               }
-                <li class={`classnavitem ${isactive('accounts') &&' classnav-active' }`} onClick={()=>{setsubjectnav(false);setclassesnav(false); setaccountsnav(!accountsnav); setcurrentpage('accounts')}}>  Accounts </li>
+                <li className={`classnavitem ${isactive('accounts') &&' classnav-active' }`} onClick={()=>{setsubjectnav(false);setclassesnav(false); setaccountsnav(!accountsnav); setcurrentpage('accounts')}}>  Accounts </li>
                 <li><hr/></li>
                 {accountsnav &&
-                 <><li class="classnavsubitem" onClick={()=>{navigate('accounts_prof')}}>Professors</li>
+                 <><li className="classnavsubitem" onClick={()=>{navigate('accounts_prof')}}>Professors</li>
                  <li><hr/></li>
-                 <li class="classnavsubitem" onClick={()=>{navigate('accounts_stud')}}>Students</li>
+                 <li className="classnavsubitem" onClick={()=>{navigate('accounts_stud')}}>Students</li>
                  <li><hr/></li>                
                   </>
                 }
                
-                <li class="classnavitem " onClick={()=>{navigate('eventcalendar')}}>  Event calendar </li>
+                <li className="classnavitem " onClick={()=>{navigate('eventcalendar')}}>  Event calendar </li>
               
          
               </ul>

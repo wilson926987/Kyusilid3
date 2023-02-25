@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Outlet , useNavigate, useLocation} from 'react-router-dom'
 import Activitylogpanel from '../components/Activitylogpanel';
-import {modulelistContext, forcerefreshContext, classAndstudentselectionContext, announcementlistContext, userInfoContext, topicfilterContext, activitytypefilterContext , topiclistContext , currentActivityContext , sourceMaterialContext , currentclassContext, myClasesContext , personlistContext } from '../../Globalcontext';
+import {settingsContext, modulelistContext, forcerefreshContext, classAndstudentselectionContext, announcementlistContext, userInfoContext, topicfilterContext, activitytypefilterContext , topiclistContext , currentActivityContext , sourceMaterialContext , currentclassContext, myClasesContext , personlistContext } from '../../Globalcontext';
 import {FaPlusCircle ,FaArrowCircleLeft} from  'react-icons/fa'
 import ClassSelectionitem from '../components/ClassSelectionitem';
 import axios from 'axios';
@@ -23,6 +23,7 @@ function ClassContainer() {
   const [modulelist, setmodulelist] = useState([]);
   const location = useLocation();
   const [announcementlist, setannouncementlist] = useState([]);
+  const [classsettings, setclasssettings] = useState();
 
   const [studentselection ,setstudentselection] = useState();
   const [class_log, setclass_log] = useState([]);
@@ -131,6 +132,10 @@ function ClassContainer() {
         .then(response=>{
             setclass_log(response.data)
         }).catch(error=>{console.log(error)})
+
+        setclasssettings(
+          {'classbanner' : 1}
+          )
   }
 
 
@@ -301,6 +306,14 @@ function toggleStudentselect(studentitem){
                      }
                      <li className={`classnavitem ${isactive('/classes/sampleclass/messages') && 'classnav-active'}`} onClick={()=>{navigate('messages')}}> Messages </li>
                  
+                     {userinfo.usertype ==='prof' &&
+                      <>
+                       <hr/>
+                       <li className={`classnavitem ${isactive('/classes/sampleclass/settings') && 'classnav-active'}`} onClick={()=>{navigate('settings')}}> Settings </li>
+               
+
+                      </>
+                     }
                      
 
 
@@ -356,7 +369,10 @@ function toggleStudentselect(studentitem){
                                   <activitytypefilterContext.Provider value={{activitytypefilter, setactivitytypefilter}}>
                                  <topicfilterContext.Provider value={{topicfilter, settopicfilter}}>
                                 <modulelistContext.Provider value={{modulelist, setmodulelist}}>
-                                <Outlet /> 
+                               <settingsContext.Provider value={{classsettings, setclasssettings}}>
+                               <Outlet /> 
+                               </settingsContext.Provider>
+                             
                                 </modulelistContext.Provider>                                  
                                  </topicfilterContext.Provider>
                                   </activitytypefilterContext.Provider>
