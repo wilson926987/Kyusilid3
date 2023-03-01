@@ -46,7 +46,7 @@ import Classespage from './4admin/Classespage';
 import Accountsstud from './4admin/Accountsstud';
 import SectionContainer from './4admin/SectionContainer';
 import SampleSection from './4admin/SampleSection';
-/*import Adminannouncements from './4admin/Adminannouncements';*/
+import Adminannouncements from './4admin/Adminannouncements'
 import CreateClass from './4admin/CreateClass';
 import Createproff from './4admin/Createproff';
 import Createstud from './4admin/Createstud';
@@ -93,7 +93,7 @@ function App() {
                 <Route path='' element={<AdminDashboard/>} />
                 <Route path='department' element={<Department/>}> 
                   <Route path='' element={<Departmentoverview/>} />
-
+                  <Route path='admin_announcements' element={<Adminannouncements/>} />
                   <Route path='subjects' element={<Subjects/>} />
                   <Route path='accounts' element={<Accountsprof/>} />
                   <Route path='sections' element={<SectionContainer/>}>

@@ -127,7 +127,7 @@ function Createproff() {
 
 </div>
 
- <button type='submit' className='commonbutton lighttext secondary'> Submit</button>
+ <button type='submit' className='commonbuttons lighttext secondary'> Submit</button>
         </form>
 
 
