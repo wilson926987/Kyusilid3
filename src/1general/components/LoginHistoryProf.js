@@ -2,15 +2,16 @@ import React, { useState } from 'react'
 
 function LoginHistoryProf() {
   const [data, setData] = useState([
-    { name: 'Wilson Capistrano', date: '01-24-2023', In: '10:00pm', Out:'11:59pm' },
-    { name: 'Ronald Carlo Libot', date: '01-24-2023', In: '10:00pm', Out:'11:59pm' },
-    { name: 'Carlo Acotin', date: '01-24-2023', In: '10:00pm', Out:'11:59pm' },
-    { name: 'Aira Mae Encarnado', date: '01-24-2023', In: '10:00pm', Out:'11:59pm' },
-    { name: 'Nino Olegario', date: '01-24-2023', In: '10:00pm', Out:'11:59pm' },
-    { name: 'Melrose Lastimosa', date: '01-24-2023', In: '10:00pm', Out:'11:59pm'},
-    { name: 'Cheyt Feliciano', date: '01-24-2023', In: '10:00pm', Out:'11:59pm' }
+    { name: 'Wilson Capistrano', date: '01-24-2023', course: 'BSIT', In: '10:00pm', Out:'11:59pm' },
+    { name: 'Ronald Carlo Libot', date: '01-24-2023', course: 'BSENTREP',  In: '10:00pm', Out:'11:59pm' },
+    { name: 'Carlo Acotin', date: '01-24-2023',course: 'BSA',  In: '10:00pm', Out:'11:59pm' },
+    { name: 'Aira Mae Encarnado', date: '01-24-2023',course: 'BSIT', In: '10:00pm', Out:'11:59pm' },
+    { name: 'Nino Olegario', date: '01-24-2023', course: 'BSECE', In: '10:00pm', Out:'11:59pm' },
+    { name: 'Melrose Lastimosa', date: '01-24-2023',course: 'BSIE',  In: '10:00pm', Out:'11:59pm'},
+    { name: 'Cheyt Feliciano', date: '01-24-2023',course: 'BSIT', In: '10:00pm', Out:'11:59pm' }
   ]);
   const [filteredData, setFilteredData] = useState(data);
+  const [selectedCourse, setSelectedCourse] = useState("All Courses");
 
 
   const handleSearch = event => {
@@ -20,8 +21,10 @@ function LoginHistoryProf() {
     );
   };
 
+  
   const [showTextbox, setShowTextbox] = useState(false);
   const [selectedRow, setSelectedRow] = useState(null);
+  
 
   const handleView = (index) => {
     setShowTextbox(!showTextbox);
@@ -33,10 +36,8 @@ function LoginHistoryProf() {
     setData(newData);
   };
 
-  const handleEdit = (index) => {
-    setSelectedRow(index);
-    setShowTextbox(true);
-  };
+
+  
   return (
     <div>
       
@@ -49,32 +50,29 @@ function LoginHistoryProf() {
         />
       </div>
 
-      {showTextbox && (
-  <div className='Editext'>
-    <input className='Inputext' type="text" value={data[selectedRow].name} onChange={(event) => {
-      const newData = [...data]; 
-      newData[selectedRow].name = event.target.value;
-      setData(newData); 
-    }} />
-    <button 
-    className='Savee'
-    onClick={() => {
-      setShowTextbox(false);
-      setSelectedRow(null);
-    }}>Save</button>
-    <button 
-    className='Cancel'
-    onClick={() => {
-      setShowTextbox(false);
-      setSelectedRow(null);
-    }}>Cancel</button>
-  </div>
-)}
+
+<br />
+<br/>
+
+      <select
+      className='Dropdoowwnn'
+      name="course"
+  value={selectedCourse}
+  onChange={(event) => setSelectedCourse(event.target.value)}>
+  <option className='Dropp' value="All Courses">All Courses</option>
+  <option className='Dropp' value="BSIT">BSIT</option>
+  <option className='Dropp' value="BSENTREP">BSENTREP</option>
+  <option className='Dropp' value="BSA">BSA</option>
+  <option className='Dropp' value="BSECE">BSECE</option>
+  <option className='Dropp' value="BSIE">BSIE</option>
+</select>
+
       <table class="table">
         <thead>
           <tr>
             <th>Name</th>
             <th>date</th>
+            <th>Course</th>
             <th>In</th>
             <th>Out</th>
             <th>Action</th>
@@ -86,6 +84,7 @@ function LoginHistoryProf() {
   <tr key={index}>
     <td data-label="Name">{item.name}</td>
     <td data-label="date">{item.date}</td>
+    <td data-label="date">{item.course}</td>
     <td data-label="In">{item.In}</td>
     <td data-label="Out">{item.Out}</td>
     <td>
@@ -97,12 +96,7 @@ function LoginHistoryProf() {
         setData(newData); 
       }}>Delete</button>
 
-      <button
-      className='Edit'
-       onClick={() => {
-        setShowTextbox(true);
-        setSelectedRow(index);
-      }}>Edit</button>
+
     </td>
   </tr>
 ))}

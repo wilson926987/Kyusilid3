@@ -380,7 +380,7 @@
 .Dele{ 
     text-decoration: none;
     line-height: 30px;
-    width: 40%;
+    width: 50%;
     background-color: #6893ee;
     border-radius: 10px;
     color: black;
@@ -390,70 +390,24 @@
     align-items: center;
     border: none;
 }
-.Edit{
-    text-decoration: none;
-    line-height: 30px;
-    width: 40%;
+
+/*---------dropdown------------*/
+.Dropdoowwnn{ 
+    height: 30px;
+    width: 150px;
     background-color: #6893ee;
-    border-radius: 10px;
-    color: black;
-    margin-left: 10px;
-    display:inline-block;
     font-size: 14px;
-    align-items: center;
     border: none;
+    color: black;
+    font-weight: 500;
+    border-radius: 10px;
+
 }
-.Savee{
-    text-decoration: none;
-    line-height: 20px;
-    width: 10%;
+.Dropdoowwnn .Dropp { 
     background-color: #6893ee;
-    border-radius: 10px;
-    color: black;
-    margin-left: 5px;
-    display:inline-block;
-    font-size: 14px;
-    align-items: center;
-    border: none;
-}
-.Cancel{
-    text-decoration: none;
-    line-height: 30px;
-    width: 10%;
-    background-color: #6893ee;
-    border-radius: 10px;
-    color: black;
-    margin-left: 10px;
-    display:inline-block;
-    font-size: 14px;
-    align-items: center;
-    border: none;
-}
-.Editext{
-    text-decoration: none;
-    line-height: 45px;
-    width: 45%;
-    background-color: #6893ee;
-    border-radius: 10px;
-    color: black;
-    margin-left: 10px;
-    display:inline-block;
-    font-size: 14px;
-    align-items: center;
-    border: none;
     margin-top: 5px;
-}
-.Editext .Inputext{ 
-    text-decoration: none;
-	background: none;
-	height: 30px;
-	width: 400px;	
-	border: none;
-	outline: none;
-	border-bottom: 2px solid #fff;
-	border-radius: 10px;
-	font-size: 16px;
-	color: black;
-	margin-left: 5%;
-    margin-top: 10px;
+    height: 20px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-family: 'Century Gothic';
 }

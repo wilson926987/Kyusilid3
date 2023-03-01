@@ -48,7 +48,7 @@ function Quiz() {
     <div>
       <div className="Ques primary">
         <div className="Tion">
-        <input type="text" placeholder="Enter Title"></input>
+        <input className='Enter' type="text" placeholder="Enter Title"></input>
         <br></br>
         <input type="text" placeholder="Enter Description"></input>
         <br></br>

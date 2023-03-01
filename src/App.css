@@ -143,7 +143,97 @@ svg{
 .borderradius-md{
   border-radius: 8px;
 }
-
+/*create*/
+.Createeee { 
+  height: 500px;
+}
+.row{ 
+  height: 350px;
+}
+.CD{ 
+  height: 80px;
+}
+.session1-input{
+  height: 10px
+}
+.commonbuttons{ 
+  font-size: 18px;
+  height: 40px;
+  width: 100px;
+  border-radius: 10px;
+  margin-top: 2%;
+  margin-left: 90%;
+}
+.commonbutton1{ 
+  font-size: 18px;
+  height: 40px;
+  width: 100px;
+  border-radius: 10px;
+  margin-top: 2%;
+  margin-left: 88%;
+}
+.Schedd{ 
+  margin-left: 20px;
+  background-color: whitesmoke;
+  border: 2px solid #6893ee;
+  padding-top: 5px;
+  padding-left: 12px;
+  height: 45px;
+  width: 230px;
+  border-radius: 10px;
+}
+.Schedd input{ 
+  background: none;
+  border-radius: 5px;
+  padding-left: 5px;
+  height: 30px;
+}
+.Schedd1{ 
+  margin-left: 20px;
+  background-color: whitesmoke;
+  border: 2px solid #6893ee;
+  padding-top: 5px;
+  padding-left: 12px;
+  height: 45px;
+  width: 210px;
+  border-radius: 10px;
+}
+.Schedd1 input{ 
+  background: none;
+  border-radius: 5px;
+  padding-left: 5px;
+  height: 30px;
+}
+.Schedd2 { 
+  background-color: whitesmoke;
+  border: 2px solid #6893ee;
+  height: 43px;
+  width: 10px;
+  padding-top: 5px;
+  border-radius: 10px;
+}
+.Schedd2 input{ 
+  background: none;
+  border-radius: 5px;
+  padding-left: 3px;
+  height: 30px;
+}
+.Schedd3 { 
+  margin-left: -5px;
+  background-color: whitesmoke;
+  border: 2px solid #6893ee;
+  padding-top: 5px;
+  padding-left: 12px;
+  height: 45px;
+  max-width: fit-content;
+  border-radius: 10px;
+}
+.Schedd3 input{ 
+  background: none;
+  border-radius: 5px;
+  padding-left: 3px;
+  height: 30px;
+}
 .blacken{
   background-color: black !important;
 }
@@ -172,6 +262,7 @@ box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.75);
 
 .editmenu{
   right: 0;
+  z-index: 6;
 }
 
 .sidebarbody{
@@ -1406,10 +1497,11 @@ background-color: var(--defaultprimary);
   font-weight: bold;
   display: flex;
   justify-content: space-between; 
-
   cursor: pointer;
-  border: none;
+  border: 2px solid #6893ee;
   outline: none;
+  background: whitesmoke;
+  border-radius: 10px;
 }
 
 .dropdownmain{
@@ -1458,13 +1550,6 @@ background-color: var(--defaultprimary);
 
 .marginleftauto{
   margin-left: auto;
-  width: 250px;
-  height: 35px;
-  border-radius: 50px;
-  font-size: 16px;
-  font-family: 'Century Gothic';
-  text-align: center;
-  border-color: #6893ee;
 }
 
 .marginleft12{
@@ -1494,6 +1579,7 @@ background-color: var(--defaultprimary);
   margin: 4px;
   font-weight: bold;
 }
+
 
 .profilemodal img{
   transform: scale(2);
@@ -1862,6 +1948,32 @@ padding: 12px;
   padding: 12px;
 }
 
+.commontextbox{
+  width: 100%;
+  padding: 4px 12px;
+  border-radius: 4px;
+  margin: 8px;
+}
+
+.commontextboxplaceholder{
+  position:absolute;
+  pointer-events: none;
+  padding: 0px 14px;
+  transition: .6s;
+}
+
+.textplaceholder-lg{
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
+}
+.textplaceholder-sm{
+  top: 15%;
+  left: -10px;
+  transform: translateY(-50%) scale(.7);
+
+}
+
 .adminupdatepanel{
   align-items: center;
   justify-content: center;
@@ -1907,6 +2019,149 @@ padding: 12px;
 .infobox:hover .infobox-content{
   display: flex !important;
 }
+
+
+.messagespage > div:first-child{
+  max-height: 800px;
+  overflow: auto;
+
+
+}
+
+.chatmessage{
+  display: flex;
+}
+
+
+
+.mychat .chatmessage{
+  flex-direction: row-reverse;
+  margin-left: auto;
+}
+
+.mychat .chatdate{
+  display: none;
+}
+.chatdate{
+  margin-left: auto;
+}
+
+.mychat .chatmessagecontent h5{
+  margin-left: auto;
+}
+
+.mychat .chatmessagecontent p{
+  text-align: right;
+}
+
+.chatmessage img{
+  height: 45px;
+  width: 45px;
+  border-radius: 50%;
+  margin:  0px 12px;
+  
+}
+
+.chatmessage> p{
+  margin: auto;
+}
+
+.chatmessagecontent{
+  max-width: 70%;
+
+}
+.chatmessagecontent h5{
+  margin-right:  12px;
+}
+
+.deletechat{
+  margin-top: 12px;
+  margin-right: 20px;
+  display: none;
+ 
+}
+
+.chatmessage:hover .deletechat{
+  display: block;
+}
+
+.adminmodal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 12;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.288);
+
+}
+
+
+
+.modal-body{
+  height: 400px;
+  width: 700px;
+  margin-bottom: 100px;
+  
+  animation:  fadein .6s;
+  position: absolute;
+  z-index: 13;
+
+}
+
+.modal-body .sideoption{
+  width: 50%;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 80px;
+}
+
+.sideoption svg{
+  font-size: 70px;
+  transition: none;
+}
+
+.default .sideoption:hover{
+  background-color: var(--defaultprimary);
+}
+.dark .sideoption:hover{
+  background-color: var(--darkthemeprimary);
+}
+
+.default .sideoption:hover h2{
+  color: white;
+}
+
+.default .sideoption:hover svg{
+  fill : white;
+}
+
+
+
+
+
+@keyframes fadein{
+  0%{
+    transform: translateY(-20%);
+    opacity: 0;
+  }
+  100%{
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+
+
+
+
+
 
 
 

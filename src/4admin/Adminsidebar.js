@@ -55,7 +55,7 @@ function Adminsidebar() {
         ))}
         <li className='sidebarmenu' onClick={()=>{navigate('adminlog')}}> <div className="highlight"></div> <MdSpaceDashboard /> Admin log</li>
         <li className='sidebarmenu' onClick={()=>{navigate('adminlog')}}> <div className="highlight"></div> <MdSpaceDashboard /> Add Classes </li>
-        <li className='sidebarmenu' onClick={()=>{navigate('adminlog')}}> <div className="highlight"></div> <MdSpaceDashboard /> Addd Course</li>
+        <li className='sidebarmenu' onClick={()=>{navigate('adminlog')}}> <div className="highlight"></div> <MdSpaceDashboard /> Add Course</li>
 
     </ul>              
 </div>}

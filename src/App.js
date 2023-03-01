@@ -26,7 +26,6 @@ import ClassModules from './2prof/ClassModules';
 import Createnew from './2prof/Createnew';
 import Attendance from './1general/containerpages/Attendance';
 import ClassMarkPage from './1general/containerpages/ClassMarkPage';
-import AdminAddClass from './4admin/AdminAddClass';
 
 
 import AdminContainer from './4admin/AdminContainer';
@@ -47,6 +46,10 @@ import Classespage from './4admin/Classespage';
 import Accountsstud from './4admin/Accountsstud';
 import SectionContainer from './4admin/SectionContainer';
 import SampleSection from './4admin/SampleSection';
+/*import Adminannouncements from './4admin/Adminannouncements';*/
+import CreateClass from './4admin/CreateClass';
+import Createproff from './4admin/Createproff';
+import Createstud from './4admin/Createstud';
 
 
 
@@ -68,7 +71,6 @@ function App() {
             <Routes>
             <Route path='/Quiz' element={<Quiz/>} />
             <Route path='/ClassMarkPage' element={<ClassMarkPage/>} />
-            <Route path='/AdminAddClass' element={<AdminAddClass/>} />
               <Route path={'/'} element={userinfo!=null ? <Container/> : <Login/> } > 
                 <Route path={''} element={<Dashboard/>}></Route>  {/*this is the dashboard*/}
                 <Route path={'classes/sampleclass'} element={<ClassContainer/>}>          
@@ -80,16 +82,18 @@ function App() {
                         <Route path='sourcematerials' element={<SourceMaterials/>} />
                         <Route  path='attendance' element={<Attendance/> }/>
                         <Route path= 'activity/activityId' element={<ClassActivity/>} />
+                        <Route path='messages' element={<MessagesPage/>} />          
                   </Route>
                      
                 <Route path={'archived'} element={<Archived/>} /> 
                 <Route path={'profile'} element={<Profiilepage/> } />
-                <Route path={'messages'} element={<MessagesPage/>} />              
+                    
               </Route> 
               <Route path='/kyusilidAdmin' element={userinfo!=null ? <AdminContainer/> : <Login/>}>
                 <Route path='' element={<AdminDashboard/>} />
                 <Route path='department' element={<Department/>}> 
                   <Route path='' element={<Departmentoverview/>} />
+
                   <Route path='subjects' element={<Subjects/>} />
                   <Route path='accounts' element={<Accountsprof/>} />
                   <Route path='sections' element={<SectionContainer/>}>
@@ -99,12 +103,16 @@ function App() {
                   <Route path='accounts_prof' element={<Accountsprof/>}></Route>
                   <Route path='accounts_stud' element ={<Accountsstud/>}></Route>
                   <Route path='eventcalendar' element={<Events/>}></Route>
-                  
+                  <Route  path='createclass' element={<CreateClass/>}/>
+                  <Route  path='createproff' element={<Createproff/>}/>
+                  <Route  path='createstud' element={<Createstud/>}/>
                 </Route>
                 <Route path='adminlog' element={<Adminlog/>}/>
-            
+             
+                
+                
+             
               </Route>
-
             </Routes>   
             
               <div className='createNewbutton secondary'>
