@@ -50,6 +50,7 @@ import Adminannouncements from './4admin/Adminannouncements'
 import CreateClass from './4admin/CreateClass';
 import Createproff from './4admin/Createproff';
 import Createstud from './4admin/Createstud';
+import ClassSettings from './1general/containerpages/ClassSettings';
 
 
 
@@ -82,7 +83,8 @@ function App() {
                         <Route path='sourcematerials' element={<SourceMaterials/>} />
                         <Route  path='attendance' element={<Attendance/> }/>
                         <Route path= 'activity/activityId' element={<ClassActivity/>} />
-                        <Route path='messages' element={<MessagesPage/>} />          
+                        <Route path='messages' element={<MessagesPage/>} />  
+                        <Route path= 'settings' element={<ClassSettings/>} />        
                   </Route>
                      
                 <Route path={'archived'} element={<Archived/>} /> 

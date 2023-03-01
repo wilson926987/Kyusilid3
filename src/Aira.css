@@ -411,3 +411,94 @@
     font-size: 16px;
     font-family: 'Century Gothic';
 }
+
+
+/*create*/
+.Createeee { 
+    height: 500px;
+  }
+  
+  .CD{ 
+    height: 80px;
+  }
+  .session1-input{
+    height: 10px
+  }
+  .commonbuttons{ 
+    font-size: 18px;
+    height: 40px;
+    width: 100px;
+    border-radius: 10px;
+    margin-top: 2%;
+    margin-left: 90%;
+  }
+  .commonbutton1{ 
+    font-size: 18px;
+    height: 40px;
+    width: 100px;
+    border-radius: 10px;
+    margin-top: 2%;
+    margin-left: 88%;
+  }
+  .Schedd{ 
+    margin-left: 20px;
+    background-color: whitesmoke;
+    border: 2px solid #6893ee;
+    padding-top: 5px;
+    padding-left: 12px;
+    height: 45px;
+    width: 230px;
+    border-radius: 10px;
+  }
+  .Schedd input{ 
+    background: none;
+    border-radius: 5px;
+    padding-left: 5px;
+    height: 30px;
+  }
+  .Schedd1{ 
+    margin-left: 20px;
+    background-color: whitesmoke;
+    border: 2px solid #6893ee;
+    padding-top: 5px;
+    padding-left: 12px;
+    height: 45px;
+    width: 210px;
+    border-radius: 10px;
+  }
+  .Schedd1 input{ 
+    background: none;
+    border-radius: 5px;
+    padding-left: 5px;
+    height: 30px;
+  }
+  .Schedd2 { 
+    background-color: whitesmoke;
+    border: 2px solid #6893ee;
+    height: 43px;
+    width: 10px;
+    padding-top: 5px;
+    border-radius: 10px;
+  }
+  .Schedd2 input{ 
+    background: none;
+    border-radius: 5px;
+    padding-left: 3px;
+    height: 30px;
+  }
+  .Schedd3 { 
+    margin-left: -5px;
+    background-color: whitesmoke;
+    border: 2px solid #6893ee;
+    padding-top: 5px;
+    padding-left: 12px;
+    height: 45px;
+    max-width: fit-content;
+    border-radius: 10px;
+  }
+  .Schedd3 input{ 
+    background: none;
+    border-radius: 5px;
+    padding-left: 3px;
+    height: 30px;
+  }
