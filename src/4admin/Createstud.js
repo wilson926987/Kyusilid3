@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Dropdown from '../1general/formcomponents/Dropdown';
 import Textbox from '../1general/formcomponents/Textbox';
 
-function Createproff() {
+function CreateClass() {
  
     const yearoption = [
         {'value' : 1 ,'label' : 1},
@@ -61,14 +61,20 @@ function Createproff() {
 
 
   return (
-    <div className='Createeee tertiary padding12 borderradius-md'>
+    <div className='AddStud tertiary padding12 borderradius-md'>
         
-        
-        <h3>Add Professor</h3>
+        <h3>Add Student</h3>
+
+
         <form onSubmit={handleSubmit}>
         <div className="row">
-
-
+        <div className="col-lg-7">
+  <Textbox 
+    value={classcomment}
+    handleChange={setclasscomment}
+    placeholdervalue={'Student No.'}
+  />
+</div>
 <div className="col-lg-6">
 <Textbox 
     value={sessionname1}
@@ -105,7 +111,7 @@ function Createproff() {
   />
 </div>
 <div className="col-lg-6">
-   Department 
+   Course  
    <Dropdown
                                 options={yearoption}
                                 onChangeHandler= {setyearlvl}
@@ -124,15 +130,20 @@ function Createproff() {
 
 
 
-
 </div>
 
- <button type='submit' className='commonbutton lighttext secondary'> Submit</button>
+ <button type='submit' className='commonbuttons lighttext secondary'> Submit</button>
         </form>
 
+       
 
+
+
+
+
+    
     </div>
   )
 }
 
-export default Createproff
+export default CreateClass

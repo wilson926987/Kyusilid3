@@ -170,6 +170,7 @@
 	width: 70%;
 	margin-left: 15%;
 	border-radius: 20px;
+	color: black;
 }
 .Ques input{
 	text-decoration: none;
@@ -188,6 +189,10 @@
 }
 .Tion{ 
 	padding-top: 12px;
+}
+.Ques .Tion input{ 
+	font-size: 20px;
+	color: black;
 }
 .All{ 
 	background: #b5caf8;

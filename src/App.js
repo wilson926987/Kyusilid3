@@ -46,11 +46,10 @@ import Classespage from './4admin/Classespage';
 import Accountsstud from './4admin/Accountsstud';
 import SectionContainer from './4admin/SectionContainer';
 import SampleSection from './4admin/SampleSection';
-import Adminannouncements from './4admin/Adminannouncements';
+/*import Adminannouncements from './4admin/Adminannouncements';*/
 import CreateClass from './4admin/CreateClass';
 import Createproff from './4admin/Createproff';
-import ClassSettings from './1general/containerpages/ClassSettings';
-
+import Createstud from './4admin/Createstud';
 
 
 
@@ -83,8 +82,7 @@ function App() {
                         <Route path='sourcematerials' element={<SourceMaterials/>} />
                         <Route  path='attendance' element={<Attendance/> }/>
                         <Route path= 'activity/activityId' element={<ClassActivity/>} />
-                        <Route path='messages' element={<MessagesPage/>} />   
-                        <Route path='settings' element={<ClassSettings/>} />       
+                        <Route path='messages' element={<MessagesPage/>} />          
                   </Route>
                      
                 <Route path={'archived'} element={<Archived/>} /> 
@@ -95,7 +93,7 @@ function App() {
                 <Route path='' element={<AdminDashboard/>} />
                 <Route path='department' element={<Department/>}> 
                   <Route path='' element={<Departmentoverview/>} />
-                  <Route path='admin_announcements' element={<Adminannouncements/>}/>
+
                   <Route path='subjects' element={<Subjects/>} />
                   <Route path='accounts' element={<Accountsprof/>} />
                   <Route path='sections' element={<SectionContainer/>}>
@@ -106,7 +104,8 @@ function App() {
                   <Route path='accounts_stud' element ={<Accountsstud/>}></Route>
                   <Route path='eventcalendar' element={<Events/>}></Route>
                   <Route  path='createclass' element={<CreateClass/>}/>
-                  <Route  path='createacc_prof' element={<Createproff/>}/>
+                  <Route  path='createproff' element={<Createproff/>}/>
+                  <Route  path='createstud' element={<Createstud/>}/>
                 </Route>
                 <Route path='adminlog' element={<Adminlog/>}/>
              
