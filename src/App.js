@@ -33,6 +33,7 @@ import AdminDashboard from './4admin/AdminDashboard';
 import Accountsprof from './4admin/Accountsprof';
 import Department from './4admin/Department';
 import FileManager from './4admin/FileManager';
+import ExcelImporter from './4admin/ExcelImporter';
 
 import Profiilepage from './1general/containerpages/Profiilepage';
 import MessagesPage from './1general/containerpages/MessagesPage';
@@ -93,6 +94,7 @@ function App() {
               </Route> 
               <Route path='/kyusilidAdmin' element={userinfo!=null ? <AdminContainer/> : <Login/>}>
                 <Route path='' element={<AdminDashboard/>} />
+                <Route path='ExcelImporter' element={<ExcelImporter/>}/>
                 <Route path='department' element={<Department/>}> 
                   <Route path='' element={<Departmentoverview/>} />
                   <Route path='admin_announcements' element={<Adminannouncements/>} />

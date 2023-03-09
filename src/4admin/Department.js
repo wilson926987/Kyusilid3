@@ -32,6 +32,12 @@ function Department() {
      }
 
     } , [currentdept])
+
+    const [upclass, setupclass] = useState(false);
+    const [upstud, setupstud] = useState(false)
+    const [upproff, setupproff] = useState(false)
+
+
    
 
 
@@ -134,12 +140,18 @@ function Department() {
 
      {creatclassmodal &&
       <div className='adminmodal' > 
-      <div className='modalbackground-lgt' onClick={()=>{setcreateclassmodal(false)}}>
+      <div className='modalbackground-lgt' onClick={()=>{setcreateclassmodal(false) ; setupclass(false)}}>
 
       </div>
       <div className='tertiary borderradius-md padding12 modal-body flex'>
-          <div className='sideoption borderradius-md'onClick={()=>{navigate('createclass') ; setcreateclassmodal(false)}} > <BiEdit/><h2>Manual Adding</h2></div>
-          <div className='sideoption borderradius-md'> <FaUpload/><h2>Upload file</h2></div>
+      {!upclass ? 
+          <>     
+          <div className='sideoption borderradius-md'onClick={()=>{navigate('createclass') ; setcreateclassmodal(false) }} > <BiEdit/><h2>Manual Adding</h2></div>
+          <div className='sideoption borderradius-md' onClick={()=>{setupclass(true)}}> <FaUpload/><h2>Upload file</h2></div></> 
+          :
+          <div>dito mag uupload ng file para sa class</div>
+          
+        }
       </div>
           
 </div>
@@ -147,12 +159,18 @@ function Department() {
      
      {createstudmodal &&
       <div className='adminmodal' > 
-      <div className='modalbackground-lgt' onClick={()=>{setcreatestudmodal(false)}}>
+      <div className='modalbackground-lgt' onClick={()=>{setcreatestudmodal(false) ; setupstud(false)}}>
 
       </div>
       <div className='tertiary borderradius-md padding12 modal-body flex'>
-          <div className='sideoption borderradius-md'onClick={()=>{navigate('createstud') ; setcreatestudmodal(false)}} > <BiEdit/><h2>Manual Adding</h2></div>
-          <div className='sideoption borderradius-md'> <FaUpload/><h2>Upload file</h2></div>
+        {!upstud ? 
+          <>
+          <div className='sideoption borderradius-md'onClick={()=>{navigate('createstud') ; setcreatestudmodal(false) }} > <BiEdit/><h2>Manual Adding</h2></div>
+          <div className='sideoption borderradius-md' onClick={ ()=>{setupstud(true)}}> <FaUpload/><h2>Upload file</h2></div>
+          </>
+          :
+          <div>dito maguupload ng file para sa stud</div>
+          }
       </div>
           
 </div>
@@ -161,12 +179,16 @@ function Department() {
      
      {createproffmodal &&
       <div className='adminmodal' > 
-      <div className='modalbackground-lgt' onClick={()=>{setcreateproffmodal(false)}}>
+      <div className='modalbackground-lgt' onClick={()=>{setcreateproffmodal(false) ; setupproff(false)}}>
 
       </div>
       <div className='tertiary borderradius-md padding12 modal-body flex'>
-          <div className='sideoption borderradius-md'onClick={()=>{navigate('createproff') ; setcreateproffmodal(false)}} > <BiEdit/><h2>Manual Adding</h2></div>
-          <div className='sideoption borderradius-md'> <FaUpload/><h2>Upload file</h2></div>
+{!upproff ?  
+        <>  <div className='sideoption borderradius-md'onClick={()=>{navigate('createproff') ; setcreateproffmodal(false) }} > <BiEdit/><h2>Manual Adding</h2></div>
+        <div className='sideoption borderradius-md' onClick={()=>{setupproff(true) }}> <FaUpload/><h2>Upload file</h2></div></>
+        :
+        <div>prof uypload para dito</div>
+}
       </div>
           
 </div>

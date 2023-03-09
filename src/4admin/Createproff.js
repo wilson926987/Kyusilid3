@@ -5,8 +5,8 @@ import Textbox from '../1general/formcomponents/Textbox';
 function Createproff() {
  
     const yearoption = [
-        {'value' : 1 ,'label' : 1},
-        {'value' : 2 ,'label' : 2},
+        {'value' : 1 ,'label' : "infotech"},
+        {'value' : 2 ,'label' : "bjjbjb"},
         {'value' : 3 ,'label' : 3},
         {'value' : 4 ,'label' : 4}
 

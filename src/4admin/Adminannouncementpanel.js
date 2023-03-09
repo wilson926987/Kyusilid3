@@ -14,7 +14,7 @@ function Adminannouncementpanel({item , deleteannouncement_local}) {
   return (
     <div className='tertiary borderradius-lg padding12'>
 
-        <div className="flex"><h4>Announcement title</h4> <p className='smallfont marginleftauto'> Date posted</p> <div className='marginleft12'><AiFillEdit onClick={(e)=>{deletefunction(item.admin_an_id)}}/></div></div>
+        <div className="flex"><h5>Admin has posted an announcement</h5> <p className='smallfont marginleftauto'> Date posted</p> <div className='marginleft12'><AiFillEdit onClick={(e)=>{deletefunction(item.admin_an_id)}}/></div></div>
 
         <div className='padding12'>
                     {item.announcement_content}

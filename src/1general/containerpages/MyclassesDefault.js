@@ -23,6 +23,8 @@ function MyclassesDefault() {
       setallclasses(myclasses.filter(item => item.day_label !== days[currday]))
     }
 
+    
+
   },[myclasses])
 
   
