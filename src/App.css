@@ -1139,6 +1139,11 @@ justify-content: space-around;
 
 }
 
+.centerdiv{
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .activityicon{
   display: flex;
   justify-content: center;
@@ -2137,6 +2142,35 @@ padding: 12px;
 -webkit-box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.75);
 -moz-box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.75);
 }
+
+
+
+.deletecomment{
+  display: none;
+  cursor: pointer;
+}
+
+.deletecomment:hover {
+  text-decoration: underline;
+}
+
+.deletecommentbody:hover .deletecomment{
+  display: inline !important;
+}
+.default .deletecomment{
+  color: rgb(255, 78, 78);
+}
+
+.pushmaterialicon{
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 30px;
+ scale: 1.4;
+ margin-top: 20px;
+}
+
+
+
 
 
 

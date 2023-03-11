@@ -51,6 +51,7 @@ import CreateClass from './4admin/CreateClass';
 import Createproff from './4admin/Createproff';
 import Createstud from './4admin/Createstud';
 import ClassSettings from './1general/containerpages/ClassSettings';
+import AddtoSource from './2prof/AddtoSource';
 
 
 
@@ -83,6 +84,7 @@ function App() {
                         <Route path='sourcematerials' element={<SourceMaterials/>} />
                         <Route  path='attendance' element={<Attendance/> }/>
                         <Route path= 'activity/activityId' element={<ClassActivity/>} />
+                        <Route path='addmaterial' element={<AddtoSource/>}></Route>
                         <Route path='messages' element={<MessagesPage/>} />  
                         <Route path= 'settings' element={<ClassSettings/>} />        
                   </Route>

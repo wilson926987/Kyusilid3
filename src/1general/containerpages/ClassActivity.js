@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { currentActivityContext , userInfoContext } from '../../Globalcontext'
+import { currentActivityContext , userInfoContext , currentclassContext} from '../../Globalcontext'
 import {FaClipboardList} from 'react-icons/fa'
 import {RiBookFill} from 'react-icons/ri'
 import {MdQuiz ,MdAssignment, MdSend} from 'react-icons/md'
@@ -15,6 +15,7 @@ function ClassActivity() {
   const navigate = useNavigate();
 
   const {currentactivity} = useContext(currentActivityContext);
+  const {currentclass} = useContext(currentclassContext)
   const {userinfo} = useContext(userInfoContext);
   const [activitytab ,setactivitytab] = useState( 'default');
 
@@ -37,8 +38,7 @@ function ClassActivity() {
   
       await axios.put('https://api.kyusillid.online/api/createactivitycomment', temp).then(response =>{
         set_actcommnentlist(response.data);
-        
-        
+              
       }).catch(error => {
         console.log(error);
       });
@@ -47,9 +47,29 @@ function ClassActivity() {
     } 
   }
 
-  const handledit = (e)=>{
+  const handledit = async(e)=>{
     e.preventDefault();
+    const temp = {
+      'activity_id' : currentactivity.activity_id,
+      'activity_title' : edittitle,
+      'description' : editdescription
   }
+    await axios.post('https://api.kyusillid.online/api/updateactivity', temp).then(response=>
+    {}
+    ).catch();
+
+    navigate('/classes/sampleclass/modules')
+  }
+
+  const confirmdeleteactivity = async(e)=>{
+    if(window.confirm('delete this activity? This cannot be undone' ) === true){
+
+      await axios.delete('https://api.kyusillid.online/api/deleteactivity/' + currentactivity.activity_id).then().catch();
+      navigate('/classes/sampleclass/modules')
+    
+    }
+  }
+
   
 
   useEffect(()=>{
@@ -59,11 +79,50 @@ function ClassActivity() {
      axios.get('https://api.kyusillid.online/api/getactivitycommentlist/' + currentactivity.activity_id).then(response=>
       {set_actcommnentlist(response.data)}
      )
-
-
-
   },[currentactivity])
+
+
   
+  const confirmdeletecomment = async(e)=>{
+    if(window.confirm('delete this comment?') === true){
+
+      await axios.delete('https://api.kyusillid.online/api/deleteactivitycomment/' + e).then(
+      
+        set_actcommnentlist(act_commentlist.filter(item=>{
+          if(item.comment_id !==e){
+            return item;
+          }
+        }))
+      ).catch();
+
+    
+    
+    }
+  }
+
+  const pushmaterial = async()=>{
+
+    if(window.confirm('Post this material in Source Modules? This will be visible to other classes with the same subject.')== true){
+      
+      const temp = {
+        'topic_id' : currentclass.moduleSource,
+        'activity_title' : currentactivity.activity_title,
+        'category' : currentactivity.category,
+        'activity_type' : currentactivity.activity_type,
+        'createdby' : currentactivity.createdby,
+        'file_link' : currentactivity.file_link,
+        'description' : currentactivity.description,
+        'quiz_link' : currentactivity.quiz_link
+
+      }
+      //console.log(JSON.stringify(temp));
+      await axios.put('https://api.kyusillid.online/api/postactivity', temp).then().catch();
+      navigate('/classes/sampleclass/sourcematerials')
+    }
+
+  }
+  
+
   if(currentactivity=== undefined){
     return (<div></div>)
   }else{
@@ -106,7 +165,7 @@ function ClassActivity() {
    
    <div className='flex activitytab background relative' >
       <div  onClick={()=>{setactivitysettings(!activitysettings)}}>
-      <BsGearFill />
+      <BsGearFill /> 
       </div>
     
        {activitysettings && 
@@ -114,11 +173,11 @@ function ClassActivity() {
            <div className='activitysettings tertiary borderradius-md'>
         <ul>
           <li className='padding12' onClick={()=>{setactivitytab('edit') ; setactivitysettings(false) }}>Edit {currentactivity.activity_type}</li>
-          <li className='padding12'>Delete {currentactivity.activity_type}</li>
-          <li className='padding12'>Post to Source Modules</li>
+          <li className='padding12' onClick={()=>{setactivitysettings(false); confirmdeleteactivity(currentactivity.activity_id)}}>Delete {currentactivity.activity_type}</li>
+          <li className='padding12' onClick={()=>{setactivitytab('post') ; setactivitysettings(false) }}>Post to Source Modules</li>
 
          </ul>
-         </div>        
+         </div>         
       }
    </div>  
    }
@@ -186,10 +245,15 @@ function ClassActivity() {
 
         <div className="activitycomments">
           <h4>Class comments</h4>
+          
           <hr/>  
           {act_commentlist.map((item)=>(
             <div key={item.comment_id} className='margintop12'>
-              <div className='flex'> <h6>{item.firstname} {item.middle} {item.lastname} {item.suffix}</h6> <p className='smallfont marginleftauto'>{item.date_posted}</p></div>
+              <div className='flex deletecommentbody'> 
+                <h6>{item.firstname} {item.middle} {item.lastname} {item.suffix}</h6> 
+                {item.acc_id=== userinfo.user.acc_id &&
+                       <h6 className='marginleft12 deletecomment' onClick={()=>{confirmdeletecomment(item.comment_id)}}>delete</h6>}
+                <p className='smallfont marginleftauto'>{item.date_posted}</p></div>
               <div> {item.comment_content}</div>
             </div>
           ))}
@@ -210,6 +274,38 @@ function ClassActivity() {
             <h4>Response here</h4>
         </div>
         :
+        activitytab ==='post'?
+        <div className='flex padding12'>
+            <div  className='centerdiv'>
+            <div className='activityicon tertiary pushmaterialicon'>
+                        {currentactivity.activitytype==='Material' ?
+                          <RiBookFill />:
+                          currentactivity.activitytype==='Questionnaire' ?
+                          <MdQuiz/> :
+                          currentactivity.activitytype==='Assignment' ?
+                          <MdAssignment/> :
+                          <FaClipboardList/>                                 
+                      }
+                       </div>
+              <ul>
+                <li className='flex'>  <h4>Topic : &nbsp;</h4> {currentactivity.topic_name}</li>
+                <li className='flex'>   <h4>Activity name : &nbsp; </h4> {currentactivity.activity_title}</li>
+                <li className='flex'>   <h4>Activity name : &nbsp; </h4> {currentactivity.activity_type}</li>
+                <li className='flex'> <h4>Category :  &nbsp;</h4> {currentactivity.category}</li>
+                <li>created b y : {currentactivity.createdby}</li>
+                <li>topic idclass : {currentclass.moduleSource}</li>
+                <li></li>
+              </ul>
+
+            <button className='commonbutton secondary lighttext margintop12 centerdiv' onClick={pushmaterial}><h2>Submit</h2></button>
+             
+           
+              
+            </div>
+
+        </div>
+        :
+
         <div> 
           {/* edit activity */}
 
@@ -224,7 +320,7 @@ function ClassActivity() {
             </div>
 
           <div className='flex editactivityfooter'>
-           <button type='submit' className='commonbutton secondary lighttext '>Confirm changes</button>
+           <button type='submit' className='commonbutton secondary lighttext ' >Confirm changes</button>
 
           </div>
             

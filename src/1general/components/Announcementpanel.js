@@ -60,6 +60,7 @@ function Announcementpanel({announcementitem , forcerefresh}) {
 
   const confirmdelete = async (e)=>{
     if(window.confirm('delete this post?') === true){
+
       await axios.delete('https://api.kyusillid.online/api/deleteannouncement/' + e).then(
         forecerefreshHandler()
       ).catch();
@@ -76,6 +77,25 @@ function Announcementpanel({announcementitem , forcerefresh}) {
     }
 
 
+  }
+
+  const confirmdeletecomment = async(e)=>{
+    if(window.confirm('delete this comment?') === true){
+
+      await axios.delete('https://api.kyusillid.online/api/deleteannouncementcomment/' + e).then(
+        forecerefreshHandler()
+      ).catch();
+
+      await axios.get(url + currentclass.classes_id)
+      .then(response => {
+        setannouncementlist(response.data)
+       
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    
+    }
   }
 
 
@@ -112,14 +132,22 @@ function Announcementpanel({announcementitem , forcerefresh}) {
                     <h5>Class Comments</h5>
                     <div className="">
                        {announcementitem !== undefined  && announcementitem.commentlist.map((commentitem , key)=>(
-                         <div key={key} className='padding12'>
-                            <div className="flex">
+                         <div key={key} className='padding12 deletecommentbody'>
+
+                              <div className="flex ">
                               <h5>{commentitem.title + " " + commentitem.firstname + ' ' + commentitem.lastname + ' '  + commentitem.suffix }</h5>
+                            
+                             
+                             {commentitem.acc_id=== userinfo.user.acc_id &&
+                               <h5 className='marginleft12 deletecomment'  onClick={()=>{confirmdeletecomment(commentitem.com_id)}}>delete</h5>
+                             }
                               <p className='smallfont marginleftauto'>{commentitem.date_posted}</p>
                             </div>
                             <div className='ellipsis '>
                                   {commentitem.com_content}
                             </div>
+              
+                        
                    
                          </div>
                        ))}
