@@ -38,7 +38,7 @@ function Subjects() {
        <tbody>
 
         {subject !== undefined  && subject.map((item, key)=>(
-            <tr>
+            <tr key= {key}>
 
         
             <td>{item.units}</td>
