@@ -1,177 +1,177 @@
 
 .all{ 
-    background: #6893ee;
-    border-radius: 20%;
-    height: 80px;
-    width: 80px;
-    text-align: center;
-    margin-left: -130px;
-    margin-top: -80px;
+  background: #6893ee;
+  border-radius: 20%;
+  height: 80px;
+  width: 80px;
+  text-align: center;
+  margin-left: -130px;
+  margin-top: -80px;
 }   
 .all a{ 
-    text-decoration: none;
-    font-size: 18px;
+  text-decoration: none;
+  font-size: 18px;
 }
 .on-Time{ 
-    background: #6893ee;
-    border-radius: 20%;
-    height: 80px;
-    width: 80px;
-    text-align: center;
-    margin-left: 30px;
-    margin-top: -80px;
+  background: #6893ee;
+  border-radius: 20%;
+  height: 80px;
+  width: 80px;
+  text-align: center;
+  margin-left: 30px;
+  margin-top: -80px;
 }
 .on-Time a{ 
-    text-decoration: none;
-    font-size: 18px;
+  text-decoration: none;
+  font-size: 18px;
 }
 .Late{ 
-    background: #6893ee;
-    border-radius: 20%;
-    height: 80px;
-    width: 80px;
-    text-align: center;
-    margin-left: 30px;
-    margin-top: -80px;
+  background: #6893ee;
+  border-radius: 20%;
+  height: 80px;
+  width: 80px;
+  text-align: center;
+  margin-left: 30px;
+  margin-top: -80px;
 }
 .Late a{ 
-    text-decoration: none;
-    font-size: 18px;
+  text-decoration: none;
+  font-size: 18px;
 }
 .Miss{ 
-    background: #6893ee;
-    border-radius: 20%;
-    height: 80px;
-    width: 80px;
-    text-align: center;
-    margin-left: 30px;
-    margin-top: -80px;
+  background: #6893ee;
+  border-radius: 20%;
+  height: 80px;
+  width: 80px;
+  text-align: center;
+  margin-left: 30px;
+  margin-top: -80px;
 }
 .Miss a{ 
-    text-decoration: none;
-    font-size: 18px;
+  text-decoration: none;
+  font-size: 18px;
 }
 
 .btn{ 
-    font-family: "Century Gothic" , sans-serif;
-    font-size: 25px;
-    padding-left: 80px;
-    text-align: center;
-    text-decoration: none;
-    color: black;
-    -webkit-transition-duration: 0.3s;
-    transition-duration: 0.3s;
-    -webkit-transition-property: box-shadow, transform;
-    transition-property: box-shadow, transform;
-     
+  font-family: "Century Gothic" , sans-serif;
+  font-size: 25px;
+  padding-left: 80px;
+  text-align: center;
+  text-decoration: none;
+  color: black;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: box-shadow, transform;
+  transition-property: box-shadow, transform;
+   
 }
 .Klase{ 
-    display:inline-flex;
-    padding-left: 20%;
-    padding-top: 10%;
-    text-align: center;
+  display:inline-flex;
+  padding-left: 20%;
+  padding-top: 10%;
+  text-align: center;
 }
 .all:hover{ 
-    box-shadow: 0 0 20px rgba(0,0,0, 0.5);
-    -webkit-transform: scale(1.1);
-    transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(0,0,0, 0.5);
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
 }
 .Late:hover{ 
-    box-shadow: 0 0 20px rgba(0,0,0, 0.5);
-    -webkit-transform: scale(1.1);
-    transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(0,0,0, 0.5);
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
 }
 .Miss:hover{ 
-    box-shadow: 0 0 20px rgba(0,0,0, 0.5);
-    -webkit-transform: scale(1.1);
-    transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(0,0,0, 0.5);
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
 }
 .on-Time:hover{ 
-    box-shadow: 0 0 20px rgba(0,0,0, 0.5);
-    -webkit-transform: scale(1.1);
-    transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(0,0,0, 0.5);
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
 }
 /* Table*/
 .table{ 
-    margin-left: 5px;
-    margin-top: 3%;
-    text-align: center;
-    width: 90%;
-    border-collapse: collapse;
-    font-family: 'Century Gothic';
-    overflow: scroll;
+  margin-left: 5px;
+  margin-top: 3%;
+  text-align: center;
+  width: 90%;
+  border-collapse: collapse;
+  font-family: 'Century Gothic';
+  overflow: scroll;
 }
 .table thead tr th { 
-    background-color: #6893ee;
-    border-radius: 20px;
-    font-size: 16px;
-    color: black;   
+  background-color: #6893ee;
+  border-radius: 20px;
+  font-size: 16px;
+  color: black;   
 }
 .name{ 
-    max-width: 100px;
+  max-width: 100px;
 }
 
 .table .thead tr th{
-    font-weight: 600;
-    letter-spacing: 0.20px;
-    color: black;
-    opacity: 1;
-    padding: 10px;
-    border: 1px solid white;
-    border-radius: 15px;
-    vertical-align: top;
+  font-weight: 600;
+  letter-spacing: 0.20px;
+  color: black;
+  opacity: 1;
+  padding: 10px;
+  border: 1px solid white;
+  border-radius: 15px;
+  vertical-align: top;
 }
 .table tbody tr td{ 
-    font-size: 16px;
-    letter-spacing:  0.35px;
-    font-weight: normal;
-    color: black;
-    background-color: whitesmoke;
-    padding: 8px;
-    text-align: center;
-    border: 1px solid white;
-    border-radius: 15px;
-    margin-top: 10%;
-    text-overflow: ellipsis;
-    
+  font-size: 16px;
+  letter-spacing:  0.35px;
+  font-weight: normal;
+  color: black;
+  background-color: whitesmoke;
+  padding: 8px;
+  text-align: center;
+  border: 1px solid white;
+  border-radius: 15px;
+  margin-top: 10%;
+  text-overflow: ellipsis;
+  
 }
 .table .view { 
-    text-decoration: none;
-    line-height: 30px;
-    width: 40%;
-    background-color: #6893ee;
-    border-radius: 10px;
-    color: black;
-    margin-left: 10px;
-    display:inline-block;
-    font-size: 14px;
-    align-items: center;
-    border: none;
+  text-decoration: none;
+  line-height: 30px;
+  width: 40%;
+  background-color: #6893ee;
+  border-radius: 10px;
+  color: black;
+  margin-left: 10px;
+  display:inline-block;
+  font-size: 14px;
+  align-items: center;
+  border: none;
 }
 
 /*search*/
 .search{ 
-    margin-left: 65%;
+  margin-left: 65%;
 }
 .search input{ 
-    width: 250px;
-    height: 35px;
-    border-radius: 50px;
-    font-size: 16px;
-    font-family: 'Century Gothic';
-    text-align: center;
-    border-color: #6893ee;
+  width: 250px;
+  height: 35px;
+  border-radius: 50px;
+  font-size: 16px;
+  font-family: 'Century Gothic';
+  text-align: center;
+  border-color: #6893ee;
 }
 .extra-textbox .GradeText{ 
-    background-color: white;
-    margin-top: 3%;
-    justify-content: center;
-    height: 30px;
-    width: 80px;
-    border-radius: 10px;
-    border-color: #6893ee;
-    text-align: center;
-    font-size: 16px;
+  background-color: white;
+  margin-top: 3%;
+  justify-content: center;
+  height: 30px;
+  width: 80px;
+  border-radius: 10px;
+  border-color: #6893ee;
+  text-align: center;
+  font-size: 16px;
 
 
 
@@ -181,233 +181,371 @@
 
 /*--------adminnn lang to --------*/
 .iconn-case{ 
-    border-radius: 50px;
-    display: block;
-    margin-top: -40px;
+  border-radius: 50px;
+  display: block;
+  margin-top: -40px;
 }
 .iconn-case img{ 
-    position: relative;
-    margin-top: 10px;
-    height: 90px;
-    width: 90px;
-    margin-left: -100px;
+  position: relative;
+  margin-top: 10px;
+  height: 90px;
+  width: 90px;
+  margin-left: -100px;
 }
 .iconn-case .boxes { 
-    padding: 20px 10px;
-    display: inline-flex;
-    align-items: center;
+  padding: 20px 10px;
+  display: inline-flex;
+  align-items: center;
 }
 .iconn-case .boxes a{
-    text-decoration: none;
+  text-decoration: none;
 }
 .iconn-case .boxes a .linkk:hover{ 
-    background-color: aliceblue;
+  background-color: aliceblue;
 }
 .iconn-case .boxes .box{ 
-    padding: 20px 50px;
-    display: flex;
-    align-items: center;
+  padding: 20px 50px;
+  display: flex;
+  align-items: center;
 }
 .iconn-case .boxes .box .cards{ 
-    width: 300px;
-    height: 120px;
-    background: #6893ee;
-    margin: 20px -25px;
-    border-radius: 10px;
+  width: 300px;
+  height: 120px;
+  background: #6893ee;
+  margin: 20px -25px;
+  border-radius: 10px;
 
 
 }
 .iconn-case .boxes .box .cards h2{ 
-    margin-top: 30px;
-    margin-left: 50px;
+  margin-top: 30px;
+  margin-left: 50px;
 }
 .iconn-case .boxes .box .cards h3{ 
-    margin-top: 10px;
-    margin-left: 50px;
+  margin-top: 10px;
+  margin-left: 50px;
 }
 
 /*Time and Date*/ 
 .boxess{ 
-    margin-left: 5%;
-    margin-top: -220px;
+  margin-left: 5%;
+  margin-top: -220px;
 }
 .box2{ 
-    background-color: #6893ee;
-    height: 30px;
-    width: 1300px;
-    text-align: center;
-    margin-top: 170px;
-    margin-left: 5%;
-    padding-top: 5px;
+  background-color: #6893ee;
+  height: 30px;
+  width: 1300px;
+  text-align: center;
+  margin-top: 170px;
+  margin-left: 5%;
+  padding-top: 5px;
 
 }
 .box2 h2{ 
-    font-size: 18px;
-    display:inline-flex;
-    padding:0px 10px 0px 19px;
+  font-size: 18px;
+  display:inline-flex;
+  padding:0px 10px 0px 19px;
 }
 
 .box3 {
-    padding: 20px;
-    transition: 0.3s ease;
-    width: 220px;
-    height: 150px;
-    border-radius: 10px;
-    background-color: rgba(93, 129, 207, 0.5);
-    margin-top: -180px;
-    margin-left: 40px;
-  }
-  
+  padding: 20px;
+  transition: 0.3s ease;
+  width: 220px;
+  height: 150px;
+  border-radius: 10px;
+  background-color: rgba(93, 129, 207, 0.5);
+  margin-top: -180px;
+  margin-left: 40px;
+}
+
 .box3:hover {
-    background-color: #6893ee;
-  }
+  background-color: #6893ee;
+}
 .box3 h2{ 
-    font-weight: 400;
-    font-size: 14px;
+  font-weight: 400;
+  font-size: 14px;
 }
 .box3 img{ 
-    height: 50px;
-    width: 50px;
-    align-items: flex-end;
+  height: 50px;
+  width: 50px;
+  align-items: flex-end;
 }
 
 .box4 {
-    padding: 20px;
-    transition: 0.3s ease;
-    width: 220px;
-    height: 150px;
-    border-radius: 10px;
-    background-color: rgba(93, 129, 207, 0.5);
-    margin-top: -150px;
-    margin-left: 280px;
-  }
-  
+  padding: 20px;
+  transition: 0.3s ease;
+  width: 220px;
+  height: 150px;
+  border-radius: 10px;
+  background-color: rgba(93, 129, 207, 0.5);
+  margin-top: -150px;
+  margin-left: 280px;
+}
+
 .box4:hover {
-    background-color: #6893ee;
-  }
+  background-color: #6893ee;
+}
 .box4 h2{ 
-    font-weight: 400;
-    font-size: 14px;
+  font-weight: 400;
+  font-size: 14px;
 }
 .box4 img{ 
-    height: 50px;
-    width: 50px;
-    align-items: flex-end;
+  height: 50px;
+  width: 50px;
+  align-items: flex-end;
 }
 .box4 {
-    padding: 20px;
-    transition: 0.3s ease;
-    width: 220px;
-    height: 150px;
-    border-radius: 10px;
-    background-color: rgba(93, 129, 207, 0.5);
-    margin-top: -150px;
-    margin-left: 280px;
-  }
-  
+  padding: 20px;
+  transition: 0.3s ease;
+  width: 220px;
+  height: 150px;
+  border-radius: 10px;
+  background-color: rgba(93, 129, 207, 0.5);
+  margin-top: -150px;
+  margin-left: 280px;
+}
+
 .box4:hover {
-    background-color: #6893ee;
-  }
-  .box5 {
-    padding: 20px;
-    transition: 0.3s ease;
-    width: 220px;
-    height: 150px;
-    border-radius: 10px;
-    background-color: rgba(93, 129, 207, 0.5);
-    margin-top: -150px;
-    margin-left: 520px;
-  }
-  
+  background-color: #6893ee;
+}
+.box5 {
+  padding: 20px;
+  transition: 0.3s ease;
+  width: 220px;
+  height: 150px;
+  border-radius: 10px;
+  background-color: rgba(93, 129, 207, 0.5);
+  margin-top: -150px;
+  margin-left: 520px;
+}
+
 .box5:hover {
-    background-color: #6893ee;
-  }
+  background-color: #6893ee;
+}
 .box5 h2{ 
-    font-weight: 400;
-    font-size: 14px;
+  font-weight: 400;
+  font-size: 14px;
 }
 .box5 img{ 
-    height: 50px;
-    width: 50px;
-    align-items: flex-end;
+  height: 50px;
+  width: 50px;
+  align-items: flex-end;
 }
 .box6 {
-    padding: 20px;
-    transition: 0.3s ease;
-    width: 220px;
-    height: 150px;
-    border-radius: 10px;
-    background-color: rgba(93, 129, 207, 0.5);
-    margin-top: -150px;
-    margin-left: 760px;
-  }
-  
+  padding: 20px;
+  transition: 0.3s ease;
+  width: 220px;
+  height: 150px;
+  border-radius: 10px;
+  background-color: rgba(93, 129, 207, 0.5);
+  margin-top: -150px;
+  margin-left: 760px;
+}
+
 .box6:hover {
-    background-color: #6893ee;
-  }
+  background-color: #6893ee;
+}
 .box6 h2{ 
-    font-weight: 400;
-    font-size: 14px;
+  font-weight: 400;
+  font-size: 14px;
 }
 .box6 img{ 
-    height: 50px;
-    width: 50px;
-    align-items: flex-end;
+  height: 50px;
+  width: 50px;
+  align-items: flex-end;
 }
 .box7 {
-    padding: 20px;
-    transition: 0.3s ease;
-    width: 220px;
-    height: 150px;
-    border-radius: 10px;
-    background-color: rgba(93, 129, 207, 0.5);
-    margin-top: -150px;
-    margin-left: 1000px;
-  }
-  
+  padding: 20px;
+  transition: 0.3s ease;
+  width: 220px;
+  height: 150px;
+  border-radius: 10px;
+  background-color: rgba(93, 129, 207, 0.5);
+  margin-top: -150px;
+  margin-left: 1000px;
+}
+
 .box7:hover {
-    background-color: #6893ee;
-  }
+  background-color: #6893ee;
+}
 .box7 h2{ 
-    font-weight: 400;
-    font-size: 14px;
+  font-weight: 400;
+  font-size: 14px;
 }
 .box7 img{ 
-    height: 50px;
-    width: 50px;
-    align-items: flex-end;
+  height: 50px;
+  width: 50px;
+  align-items: flex-end;
 }
 .Dele{ 
-    text-decoration: none;
-    line-height: 30px;
-    width: 50%;
-    background-color: #6893ee;
-    border-radius: 10px;
-    color: black;
-    margin-left: 10px;
-    display:inline-block;
-    font-size: 14px;
-    align-items: center;
-    border: none;
+  text-decoration: none;
+  line-height: 30px;
+  width: 50%;
+  background-color: #6893ee;
+  border-radius: 10px;
+  color: black;
+  margin-left: 10px;
+  display:inline-block;
+  font-size: 14px;
+  align-items: center;
+  border: none;
 }
 
 /*---------dropdown------------*/
 .Dropdoowwnn{ 
-    height: 30px;
-    width: 150px;
-    background-color: #6893ee;
-    font-size: 14px;
-    border: none;
-    color: black;
-    font-weight: 500;
-    border-radius: 10px;
+  height: 30px;
+  width: 150px;
+  background-color: #6893ee;
+  font-size: 14px;
+  border: none;
+  color: black;
+  font-weight: 500;
+  border-radius: 10px;
 
 }
 .Dropdoowwnn .Dropp { 
-    background-color: #6893ee;
-    margin-top: 5px;
-    height: 20px;
-    border-radius: 10px;
-    font-size: 16px;
-    font-family: 'Century Gothic';
+  background-color: #6893ee;
+  margin-top: 5px;
+  height: 20px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-family: 'Century Gothic';
+}
+
+
+/*create*/
+.Createeee { 
+  height: 500px;
+}
+
+.CD{ 
+  height: 80px;
+}
+.session1-input{
+  height: 10px
+}
+.commonbuttons{ 
+  font-size: 18px;
+  height: 40px;
+  width: 100px;
+  border-radius: 10px;
+  margin-top: 2%;
+  margin-left: 90%;
+}
+.commonbutton1{ 
+  font-size: 18px;
+  height: 40px;
+  width: 100px;
+  border-radius: 10px;
+  margin-top: 2%;
+  margin-left: 88%;
+}
+.Schedd{ 
+  margin-left: 20px;
+  background-color: whitesmoke;
+  border: 2px solid #6893ee;
+  padding-top: 5px;
+  padding-left: 12px;
+  height: 45px;
+  width: 230px;
+  border-radius: 10px;
+}
+.Schedd input{ 
+  background: none;
+  border-radius: 5px;
+  padding-left: 5px;
+  height: 30px;
+}
+.Schedd1{ 
+  margin-left: 20px;
+  background-color: whitesmoke;
+  border: 2px solid #6893ee;
+  padding-top: 5px;
+  padding-left: 12px;
+  height: 45px;
+  width: 210px;
+  border-radius: 10px;
+}
+.Schedd1 input{ 
+  background: none;
+  border-radius: 5px;
+  padding-left: 5px;
+  height: 30px;
+}
+.Schedd2 { 
+  background-color: whitesmoke;
+  border: 2px solid #6893ee;
+  height: 43px;
+  width: 10px;
+  padding-top: 5px;
+  border-radius: 10px;
+}
+.Schedd2 input{ 
+  background: none;
+  border-radius: 5px;
+  padding-left: 3px;
+  height: 30px;
+}
+.Schedd3 { 
+  margin-left: -5px;
+  background-color: whitesmoke;
+  border: 2px solid #6893ee;
+  padding-top: 5px;
+  padding-left: 12px;
+  height: 45px;
+  max-width: fit-content;
+  border-radius: 10px;
+}
+.Schedd3 input{ 
+  background: none;
+  border-radius: 5px;
+  padding-left: 3px;
+  height: 30px;
+}
+/*-----Profile------*/
+
+/*PROFILE PIC*/
+.profile-pic-div{
+position: relative;
+display: flex;
+justify-content: center;
+align-items: center;
+height: 100px;
+width: 100px;
+border-radius: 50%;
+overflow: hidden;
+border: 1px solid grey;
+}
+
+.profile-pic-div img{
+transform: translateX(-8%);
+}
+#photo{
+height: 100%;
+width: 100%;
+object-fit: cover;
+align-self: center;
+
+}
+
+#uploadBtnn{
+position: absolute;
+bottom: 0;
+left: 0;
+right: 0;
+height: 40px;
+background: rgba(0, 0, 0, 0.7);
+color: wheat;
+font-family: sans-serif;
+font-size: 12px;
+line-height: 40px;
+text-align: center;
+cursor: pointer;
+}
+#file{
+display: none;
+}
+/*calendar*/
+.modal1{ 
+  height: 100px;
 }

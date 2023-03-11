@@ -94,7 +94,7 @@ function App() {
                 <Route path='department' element={<Department/>}> 
                   <Route path='' element={<Departmentoverview/>} />
 
-                  <Route path='subjects' element={<Subjects/>} />
+                    <Route path='subjects' element={<Subjects/>} />
                   <Route path='accounts' element={<Accountsprof/>} />
                   <Route path='sections' element={<SectionContainer/>}>
                         <Route path='' element={<Classespage/>}> </Route>

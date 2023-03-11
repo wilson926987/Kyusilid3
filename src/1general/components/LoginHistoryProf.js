@@ -55,11 +55,11 @@ function LoginHistoryProf() {
 <br/>
 
       <select
-      className='Dropdoowwnn'
+      className='Dropdoowwnn' 
       name="course"
   value={selectedCourse}
   onChange={(event) => setSelectedCourse(event.target.value)}>
-  <option className='Dropp' value="All Courses">All Courses</option>
+  <option className='Dropp' value="All Courses">All Department</option>
   <option className='Dropp' value="BSIT">BSIT</option>
   <option className='Dropp' value="BSENTREP">BSENTREP</option>
   <option className='Dropp' value="BSA">BSA</option>
