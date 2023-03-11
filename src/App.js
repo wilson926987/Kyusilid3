@@ -33,6 +33,7 @@ import AdminDashboard from './4admin/AdminDashboard';
 import Accountsprof from './4admin/Accountsprof';
 import Department from './4admin/Department';
 import FileManager from './4admin/FileManager';
+import AdminAddModule from './4admin/AdminAddModule';
 
 import Profiilepage from './1general/containerpages/Profiilepage';
 import MessagesPage from './1general/containerpages/MessagesPage';
@@ -51,7 +52,6 @@ import CreateClass from './4admin/CreateClass';
 import Createproff from './4admin/Createproff';
 import Createstud from './4admin/Createstud';
 import ClassSettings from './1general/containerpages/ClassSettings';
-import AddtoSource from './2prof/AddtoSource';
 
 
 
@@ -84,7 +84,6 @@ function App() {
                         <Route path='sourcematerials' element={<SourceMaterials/>} />
                         <Route  path='attendance' element={<Attendance/> }/>
                         <Route path= 'activity/activityId' element={<ClassActivity/>} />
-                        <Route path='addmaterial' element={<AddtoSource/>}></Route>
                         <Route path='messages' element={<MessagesPage/>} />  
                         <Route path= 'settings' element={<ClassSettings/>} />        
                   </Route>
@@ -110,6 +109,7 @@ function App() {
                   <Route  path='createclass' element={<CreateClass/>}/>
                   <Route  path='createproff' element={<Createproff/>}/>
                   <Route  path='createstud' element={<Createstud/>}/>
+                  <Route path='admin_AddModule' element={<AdminAddModule/>} />
                 </Route>
                 <Route path='adminlog' element={<Adminlog/>}/>
              

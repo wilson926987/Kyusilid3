@@ -1,15 +1,13 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import classbanner1 from '../../assets/images/classbanner1.png'
 import classbanner2 from '../../assets/images/classbanner2.png'
 import classbanner3 from '../../assets/images/classbanner3.png'
 import classbanner4 from '../../assets/images/classbanner4.png'
 import classbanner5 from '../../assets/images/classbanner5.png'
-import { currentclassContext } from '../../Globalcontext'
 import Textbox from '../formcomponents/Textbox'
 
 function ClassSettings() {
     const [discussionlink, setdicussionlink] = useState();
-    const {currentclass} = useContext(currentclassContext);
   return (
     <div>
         <h4>class banner</h4>
@@ -42,7 +40,7 @@ function ClassSettings() {
         </div>
 
 
-        <h4 className='margintop12'> Discussion link {currentclass.classbanner}</h4>
+        <h4 className='margintop12'> Discussion link</h4>
 
 
         <div className="row">

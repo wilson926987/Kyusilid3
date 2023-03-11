@@ -1,9 +1,35 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
+import LoginHistoryProf from './LoginHistoryProf';
+
+
+
+
 
 function Adminlog() {
-  return (
-    <div>Adminlog</div>
-  )
+
+  const [accountsnav, setaccountsnav] = useState(false)
+
+  const navigate = useNavigate()
+  function isactive(e){
+
+    return true
+
+ }
+ 
+ return (
+<div>
+  <LoginHistoryProf></LoginHistoryProf>
+  </div>
+ )
+ 
+
 }
+ 
+ 
+
+
+  
+
 
 export default Adminlog

@@ -4,6 +4,7 @@ import { Outlet , useNavigate , useLocation, useOutletContext} from 'react-route
 import { currentdeptContext , userInfoContext , departmentsContext , deptInfoContext} from '../Globalcontext'
 import {BiEdit} from 'react-icons/bi'
 import {FaUpload} from 'react-icons/fa'
+import ExcelImporter from './ExcelImporter'
 
 
 function Department() {
@@ -32,6 +33,12 @@ function Department() {
      }
 
     } , [currentdept])
+
+    const [upclass, setupclass] = useState(false);
+    const [upstud, setupstud] = useState(false)
+    const [upproff, setupproff] = useState(false)
+
+
    
 
 
@@ -71,6 +78,8 @@ function Department() {
                 <li className={`classnavitem ${isactive('department') &&' classnav-active' }`} onClick={()=>{navigate('/kyusilidAdmin/department')}}>  Overview </li>
                 <li><hr/></li>
                 <li className="classnavitem " onClick={()=>{navigate('admin_announcements')}}>  Announcements </li>
+                <li><hr/></li>
+                <li className="classnavitem " onClick={()=>{navigate('admin_AddModule')}}>  Add Module </li>
                 <li><hr/></li>
                 <li className={`classnavitem ${isactive('subjects') &&' classnav-active' }`} onClick={()=>{setaccountsnav(false);setclassesnav(false); setsubjectnav(!subjectnav) ;setcurrentpage('subjects')}}>  Subjects</li>
                 <li><hr/></li>
@@ -134,12 +143,18 @@ function Department() {
 
      {creatclassmodal &&
       <div className='adminmodal' > 
-      <div className='modalbackground-lgt' onClick={()=>{setcreateclassmodal(false)}}>
+      <div className='modalbackground-lgt' onClick={()=>{setcreateclassmodal(false) ; setupclass(false)}}>
 
       </div>
       <div className='tertiary borderradius-md padding12 modal-body flex'>
-          <div className='sideoption borderradius-md'onClick={()=>{navigate('createclass') ; setcreateclassmodal(false)}} > <BiEdit/><h2>Manual Adding</h2></div>
-          <div className='sideoption borderradius-md'> <FaUpload/><h2>Upload file</h2></div>
+      {!upclass ? 
+          <>     
+          <div className='sideoption borderradius-md'onClick={()=>{navigate('createclass') ; setcreateclassmodal(false) }} > <BiEdit/><h2>Manual Adding</h2></div>
+          <div className='sideoption borderradius-md' onClick={()=>{setupclass(true)}}> <FaUpload/><h2>Upload file</h2></div></> 
+          :
+          <div>dito mag uupload ng file para sa class</div>
+          
+        }
       </div>
           
 </div>
@@ -147,12 +162,18 @@ function Department() {
      
      {createstudmodal &&
       <div className='adminmodal' > 
-      <div className='modalbackground-lgt' onClick={()=>{setcreatestudmodal(false)}}>
+      <div className='modalbackground-lgt' onClick={()=>{setcreatestudmodal(false) ; setupstud(false)}}>
 
       </div>
       <div className='tertiary borderradius-md padding12 modal-body flex'>
-          <div className='sideoption borderradius-md'onClick={()=>{navigate('createstud') ; setcreatestudmodal(false)}} > <BiEdit/><h2>Manual Adding</h2></div>
-          <div className='sideoption borderradius-md'> <FaUpload/><h2>Upload file</h2></div>
+        {!upstud ? 
+          <>
+          <div className='sideoption borderradius-md'onClick={()=>{navigate('createstud') ; setcreatestudmodal(false) }} > <BiEdit/><h2>Manual Adding</h2></div>
+          <div className='sideoption borderradius-md' onClick={ ()=>{setupstud(true)}}> <FaUpload/><h2>Upload file</h2></div>
+          </>
+          :
+          <div><ExcelImporter/></div>
+          }
       </div>
           
 </div>
@@ -161,12 +182,16 @@ function Department() {
      
      {createproffmodal &&
       <div className='adminmodal' > 
-      <div className='modalbackground-lgt' onClick={()=>{setcreateproffmodal(false)}}>
+      <div className='modalbackground-lgt' onClick={()=>{setcreateproffmodal(false) ; setupproff(false)}}>
 
       </div>
       <div className='tertiary borderradius-md padding12 modal-body flex'>
-          <div className='sideoption borderradius-md'onClick={()=>{navigate('createproff') ; setcreateproffmodal(false)}} > <BiEdit/><h2>Manual Adding</h2></div>
-          <div className='sideoption borderradius-md'> <FaUpload/><h2>Upload file</h2></div>
+{!upproff ?  
+        <>  <div className='sideoption borderradius-md'onClick={()=>{navigate('createproff') ; setcreateproffmodal(false) }} > <BiEdit/><h2>Manual Adding</h2></div>
+        <div className='sideoption borderradius-md' onClick={()=>{setupproff(true) }}> <FaUpload/><h2>Upload file</h2></div></>
+        :
+        <div>prof uypload para dito</div>
+}
       </div>
           
 </div>

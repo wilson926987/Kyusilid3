@@ -1,14 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import stud from '../assets/images/student.png';
 import prof from '../assets/images/prof.png';
 import arch from '../assets/images/archived.png';
 import klase from '../assets/images/class.png';
 import books from '../assets/images/book.png';
 
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
 
 
 function AdminDashboard() {
   const [currentTime, setCurrentTime] = useState(new Date());
+
+  const navigate = useNavigate();
+  const [deptinfo, setdepartmentoverview] = useState();
+
+
+
+
+
 
 
   useEffect(() => {
@@ -17,7 +28,33 @@ function AdminDashboard() {
     }, 1000);
 
     return () => clearInterval(intervalId);
+
+
   }, []);
+
+
+
+  useEffect(()=> {
+ 
+ 
+   
+      axios.get('https://api.kyusillid.online/api/admindashboard/' + 1)
+      .then(response=>
+        {
+          setdepartmentoverview(response.data)
+ 
+        }
+
+      ).catch()
+
+    
+
+
+    
+
+  },[])
+
+
 
   
   return (
@@ -27,17 +64,18 @@ function AdminDashboard() {
           <div class="linkk" >
           <div className="box">
               <div className="cards">
-              <h2>1000</h2>
-              <h3>Students</h3>
+              <h2>{deptinfo !== undefined && deptinfo.studcount}</h2>
+              <h3>Students </h3>
             </div>
             <div className="images">
               <img src={prof} alt="" srcSet="" />
             </div>
-          </div></div>
+          </div>
+          </div>
           <div class="linkk" >
           <div className="box">
             <div className="cards">
-              <h2>507</h2>
+              <h2>{deptinfo!== undefined && deptinfo.profcount}</h2>
               <h3>Professors</h3>
             </div>
             <div className="images">
@@ -47,7 +85,7 @@ function AdminDashboard() {
           <div class="linkk" >
           <div className="box">
             <div className="cards">
-              <h2>25</h2>
+              <h2>{deptinfo !== undefined && deptinfo.archived}</h2>
               <h3>Archived</h3>
             </div>
             <div className="images">
@@ -57,7 +95,7 @@ function AdminDashboard() {
           <div class="linkk">
           <div className="box">
             <div className="cards">
-              <h2>40</h2>
+              <h2>{deptinfo!== undefined && deptinfo.classes}</h2>
               <h3>Classes</h3>
             </div>
             <div className="images">
@@ -75,55 +113,7 @@ function AdminDashboard() {
             </div>
           </div>
 
-    <div className='boxess'>
-    <div className="box3">
-            <div className="images1">
-              <img src={books} alt="" srcSet="" />
-            </div>
-      <h2>Bachelor of Science</h2>
-      <p>Information and Technology</p>
-    </div>
-
-    <div className="box4">
-            <div className="images2">
-              <img src={books} alt="" srcSet="" />
-            </div>
-      <h2>Bachelor of Science</h2>
-      <p>Accountancy</p>
-
-    </div>
-
-    
-    <div className="box5">
-            <div className="images2">
-              <img src={books} alt="" srcSet="" />
-            </div>
-      <h2>Bachelor of Science</h2>
-      <p>Entrepreneurship</p>
-
-    </div>
-
-    
-    <div className="box6">
-            <div className="images2">
-              <img src={books} alt="" srcSet="" />
-            </div>
-      <h2>Bachelor of Science</h2>
-      <p>Industrial Engineering</p>
-
-    </div>
-
-    
-    <div className="box7">
-            <div className="images2">
-              <img src={books} alt="" srcSet="" />
-            </div>
-      <h2>Bachelor of Science</h2>
-      <p>Electrical Engineering</p>
-
-    </div>
-
-    </div>
+   
    
     
     </div>

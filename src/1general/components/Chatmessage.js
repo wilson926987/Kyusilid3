@@ -39,7 +39,7 @@ function Chatmessage({item}) {
              
         </div>
 
-        {userinfo.user.acc_id=== item.acc_id && ( !item.isdeleted && !isdeleted) &&
+        {userinfo.user.acc_id=== item.acc_id && ( !item.isdeleted|| !isdeleted) &&
          <div className='deletechat'>
          <BsFillTrashFill className='activityname' onClick={handledelete}/>
         </div>
