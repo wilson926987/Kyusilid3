@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import avatar from '../assets/images/avatar.jpg';
 import AreaChart from '../1general/components/areachart'
-import { useOutletContext } from 'react-router-dom';
+
 import { deptInfoContext } from '../Globalcontext';
 
 
