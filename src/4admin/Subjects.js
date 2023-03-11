@@ -37,7 +37,7 @@ function Subjects() {
        </thead>
        <tbody>
 
-        {subject !== undefined  && subject.map((item, key)=>(
+        {/* {subject !== undefined  && subject.map((item, key)=>(
             <tr key= {key}>
 
         
@@ -46,11 +46,10 @@ function Subjects() {
             <td>{item.sub_name}</td>
             <td></td>
             <td>
-              {/* <button className='commonbutton lighttext secondary' onClick={ ()=>{navigate('/kyusilidAdmin/department/sections')}}>View Classes</button>
-               */}</td>
+             </td>
           </tr>
 
-        ))}
+        ))} */}
       
         
        </tbody>
