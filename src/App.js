@@ -28,11 +28,13 @@ import Attendance from './1general/containerpages/Attendance';
 import ClassMarkPage from './1general/containerpages/ClassMarkPage';
 
 
+
 import AdminContainer from './4admin/AdminContainer';
 import AdminDashboard from './4admin/AdminDashboard';
 import Accountsprof from './4admin/Accountsprof';
 import Department from './4admin/Department';
 import FileManager from './4admin/FileManager';
+import Log from './4admin/Adminlog';
 
 import Profiilepage from './1general/containerpages/Profiilepage';
 import MessagesPage from './1general/containerpages/MessagesPage';

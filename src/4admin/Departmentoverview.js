@@ -10,19 +10,16 @@ import { deptInfoContext } from '../Globalcontext';
 function Departmentoverview() {
 
  const {departmentinfo} = useContext(deptInfoContext);
+ const [searchTerm, setSearchTerm] = useState('');
+
+ 
 
  useEffect(()=>{
     console.log(departmentinfo);
  },[departmentinfo])
 
-
- 
-
-
   return (
     departmentinfo != undefined ?
-
-
 
     <div className="row">
     <div className="col-lg-12 displaynone ">
@@ -79,12 +76,21 @@ function Departmentoverview() {
     <div className="row">
     <div className="col-lg-12 margintop12">
         <div className="tertiary borderradius-md overviewlist" >
-         <div className='flex'> <h4>Department Admin</h4>  <input type="text" className='marginleftauto'/></div>
+         <div className='searchDept'> 
+         <h4>Department Admin</h4>  
+         <input
+           type="text"
+            className="searchDept"
+            placeholder='Search by Name'
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}/>
+</div>
 
           <ul className='margintop12'>
 
 
-           { departmentinfo.depadminlist != undefined && departmentinfo.depadminlist.map((item, key)=>(
+           { departmentinfo.depadminlist != undefined && departmentinfo.depadminlist
+            .filter((item) => item.firstname.toLowerCase().includes(searchTerm.toLowerCase())).map((item, key)=>(
                  <li key={key}>
                   <div class="personpanel">
                     <div>

@@ -1,3 +1,4 @@
+
 import React, { useContext, useEffect, useState } from 'react'
 import Avater from '../../assets/images/avatar.jpg'
 import {BsFillGearFill} from 'react-icons/bs'
@@ -28,9 +29,15 @@ function Profiilepage() {
 
 
       <div className='tertiary profilepanelmain  borderradius-lg '>
+
           <div className='flex'>
-            <img src={Avater} alt="" />
-            <div>
+          <div className='profile-pic-div'>
+            <img src={Avater} alt=""/>
+            <input type="file" id="file"></input>
+            <label className='uploadBtnn' for="file" id="uploadBtnn" style={{display: "block"}}>Choose Photo</label>
+</div>
+          
+          <div>
             <h3>{userinfo.user.firstname} {userinfo.user.middle} {userinfo.user.lastname}</h3>
             <p>Information Technology</p>
             </div>
@@ -45,7 +52,6 @@ function Profiilepage() {
           </div>
          {settings &&  
          <div className='profilesettingsdropdown borderradius-md'>
-            <p className='profiledropdownitem'>change profile picture</p>
             <p className='profiledropdownitem'>change password</p>
           </div>
         }
