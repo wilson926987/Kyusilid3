@@ -83,7 +83,7 @@ function Login() {
     <div className='Logincontainer primary'>
       
       <img src={logoiconimage1} alt="" srcset="" className='avatar'/>
-      <h1>Login Here</h1>
+      <h1>Login</h1>
 
       <form className='form-group-form' autoComplete="off"
       onSubmit={handleFormSubmit}>
