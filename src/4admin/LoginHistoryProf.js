@@ -16,10 +16,20 @@ function LoginHistoryProf() {
 
   const handleSearch = event => {
     const searchTerm = event.target.value.toLowerCase();
+    const filteredByCourse = selectedCourse === "All Courses" ? data : data.filter(d => d.course === selectedCourse);
     setFilteredData(
-      data.filter(d => d.name.toLowerCase().includes(searchTerm))
+      filteredByCourse.filter(d => d.name.toLowerCase().includes(searchTerm))
     );
   };
+  
+
+  const handleCourseChange = event => {
+    const course = event.target.value;
+    setSelectedCourse(course);
+    const filteredByCourse = course === "All Courses" ? data : data.filter(d => d.course === course);
+    setFilteredData(filteredByCourse);
+  };
+  
 
   
   const [showTextbox, setShowTextbox] = useState(false);
@@ -41,7 +51,7 @@ function LoginHistoryProf() {
   return (
     <div>
       
-      <div class="search">
+      <div className="search">
         <input
           type="text"
           placeholder="Search by name"
@@ -54,11 +64,11 @@ function LoginHistoryProf() {
 <br />
 <br/>
 
-      <select
-      className='Dropdoowwnn' 
-      name="course"
+<select
+  className='Dropdoowwnn secondary commonbutton lighttext' 
+  name="course"
   value={selectedCourse}
-  onChange={(event) => setSelectedCourse(event.target.value)}>
+  onChange={handleCourseChange}>
   <option className='Dropp' value="All Courses">All Department</option>
   <option className='Dropp' value="BSIT">BSIT</option>
   <option className='Dropp' value="BSENTREP">BSENTREP</option>
@@ -67,7 +77,8 @@ function LoginHistoryProf() {
   <option className='Dropp' value="BSIE">BSIE</option>
 </select>
 
-      <table class="table">
+
+      <table className="table">
         <thead>
           <tr>
             <th>Name</th>

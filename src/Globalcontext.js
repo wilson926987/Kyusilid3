@@ -32,3 +32,9 @@ export const forcerefreshContext = createContext();
 export const currentdepartment = createContext();
 export const settingsContext = createContext();
 export const deptInfoContext = createContext();
+
+
+export const subjectfilterContext = createContext();
+export const subjectlistContext = createContext();
+export const adminclasslistContext = createContext();
+export const accountlistContext = createContext();

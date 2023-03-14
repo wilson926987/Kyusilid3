@@ -5,18 +5,27 @@ import AreaChart from '../1general/components/areachart'
 import { deptInfoContext } from '../Globalcontext';
 
 
-
-
 function Departmentoverview() {
 
  const {departmentinfo} = useContext(deptInfoContext);
-
- useEffect(()=>{
-    console.log(departmentinfo);
- },[departmentinfo])
+ const [searchTerm, setSearchTerm] = useState('');
+ const [adminlist ,setadminlist] = useState()
 
 
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+
+
+useEffect(()=>{
+  if(departmentinfo.depadminlist !== undefined){
+    setadminlist(departmentinfo.depadminlist.map(item=>(
+      {'name': item.firstname + ' ' + item.lastname + ' ' + item.suffix}
+    )))
+  }
  
+},[departmentinfo.depadminlist])
 
 
   return (
@@ -79,18 +88,27 @@ function Departmentoverview() {
     <div className="row">
     <div className="col-lg-12 margintop12">
         <div className="tertiary borderradius-md overviewlist" >
-         <div className='flex'> <h4>Department Admin</h4>  <input type="text" className='marginleftauto'/></div>
+         <div className='flex'> <h4>Department Admin</h4>  
+         <input
+           type="text"
+            placeholder="Search by name"
+            className="search1"
+            onChange={handleSearch}
+/>
+</div>
 
           <ul className='margintop12'>
 
 
-           { departmentinfo.depadminlist != undefined && departmentinfo.depadminlist.map((item, key)=>(
+           { adminlist != undefined && adminlist.filter(searchitem=>
+              searchitem.name.toLowerCase().includes(searchTerm.toLowerCase()) || searchTerm=== ''
+           ).map((item, key)=>(
                  <li key={key}>
-                  <div class="personpanel">
+                  <div className="personpanel">
                     <div>
                       <img src={avatar} alt="" /></div>
-                    <div class="personpanelcontent">
-                      <h5>{item.title} {item.firstname} {item.lastname} {item.suffix}</h5>
+                    <div className="personpanelcontent">
+                      <h5>{item.name}</h5>
                       
                     </div>
                   </div>

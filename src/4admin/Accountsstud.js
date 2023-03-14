@@ -1,26 +1,20 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { FcEmptyTrash } from "react-icons/fc";
 import { FiEdit } from "react-icons/fi";
+import { accountlistContext } from '../Globalcontext';
 
 
 function Accountsstud() {
-  const [data, setData] = useState([
-    { studnum: '20-2901', lname: 'Capistrano', fname: 'Wilson Diego', mname:'Santos', course:'BSIT', sec:'SBIT4F' },
-    { studnum: '20-2902', lname: 'Libot', fname: 'Ronald Carlo', mname:'Nargatan', course:'BSIT', sec:'SBIT4J' },
-    { studnum: '20-2903', lname: 'Acotin', fname: 'Carlo', mname:'Roxas', course:'BSIT', sec:'SBIT4C' },
-    { studnum: '20-2904', lname: 'Encarnado', fname: 'Aira Mae', mname:'Si', course:'BSIT', sec:'SBIT4H' },
-    { studnum: '20-2905', lname: 'Olegario', fname: 'Niño', mname:'Nebres', course:'BSIT', sec:'SBIT4P'},
 
-  ]);
-  const [filteredData, setFilteredData] = useState(data);
+  const {accountlist} = useContext(accountlistContext);
 
 
-  const handleSearch = event => {
-    const searchTerm = event.target.value.toLowerCase();
-    setFilteredData(
-      data.filter(d => d.name.toLowerCase().includes(searchTerm))
-    );
-  };
+  
+ useEffect(()=>{
+    console.log(accountlist)
+ },[])
+
+ 
 
   const [showTextbox, setShowTextbox] = useState(false);
   const [selectedRow, setSelectedRow] = useState(null);
@@ -29,16 +23,7 @@ function Accountsstud() {
     setShowTextbox(!showTextbox);
   };
 
-  const handleDelete = (index) => {
-    const newData = [...data];
-    newData.splice(index, 1);
-    setData(newData);
-  };
 
-  const handleEdit = (index) => {
-    setSelectedRow(index);
-    setShowTextbox(true);
-  };
   return (
     
     <div className=''>
@@ -50,7 +35,7 @@ function Accountsstud() {
           type="text"
           placeholder="Search by name"
           name="search"
-          onChange={handleSearch}
+          
         />
         
         
@@ -61,11 +46,7 @@ function Accountsstud() {
 
       {showTextbox && (
   <div className='Editext'>
-    <input className='Inputext' type="text" value={data[selectedRow].name} onChange={(event) => {
-      const newData = [...data]; 
-      newData[selectedRow].name = event.target.value;
-      setData(newData); 
-    }} />
+    <input className='Inputext' type="text" />
     <button 
     className='Savee'
     onClick={() => {
@@ -96,43 +77,34 @@ function Accountsstud() {
           
           <tr>
             <th>Student Number</th>
-            <th>Last Name</th>
-            <th>First Name</th>
-            <th>Middle Name</th>
-            <th>Course</th>
-            <th>Section</th>
+           <th>Name</th>
+      
+           
             <th>Action</th>
 
           </tr>
         </thead>
         <tbody>
-        {filteredData.map((item, index) => (
+    {accountlist !== undefined &&
+    <>
+        {accountlist.studentlist.map((item, index) => (
   <tr key={index}>
     <td data-label="Student Number">{item.studnum}</td>
-    <td data-label="Last Name">{item.lname}</td>
-    <td data-label="First Name">{item.fname}</td>
-    <td data-label="Middle Name">{item.mname}</td>
-    <td data-label="Course">{item.course}</td>
-    <td data-label="Section">{item.sec}</td>
+    <td data-label="Last Name">{item.name}</td>
+   
+ 
     <td>
       <button
        
-      className='Dele buttonstud2'
-      onClick={() => {
-        const newData = [...data];
-        newData.splice(index, 1); 
-        setData(newData); 
-      }}><FcEmptyTrash /> Delete</button>
+      className='Dele buttonstud2'><FcEmptyTrash /> Delete</button>
 
       <button
-      className='Edit margin10l buttonstud1'
-       onClick={() => {
-        setShowTextbox(true);
-        setSelectedRow(index);
-      }}><FiEdit /> Edit</button>
+      className='Edit margin10l buttonstud1'><FiEdit /> Edit</button>
     </td>
   </tr>
 ))}
+    </>
+    }
 
         </tbody>
       </table>

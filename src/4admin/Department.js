@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useState, useEffect, useContext } from 'react'
 import { Outlet , useNavigate , useLocation, useOutletContext} from 'react-router-dom'
-import { currentdeptContext , userInfoContext , departmentsContext , deptInfoContext} from '../Globalcontext'
+import {accountlistContext, adminclasslistContext, subjectlistContext, currentdeptContext , userInfoContext , departmentsContext , deptInfoContext , subjectfilterContext} from '../Globalcontext'
 import {BiEdit} from 'react-icons/bi'
 import {FaUpload} from 'react-icons/fa'
 import ExcelImporter from './ExcelImporter'
@@ -20,16 +20,31 @@ function Department() {
     const {currentdept} = useContext(currentdeptContext);
     const [departmentinfo, setdepartmentinfo] = useState({}
     );
+    const [subjectlist, setsubjectlist] = useState();
+    const [subjectfilter, setsubjectfilter] = useState(4);
+    const [adminclasslist, setadminclasslist] = useState();
+    const [accountlist, setaccountlist] = useState();
+
 
 
     useEffect(()=>{
      if(currentdept != undefined){
       axios.get('https://api.kyusillid.online/api/getdeptinfo/' + currentdept.dep_id ).then(response =>{  
-        setdepartmentinfo(response.data)
-      
-      }).catch(
+        setdepartmentinfo(response.data)  
+      }).catch(); 
 
-      );   
+      axios.get('https://api.kyusillid.online/api/getsubjectlist/'+ currentdept.dep_id  ).then(response =>{
+        setsubjectlist(response.data)
+      }).catch();
+
+      axios.get('https://api.kyusillid.online/api/getclasslist/' + currentdept.dep_id ).then(
+        response=>setadminclasslist(response.data)
+      ).catch();
+
+      axios.get('https://api.kyusillid.online/api/accountlist/' +currentdept.dep_id).then(
+        response=> setaccountlist(response.data)
+      ).catch();
+      
      }
 
     } , [currentdept])
@@ -39,14 +54,6 @@ function Department() {
     const [upproff, setupproff] = useState(false)
 
 
-   
-
-
-
-
-    
-
-  
 
 
   function isactive(e){
@@ -84,13 +91,13 @@ function Department() {
                 <li className={`classnavitem ${isactive('subjects') &&' classnav-active' }`} onClick={()=>{setaccountsnav(false);setclassesnav(false); setsubjectnav(!subjectnav) ;setcurrentpage('subjects')}}>  Subjects</li>
                 <li><hr/></li>
                 {subjectnav &&
-                   <><li className="classnavsubitem" onClick={()=>{navigate('subjects')}}>4th year</li>
+                   <><li className="classnavsubitem" onClick={()=>{setsubjectfilter(4); navigate('subjects')}}>4th year</li>
                    <li><hr/></li>
-                   <li className="classnavsubitem" onClick={()=>{navigate('subjects')}}>3rd year</li>
+                   <li className="classnavsubitem" onClick={()=>{setsubjectfilter(3); navigate('subjects')}}>3rd year</li>
                    <li><hr/></li>
-                   <li className="classnavsubitem" onClick={()=>{navigate('subjects')}}>2nd year</li>
+                   <li className="classnavsubitem" onClick={()=>{ setsubjectfilter(2); navigate('subjects')}}>2nd year</li>
                    <li><hr/></li>
-                   <li className="classnavsubitem" onClick={()=>{navigate('subjects')}}>1st year</li>
+                   <li className="classnavsubitem" onClick={()=>{ setsubjectfilter(1); navigate('subjects')}}>1st year</li>
                    <li><hr/></li>
                    </>
                 }
@@ -133,7 +140,16 @@ function Department() {
         <div className="col-lg-9 margintop12">
   
           <deptInfoContext.Provider value ={{departmentinfo, setdepartmentinfo}}>
-          <Outlet />
+          <subjectlistContext.Provider value = {{subjectlist}}>
+            <subjectfilterContext.Provider value = {{subjectfilter}}>
+            <adminclasslistContext.Provider value={{adminclasslist}}>
+              <accountlistContext.Provider value={{accountlist}}>
+              <Outlet />
+              </accountlistContext.Provider>
+       
+            </adminclasslistContext.Provider>  
+            </subjectfilterContext.Provider>
+          </subjectlistContext.Provider>      
           </deptInfoContext.Provider>
              
   
