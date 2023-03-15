@@ -2139,6 +2139,34 @@ padding: 12px;
 }
 
 
+.archiveselection{
+  width: 0px;
+  overflow: hidden ;
+  min-width: 0px;
+
+}
+
+.archiveselectionactive{
+  width: 290px !important;
+  min-width: 290px !important;
+  
+}
+
+.archiveselection li{
+  margin :  8px 12px;
+  border-bottom:  2px solid gray;
+  white-space: nowrap;
+  padding-right: 40px;
+}
+
+.archiveselectionactive .archiveselection li{
+  padding: 0px !important;
+  margin-left: -12px;
+}
+
+
+
+
 
 
 

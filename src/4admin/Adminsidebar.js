@@ -51,7 +51,7 @@ function Adminsidebar() {
     <ul>
         <li className='sidebarmenu' onClick={()=>{navigate('/kyusilidAdmin')}}> <div className="highlight"></div> <MdSpaceDashboard />  Dashboard</li>
         {departments.map((item)=>(
-             <li key={item.dep_id} className='sidebarmenu' onClick={()=>{setcurrentdept(item);console.log(item); navigate('department')}}> <div className="highlight"></div> <MdBrightness1 className='clear ellipsis'/> {item.dep_name} </li>
+             <li key={item.dep_id} className='sidebarmenu' onClick={()=>{setcurrentdept(item); navigate('department')}}> <div className="highlight"></div> <MdBrightness1 className='clear ellipsis'/> {item.dep_name} </li>
         ))}
         <li className='sidebarmenu' onClick={()=>{navigate('adminlog')}}> <div className="highlight"></div> <MdSpaceDashboard /> Admin log</li>
 

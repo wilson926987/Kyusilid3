@@ -1,9 +1,15 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { adminclasslistContext } from '../Globalcontext'
 
 
 function Classespage() {
   const navigate = useNavigate()
+  const {adminclasslist} = useContext(adminclasslistContext);
+
+  useEffect(()=>{
+    console.log(adminclasslist)
+  },[])
 
   return (
     <div className='tertiary borderradius-lg padding12'>
@@ -31,15 +37,27 @@ function Classespage() {
         
        </thead>
        <tbody>
-        <tr>
-          <td>1</td>
-          <td>SBIT- 4J</td>
-          <td>Practicum</td>
-          <td>juan Dela Cruz</td>
-          <td>Schedule</td>
-          <td>40</td>
-          <td> <button className="secondary lighttext commonbutton" onClick={()=>{navigate('/kyusilidAdmin/department/sections/samplesection')}}>View Class</button></td>
-        </tr>
+
+        {adminclasslist !== undefined &&
+        <>
+        {adminclasslist.map((item,key)=>(
+             <tr key={key}>
+             <td>{item.classes_id}</td>
+             <td>{item.yearsection}</td>
+             <td>{item.sub_name}</td>
+             <td>{item.profname}</td>
+             <td>{item.schedule}</td>
+             <td>{item.studentcount}</td>
+             <td> <button className="secondary lighttext commonbutton" onClick={()=>{navigate('/kyusilidAdmin/department/sections/samplesection')}}>View Class</button></td>
+           </tr>
+
+        ))}
+        
+        </>
+        
+        
+        }
+     
        
        </tbody>
 

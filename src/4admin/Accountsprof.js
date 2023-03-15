@@ -1,26 +1,13 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { FcEmptyTrash } from "react-icons/fc";
 import { FiEdit } from "react-icons/fi";
+import { accountlistContext } from '../Globalcontext';
 
 
 function Accountsprof() {
-  const [data, setData] = useState([
-    { empid: '00827', lname: 'Capistrano', fname: 'Wilson Diego', mname:'Santos', dept:'IT', sub:'Capstone' },
-    { empid: '00928', lname: 'Libot', fname: 'Ronald Carlo', mname:'Nargatan', dept:'IT', sub:'Practicum' },
-    { empid: '00934', lname: 'Acotin', fname: 'Carlo', mname:'Roxas', dept:'IT', sub:'Object Oriented' },
-    { empid: '00978', lname: 'Encarnado', fname: 'Aira Mae', mname:'Si', dept:'IT', sub:'Programming' },
-    { empid: '00985', lname: 'Olegario', fname: 'Niño', mname:'Nebres', dept:'IT', sub:'Human Interactive'},
-
-  ]);
-  const [filteredData, setFilteredData] = useState(data);
+  const {accountlist} = useContext(accountlistContext);
 
 
-  const handleSearch = event => {
-    const searchTerm = event.target.value.toLowerCase();
-    setFilteredData(
-      data.filter(d => d.name.toLowerCase().includes(searchTerm))
-    );
-  };
 
   const [showTextbox, setShowTextbox] = useState(false);
   const [selectedRow, setSelectedRow] = useState(null);
@@ -29,16 +16,9 @@ function Accountsprof() {
     setShowTextbox(!showTextbox);
   };
 
-  const handleDelete = (index) => {
-    const newData = [...data];
-    newData.splice(index, 1);
-    setData(newData);
-  };
+ 
 
-  const handleEdit = (index) => {
-    setSelectedRow(index);
-    setShowTextbox(true);
-  };
+ 
   return (
     
     <div className=''>
@@ -50,7 +30,7 @@ function Accountsprof() {
           type="text"
           placeholder="Search by name"
           name="search"
-          onChange={handleSearch}
+
         />
         
         
@@ -61,11 +41,7 @@ function Accountsprof() {
 
       {showTextbox && (
   <div className='Editext'>
-    <input className='Inputext' type="text" value={data[selectedRow].name} onChange={(event) => {
-      const newData = [...data]; 
-      newData[selectedRow].name = event.target.value;
-      setData(newData); 
-    }} />
+    <input className='Inputext' type="text" />
     <button 
     className='Savee'
     onClick={() => {
@@ -95,34 +71,25 @@ function Accountsprof() {
           
           
           <tr>
-            <th>Employee Number</th>
-            <th>Last Name</th>
-            <th>First Name</th>
-            <th>Middle Name</th>
-            <th>Department</th>
-            <th>Subject</th>
+        
+            <th> Name</th>
+         
+  
             <th>Action</th>
 
           </tr>
         </thead>
         <tbody>
-        {filteredData.map((item, index) => (
+        {accountlist.proflist.map((item, index) => (
   <tr key={index}>
-    <td data-label="Employee Number">{item.empid}</td>
-    <td data-label="Last Name">{item.lname}</td>
-    <td data-label="First Name">{item.fname}</td>
-    <td data-label="Middle Name">{item.mname}</td>
-    <td data-label="Department">{item.dept}</td>
-    <td data-label="Subject">{item.sub}</td>
+    <td data-label="Namer">{item.name}</td>
+  
+
     <td>
       <button
        
       className='Dele buttonstud2'
-      onClick={() => {
-        const newData = [...data];
-        newData.splice(index, 1); 
-        setData(newData); 
-      }}><FcEmptyTrash /> Delete</button>
+      ><FcEmptyTrash /> Delete</button>
 
       <button
       className='Edit margin10l buttonstud1'

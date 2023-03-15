@@ -1,9 +1,10 @@
 import axios from 'axios'
 import React, { useState, useEffect, useContext } from 'react'
 import { Outlet , useNavigate , useLocation, useOutletContext} from 'react-router-dom'
-import { currentdeptContext , userInfoContext , departmentsContext , deptInfoContext} from '../Globalcontext'
+import {accountlistContext, adminclasslistContext, subjectlistContext, currentdeptContext , userInfoContext , departmentsContext , deptInfoContext , subjectfilterContext} from '../Globalcontext'
 import {BiEdit} from 'react-icons/bi'
 import {FaUpload} from 'react-icons/fa'
+import ExcelImporter from './ExcelImporter'
 
 
 function Department() {
@@ -19,27 +20,40 @@ function Department() {
     const {currentdept} = useContext(currentdeptContext);
     const [departmentinfo, setdepartmentinfo] = useState({}
     );
+    const [subjectlist, setsubjectlist] = useState();
+    const [subjectfilter, setsubjectfilter] = useState(4);
+    const [adminclasslist, setadminclasslist] = useState();
+    const [accountlist, setaccountlist] = useState();
+
 
 
     useEffect(()=>{
      if(currentdept != undefined){
       axios.get('https://api.kyusillid.online/api/getdeptinfo/' + currentdept.dep_id ).then(response =>{  
-        setdepartmentinfo(response.data)
-      
-      }).catch(
+        setdepartmentinfo(response.data)  
+      }).catch(); 
 
-      );   
+      axios.get('https://api.kyusillid.online/api/getsubjectlist/'+ currentdept.dep_id  ).then(response =>{
+        setsubjectlist(response.data)
+      }).catch();
+
+      axios.get('https://api.kyusillid.online/api/getclasslist/' + currentdept.dep_id ).then(
+        response=>setadminclasslist(response.data)
+      ).catch();
+
+      axios.get('https://api.kyusillid.online/api/accountlist/' +currentdept.dep_id).then(
+        response=> setaccountlist(response.data)
+      ).catch();
+      
      }
 
     } , [currentdept])
-   
+
+    const [upclass, setupclass] = useState(false);
+    const [upstud, setupstud] = useState(false)
+    const [upproff, setupproff] = useState(false)
 
 
-
-
-    
-
-  
 
 
   function isactive(e){
@@ -72,16 +86,18 @@ function Department() {
                 <li><hr/></li>
                 <li className="classnavitem " onClick={()=>{navigate('admin_announcements')}}>  Announcements </li>
                 <li><hr/></li>
+                <li className="classnavitem " onClick={()=>{navigate('admin_AddModule')}}>  Add Module </li>
+                <li><hr/></li>
                 <li className={`classnavitem ${isactive('subjects') &&' classnav-active' }`} onClick={()=>{setaccountsnav(false);setclassesnav(false); setsubjectnav(!subjectnav) ;setcurrentpage('subjects')}}>  Subjects</li>
                 <li><hr/></li>
                 {subjectnav &&
-                   <><li className="classnavsubitem" onClick={()=>{navigate('subjects')}}>4th year</li>
+                   <><li className="classnavsubitem" onClick={()=>{setsubjectfilter(4); navigate('subjects')}}>4th year</li>
                    <li><hr/></li>
-                   <li className="classnavsubitem" onClick={()=>{navigate('subjects')}}>3rd year</li>
+                   <li className="classnavsubitem" onClick={()=>{setsubjectfilter(3); navigate('subjects')}}>3rd year</li>
                    <li><hr/></li>
-                   <li className="classnavsubitem" onClick={()=>{navigate('subjects')}}>2nd year</li>
+                   <li className="classnavsubitem" onClick={()=>{ setsubjectfilter(2); navigate('subjects')}}>2nd year</li>
                    <li><hr/></li>
-                   <li className="classnavsubitem" onClick={()=>{navigate('subjects')}}>1st year</li>
+                   <li className="classnavsubitem" onClick={()=>{ setsubjectfilter(1); navigate('subjects')}}>1st year</li>
                    <li><hr/></li>
                    </>
                 }
@@ -124,7 +140,16 @@ function Department() {
         <div className="col-lg-9 margintop12">
   
           <deptInfoContext.Provider value ={{departmentinfo, setdepartmentinfo}}>
-          <Outlet />
+          <subjectlistContext.Provider value = {{subjectlist}}>
+            <subjectfilterContext.Provider value = {{subjectfilter}}>
+            <adminclasslistContext.Provider value={{adminclasslist}}>
+              <accountlistContext.Provider value={{accountlist}}>
+              <Outlet />
+              </accountlistContext.Provider>
+       
+            </adminclasslistContext.Provider>  
+            </subjectfilterContext.Provider>
+          </subjectlistContext.Provider>      
           </deptInfoContext.Provider>
              
   
@@ -134,12 +159,18 @@ function Department() {
 
      {creatclassmodal &&
       <div className='adminmodal' > 
-      <div className='modalbackground-lgt' onClick={()=>{setcreateclassmodal(false)}}>
+      <div className='modalbackground-lgt' onClick={()=>{setcreateclassmodal(false) ; setupclass(false)}}>
 
       </div>
       <div className='tertiary borderradius-md padding12 modal-body flex'>
-          <div className='sideoption borderradius-md'onClick={()=>{navigate('createclass') ; setcreateclassmodal(false)}} > <BiEdit/><h2>Manual Adding</h2></div>
-          <div className='sideoption borderradius-md'> <FaUpload/><h2>Upload file</h2></div>
+      {!upclass ? 
+          <>     
+          <div className='sideoption borderradius-md'onClick={()=>{navigate('createclass') ; setcreateclassmodal(false) }} > <BiEdit/><h2>Manual Adding</h2></div>
+          <div className='sideoption borderradius-md' onClick={()=>{setupclass(true)}}> <FaUpload/><h2>Upload file</h2></div></> 
+          :
+          <div>dito mag uupload ng file para sa class</div>
+          
+        }
       </div>
           
 </div>
@@ -147,12 +178,18 @@ function Department() {
      
      {createstudmodal &&
       <div className='adminmodal' > 
-      <div className='modalbackground-lgt' onClick={()=>{setcreatestudmodal(false)}}>
+      <div className='modalbackground-lgt' onClick={()=>{setcreatestudmodal(false) ; setupstud(false)}}>
 
       </div>
       <div className='tertiary borderradius-md padding12 modal-body flex'>
-          <div className='sideoption borderradius-md'onClick={()=>{navigate('createstud') ; setcreatestudmodal(false)}} > <BiEdit/><h2>Manual Adding</h2></div>
-          <div className='sideoption borderradius-md'> <FaUpload/><h2>Upload file</h2></div>
+        {!upstud ? 
+          <>
+          <div className='sideoption borderradius-md'onClick={()=>{navigate('createstud') ; setcreatestudmodal(false) }} > <BiEdit/><h2>Manual Adding</h2></div>
+          <div className='sideoption borderradius-md' onClick={ ()=>{setupstud(true)}}> <FaUpload/><h2>Upload file</h2></div>
+          </>
+          :
+          <div><ExcelImporter/></div>
+          }
       </div>
           
 </div>
@@ -161,12 +198,16 @@ function Department() {
      
      {createproffmodal &&
       <div className='adminmodal' > 
-      <div className='modalbackground-lgt' onClick={()=>{setcreateproffmodal(false)}}>
+      <div className='modalbackground-lgt' onClick={()=>{setcreateproffmodal(false) ; setupproff(false)}}>
 
       </div>
       <div className='tertiary borderradius-md padding12 modal-body flex'>
-          <div className='sideoption borderradius-md'onClick={()=>{navigate('createproff') ; setcreateproffmodal(false)}} > <BiEdit/><h2>Manual Adding</h2></div>
-          <div className='sideoption borderradius-md'> <FaUpload/><h2>Upload file</h2></div>
+{!upproff ?  
+        <>  <div className='sideoption borderradius-md'onClick={()=>{navigate('createproff') ; setcreateproffmodal(false) }} > <BiEdit/><h2>Manual Adding</h2></div>
+        <div className='sideoption borderradius-md' onClick={()=>{setupproff(true) }}> <FaUpload/><h2>Upload file</h2></div></>
+        :
+        <div>prof uypload para dito</div>
+}
       </div>
           
 </div>

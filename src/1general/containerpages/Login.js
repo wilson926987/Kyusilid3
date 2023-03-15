@@ -29,12 +29,7 @@ function Login() {
 
 
 
-  // const handleFormSubmit=(e)=>{
-  //   e.preventDefault();
-  // }
-
  
-  //API Code
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -76,13 +71,6 @@ function Login() {
    }
 };
 
-// const handleFormSubmit = async (e) =>{
-//   setuserinfo({'status': 'success', 'user': {'acc_email' : 
-//   "student@gmail.com" , 'acc_id' : 3 , 'acc_username': "Jysreal"
-  
-//  },
-//    'usertype': username, 'temp': '17-6928'})
-// }
 
 
  
@@ -95,7 +83,7 @@ function Login() {
     <div className='Logincontainer primary'>
       
       <img src={logoiconimage1} alt="" srcset="" className='avatar'/>
-      <h1>Login Here</h1>
+      <h1>Login</h1>
 
       <form className='form-group-form' autoComplete="off"
       onSubmit={handleFormSubmit}>
@@ -112,7 +100,7 @@ function Login() {
        
         <button type="submit" className='buttonsubmit secondary'>login
         </button>
-  {/* <center> <a href="EMS.forget.html">Forgot Password...</a></center>  */}
+
         </form>
          
     </div> 

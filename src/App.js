@@ -34,7 +34,11 @@ import AdminDashboard from './4admin/AdminDashboard';
 import Accountsprof from './4admin/Accountsprof';
 import Department from './4admin/Department';
 import FileManager from './4admin/FileManager';
+<<<<<<< HEAD
 import Log from './4admin/Adminlog';
+=======
+import AdminAddModule from './4admin/AdminAddModule';
+>>>>>>> d45d215c84dd23a43639ac11f0cb36aea0ff1df8
 
 import Profiilepage from './1general/containerpages/Profiilepage';
 import MessagesPage from './1general/containerpages/MessagesPage';
@@ -110,6 +114,7 @@ function App() {
                   <Route  path='createclass' element={<CreateClass/>}/>
                   <Route  path='createproff' element={<Createproff/>}/>
                   <Route  path='createstud' element={<Createstud/>}/>
+                  <Route path='admin_AddModule' element={<AdminAddModule/>} />
                 </Route>
                 <Route path='adminlog' element={<Adminlog/>}/>
              

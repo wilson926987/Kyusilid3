@@ -1,16 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react'
 import avatar from '../assets/images/avatar.jpg';
 import AreaChart from '../1general/components/areachart'
-import { useOutletContext } from 'react-router-dom';
+
 import { deptInfoContext } from '../Globalcontext';
-
-
 
 
 function Departmentoverview() {
 
  const {departmentinfo} = useContext(deptInfoContext);
  const [searchTerm, setSearchTerm] = useState('');
+<<<<<<< HEAD
 
  
 
@@ -18,6 +17,27 @@ function Departmentoverview() {
     console.log(departmentinfo);
  },[departmentinfo])
 
+=======
+ const [adminlist ,setadminlist] = useState()
+
+
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+
+
+useEffect(()=>{
+  if(departmentinfo.depadminlist !== undefined){
+    setadminlist(departmentinfo.depadminlist.map(item=>(
+      {'name': item.firstname + ' ' + item.lastname + ' ' + item.suffix}
+    )))
+  }
+ 
+},[departmentinfo.depadminlist])
+
+
+>>>>>>> d45d215c84dd23a43639ac11f0cb36aea0ff1df8
   return (
     departmentinfo != undefined ?
 
@@ -76,6 +96,7 @@ function Departmentoverview() {
     <div className="row">
     <div className="col-lg-12 margintop12">
         <div className="tertiary borderradius-md overviewlist" >
+<<<<<<< HEAD
          <div className='searchDept'> 
          <h4>Department Admin</h4>  
          <input
@@ -84,19 +105,34 @@ function Departmentoverview() {
             placeholder='Search by Name'
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}/>
+=======
+         <div className='flex'> <h4>Department Admin</h4>  
+         <input
+           type="text"
+            placeholder="Search by name"
+            className="search1"
+            onChange={handleSearch}
+/>
+>>>>>>> d45d215c84dd23a43639ac11f0cb36aea0ff1df8
 </div>
 
           <ul className='margintop12'>
 
 
+<<<<<<< HEAD
            { departmentinfo.depadminlist != undefined && departmentinfo.depadminlist
             .filter((item) => item.firstname.toLowerCase().includes(searchTerm.toLowerCase())).map((item, key)=>(
+=======
+           { adminlist != undefined && adminlist.filter(searchitem=>
+              searchitem.name.toLowerCase().includes(searchTerm.toLowerCase()) || searchTerm=== ''
+           ).map((item, key)=>(
+>>>>>>> d45d215c84dd23a43639ac11f0cb36aea0ff1df8
                  <li key={key}>
-                  <div class="personpanel">
+                  <div className="personpanel">
                     <div>
                       <img src={avatar} alt="" /></div>
-                    <div class="personpanelcontent">
-                      <h5>{item.title} {item.firstname} {item.lastname} {item.suffix}</h5>
+                    <div className="personpanelcontent">
+                      <h5>{item.name}</h5>
                       
                     </div>
                   </div>

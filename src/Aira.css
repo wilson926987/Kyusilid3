@@ -162,6 +162,17 @@
     text-align: center;
     border-color: #6893ee;
 }
+.flex .search1{ 
+    margin-left: 30%;
+    width: 250px;
+    height: 35px;
+    border-radius: 50px;
+    font-size: 16px;
+    font-family: 'Century Gothic';
+    text-align: center;
+    border-color: #6893ee;
+    
+}
 .extra-textbox .GradeText{ 
     background-color: white;
     margin-top: 3%;
@@ -394,23 +405,9 @@
 /*---------dropdown------------*/
 .Dropdoowwnn{ 
     height: 30px;
-    width: 150px;
-    background-color: #6893ee;
-    font-size: 14px;
-    border: none;
-    color: black;
-    font-weight: 500;
-    border-radius: 10px;
+    width: 200px;
+}
 
-}
-.Dropdoowwnn .Dropp { 
-    background-color: #6893ee;
-    margin-top: 5px;
-    height: 20px;
-    border-radius: 10px;
-    font-size: 16px;
-    font-family: 'Century Gothic';
-}
 
 
 /*create*/
@@ -502,6 +499,7 @@
     padding-left: 3px;
     height: 30px;
   }
+<<<<<<< HEAD
 /*-----Profile------*/
   
 /*PROFILE PIC*/
@@ -545,3 +543,9 @@
 #file{
   display: none;
 }
+=======
+
+.inputss{
+    z-index: 9980!important;
+}
+>>>>>>> d45d215c84dd23a43639ac11f0cb36aea0ff1df8

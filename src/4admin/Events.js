@@ -112,7 +112,11 @@ function Events() {
       <h2 className="Addd">Add New Event</h2>
 
       <div className="row">
+<<<<<<< HEAD
         <div className="inputss col-lg-4" style={{height:"10"}}>
+=======
+        <div className="inputss">
+>>>>>>> d45d215c84dd23a43639ac11f0cb36aea0ff1df8
         <input type="text" className='textttt commontextbox primaryborder ' placeholder="Add Title" style={{ marginRight: "5px" }} value={newEvent.title} onChange={(e) => setNewEvent({ ...newEvent, title: e.target.value })} />
         </div>
         <div className="inputss  col-lg-4" style={{height:"10"}}>
@@ -135,7 +139,11 @@ function Events() {
     </div>
   </div>
 
+<<<<<<< HEAD
   <Calendar localizer={localizer} events={allEvents} startAccessor="start" endAccessor="end" style={{ height: 250, margin: "50px", fontSize: "14px" }} />
+=======
+  <Calendar localizer={localizer} events={allEvents} startAccessor="start" endAccessor="end" style={{ height: 300, margin: "10px", fontSize: "14px"}} />
+>>>>>>> d45d215c84dd23a43639ac11f0cb36aea0ff1df8
   <div style={{ display: "flex", flexDirection: "row", marginTop: "10px" }}>
     {allEvents.map((event, index) => (
       <div style={{ display: "flex", flexDirection: "column", marginRight: "20px", fontSize: "12px" }} key={index}>
