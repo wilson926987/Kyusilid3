@@ -72,7 +72,7 @@ function Department() {
       <div className='col-lg-12 primary borderradius-lg adminheader flex'>
         <div className='lighttext'>
           <h2> {currentdept!== undefined && currentdept.dep_name}</h2>
-          <h4 className='margintop12'>School year : 2022 - 2023 , 1st sem</h4>
+          <h4 className='margintop12'>School Year : 2022 - 2023 , 1st sem</h4>
          
         </div>
       </div>
@@ -125,7 +125,7 @@ function Department() {
                   </>
                 }
                
-                <li className="classnavitem " onClick={()=>{navigate('eventcalendar')}}>  Event calendar </li>
+                <li className="classnavitem " onClick={()=>{navigate('eventcalendar')}}>  Event Calendar </li>
               
          
               </ul>
@@ -165,8 +165,8 @@ function Department() {
       <div className='tertiary borderradius-md padding12 modal-body flex'>
       {!upclass ? 
           <>     
-          <div className='sideoption borderradius-md'onClick={()=>{navigate('createclass') ; setcreateclassmodal(false) }} > <BiEdit/><h2>Manual Adding</h2></div>
-          <div className='sideoption borderradius-md' onClick={()=>{setupclass(true)}}> <FaUpload/><h2>Upload file</h2></div></> 
+          <div className='sideoption borderradius-md'onClick={()=>{navigate('createclass') ; setcreateclassmodal(false) }} > <BiEdit/><h2>ADD CLASS MANUALLY</h2></div>
+          <div className='sideoption borderradius-md' onClick={()=>{setupclass(true)}}> <FaUpload/><h2>UPLOAD FILE</h2></div></> 
           :
           <div>dito mag uupload ng file para sa class</div>
           
@@ -184,7 +184,7 @@ function Department() {
       <div className='tertiary borderradius-md padding12 modal-body flex'>
         {!upstud ? 
           <>
-          <div className='sideoption borderradius-md'onClick={()=>{navigate('createstud') ; setcreatestudmodal(false) }} > <BiEdit/><h2>Manual Adding</h2></div>
+          <div className='sideoption borderradius-md'onClick={()=>{navigate('createstud') ; setcreatestudmodal(false) }} > <BiEdit/><h2>ADD CLASS MANUALLY</h2></div>
           <div className='sideoption borderradius-md' onClick={ ()=>{setupstud(true)}}> <FaUpload/><h2>Upload file</h2></div>
           </>
           :
@@ -203,7 +203,7 @@ function Department() {
       </div>
       <div className='tertiary borderradius-md padding12 modal-body flex'>
 {!upproff ?  
-        <>  <div className='sideoption borderradius-md'onClick={()=>{navigate('createproff') ; setcreateproffmodal(false) }} > <BiEdit/><h2>Manual Adding</h2></div>
+        <>  <div className='sideoption borderradius-md'onClick={()=>{navigate('createproff') ; setcreateproffmodal(false) }} > <BiEdit/><h2>ADD CLASS MANUALLY</h2></div>
         <div className='sideoption borderradius-md' onClick={()=>{setupproff(true) }}> <FaUpload/><h2>Upload file</h2></div></>
         :
         <div>prof uypload para dito</div>

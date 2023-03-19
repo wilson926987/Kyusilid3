@@ -1,150 +1,106 @@
 import React, { useState } from "react";
+import Dropdown from "../formcomponents/Dropdown";
+import QuizitemContainer from "../components/quizitems/QuizitemContainer";
 
 function Quiz() {
+
+  
   const [questions, setQuestions] = useState([
-    { text: "", points: 1, type: "radio", options: ["", ""], answer: "" }
+    { "questionid": 1, "question": "", "points": 1, "type": "Multiplechoice", "content":[], "answer": "" }
   ]);
 
-  const handleQuestionChange = (index, e) => {
-    const { name, value } = e.target;
-    const updatedQuestions = [...questions];
-    updatedQuestions[index][name] = value;
-    setQuestions(updatedQuestions);
+  const handleQuestionChange = (item, questiontemp) => {
+    setQuestions(questions.map((item2)=>({
+      "question": item2.questionid=== item.questionid ? questiontemp : item2.question,
+      'points' : item2.points,
+      "type" : item2.type,
+      "content": item2.content,
+      "answer": item2.answer,
+      "questionid": item2.questionid
+    })))
   };
 
-  const handleOptionChange = (index, optionIndex, e) => {
-    const { value } = e.target;
-    const updatedQuestions = [...questions];
-    updatedQuestions[index].options[optionIndex] = value;
-    setQuestions(updatedQuestions);
+  const handleOptionChange = (item, typetemp) => {
+    setQuestions(questions.map((item2)=>({
+      "question": item2.question,
+      'points' : item2.points,
+      "type" : item2.questionid === item.questionid ? typetemp : item2.type,
+      "content": item2.content,
+      "answer": item2.answer,
+      "questionid": item2.questionid
+    })))
   };
 
   const handleAddQuestion = () => {
     setQuestions([
       ...questions,
-      { text: "", points: 1, type: "radio", options: ["", ""], answer: "" }
+      { "questionid": questions.length+1, "question": "", "points": 1, "type": "Multiplechoice", "content":[], "answer": "" }
+  
     ]);
   };
 
-  const handleDeleteQuestion = (index) => {
-    const updatedQuestions = [...questions];
-    updatedQuestions.splice(index, 1);
-    setQuestions(updatedQuestions);
+  const handleDeleteQuestion = (item) => {
+    const updatedItems = questions.filter(item2 => item2.questionid !== item.questionid);
+    setQuestions(updatedItems);
+
+
+   
   };
 
-  const handleAddOption = (index) => {
-    const updatedQuestions = [...questions];
-    updatedQuestions[index].options.push("");
-    setQuestions(updatedQuestions);
-  };
+  const handleaddoption= ( item , content)=>{
+    
+
+    setQuestions(questions.map(item2=>({
+      "question": item2.question,
+      'points' : item2.points,
+      "type" :  item2.type,
+      "content": item2.questionid===item.questionid? content : item2.content,
+      "answer": item2.answer,
+      "questionid": item2.questionid
+    })))
+
+    
+ 
+  }
+
 
   const handleDeleteOption = (index, optionIndex) => {
     const updatedQuestions = [...questions];
     updatedQuestions[index].options.splice(optionIndex, 1);
     setQuestions(updatedQuestions);
   };
+  
+  
 
-  return (
-    <div>
-      <div className="Ques primary">
-        <div className="Tion">
-        <input className='Enter' type="text" placeholder="Enter Title"></input>
-        <br></br>
-        <input type="text" placeholder="Enter Description"></input>
-        <br></br>
-        <br></br>
-        </div>
-        </div>
-      
-      <div className="All">
-      {questions.map((question, index) => (
-        <div key={index}>
-          <input
-          className="textt"
-            name="text"
-            value={question.text}
-            onChange={(e) => handleQuestionChange(index, e)}
-          />
-          <select
-            className="Opt"
-            name="points"
-            value={question.points}
-            onChange={(e) => handleQuestionChange(index, e)}
-          >
-            <option value={0}>Score</option>
-            <option value={1}>1</option>
-            <option value={2}>2</option>
-            <option value={3}>3</option>
-            <option value={4}>4</option>
-            <option value={5}>5</option>
-            <option value={6}>6</option>
-            <option value={7}>7</option>
-            <option value={8}>8</option>
-            <option value={9}>9</option>
-            <option value={10}>10</option>
-          </select>
-          <select
-            name="type"
-            className="Opt"
-            value={question.type}
-            onChange={(e) => handleQuestionChange(index, e)}
-          >
-            <option value="radio">Radio</option>
-            <option value="checkbox">Checkbox</option>
-            <option value="paragraph">Paragraph</option>
-          </select>
-          <div>
-            {question.options.map((option, optionIndex) => (
-              <div key={optionIndex}>
-                <input
-                className="Opt2"
-                  value={option}
-                  onChange={(e) => handleOptionChange(index, optionIndex, e)}
-                />
-                <button className="Opt3" 
-                onClick={() => handleDeleteOption(index, optionIndex)}>
-                  Delete
-                </button>
-              </div>
-            ))}
-            <button 
-            className="Opt4"
-            onClick={() => handleAddOption(index)}>Add Option</button>
-          </div>
-          
-          <select
-          className="Opt5"
-            name="answer"
-            value={question.answer}
-            onChange={(e) => handleQuestionChange(index, e)}
-          >
-            
-            {question.options.map((option, optionIndex) => (
-              <option key={optionIndex} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
-          <br />
+return(
+  <div>
+
+        <header className="Quiz-Header primary margintop12">
         
-          <button 
-          className="Opt6"
-          onClick={() => handleDeleteQuestion(index)}>
-            Delete Question
-          </button>
-          
-          <hr />
-          
-        </div>
-      ))}
-      <button 
-      className="Opt7"
-      onClick={handleAddQuestion}>Add Question
-      </button>
+            <h1 className='quiz-text'>Quiz Title</h1>
+            <input type="text" className="quiz-input-text commontextbox col-lg-4" placeholder="Enter Title"/> 
+            <br></br>
+            <h1 className='quiz-text'>Quiz Description</h1>
+            <input type="text" className="quiz-input-text commontextbox col-lg-4" placeholder="Enter Description"/>
+            
+        </header>
+        
+<div className="Questions-Options primary padding12 margintop12 paddingleft12">
+   
+{questions.map((item, key)=>(<div className="Ques">  
+          <QuizitemContainer key={key} item={item} 
+              handleOptionChange= {handleOptionChange} 
+              handleDeleteQuestion = {handleDeleteQuestion} 
+              handleaddoption={handleaddoption}/>
+        </div>     ))}
 
-      </div>
-    </div>
-  );
+
+        <button onClick={handleAddQuestion} className="secondary commonbutton lighttext col-lg-4">ADD QUESTIONS</button>
+        <button onClick={handleAddQuestion} className="secondary commonbutton lighttext col-lg-4">SUBMIT</button>
+        </div>
+
+  </div>
+)
 }
 
 export default Quiz;

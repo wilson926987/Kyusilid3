@@ -17,7 +17,14 @@ function Accountsstud() {
  
 
   const [showTextbox, setShowTextbox] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
   const [selectedRow, setSelectedRow] = useState(null);
+
+
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
 
   const handleView = (index) => {
     setShowTextbox(!showTextbox);
@@ -31,10 +38,12 @@ function Accountsstud() {
      <div className='marginlass'><h4>Student Accounts Table</h4></div>
       <div class="search marginlas">
         
+
         <input
           type="text"
           placeholder="Search by name"
           name="search"
+          onChange={handleSearch}
           
         />
         
@@ -85,28 +94,38 @@ function Accountsstud() {
           </tr>
         </thead>
         <tbody>
-    {accountlist !== undefined &&
+  {accountlist !== undefined && (
     <>
-        {accountlist.studentlist.map((item, index) => (
-  <tr key={index}>
-    <td data-label="Student Number">{item.studnum}</td>
-    <td data-label="Last Name">{item.name}</td>
-   
- 
-    <td>
-      <button
-       
-      className='Dele buttonstud2'><FcEmptyTrash /> Delete</button>
+      {accountlist.studentlist
+        .filter((item) =>
+          item.name.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+        .map((item, index) => (
+          <tr key={index}>
+            <td data-label="Student Number">{item.studnum}</td>
+            <td data-label="Last Name">{item.name}</td>
 
-      <button
-      className='Edit margin10l buttonstud1'><FiEdit /> Edit</button>
-    </td>
-  </tr>
-))}
+            <td>
+              <button className="Dele buttonstud2">
+                <FcEmptyTrash /> Delete
+              </button>
+
+              <button
+                className="Edit margin10l buttonstud1"
+                onClick={() => {
+                  setSelectedRow(index);
+                  setShowTextbox(true);
+                }}
+              >
+                <FiEdit /> Edit
+              </button>
+            </td>
+          </tr>
+        ))}
     </>
-    }
+  )}
+</tbody>
 
-        </tbody>
       </table>
 
   </div>

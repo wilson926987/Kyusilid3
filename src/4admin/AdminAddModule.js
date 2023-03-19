@@ -7,6 +7,7 @@ import AdminTopicpanel from '../1general/components/AdminTopicpanel';
 function AdminAddModule() {
  
  
+const [activeWeek, setActiveWeek] = useState(null);
 
   const [tempactivityfilter, settempactivityfilter] = useState([
     {'value' : 'none',
@@ -85,12 +86,5 @@ function AdminAddModule() {
 }
 
 export default AdminAddModule
-
-
-
-
-
-
-
 
  

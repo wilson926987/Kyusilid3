@@ -210,8 +210,8 @@ function toggleStudentselect(studentitem){
                      <div>
                       <h3 >{currentclass.sub_name}</h3>
                      <h4 className='margintop12'>{currentclass.sub_code}</h4>
-                    <h4>{currentclass.day_label} {currentclass.sched_from} - {currentclass.sched_to} {currentclass.sessionname2 !== "" && (', ' + currentclass.sched_from2 + ' - ' + currentclass.sched_to2)}</h4>
-                    <h4>{currentclass.title + ' '+ currentclass.firstname +' ' +  currentclass.lastname + ' ' + currentclass.suffix}</h4>
+                    <h4>{currentclass.day_label} {currentclass.sched_from} - {currentclass.sched_to} {currentclass.sessionname2 !== "" ||currentclass.sessionname2 !== null && (', ' + currentclass.sched_from2 + ' - ' + currentclass.sched_to2)}</h4>
+                    <h4> {currentclass.title!== ''|| currentclass.title !== null && currentclass.title}{ ' '+ currentclass.firstname +' ' +  currentclass.lastname + ' ' } {currentclass.suffix!== '' && currentclass.suffix !== null && currentclass.suffix}</h4>
                 
                    </div> :
            

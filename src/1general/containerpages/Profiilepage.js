@@ -29,8 +29,15 @@ function Profiilepage() {
 
       <div className='tertiary profilepanelmain  borderradius-lg '>
           <div className='flex'>
-            <img src={Avater} alt="" />
-            <div>
+
+            <div className='profile-pic-div'>
+            <img src={Avater} alt=""/>
+            <input type="file" id="file" />
+            <label for="file" id="uploadBtn">Choose Photo</label>
+            
+            </div>
+
+            <div className='information-prof'>
             <h3>{userinfo.user.firstname} {userinfo.user.middle} {userinfo.user.lastname}</h3>
             <p>Information Technology</p>
             </div>

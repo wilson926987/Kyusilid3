@@ -62,56 +62,70 @@ function AdminDashboard() {
       <div className="iconn-case">
         <div className="boxes">
           <div class="linkk" >
-          <div className="box">
+          <div className="box ">
               <div className="cards">
-              <h2>{deptinfo !== undefined && deptinfo.studcount}</h2>
+
+              <h2 className='h22'>{deptinfo !== undefined && deptinfo.studcount}</h2>
               <h3>Students </h3>
+
             </div>
             <div className="images">
               <img src={prof} alt="" srcSet="" />
             </div>
           </div>
           </div>
+          
           <div class="linkk" >
           <div className="box">
             <div className="cards">
-              <h2>{deptinfo!== undefined && deptinfo.profcount}</h2>
+            <h2 className='h22'>{deptinfo!== undefined && deptinfo.profcount}</h2>
               <h3>Professors</h3>
             </div>
             <div className="images">
               <img src={stud} alt="" srcSet="" />
             </div>
           </div></div>
-          <div class="linkk" >
-          <div className="box">
-            <div className="cards">
-              <h2>{deptinfo !== undefined && deptinfo.archived}</h2>
-              <h3>Archived</h3>
-            </div>
-            <div className="images">
-              <img src={arch} alt="" srcSet="" />
-            </div>
-          </div></div>
-          <div class="linkk">
-          <div className="box">
-            <div className="cards">
-              <h2>{deptinfo!== undefined && deptinfo.classes}</h2>
-              <h3>Classes</h3>
-            </div>
-            <div className="images">
-              <img src={klase} alt="" srcSet="" />
-            </div>
-          </div></div>
-          </div>
-      </div>
-      
-    
+
           <div className="box2 primary">
             <div className="cards primary">
               <h2>{currentTime.toLocaleTimeString()}</h2>
-              <h2>{currentTime.toLocaleDateString()}</h2>
+              <br></br>
+              <h3>{currentTime.toLocaleDateString()}</h3>
             </div>
           </div>
+          </div>
+
+          <div className="boxes1">
+
+          <div class="linkk" >
+          <div className="box1">
+            <div className="cards1">
+              <h2 className='h22'>{deptinfo !== undefined && deptinfo.archived}</h2>
+              <h3 className='tex'>Archived</h3>
+            </div>
+            <div className="images1">
+              <img src={arch} alt="" srcSet="" />
+            </div>
+          </div></div>
+
+          <div class="linkk1">
+          <div className="box1">
+            <div className="cards1">
+              <h2 className='h22'>{deptinfo!== undefined && deptinfo.classes}</h2>
+              <h3>Classes</h3>
+            </div>
+            <div className="images1">
+              <img src={klase} alt="" srcSet="" />
+            </div>
+          </div></div>
+
+          </div>
+
+
+
+      </div>
+      
+    
 
    
    
