@@ -13,7 +13,7 @@ function SourceMaterials() {
 
   return (
     <div className='topicpanel borderradius-md'>
-      <div className='flex'>   <h4>Materials</h4> <p className='smallfont marginleftauto'>last updated: November 4</p></div>
+      <div className='flex'>   <h4>Materials for {modulelist.classinfo}</h4> <p className='smallfont marginleftauto'>last updated: November 4</p></div>
   
     
     <ul className='topiclist'>
@@ -23,7 +23,7 @@ function SourceMaterials() {
 
     <div className='col-md-12 margintop12'>
     
-      {modulelist.map(sourcetopicitem=>(
+      {modulelist.topiclist !== undefined && modulelist.topiclist.map(sourcetopicitem=>(
            
              <Sourcetopicpanel  key={sourcetopicitem.topic_id} sourcetopicitem = {sourcetopicitem}/>
         

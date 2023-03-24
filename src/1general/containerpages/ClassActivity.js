@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { currentActivityContext , userInfoContext } from '../../Globalcontext'
+import {currentclassContext, currentActivityContext , userInfoContext , modulelistContext} from '../../Globalcontext'
 import {FaClipboardList} from 'react-icons/fa'
 import {RiBookFill} from 'react-icons/ri'
 import {MdQuiz ,MdAssignment, MdSend} from 'react-icons/md'
@@ -12,8 +12,10 @@ import Textbox from '../formcomponents/Textbox';
 
 
 function ClassActivity() {
-  const navigate = useNavigate();
 
+  const {setmodulelist} = useContext(modulelistContext)
+  const navigate = useNavigate();
+ const {currentclass} = useContext(currentclassContext);
   const {currentactivity} = useContext(currentActivityContext);
   const {userinfo} = useContext(userInfoContext);
   const [activitytab ,setactivitytab] = useState( 'default');
@@ -49,6 +51,41 @@ function ClassActivity() {
 
   const handledit = (e)=>{
     e.preventDefault();
+  }
+
+
+  const posttomodule = async()=>{
+    console.log(currentclass)
+  
+    let temp = {
+      "activity_title" : currentactivity.activity_title,
+      "activity_type": currentactivity.activity_type,
+      "category" : currentactivity.category,
+      "description" : currentactivity.description,
+      "created_by" : userinfo.user.acc_id,
+      "topic_name" : currentactivity.topic_name,
+      "classes_id" : currentclass.moduleSource
+    }
+
+    console.log(JSON.stringify(temp))
+
+    await axios.post("https://api.kyusillid.online/api/posttomodule", temp).then(
+      response=> console.log(response.data)
+    ).catch()
+
+    await axios.get('https://api.kyusillid.online/api/get-topiclist/' + currentclass.moduleSource)
+    .then(response => {
+      setmodulelist(response.data);
+     
+    
+    })
+    .catch(error => {
+      console.log(error);
+    });
+
+
+
+    navigate('/classes/sampleclass');
   }
   
 
@@ -115,11 +152,12 @@ function ClassActivity() {
         <ul>
           <li className='padding12' onClick={()=>{setactivitytab('edit') ; setactivitysettings(false) }}>Edit {currentactivity.activity_type}</li>
           <li className='padding12'>Delete {currentactivity.activity_type}</li>
-          <li className='padding12'>Post to Source Modules</li>
+          <li className='padding12' onClick={()=>{setactivitytab('postmodule') ; setactivitysettings(false) }}>Post to Source Modules</li>
 
          </ul>
          </div>        
       }
+
    </div>  
    }
 
@@ -208,6 +246,17 @@ function ClassActivity() {
         activitytab ==='responses' ?
         <div>
             <h4>Response here</h4>
+        </div>
+        :
+        activitytab ==="postmodule"?
+        <div className='flex postmodule'>
+          <h4>{currentactivity.activity_title} will be posted to source modules.</h4>
+
+          <button className='commonbutton lighttext secondary' onClick={posttomodule}>Confirm</button>
+
+          
+
+
         </div>
         :
         <div> 

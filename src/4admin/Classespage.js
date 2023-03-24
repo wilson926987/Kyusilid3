@@ -1,16 +1,18 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { adminclasslistContext } from '../Globalcontext'
+import { adminYearfilterContext,  adminclasslistContext , adminSampleClassContext } from '../Globalcontext'
 
 
 function Classespage() {
   const navigate = useNavigate()
   const { adminclasslist } = useContext(adminclasslistContext);
+  const {yearlistfilter} = useContext(adminYearfilterContext);
+  const {setsampleclassid} = useContext(adminSampleClassContext)
   const [searchValue, setSearchValue] = useState("");
 
   useEffect(() => {
-    console.log(adminclasslist)
-  }, [])
+    console.log(yearlistfilter)
+  }, [yearlistfilter])
 
   const filteredList = adminclasslist.filter(item => {
     return item.sub_name.toLowerCase().includes(searchValue.toLowerCase())
@@ -59,7 +61,7 @@ function Classespage() {
 
             {adminclasslist !== undefined &&
               <>
-                {filteredList.map((item, key) => (
+                {adminclasslist.filter(item2=> yearlistfilter=== undefined || item2.yearlvl === yearlistfilter ).map((item, key) => (
                   <tr key={key}>
                     <td>{item.classes_id}</td>
                     <td>{item.yearsection}</td>
@@ -67,7 +69,7 @@ function Classespage() {
                     <td>{item.profname}</td>
                     <td>{item.schedule}</td>
                     <td>{item.studentcount}</td>
-                    <td> <button className="secondary lighttext commonbutton" onClick={() => { navigate('/kyusilidAdmin/department/sections/samplesection') }}>View Class</button></td>
+                    <td> <button className="secondary lighttext commonbutton" onClick={() => {setsampleclassid(item); navigate('/kyusilidAdmin/department/sections/samplesection') }}>Class Info</button></td>
                   </tr>
 
                 ))}

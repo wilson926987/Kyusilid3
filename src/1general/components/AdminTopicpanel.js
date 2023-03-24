@@ -8,47 +8,48 @@ import axios from 'axios';
 
 function AdminTopicpanel({topicitem}) {
 
+       const [activitylist, setactivitylist] = useState([])
+
+
+
  
-  const [ClassActivitylist , setClassActivitylist] = useState([
-  ]);
+       useEffect(()=>{
+
+            if(topicitem !== undefined){
+              axios.get('https://api.kyusillid.online/api/get-activitylist/' + topicitem.topic_id)
+              .then(response => {
+                     setactivitylist(response.data)
+              })
+              .catch(error => {
+                console.log(error);  
+              });
+          
+            }
+          
+            },[])
+  
+
+       return (
+              <div className='topicpanel borderradius-md'>
+                 <h4> {topicitem.topic_name}</h4>
+                 <hr />
+          
+               <ul className="topiclist">
+          
+          
+               {activitylist.map((temp2)=>(
+                    <li className='relative flex activitypanel borderradius-md' key={temp2.activity_id}>
+                          <AdminActivityItempanel  actItem = {temp2}/>
+                    </li>
+          
+                ))}
+               </ul>
+             
+              </div>
+          
+            )
 
 
-
-  return (
-    <div className={`topicpanel borderradius-md `}>
-      <div className='flex'>
-       <h4>Week 1</h4> 
-        <div className='marginleftauto relative'>
-    
-
-    </div>
-
-   
-    <button className="commonbutton primary">Upload File</button> 
-   
-       <br></br>
-      </div>
-      <hr />
-       <ul className='topiclist'>
-       <li className='relative flex activitypanel borderradius-md' >
-               <AdminActivityItempanel/>    
-        </li>
-        <li className='relative flex activitypanel borderradius-md' >
-               <AdminActivityItempanel/>    
-        </li><li className='relative flex activitypanel borderradius-md' >
-               <AdminActivityItempanel/>    
-        </li><li className='relative flex activitypanel borderradius-md' >
-               <AdminActivityItempanel/>    
-        </li><li className='relative flex activitypanel borderradius-md' >
-               <AdminActivityItempanel/>    
-        </li>
-       
-       
-              
-       </ul>
-       
-    </div>
-  )
 }
 
 export default AdminTopicpanel

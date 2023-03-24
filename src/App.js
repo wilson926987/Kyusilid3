@@ -52,6 +52,7 @@ import CreateClass from './4admin/CreateClass';
 import Createproff from './4admin/Createproff';
 import Createstud from './4admin/Createstud';
 import ClassSettings from './1general/containerpages/ClassSettings';
+import AdminCreateActivity from './4admin/AdminCreateActivity';
 
 
 
@@ -98,6 +99,8 @@ function App() {
                   <Route path='' element={<Departmentoverview/>} />
                   <Route path='admin_announcements' element={<Adminannouncements/>} />
                   <Route path='subjects' element={<Subjects/>} />
+                  <Route path='adminsidemodules' element={<AdminAddModule/>}/>
+                  <Route path='createactivity' element={<AdminCreateActivity/>}/>
                   <Route path='accounts' element={<Accountsprof/>} />
                   <Route path='sections' element={<SectionContainer/>}>
                         <Route path='' element={<Classespage/>}> </Route>
@@ -105,11 +108,11 @@ function App() {
                   </Route>
                   <Route path='accounts_prof' element={<Accountsprof/>}></Route>
                   <Route path='accounts_stud' element ={<Accountsstud/>}></Route>
-                  <Route path='eventcalendar' element={<Events/>}></Route>
+              
                   <Route  path='createclass' element={<CreateClass/>}/>
                   <Route  path='createproff' element={<Createproff/>}/>
                   <Route  path='createstud' element={<Createstud/>}/>
-                  <Route path='admin_AddModule' element={<AdminAddModule/>} />
+              
                 </Route>
                 <Route path='adminlog' element={<Adminlog/>}/>
              

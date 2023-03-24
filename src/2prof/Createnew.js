@@ -45,6 +45,8 @@ function Createnew() {
       setcategorylist(categorylist=> [...categorylist, { 'value' : currentclass.sessionname2 ,  'label' : currentclass.sessionname2}])
     }
     setpostdate(new Date(Date.now() -tzoffset).toISOString().slice(0, -8));
+
+    console.log(currentclass.sessionname1)
    
   },[])
 
@@ -53,7 +55,7 @@ function Createnew() {
 
   useEffect(()=>{
     settopiclisttem(
-      topiclist.map(function (obj) {
+      topiclist.topiclist.map(function (obj) {
       
         return {'value': obj.topic_name, 'label': obj.topic_name}
        })
@@ -183,11 +185,9 @@ async function createActivity(){
     'postschedtype' : postscheduletype,
     'scheduleoffset' : schedoffset, 
   }
-  console.log(JSON.stringify(newtopicitem));
-
-
 
   await axios.post('https://api.kyusillid.online/api/createactivity' , newtopicitem)
+
   .then(response => {    
       console.log(response.data)  ;    
 
@@ -565,7 +565,7 @@ const handlecreateactivity=()=>{
                 <div className="createactivityfooter">
                   
                    
-                <button className='primary createactivityconfirm' onClick={handlecreateactivity}>Confirm</button>
+                <button className='secondary lighttext createactivityconfirm' onClick={handlecreateactivity}>Confirm</button>
                 
 
                 </div>
