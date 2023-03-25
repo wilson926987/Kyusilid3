@@ -53,7 +53,7 @@ import Createproff from './4admin/Createproff';
 import Createstud from './4admin/Createstud';
 import ClassSettings from './1general/containerpages/ClassSettings';
 import AdminCreateActivity from './4admin/AdminCreateActivity';
-
+import Firstchangepass from './1general/containerpages/Firstchangepass';
 
 
 
@@ -72,6 +72,7 @@ function App() {
       <div className='appbody background'>
         <BrowserRouter>
             <Routes>
+            <Route path='/Changepassword' element ={userinfo!=null ?   <Firstchangepass/> :<Login/> } />
             <Route path='/Quiz' element={<Quiz/>} />
             <Route path='/ClassMarkPage' element={<ClassMarkPage/>} />
               <Route path={'/'} element={userinfo!=null ? <Container/> : <Login/> } > 

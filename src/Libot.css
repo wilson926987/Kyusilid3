@@ -175,5 +175,30 @@ text-align: center;
 }
 
 
-
-
+.resetpass1{ 
+	max-width:100px;
+	max-height:520px;
+    margin-top: 15%;
+	
+	margin-left: 25%;
+	
+  }
+  .resetpass1 button{ 
+	width: 300px;
+	margin-top: 5%;
+	margin-left: 350px;
+	margin-bottom: 100px;
+	
+  }
+  
+  .resetpass1 input{ 
+  width: 500px;
+  height: 35px;
+  border-radius: 50px;
+  font-size: 16px;
+  font-family: 'Century Gothic';
+  padding-left: 10%;
+  border-color: #6893ee;
+  margin-top: 5%;
+	margin-left: 250px;
+  }
