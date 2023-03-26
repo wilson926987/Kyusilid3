@@ -1472,6 +1472,10 @@ background-color: var(--defaultprimary);
   background-color: var(--defaultbackground);
 }
 
+.spacebetween{
+  justify-content: space-between;
+}
+
 .marginleftauto{
   margin-left: auto;
 }
@@ -2164,6 +2168,13 @@ padding: 12px;
   margin-left: -12px;
 }
 
+
+.postmodule{
+  flex-direction: row;
+  justify-content: space-between;
+  height: 60px;
+  align-items: center;
+}
 
 
 

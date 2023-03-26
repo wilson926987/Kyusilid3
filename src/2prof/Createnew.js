@@ -45,6 +45,8 @@ function Createnew() {
       setcategorylist(categorylist=> [...categorylist, { 'value' : currentclass.sessionname2 ,  'label' : currentclass.sessionname2}])
     }
     setpostdate(new Date(Date.now() -tzoffset).toISOString().slice(0, -8));
+
+    console.log(currentclass.sessionname1)
    
   },[])
 
@@ -53,7 +55,7 @@ function Createnew() {
 
   useEffect(()=>{
     settopiclisttem(
-      topiclist.map(function (obj) {
+      topiclist.topiclist.map(function (obj) {
       
         return {'value': obj.topic_name, 'label': obj.topic_name}
        })
@@ -183,11 +185,9 @@ async function createActivity(){
     'postschedtype' : postscheduletype,
     'scheduleoffset' : schedoffset, 
   }
-  console.log(JSON.stringify(newtopicitem));
-
-
 
   await axios.post('https://api.kyusillid.online/api/createactivity' , newtopicitem)
+
   .then(response => {    
       console.log(response.data)  ;    
 
@@ -217,9 +217,9 @@ const handlecreateactivity=()=>{
                           {activitytype !== 'Attendance' ?
                            <div>
                                    
-                          <p className="smallfont">Title</p><input type="text"  disabled={sourcematerial!==undefined} className='primaryborder' placeholder='title' defaultValue={posttitle}  onChange={(e)=>{setposttitle(e.target.value)}}/> <br />
+                          <p className="smallfont">TITLE</p><input type="text"  disabled={sourcematerial!==undefined} className='primaryborder' placeholder='title' defaultValue={posttitle}  onChange={(e)=>{setposttitle(e.target.value)}}/> <br />
                            <br />
-                           <p className="smallfont">Description</p><textarea name="" id="" cols="30" rows="6" className='primaryborder'  value={description} placeholder='description' onChange={(e)=>{setdescription(e.target.value)}}></textarea><br />
+                           <p className="smallfont">DESCRIPTION</p><textarea name="" id="" cols="30" rows="6" className='primaryborder'  value={description} placeholder='description' onChange={(e)=>{setdescription(e.target.value)}}></textarea><br />
                            <br />
                            
  
@@ -235,7 +235,7 @@ const handlecreateactivity=()=>{
                                  </div>
                                 :
                                  <>
-                                <label htmlFor="">Upload</label>
+                                <label htmlFor="">UPLOAD</label>
                                  <div className="flex">
                                  <div className='primary uploadpanel borderradius-md'>
                                
@@ -261,7 +261,7 @@ const handlecreateactivity=()=>{
                         <div className="col-lg-5 createactivitytitle">
                           <div>
                             <div>
-                              < p className=' smallfont'>Activity type</p>
+                              < p className=' smallfont'>ACTIVITY TYPE</p>
                        
 
 
@@ -287,7 +287,7 @@ const handlecreateactivity=()=>{
                             <>
 
 <div>
-                             <p className='smallfont'> Category</p>
+                             <p className='smallfont'> CATEGORY</p>
 
                               
                               <Dropdown
@@ -307,7 +307,7 @@ const handlecreateactivity=()=>{
                             <br />
 
                             <div>
-                              <p className="smallfont">Module</p>
+                              <p className="smallfont">MODULE</p>
                               <div className="row">
                               <div className='col-lg-6'>
                               <Dropdown
@@ -325,16 +325,16 @@ const handlecreateactivity=()=>{
                               </div>
 
                               <div className="col-lg-6">
-                            {sourcematerial === undefined &&   <button className='commonbutton lighttext borderradius-md secondary' onClick={()=>{setcreatetopic(!createtopic)}}> <FaPlusCircle/> Create Topic</button>
+                            {sourcematerial === undefined &&   <button className='commonbutton lighttext borderradius-md secondary' onClick={()=>{setcreatetopic(!createtopic)}}> <FaPlusCircle/> CREATE TOPIC</button>
     }
                           {createtopic && 
                             <div className='createtopicmodal tertiary borderradius-md flex'>
                             <input type="text"  onChange={(e)=> {setinputtopicname(e.target.value)}}/>
 
-                            <button className='commonbutton secondary borderradius-md lighttext margintop12' onClick={()=>{setcreatetopic(false)}}>Cancel</button>
+                            <button className='commonbutton secondary borderradius-md lighttext margintop12' onClick={()=>{setcreatetopic(false)}}>CANCEL</button>
 
                           <form action="" onSubmit={(e)=>{createnewtopic(e)}}>
-                          <button className='commonbutton secondary borderradius-md lighttext' >Create</button>
+                          <button className='commonbutton secondary borderradius-md lighttext' >CREATE</button>
 
                           </form>
 
@@ -350,7 +350,7 @@ const handlecreateactivity=()=>{
 
                             <br />
                              
-                                 <p className="smallfont">Schedule</p>
+                                 <p className="smallfont">POSTING SCHEDULE</p>
                                
                                   <div className="flex">
                                   <Dropdown
@@ -400,10 +400,9 @@ const handlecreateactivity=()=>{
                               <>
                               <br />
                               <div>
-                                <input type="checkbox" name="" id="allowedit" onChange={(e)=> {setallowedit(e.target.checked)}} /> <label htmlFor="allowedit">Allow Students to edit once submitted</label> <br />
-                                <input type="checkbox" name='' id='allowlate' onChange={(e)=> {setallowlate(e.target.checked)}}/> <label htmlFor="allowlate">Allow late submissions</label> <br />
+                                <input type="checkbox" name='' id='allowlate' onChange={(e)=> {setallowlate(e.target.checked)}}/> <label htmlFor="allowlate"><b>ALLOW LATE SUBMISSION</b></label> <br />
                                <br />
-                               <p className="smallfont">Limit availability</p>
+                               <p className="smallfont">LIMIT AVAILABILITY</p>
 
                               <div className="flex">
                               <Dropdown
@@ -432,7 +431,7 @@ const handlecreateactivity=()=>{
                       
                         
                              <br />
-                            <p className="smallfont">Due Date</p>
+                            <p className="smallfont">DUE DATE</p>
                             <Dropdown
                                 options={Dueoptions}
                                 onChangeHandler= {setduedate}
@@ -566,7 +565,7 @@ const handlecreateactivity=()=>{
                 <div className="createactivityfooter">
                   
                    
-                <button className='primary createactivityconfirm' onClick={handlecreateactivity}>Confirm</button>
+                <button className='secondary lighttext createactivityconfirm' onClick={handlecreateactivity}>Confirm</button>
                 
 
                 </div>

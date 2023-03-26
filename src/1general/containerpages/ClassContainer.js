@@ -121,6 +121,7 @@ function ClassContainer() {
           await axios.get('https://api.kyusillid.online/api/get-topiclist/' + currentclass.moduleSource)
         .then(response => {
           setmodulelist(response.data);
+         
         
         })
         .catch(error => {
@@ -146,10 +147,7 @@ function ClassContainer() {
 
  }
 
- const togglenavcreate = ()=>{
-    setnavcreate(!navcreate)
-   
- }
+
 
 
  const [activitytypefilter, setactivitytypefilter] = useState('none')
@@ -195,6 +193,8 @@ function toggleStudentselect(studentitem){
 
 
 
+
+
  
  if(currentclass===undefined){
   return <div></div>
@@ -210,8 +210,8 @@ function toggleStudentselect(studentitem){
                      <div>
                       <h3 >{currentclass.sub_name}</h3>
                      <h4 className='margintop12'>{currentclass.sub_code}</h4>
-                    <h4>{currentclass.day_label} {currentclass.sched_from} - {currentclass.sched_to} {currentclass.sessionname2 !== "" && (', ' + currentclass.sched_from2 + ' - ' + currentclass.sched_to2)}</h4>
-                    <h4>{currentclass.title + ' '+ currentclass.firstname +' ' +  currentclass.lastname + ' ' + currentclass.suffix}</h4>
+                    <h4>{currentclass.day_label} {currentclass.sched_from} - {currentclass.sched_to} {(currentclass.sessionname2 !== "" ||currentclass.sessionname2 !== null) && (', ' + currentclass.sched_from2 + ' - ' + currentclass.sched_to2)}</h4>
+                    <h4> {currentclass.title!== ''|| currentclass.title !== null && currentclass.title}{ ' '+ currentclass.firstname +' ' +  currentclass.lastname + ' ' } {currentclass.suffix!== '' && currentclass.suffix !== null && currentclass.suffix}</h4>
                 
                    </div> :
            
@@ -276,7 +276,7 @@ function toggleStudentselect(studentitem){
                          <li className='classnavsubitem' onClick={()=>{settopicfilter('none') ; navigate('modules')}}>All topics</li>
                          <li><hr /></li>
 
-                         {topiclist.map((topicitem, key)=>(
+                         {topiclist.topiclist.map((topicitem, key)=>(
                           <React.Fragment key={key}> 
                               <li key={key} className='classnavsubitem' onClick={()=>{settopicfilter(topicitem.topic_id) ; navigate('modules')}}>{topicitem.topic_name}</li>
                               <li><hr /></li>

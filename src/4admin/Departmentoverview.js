@@ -1,6 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react'
 import avatar from '../assets/images/avatar.jpg';
-import AreaChart from '../1general/components/areachart'
+//import AreaChart from '../1general/components/areachart'
+import { FaUserGraduate } from 'react-icons/fa';
+import { GiTeacher } from 'react-icons/gi';
+import { SiGoogleclassroom } from 'react-icons/si';
+import { FiUsers } from 'react-icons/fi';
+import { BsFillJournalBookmarkFill } from 'react-icons/bs';
+
+
+
+
 
 import { deptInfoContext } from '../Globalcontext';
 
@@ -9,7 +18,6 @@ function Departmentoverview() {
 
  const {departmentinfo} = useContext(deptInfoContext);
  const [searchTerm, setSearchTerm] = useState('');
-<<<<<<< HEAD
 
  
 
@@ -17,70 +25,61 @@ function Departmentoverview() {
     console.log(departmentinfo);
  },[departmentinfo])
 
-=======
- const [adminlist ,setadminlist] = useState()
-
-
-  const handleSearch = (event) => {
-    setSearchTerm(event.target.value);
-  };
-
-
-
-useEffect(()=>{
-  if(departmentinfo.depadminlist !== undefined){
-    setadminlist(departmentinfo.depadminlist.map(item=>(
-      {'name': item.firstname + ' ' + item.lastname + ' ' + item.suffix}
-    )))
-  }
- 
-},[departmentinfo.depadminlist])
-
-
->>>>>>> d45d215c84dd23a43639ac11f0cb36aea0ff1df8
   return (
     departmentinfo != undefined ?
 
     <div className="row">
     <div className="col-lg-12 displaynone ">
       <div className="tertiary borderradius-md paneladd " >
-        <div className='area'><AreaChart></AreaChart></div>
+
         </div> 
     </div>
 
    <div className="col-lg-6">
     <div className="row">
-      <div className="col-lg-6 margintop12">
-      <div className="tertiary borderradius-md overviewpanel" >
-          <h4>Classes</h4>
+      <div className="col-lg-6 margintop12 ">
+        
+      <div className="pos tertiary borderradius-md overviewpanel1 padding1" >
+          <h4 className='h44 primary'><SiGoogleclassroom/>    Classes</h4>
+          {/* <AreaChart></AreaChart> */}
+          <p>
+          <div className='positionr'>
+            <ul>
+              <br></br>
+              <li><BsFillJournalBookmarkFill/> 4th year : {departmentinfo.fourthyear}</li>
+              <br></br>
+              <li><BsFillJournalBookmarkFill/> 3rd year  : {departmentinfo.thirdyear}</li>
+              <br></br>
+              <li><BsFillJournalBookmarkFill/> 2nd year  : {departmentinfo.secondyear}</li>
+              <br></br>
+              <li><BsFillJournalBookmarkFill/> 1st year  : {departmentinfo.firstyear}</li>
+            </ul>
+            </div>
+            </p>
+          </div> 
+      </div>
+      <div className="col-lg-6 margintop12 ">
+      <div className="pos tertiary borderradius-md overviewpanel1 padding1" >
+          <h4 className='h44 primary'><FiUsers/>  Accounts</h4>
           <p>
             <ul>
-              <li>4th year {departmentinfo.fourthyear}</li>
-              <li>3rd year {departmentinfo.thirdyear}</li>
-              <li>2nd year {departmentinfo.secondyear}</li>
-              <li>1st year {departmentinfo.firstyear}</li>
+            <br></br>
+            <div className='positionr'>
+              <li><GiTeacher/>  Professors : {departmentinfo.profcount}</li>
+              <br></br>
+              <li><FaUserGraduate/>  Students : {departmentinfo.studcount}</li>    
+              </div>       
             </ul>
             </p>
           </div> 
       </div>
-      <div className="col-lg-6 margintop12">
-      <div className="tertiary borderradius-md overviewpanel" >
-          <h4>Accounts</h4>
-          <p>
-            <ul>
-              <li>Professors : {departmentinfo.profcount}</li>
-              <li>Students : {departmentinfo.studcount}</li>           
-            </ul>
-            </p>
-          </div> 
-      </div>
-      <div className="col-lg-6 margintop12">
+      <div className="col-lg-6 margintop12 displaynone">
       <div className="tertiary borderradius-md overviewpanel" >
           <h4>Events</h4>
          
           </div> 
       </div>
-      <div className="col-lg-6 margintop12">
+      <div className="col-lg-6 margintop12 displaynone">
       <div className="tertiary borderradius-md overviewpanel" >
           <h4>Subjects</h4>
          
@@ -96,37 +95,22 @@ useEffect(()=>{
     <div className="row">
     <div className="col-lg-12 margintop12">
         <div className="tertiary borderradius-md overviewlist" >
-<<<<<<< HEAD
          <div className='searchDept'> 
          <h4>Department Admin</h4>  
+         
+         <div className='search2'>
          <input
            type="text"
-            className="searchDept"
             placeholder='Search by Name'
             value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}/>
-=======
-         <div className='flex'> <h4>Department Admin</h4>  
-         <input
-           type="text"
-            placeholder="Search by name"
-            className="search1"
-            onChange={handleSearch}
-/>
->>>>>>> d45d215c84dd23a43639ac11f0cb36aea0ff1df8
+            onChange={(e) => setSearchTerm(e.target.value)}/></div>
 </div>
 
           <ul className='margintop12'>
 
 
-<<<<<<< HEAD
            { departmentinfo.depadminlist != undefined && departmentinfo.depadminlist
             .filter((item) => item.firstname.toLowerCase().includes(searchTerm.toLowerCase())).map((item, key)=>(
-=======
-           { adminlist != undefined && adminlist.filter(searchitem=>
-              searchitem.name.toLowerCase().includes(searchTerm.toLowerCase()) || searchTerm=== ''
-           ).map((item, key)=>(
->>>>>>> d45d215c84dd23a43639ac11f0cb36aea0ff1df8
                  <li key={key}>
                   <div className="personpanel">
                     <div>

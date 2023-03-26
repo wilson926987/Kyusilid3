@@ -19,9 +19,6 @@ function AdminDashboard() {
 
 
 
-
-
-
   useEffect(() => {
     const intervalId = setInterval(() => {
       setCurrentTime(new Date());
@@ -61,57 +58,68 @@ function AdminDashboard() {
     <div>
       <div className="iconn-case">
         <div className="boxes">
-          <div class="linkk" >
-          <div className="box">
-              <div className="cards">
-              <h2>{deptinfo !== undefined && deptinfo.studcount}</h2>
-              <h3>Students </h3>
-            </div>
-            <div className="images">
-              <img src={prof} alt="" srcSet="" />
-            </div>
-          </div>
-          </div>
-          <div class="linkk" >
-          <div className="box">
-            <div className="cards">
-              <h2>{deptinfo!== undefined && deptinfo.profcount}</h2>
-              <h3>Professors</h3>
-            </div>
-            <div className="images">
-              <img src={stud} alt="" srcSet="" />
-            </div>
-          </div></div>
-          <div class="linkk" >
-          <div className="box">
-            <div className="cards">
-              <h2>{deptinfo !== undefined && deptinfo.archived}</h2>
-              <h3>Archived</h3>
-            </div>
-            <div className="images">
-              <img src={arch} alt="" srcSet="" />
-            </div>
-          </div></div>
+
           <div class="linkk">
           <div className="box">
-            <div className="cards">
-              <h2>{deptinfo!== undefined && deptinfo.classes}</h2>
-              <h3>Classes</h3>
+              <div className="cards col-lg-12">
+              <div className='images'>
+              <h2 className='h22'>{deptinfo !== undefined && deptinfo.studcount}</h2>
+              <h3>Students </h3>
+        </div>
             </div>
-            <div className="images">
-              <img src={klase} alt="" srcSet="" />
-            </div>
-          </div></div>
+
           </div>
+          </div>
+          
+          <div className="linkk">
+          <div className="box">
+            <div className="cards">
+            <div className='images1'>
+            <h2 className='h22'>{deptinfo!== undefined && deptinfo.profcount}</h2>
+              <h3>Professors</h3>
+            </div></div>
+            </div>
+
+          </div>
+
+          <div className="box2">
+            <div className="cards">
+              <h2>{currentTime.toLocaleTimeString()}</h2>
+              <br></br>
+              <h3>{currentTime.toLocaleDateString()}</h3>
+            </div>
+          </div>
+          </div>
+
+          <div className="boxes1">
+
+          <div class="linkk1" >
+          <div className="box1">
+            <div className="cards1">
+            <div className='images2'>
+              <h2 className='h22'>{deptinfo !== undefined && deptinfo.archived}</h2>
+              <h3 className='tex'>Archived</h3>
+            </div></div>
+
+          </div></div>
+
+          <div class="linkk1">
+          <div className="box1">
+            <div className="cards1">
+            <div className='images3'>
+              <h2 className='h22'>{deptinfo!== undefined && deptinfo.classes}</h2>
+              <h3>Classes</h3>
+            </div></div>
+
+          </div></div>
+
+          </div>
+
+
+
       </div>
       
     
-          <div className="box2 primary">
-            <div className="cards primary">
-              <h2>{currentTime.toLocaleTimeString()}</h2>
-              <h2>{currentTime.toLocaleDateString()}</h2>
-            </div>
-          </div>
 
    
    

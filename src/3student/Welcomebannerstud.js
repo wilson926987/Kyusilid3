@@ -31,9 +31,9 @@ const currday = new Date().getDay();
     <div className='primary borderradius-lg welcomebanner dbpanelmargin'>                       
     <h2>Welcome, {userinfo.user.firstname}</h2>
     <h3>{upcomingclass > 1 ?
-     'you have ' + upcomingclass + ' classes today' :
+     'you have ' + upcomingclass + ' Classes Today' :
      upcomingclass === 1?
-     'you have a class today' : 'you have no classes today'
+     'you have a class today' : 'You Have No Classes Today'
   }</h3>
    
     

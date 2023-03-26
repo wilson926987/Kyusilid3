@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-<<<<<<< HEAD
 
 function Adminlog() {
   const [data, setData] = useState([
@@ -109,33 +108,6 @@ function Adminlog() {
   
     </div>
   );
-=======
-import { useNavigate } from 'react-router-dom';
-import LoginHistoryProf from './LoginHistoryProf';
-
-
-
-
-
-function Adminlog() {
-
-  const [accountsnav, setaccountsnav] = useState(false)
-
-  const navigate = useNavigate()
-  function isactive(e){
-
-    return true
-
- }
- 
- return (
-<div>
-  <LoginHistoryProf></LoginHistoryProf>
-  </div>
- )
- 
-
->>>>>>> d45d215c84dd23a43639ac11f0cb36aea0ff1df8
 }
  
  

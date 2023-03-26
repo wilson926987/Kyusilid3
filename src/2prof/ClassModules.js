@@ -1,6 +1,6 @@
 
 import Topicpanel from '../1general/components/Topicpanel'
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { activitytypefilterContext, topiclistContext ,currentclassContext} from '../Globalcontext';
 import Dropdown from '../1general/formcomponents/Dropdown';
 
@@ -32,7 +32,10 @@ function ClassModules() {
 
 
   ])
-
+  
+  useEffect(()=>{
+    console.log(topiclist)
+  },[topiclist])
 
 
 
@@ -44,7 +47,7 @@ function ClassModules() {
   return (
     <div >
      <div className="flex">
-     <h4>Classwork</h4> 
+     <h4>Classwork for {topiclist.classinfo}</h4> 
 
      <div className='marginleftauto relative'>
     
@@ -75,13 +78,13 @@ function ClassModules() {
 
         <div className='col-md-12 margintop12'>
 
-          {topiclist.length ===0 &&
+          {topiclist.topiclist.length ===0 &&
           
             <div className="emptylist">
               <h4>No Classworks yet</h4>
             </div>
           }
-          {topiclist.map((topicitem)=>(
+          {topiclist.topiclist.map((topicitem)=>(
             <Topicpanel key={topicitem.topic_id} topicitem={topicitem}/>
 
           ))}
@@ -97,6 +100,7 @@ function ClassModules() {
       
 
     </div>
+ 
   )
 }
 

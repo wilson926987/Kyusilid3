@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useState, useEffect, useContext } from 'react'
 import { Outlet , useNavigate , useLocation, useOutletContext} from 'react-router-dom'
-import {accountlistContext, adminclasslistContext, subjectlistContext, currentdeptContext , userInfoContext , departmentsContext , deptInfoContext , subjectfilterContext} from '../Globalcontext'
+import {subjectmoduleContext, adminSampleClassContext, adminYearfilterContext, accountlistContext, adminclasslistContext, subjectlistContext, currentdeptContext , userInfoContext , departmentsContext , deptInfoContext , subjectfilterContext} from '../Globalcontext'
 import {BiEdit} from 'react-icons/bi'
 import {FaUpload} from 'react-icons/fa'
 import ExcelImporter from './ExcelImporter'
@@ -24,6 +24,9 @@ function Department() {
     const [subjectfilter, setsubjectfilter] = useState(4);
     const [adminclasslist, setadminclasslist] = useState();
     const [accountlist, setaccountlist] = useState();
+    const [yearlistfilter, setyearlistfilter] = useState();
+    const [sampleclassid, setsampleclassid] = useState();
+    const [topicid, settopicsid] = useState();
 
 
 
@@ -37,7 +40,7 @@ function Department() {
         setsubjectlist(response.data)
       }).catch();
 
-      axios.get('https://api.kyusillid.online/api/getclasslist/' + currentdept.dep_id ).then(
+      axios.get('https://api.kyusillid.online/api/getclasslist2/' + currentdept.dep_id ).then(
         response=>setadminclasslist(response.data)
       ).catch();
 
@@ -62,6 +65,11 @@ function Department() {
 
  }
 
+ useEffect(() => {
+  console.log(yearlistfilter)
+}, [yearlistfilter])
+
+
 
 
 
@@ -72,7 +80,7 @@ function Department() {
       <div className='col-lg-12 primary borderradius-lg adminheader flex'>
         <div className='lighttext'>
           <h2> {currentdept!== undefined && currentdept.dep_name}</h2>
-          <h4 className='margintop12'>School year : 2022 - 2023 , 1st sem</h4>
+          <h4 className='margintop12'>School Year : 2022 - 2023 , 1st sem</h4>
          
         </div>
       </div>
@@ -86,8 +94,7 @@ function Department() {
                 <li><hr/></li>
                 <li className="classnavitem " onClick={()=>{navigate('admin_announcements')}}>  Announcements </li>
                 <li><hr/></li>
-                <li className="classnavitem " onClick={()=>{navigate('admin_AddModule')}}>  Add Module </li>
-                <li><hr/></li>
+            
                 <li className={`classnavitem ${isactive('subjects') &&' classnav-active' }`} onClick={()=>{setaccountsnav(false);setclassesnav(false); setsubjectnav(!subjectnav) ;setcurrentpage('subjects')}}>  Subjects</li>
                 <li><hr/></li>
                 {subjectnav &&
@@ -105,13 +112,13 @@ function Department() {
                 <li className={`classnavitem ${isactive('sections') &&' classnav-active' }`} onClick={()=>{setaccountsnav(false); setsubjectnav(false); setclassesnav(!classesnav) ;setcurrentpage('sections')}} >  Classes</li>
                 <li><hr/></li> 
               {classesnav&&
-                  <><li className="classnavsubitem" onClick={()=>{navigate('sections')}}>4th year</li>
+                  <><li className="classnavsubitem" onClick={()=>{ setyearlistfilter(4); navigate('sections')}}>4th year</li>
                   <li><hr/></li>
-                  <li className="classnavsubitem" onClick={()=>{navigate('sections')}}>3rd year</li>
+                  <li className="classnavsubitem" onClick={()=>{setyearlistfilter(3); navigate('sections')}}>3rd year</li>
                   <li><hr/></li>
-                  <li className="classnavsubitem" onClick={()=>{navigate('sections')}}>2nd year</li>
+                  <li className="classnavsubitem" onClick={()=>{setyearlistfilter(2); navigate('sections')}}>2nd year</li>
                   <li><hr/></li>
-                  <li className="classnavsubitem" onClick={()=>{navigate('sections')}}>1st year</li>
+                  <li className="classnavsubitem" onClick={()=>{setyearlistfilter(1); navigate('sections')}}>1st year</li>
                   <li><hr/></li>
                   </>
               }
@@ -125,8 +132,7 @@ function Department() {
                   </>
                 }
                
-                <li className="classnavitem " onClick={()=>{navigate('eventcalendar')}}>  Event calendar </li>
-              
+            
          
               </ul>
             </div>
@@ -144,9 +150,14 @@ function Department() {
             <subjectfilterContext.Provider value = {{subjectfilter}}>
             <adminclasslistContext.Provider value={{adminclasslist}}>
               <accountlistContext.Provider value={{accountlist}}>
-              <Outlet />
-              </accountlistContext.Provider>
-       
+                <adminYearfilterContext.Provider value={{yearlistfilter}}>
+                  <adminSampleClassContext.Provider value={{sampleclassid , setsampleclassid}}>
+                    <subjectmoduleContext.Provider  value={{topicid, settopicsid}}>
+                    <Outlet />
+                    </subjectmoduleContext.Provider>       
+                  </adminSampleClassContext.Provider>
+                </adminYearfilterContext.Provider>
+              </accountlistContext.Provider>      
             </adminclasslistContext.Provider>  
             </subjectfilterContext.Provider>
           </subjectlistContext.Provider>      
@@ -165,8 +176,8 @@ function Department() {
       <div className='tertiary borderradius-md padding12 modal-body flex'>
       {!upclass ? 
           <>     
-          <div className='sideoption borderradius-md'onClick={()=>{navigate('createclass') ; setcreateclassmodal(false) }} > <BiEdit/><h2>Manual Adding</h2></div>
-          <div className='sideoption borderradius-md' onClick={()=>{setupclass(true)}}> <FaUpload/><h2>Upload file</h2></div></> 
+          <div className='sideoption borderradius-md'onClick={()=>{navigate('createclass') ; setcreateclassmodal(false) }} > <BiEdit/><h2>ADD CLASS MANUALLY</h2></div>
+          <div className='sideoption borderradius-md' onClick={()=>{setupclass(true)}}> <FaUpload/><h2>UPLOAD FILE</h2></div></> 
           :
           <div>dito mag uupload ng file para sa class</div>
           
@@ -184,7 +195,7 @@ function Department() {
       <div className='tertiary borderradius-md padding12 modal-body flex'>
         {!upstud ? 
           <>
-          <div className='sideoption borderradius-md'onClick={()=>{navigate('createstud') ; setcreatestudmodal(false) }} > <BiEdit/><h2>Manual Adding</h2></div>
+          <div className='sideoption borderradius-md'onClick={()=>{navigate('createstud') ; setcreatestudmodal(false) }} > <BiEdit/><h2>ADD CLASS MANUALLY</h2></div>
           <div className='sideoption borderradius-md' onClick={ ()=>{setupstud(true)}}> <FaUpload/><h2>Upload file</h2></div>
           </>
           :
@@ -203,7 +214,7 @@ function Department() {
       </div>
       <div className='tertiary borderradius-md padding12 modal-body flex'>
 {!upproff ?  
-        <>  <div className='sideoption borderradius-md'onClick={()=>{navigate('createproff') ; setcreateproffmodal(false) }} > <BiEdit/><h2>Manual Adding</h2></div>
+        <>  <div className='sideoption borderradius-md'onClick={()=>{navigate('createproff') ; setcreateproffmodal(false) }} > <BiEdit/><h2>ADD CLASS MANUALLY</h2></div>
         <div className='sideoption borderradius-md' onClick={()=>{setupproff(true) }}> <FaUpload/><h2>Upload file</h2></div></>
         :
         <div>prof uypload para dito</div>
