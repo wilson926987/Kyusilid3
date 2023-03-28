@@ -136,8 +136,28 @@
 	color: #fd0404;
 	font-size:20px;
 }
+@media(max-width:790px){
+	.Logincontainer{
+	width:300px;
+	
+	
+	
+	}
+	.logotext{
+	margin-top: 700px;
 
+	}
 
+	.Backgroundlog{
+		height: 150vh;
+		margin-left: 0px;
+		background-repeat:no-repeat;
+		background-size: cover;
+	
+		
+	}
+	
+	}
 /*-----------Quiz-----------*/
 
 .Quiz-Header{
