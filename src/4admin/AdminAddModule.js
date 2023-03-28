@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 function AdminAddModule() {
  
  
-  const {topicid} = useContext(subjectmoduleContext);
+const {topicid} = useContext(subjectmoduleContext);
 const [activeWeek, setActiveWeek] = useState(null);
 
 

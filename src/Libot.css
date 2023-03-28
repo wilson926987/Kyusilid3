@@ -136,28 +136,8 @@
 	color: #fd0404;
 	font-size:20px;
 }
-@media(max-width:790px){
-	.Logincontainer{
-	width:300px;
-	
-	
-	
-	}
-	.logotext{
-	margin-top: 700px;
 
-	}
 
-	.Backgroundlog{
-		height: 150vh;
-		margin-left: 0px;
-		background-repeat:no-repeat;
-		background-size: cover;
-	
-		
-	}
-	
-	}
 /*-----------Quiz-----------*/
 
 .Quiz-Header{
@@ -169,3 +149,56 @@ text-align: center;
 .Quiz-Header input{ 
 text-align: center;
 }
+
+
+.quiz-text{ 
+	
+	font-size: 25px;
+}
+.quiz-input-text{
+	height: 40px;
+}
+.samplebox2{
+	height: 80px;
+}
+.Questions-Options .Ques{ 
+	border-bottom: 2px solid #fff;	
+
+}
+.Questions-Options{
+	width: 70%;
+	margin-left: 250px;
+	border-radius: 10px;
+}
+.flex .textttt{ 
+	width: 100%;
+}
+
+
+.resetpass1{ 
+	max-width:100px;
+	max-height:520px;
+    margin-top: 15%;
+	
+	margin-left: 25%;
+	
+  }
+  .resetpass1 button{ 
+	width: 300px;
+	margin-top: 5%;
+	margin-left: 350px;
+	margin-bottom: 100px;
+	
+  }
+  
+  .resetpass1 input{ 
+  width: 500px;
+  height: 35px;
+  border-radius: 50px;
+  font-size: 16px;
+  font-family: 'Century Gothic';
+  padding-left: 10%;
+  border-color: #6893ee;
+  margin-top: 5%;
+	margin-left: 250px;
+  }

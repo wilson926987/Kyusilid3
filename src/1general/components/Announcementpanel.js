@@ -95,7 +95,7 @@ function Announcementpanel({announcementitem , forcerefresh}) {
               <div className='flex'>
                 <h6>Created {announcementitem !== undefined  && announcementitem.announcementitem.created_at} by {announcementitem !== undefined  && announcementitem.announcementitem.firstname} { announcementitem !== undefined  && announcementitem.announcementitem.lastname}</h6>
                  {userinfo.user.usertype ==='prof' &&  <div className='marginleft12 relative'> <AiFillEdit onClick={()=>{setedditmenu(!editmenu)}}/>
-                    {editmenu && <div className='absolute tertiary editmenu  borderradius-md'> <ul><li className='padding12 borderradius-md'>edit</li> <li className='padding12 borderradius-md' onClick={()=>{ setedditmenu(!editmenu) ;confirmdelete(announcementitem.announcementitem.an_id) }}>delete</li></ul> </div>  }
+                    {editmenu && <div className='absolute tertiary editmenu  borderradius-md'> <ul><li className='padding12 borderradius-md' onClick={()=>{ setedditmenu(!editmenu) ;confirmdelete(announcementitem.announcementitem.an_id) }}>delete</li></ul> </div>  }
                   </div>}
               </div>
             </div>

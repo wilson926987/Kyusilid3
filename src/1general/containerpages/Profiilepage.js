@@ -6,21 +6,64 @@ import DonutChart from '../components/DonutChart'
 import BarChart from '../components/BarChart'
 import StudProfile from '../components/statprofstud'
 import { userInfoContext } from '../../Globalcontext'
+import axios from 'axios'
 
 function Profiilepage() {
 
   const {userinfo} = useContext(userInfoContext);
+  const [activitystatus, setactivitystatus]= useState();
+  const [password, setpassword] = useState("");
+  const [cpassword, setcpassword] = useState();
+
 
   useEffect(()=>{
-    console.log(userinfo);
-  })
+      axios.get('https://api.kyusillid.online/api/getprofilestatus/' + userinfo.user.acc_id).then(
+        response => setactivitystatus(response.data)
+      ).catch();
+  },[])
+
+
+
+
+  const handleSubmit = async(e)=>{
+    e.preventDefault();
+
+    if(password.length >= 4 && password === cpassword){
+
+      const temp = {
+        "acc_id" : userinfo.user.acc_id,
+        "acc_password" :password
+      }
+
+      console.log(JSON.stringify(temp))
+
+
+      await axios.post('https://api.kyusillid.online/api/changepass' , temp).then(
+        setsettings(false)
+      ).catch();
+    
+    }
+  }
+
+ 
 
   const [settings, setsettings] = useState(false);
   const togglesetting = ()=>{
     setsettings(!settings)
-    
-  
   }
+
+
+  const [togglewarning,settogglewarning] = useState(false)
+
+ useEffect(()=>{
+    if((cpassword !== undefined || cpassword !== "") && cpassword !== password){
+        settogglewarning(true);
+    }else{
+      settogglewarning(false);
+    }
+ },[cpassword])
+
+
   return (
     <div>
     <div className='col-lg-12'>
@@ -43,23 +86,58 @@ function Profiilepage() {
             </div>
           </div>
           <div className='accountinfo'>
-            {/* <h4>Account info</h4>
-            <p>email: {userinfo.user.email}</p>
-            <p>username : username</p> */}
+            <h4>Account info</h4>
+            <p>email: {userinfo.user.acc_email=== null ? " no email yet" : userinfo.user.acc_email}</p>
+            <p>username : {userinfo.user.acc_username}</p>
+            <button className='commonbutton secondary lighttext' onClick={togglesetting}>change password</button>
           </div>
-          <div className='profilesettings' onClick={togglesetting}>
-          <BsFillGearFill />
-          </div>
-         {settings &&  
-         <div className='profilesettingsdropdown borderradius-md'>
-            <p className='profiledropdownitem'>change password</p>
-          </div>
-        }
+    
+     
       </div>
 
     
     
     </div>
+ {settings &&
+     <div className="col-lg-6 ">
+
+
+     <div className='tertiary profilepanelmain  borderradius-lg '>
+
+       <form action="" onSubmit={handleSubmit}>
+         <h4>Change password</h4>
+         <div className='col-lg-12 flex'>
+         <input type="password" className='commontextbox background col-lg-7' placeholder='Enter password' onChange={e=>{setpassword(e.target.value)}}/>
+         </div>
+         
+         <div className='col-lg-12 flex'>   <input type="password" className='commontextbox background col-lg-7' placeholder='Confirm new password' onChange={e=>{setcpassword(e.target.value)}}/>
+         {togglewarning && 
+         <p className=''> *passwords must match</p>}</div>
+       
+
+       <div className='col-lg-12'>
+      
+       <input type="submit" className='commonbutton secondary lighttext col-lg-7 marginleft12'  value= "Save"/>
+
+       </div>
+
+       
+
+
+       </form>
+
+
+
+       
+     
+
+
+     </div>
+
+
+
+</div>
+ }
 
 
 
@@ -84,7 +162,7 @@ function Profiilepage() {
         <div className='col-md-8'>
             <div className="tertiary borderradius-lg activitystatuspanel dbpanelmargin margintop12">
             <h2 className="text-left">Activity Status</h2>
-            <div className='BarChart'> <BarChart></BarChart></div>
+            <div className='BarChart'> {activitystatus !== undefined && <BarChart item= {activitystatus}/>}</div>
             </div>
         </div>
 

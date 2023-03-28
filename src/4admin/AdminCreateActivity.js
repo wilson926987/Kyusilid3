@@ -1,10 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Dropdown from '../1general/formcomponents/Dropdown';
 import {AiFillFile } from 'react-icons/ai'
 import {BsFillPlusCircleFill} from 'react-icons/bs'
+import axios from 'axios';
+import { subjectmoduleContext , userInfoContext} from '../Globalcontext';
+import { useNavigate } from 'react-router-dom';
 
 
 function AdminCreateActivity() {
+
+  const {topicid} = useContext(subjectmoduleContext)
+  const {userinfo} = useContext(userInfoContext)
+  const navigate = useNavigate();
+
+
 
   const activitytpelist = [
     {'value' : 'Material','label' : 'Material'},
@@ -23,27 +32,54 @@ function AdminCreateActivity() {
   const [description, setdescription] = useState();
   const [activitytype, setactivitytype] = useState(activitytpelist[0].value);
   const [topic, settopic] = useState();
-  const [createdby, setcreatedby] = useState()
   const [category, setcategory] = useState(categorylist[0].value);
-  const [topiclist, settopiclist] = useState();
+  const [topiclist, settopiclist] = useState([]);
+  const [questionlink, setquestionlink] = useState();
 
 
   useEffect(()=>{
+    console.log( 'topicid ' + topicid)
+
+    axios.get('https://api.kyusillid.online/api/gettopicstring/' + topicid).then(
+      response=> {
+          settopiclist(response.data.map(item=>(
+            {'value': item.topic_id , 'label' : item.topic_name}
+          )))
+
+      }
+    ).catch();
+
     
-  },[])
-
-
- 
-
-
+  },[topicid])
 
 
 
 
   const handleSubmit = (e)=>{
     e.preventDefault()
+    const temp = {
+      'topic_id' : topic,
+      'title' : title,
+      'created_by' : userinfo.user.acc_id,
+      'description' : description,
+      'activity_type' : activitytype != undefined ? activitytype : "Material",
+      'category' : category != undefined ? category : "Lecture",
+      'questionlink': questionlink
+
+    }
+
+    axios.post('https://api.kyusillid.online/api/admincreatemodule2' , temp).then().catch();
+
+    navigate('/kyusilidAdmin/department')
+
+
+
+
+
 
   }
+
+
   return (
     <div className='tertiary borderradius-lg padding12' >
        <h4>Creating a new activity for  #</h4>
@@ -55,11 +91,11 @@ function AdminCreateActivity() {
           <div className="row">
             <div className="col-lg-6">
               <div className='createactivitytitle'>
-                  <p className="smallfont">TITLE</p><input type="text"   className='primaryborder' placeholder='title'/> 
+                  <p className="smallfont">TITLE</p><input type="text"   className='primaryborder' placeholder='title' onChange={e=>{settitle(e.target.value)}}/> 
               </div>
 
               <div className='margintop12 createactivitytitle'>
-               <p className="smallfont">DESCRIPTION</p><textarea name="" id="" cols="30" rows="6" className='primaryborder'></textarea><br />
+               <p className="smallfont">DESCRIPTION</p><textarea name="" id="" cols="30" rows="6" className='primaryborder' onChange={e=>{setdescription(e.target.value)}}></textarea><br />
                            
                  
               </div>
@@ -81,12 +117,9 @@ function AdminCreateActivity() {
                                 mainActiveClass='dropdownmain-active'
                             
                             />  
-            
-        
+
               </div>
-
-
-              
+         
               <div className="margintop12 createactivitytitle">
               <p className="smallfont">Select Activity Type</p>
               <Dropdown
@@ -95,6 +128,24 @@ function AdminCreateActivity() {
                                 mainClass= 'dropdownmain primary borderradius-md'
                                 itemClass= 'dropdownitem'
                                 placeholderValue= 'select activity type'
+                                controlClass='dropdowncontrol'
+                                menuClass='dropdownmenu primary'
+                                controlActiveClass='dropdowncontrolactive'
+                                mainActiveClass='dropdownmain-active'
+                            
+                            />  
+         
+        
+              </div>
+
+              <div className="margintop12 createactivitytitle">
+              <p className="smallfont">Select Topic</p>
+              <Dropdown
+                                options={topiclist}
+                                onChangeHandler= {settopic}
+                                mainClass= 'dropdownmain primary borderradius-md'
+                                itemClass= 'dropdownitem'
+                                placeholderValue= 'select topic'
                                 controlClass='dropdowncontrol'
                                 menuClass='dropdownmenu primary'
                                 controlActiveClass='dropdowncontrolactive'

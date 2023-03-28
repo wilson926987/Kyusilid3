@@ -1,22 +1,26 @@
-import React, { useState } from 'react'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
 
 function Adminlog() {
   const [data, setData] = useState([
-    { name: 'Wilson Capistrano', date: '01-24-2023', In: '10:00pm', Out:'11:59pm' },
-    { name: 'Ronald Carlo Libot', date: '01-24-2023', In: '10:00pm', Out:'11:59pm' },
-    { name: 'Carlo Acotin', date: '01-24-2023', In: '10:00pm', Out:'11:59pm' },
-    { name: 'Aira Mae Encarnado', date: '01-24-2023', In: '10:00pm', Out:'11:59pm' },
-    { name: 'Nino Olegario', date: '01-24-2023', In: '10:00pm', Out:'11:59pm' },
-    { name: 'Melrose Lastimosa', date: '01-24-2023', In: '10:00pm', Out:'11:59pm'},
-    { name: 'Cheyt Feliciano', date: '01-24-2023', In: '10:00pm', Out:'11:59pm' }
+
   ]);
   const [filteredData, setFilteredData] = useState(data);
+
+
+  useEffect(()=>{
+      axios.get('https://api.kyusillid.online/api/getadminlog').then(
+        response=> setFilteredData(response.data)
+      ).catch();
+
+      console.log(JSON.stringify(data))
+  },[])
 
 
   const handleSearch = event => {
     const searchTerm = event.target.value.toLowerCase();
     setFilteredData(
-      data.filter(d => d.name.toLowerCase().includes(searchTerm))
+      data.filter(d => d.firstname.toLowerCase().includes(searchTerm))
     );
   };
 
@@ -76,29 +80,17 @@ function Adminlog() {
             <th>Name</th>
             <th>date</th>
             <th>In</th>
-            <th>Out</th>
-            <th>Action</th>
+  
 
           </tr>
         </thead>
         <tbody>
-        {filteredData.map((item, index) => (
+        {filteredData !== undefined &&  filteredData.map((item, index) => (
   <tr key={index}>
-    <td data-label="Name">{item.name}</td>
-    <td data-label="date">{item.date}</td>
-    <td data-label="In">{item.In}</td>
-    <td data-label="Out">{item.Out}</td>
-    <td>
-      <button
-      className='Dele'
-      onClick={() => {
-        const newData = [...data];
-        newData.splice(index, 1); 
-        setData(newData); 
-      }}>Delete</button>
-
-
-    </td>
+    <td data-label="Name">{item.firstname} {item.lastname}</td>
+    <td data-label="date">{item.created_at}</td>
+    <td data-label="In">{item.created_at_time}</td>
+  
   </tr>
 ))}
 

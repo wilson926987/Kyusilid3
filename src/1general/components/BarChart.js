@@ -1,7 +1,7 @@
 import React from "react";
 import Chart from "react-apexcharts";
 
-function Barchart() {
+function Barchart({item}) {
   return (
     <React.Fragment>
 
@@ -15,17 +15,17 @@ function Barchart() {
               {
                 name: 'Pending',
                 type: 'column',
-                data: [21, 23, 31, 34, 44, 44, 56, 58]
+                data: item.pendinglist
               },
               {
                 name: "Done",
                 type: 'column',
-                data: [10, 19, 27, 26, 34, 35, 40, 38]
+                data: item.donelist
               },
               {
                 name: "Missing",
                 type: 'column',
-                data: [14, 2, 25, 15, 25, 28, 38, 46]
+                data: item.missinglist
               },
             ]}
           options={{
@@ -84,7 +84,7 @@ function Barchart() {
             },
             
             xaxis: {
-              categories: ['Class #1', 'Class #2', 'Class #3', 'Class #4', 'Class #5', 'Class #6', 'Class #7', 'Class #8'],
+              categories: item.classlist,
               labels: {
               style: {
                 fontSize:  '10px',

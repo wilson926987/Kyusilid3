@@ -39,7 +39,7 @@ function CreateClass() {
         e.preventDefault();
 
         const temp = {
-            'dep_id': 1,
+            "dep_id": 1,
             'sec_id' :1,
             'sub_id' :1,
             'day_id' :day,
@@ -53,9 +53,9 @@ function CreateClass() {
             'yearlvl' : yearlvl
 
 
-           
+   
         }
-        console.log(temp);
+        console.log(JSON.stringify(temp));
     }
     
 

@@ -17,15 +17,6 @@ function Subjects() {
   const navigate = useNavigate();
 
 
-  useEffect(()=>{
-      console.log(subjectlist)
-  },[])
-
-  useEffect(()=>{
-    console.log(subjectfilter.subjectfilter)
-  },[subjectfilter])
-
- 
 
   return (
     <div className='tertiary borderradius-lg padding12'>

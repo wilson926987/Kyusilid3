@@ -116,7 +116,7 @@ function Departmentoverview() {
                     <div>
                       <img src={avatar} alt="" /></div>
                     <div className="personpanelcontent">
-                      <h5>{item.name}</h5>
+                      <h5>{item.title} {item.firstname} {item.lastname} {item.suffix}</h5>
                       
                     </div>
                   </div>

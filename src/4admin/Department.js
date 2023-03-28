@@ -4,6 +4,9 @@ import { Outlet , useNavigate , useLocation, useOutletContext} from 'react-route
 import {subjectmoduleContext, adminSampleClassContext, adminYearfilterContext, accountlistContext, adminclasslistContext, subjectlistContext, currentdeptContext , userInfoContext , departmentsContext , deptInfoContext , subjectfilterContext} from '../Globalcontext'
 import {BiEdit} from 'react-icons/bi'
 import {FaUpload} from 'react-icons/fa'
+import ImportClass from './ImportClass'
+import ImportProfessor from './ImportProfessor'
+import ImportStudent from './ImportStudent'
 import ExcelImporter from './ExcelImporter'
 
 
@@ -179,7 +182,7 @@ function Department() {
           <div className='sideoption borderradius-md'onClick={()=>{navigate('createclass') ; setcreateclassmodal(false) }} > <BiEdit/><h2>ADD CLASS MANUALLY</h2></div>
           <div className='sideoption borderradius-md' onClick={()=>{setupclass(true)}}> <FaUpload/><h2>UPLOAD FILE</h2></div></> 
           :
-          <div>dito mag uupload ng file para sa class</div>
+          <div><ImportClass/></div>
           
         }
       </div>
@@ -199,7 +202,7 @@ function Department() {
           <div className='sideoption borderradius-md' onClick={ ()=>{setupstud(true)}}> <FaUpload/><h2>Upload file</h2></div>
           </>
           :
-          <div><ExcelImporter/></div>
+          <div><ImportStudent/></div>
           }
       </div>
           
@@ -217,7 +220,7 @@ function Department() {
         <>  <div className='sideoption borderradius-md'onClick={()=>{navigate('createproff') ; setcreateproffmodal(false) }} > <BiEdit/><h2>ADD CLASS MANUALLY</h2></div>
         <div className='sideoption borderradius-md' onClick={()=>{setupproff(true) }}> <FaUpload/><h2>Upload file</h2></div></>
         :
-        <div>prof uypload para dito</div>
+        <div><ImportProfessor/></div>
 }
       </div>
           

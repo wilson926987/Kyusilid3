@@ -17,9 +17,20 @@ function Container() {
 
 
 
-useEffect(() => {
-  filldata();  
-}, []);
+  useEffect(() => {
+    filldata(); 
+  
+    if(userinfo.user.first_login ===1){
+    
+      navigate('/Changepassword')
+    }
+  
+    if(userinfo.usertype === 'admin'){
+      navigate('/kyusilidAdmin');
+    }
+  
+  },[userinfo]);
+
 
 async function filldata(){
   await axios.get('https://api.kyusillid.online/api/getclasslist/' + userinfo.user.acc_id)
