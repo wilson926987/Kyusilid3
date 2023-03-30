@@ -635,7 +635,6 @@ justify-content: space-around;
   border-top-right-radius: 8px;
   height: 120px;
   position: relative;
-  opacity: .6;
   transition-delay: .2s;
   background-size:100% 120px;
   background-repeat: no-repeat;
@@ -734,11 +733,15 @@ justify-content: space-around;
   display: flex;
   align-items: flex-end;
   padding: 16px 20px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  
 }
 
 
+
 .classheader-lg{
-  height: 200px;
+  height: 325px;
 }
 
 .notransition{
@@ -746,7 +749,7 @@ justify-content: space-around;
 }
 
 .classheader-md{
-  height: 70px;
+  height: 90px;
 }
 
 .activitylog{
@@ -2115,6 +2118,7 @@ padding: 12px;
   margin: 6px;
   overflow: hidden;
   padding: 8px;
+  transition: none;
   
 
 }

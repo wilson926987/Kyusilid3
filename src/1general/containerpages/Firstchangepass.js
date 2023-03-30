@@ -28,12 +28,25 @@ function Firstchangepass() {
   const handlechangepass = async(e)=>{
     e.preventDefault();
 
+    if((newpass !== undefined && newpass.length <6) || (newpass !== undefined && newpass.length <6)){
+      alert("password minimum length is 6")
+      return 
+    }
+
+    if(newpass!== confirmnewpass){
+      alert("passwords must match")
+      return
+    }
+    
+
     if(userinfo!== undefined &&  newpass === confirmnewpass && newpass !== undefined && confirmnewpass !== undefined){
      
       const temp = {
         "acc_id" : userinfo.user.acc_id,
         "acc_password" : newpass
       }
+
+   
       await axios.post('https://api.kyusillid.online/api/reset-pass' , temp).then(
         alert('password successfully changed')
       ).then(
@@ -45,15 +58,7 @@ function Firstchangepass() {
     }
    
  
-    if((newpass !== undefined && newpass.length <6) || (newpass !== undefined && newpass.length <6)){
-      alert("password minimum length is 6")
-      return 
-    }
-
-    if(newpass!== confirmnewpass){
-      alert("passwords must match")
-      return
-    }
+   
    
    
 

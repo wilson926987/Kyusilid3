@@ -1,19 +1,28 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Outlet , useNavigate, useLocation} from 'react-router-dom'
 import Activitylogpanel from '../components/Activitylogpanel';
-import {settingsContext, modulelistContext, forcerefreshContext, classAndstudentselectionContext, announcementlistContext, userInfoContext, topicfilterContext, activitytypefilterContext , topiclistContext , currentActivityContext , sourceMaterialContext , currentclassContext, myClasesContext , personlistContext } from '../../Globalcontext';
+import {classbannerContext , settingsContext, modulelistContext, forcerefreshContext, classAndstudentselectionContext, announcementlistContext, userInfoContext, topicfilterContext, activitytypefilterContext , topiclistContext , currentActivityContext , sourceMaterialContext , currentclassContext, myClasesContext , personlistContext } from '../../Globalcontext';
 import {FaPlusCircle ,FaArrowCircleLeft} from  'react-icons/fa'
 import ClassSelectionitem from '../components/ClassSelectionitem';
 import axios from 'axios';
+import classbanner1 from '../../assets/images/classbanner1.png'
+import classbanner2 from '../../assets/images/classbanner2.png'
+import classbanner3 from '../../assets/images/classbanner3.png'
+import classbanner4 from '../../assets/images/classbanner4.png'
+import classbanner5 from '../../assets/images/classbanner5.png'
+import classbanner6 from '../../assets/images/classbanner6.png'
+import classbanner7 from '../../assets/images/classbanner7.png'
+import classbanner8 from '../../assets/images/classbanner8.png'
 
 function ClassContainer() {
+ 
 
-
-  
+  const classbannerlist = [classbanner1, classbanner1, classbanner2 , classbanner3, classbanner4, classbanner5, classbanner6, classbanner7, classbanner8]
 
   const navigate = useNavigate();
   const {userinfo} = useContext(userInfoContext);
   const {currentclass} = useContext(currentclassContext);
+  const [classbanner, setclassbanner] = useState();
   const [navcreate, setnavcreate] = useState(false);
   const [currentactivity, setcurrentactivity] = useState();
   const [sourcematerial,setsourcematerial] = useState();
@@ -27,6 +36,7 @@ function ClassContainer() {
 
   const [studentselection ,setstudentselection] = useState();
   const [class_log, setclass_log] = useState([]);
+  
 
   const forecerefreshHandler= async()=>{
     await axios.get(url + currentclass.classes_id)
@@ -41,12 +51,6 @@ function ClassContainer() {
   }
 
 
- 
- 
- 
-
-
-  
 
   const url = userinfo.user.usertype ==='prof' ?  'https://api.kyusillid.online/api/get-announcement/' : 'https://api.kyusillid.online/api/get-announcementforstudent/'
   
@@ -55,17 +59,29 @@ function ClassContainer() {
       setcurrentpage(location.pathname);
       if(currentclass !== undefined){
         filldata();
+        setclassbanner(currentclass!== undefined? currentclass.classbanner: 0)
+        
       }
+
+
 
 
 
   },[location , currentclass])
 
+
+
+
   useEffect(()=>{
     if(currentclass===undefined){
       navigate('/')
     }
-   })
+
+
+
+   },[])
+
+
 
   async function filldata(){
  
@@ -204,11 +220,18 @@ function toggleStudentselect(studentitem){
       <div className='classcontentmain'>
         <div className='row'> 
             <div className="col-lg-12 " >
-              <div id='top' className={`primary classheader borderradius-lg dbpanelmargin ${((isactive('/classes/sampleclass/createnew') || isactive('/classes/sampleclass/activity/activityId')) ? ' classheader-md' : ' classheader-lg')}`}>
+              <div id='top' className={`primary classheader relative borderradius-lg dbpanelmargin ${((isactive('/classes/sampleclass/createnew') || isactive('/classes/sampleclass/activity/activityId')) ? ' classheader-md' : ' classheader-lg')}`}
+                  style={{backgroundImage: `url(${classbannerlist[classbanner]})`}}
+              
+              >
+           
+
+                
+              
                 <div>
                   {!(isactive('/classes/sampleclass/createnew')|| isactive('/classes/sampleclass/activity/activityId') ) ?
-                     <div>
-                      <h3 >{currentclass.sub_name}</h3>
+                     <div>      
+                      <h3 >{currentclass.sub_name} </h3>
                      <h4 className='margintop12'>{currentclass.sub_code}</h4>
                     <h4>{currentclass.day_label} {currentclass.sched_from} - {currentclass.sched_to} {(currentclass.sessionname2 !== "" ||currentclass.sessionname2 !== null) && (', ' + currentclass.sched_from2 + ' - ' + currentclass.sched_to2)}</h4>
                     <h4> {currentclass.title!== ''|| currentclass.title !== null && currentclass.title}{ ' '+ currentclass.firstname +' ' +  currentclass.lastname + ' ' } {currentclass.suffix!== '' && currentclass.suffix !== null && currentclass.suffix}</h4>
@@ -370,9 +393,12 @@ function toggleStudentselect(studentitem){
                                  <topicfilterContext.Provider value={{topicfilter, settopicfilter}}>
                                 <modulelistContext.Provider value={{modulelist, setmodulelist}}>
                                <settingsContext.Provider value={{classsettings, setclasssettings}}>
-                               <Outlet /> 
-                               </settingsContext.Provider>
-                             
+                                <classbannerContext.Provider value={{classbanner, setclassbanner}}>
+                                <Outlet /> 
+
+                                </classbannerContext.Provider>
+                           
+                               </settingsContext.Provider>                  
                                 </modulelistContext.Provider>                                  
                                  </topicfilterContext.Provider>
                                   </activitytypefilterContext.Provider>

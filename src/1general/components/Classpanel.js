@@ -8,12 +8,15 @@ import classbanner2 from '../../assets/images/classbanner2.png'
 import classbanner3 from '../../assets/images/classbanner3.png'
 import classbanner4 from '../../assets/images/classbanner4.png'
 import classbanner5 from '../../assets/images/classbanner5.png'
+import classbanner6 from '../../assets/images/classbanner6.png'
+import classbanner7 from '../../assets/images/classbanner7.png'
+import classbanner8 from '../../assets/images/classbanner8.png'
 
 
 function Classpanel({classitem}) {
   const navigate = useNavigate()
   const {setcurrentclass} = useContext(currentclassContext);
-  const classbanner = [classbanner1,classbanner2, classbanner3, classbanner4, classbanner5]
+  const classbanner = [classbanner1, classbanner1,classbanner2, classbanner3, classbanner4, classbanner5 , classbanner6, classbanner7, classbanner8]
   
  
   return (

@@ -42,3 +42,4 @@ export const adminYearfilterContext = createContext();
 export const adminSampleClassContext = createContext();
 export const admintopicsourceContext= createContext();
 export const subjectmoduleContext = createContext();
+export const classbannerContext = createContext();

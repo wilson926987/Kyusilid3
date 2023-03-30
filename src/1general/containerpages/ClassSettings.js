@@ -1,99 +1,118 @@
-import React, { useState } from 'react'
-import ENT from '../../assets/images/ENT.png'
-import ED from '../../assets/images/ED.png'
-import BSEE from '../../assets/images/BSEE.png'
-import BSIE from '../../assets/images/BSIE.png'
-import BSBA from '../../assets/images/BSBA.png'
-import BSIT from '../../assets/images/BSIT.png'
-import ENT1 from '../../assets/images/ENT1.png'
-import ED1 from '../../assets/images/ED1.png'
-import BSEE1 from '../../assets/images/BSEE1.png'
-import BSIE1 from '../../assets/images/BSIE1.png'
-import BSBA1 from '../../assets/images/BSBA1.png'
-import BSIT1 from '../../assets/images/BSIT1.png'
+import React, { useContext, useEffect, useState } from 'react'
+import { currentclassContext, classbannerContext } from '../../Globalcontext'
+import {AiFillCheckCircle} from 'react-icons/ai'
+
+
 import Textbox from '../formcomponents/Textbox'
+import classbanner1 from '../../assets/images/classbanner1.png'
+import classbanner2 from '../../assets/images/classbanner2.png'
+import classbanner3 from '../../assets/images/classbanner3.png'
+import classbanner4 from '../../assets/images/classbanner4.png'
+import classbanner5 from '../../assets/images/classbanner5.png'
+import classbanner6 from '../../assets/images/classbanner6.png'
+import classbanner7 from '../../assets/images/classbanner7.png'
+import classbanner8 from '../../assets/images/classbanner8.png'
+import axios from 'axios'
+
+
 
 function ClassSettings() {
-    const [discussionlink, setdicussionlink] = useState();
+
+    const {classbanner, setclassbanner} = useContext(classbannerContext)
+    const currentclass = useContext(currentclassContext)
+    const [issaved, setissaved] = useState(false)
+    
+    const [discussionlink, setdicussionlink] = useState(currentclass.currentclass.class_link);
+
+    const isequal =(e)=>{
+        return e === classbanner;
+    }
+
+    const saveinfo = async()=>{
+
+        const temp = {
+            "classbanner" :classbanner,
+            "class_link" : discussionlink,
+            "classes_id": currentclass.currentclass.classes_id
+        }
+
+        console.log(JSON.stringify(temp))
+            await axios.post("https://api.kyusillid.online/api/updateclassinfosettings" ,temp).then().catch();
+    }
+
+
+
+  
+
+
+
   return (
     <div>
         <h4>class banner</h4>
         <div className="row">
             <div className="col-lg-3 themeimageminwidth">
-                <div className="themeimage">
-                <img src={BSIT} alt="" />
+                <div className={`themeimage ${isequal(1) && "primaryborder"}`} onClick={()=>{setclassbanner(1) }}>
+                <img src={classbanner1} alt=""  />
                 </div>         
             </div>
             <div className="col-lg-3 themeimageminwidth">
-                <div className="themeimage">
-                <img src={BSEE} alt="" />
+            <div className={`themeimage ${isequal(2) && "primaryborder"}`} onClick={()=>{setclassbanner(2)}}>
+                <img src={classbanner2} alt="" />
                 </div>         
             </div>
             <div className="col-lg-3 themeimageminwidth">
-                <div className="themeimage">
-                <img src={ENT} alt="" />
+            <div className={`themeimage ${isequal(3) && "primaryborder"}`} onClick={()=>{setclassbanner(3)}}>
+                <img src={classbanner3} alt="" />
                 </div>         
             </div>
             <div className="col-lg-3 themeimageminwidth">
-                <div className="themeimage">
-                <img src={ED} alt="" />
+                <div className={`themeimage ${isequal(4) && "primaryborder"}`} onClick={()=>{setclassbanner(4)}}>
+                <img src={classbanner4} alt="" />
                 </div>         
             </div>
             <div className="col-lg-3 themeimageminwidth">
-                <div className="themeimage primaryborder">
-                <img src={BSIE} alt="" />
-                </div>         
-            </div>
-
-            <div className="col-lg-3 themeimageminwidth">
-            <div className="themeimage primaryborder">
-            <img src={BSBA} alt="" />
-            </div>         
-        </div>
-        <div className="col-lg-3 themeimageminwidth">
-                <div className="themeimage">
-                <img src={BSIT1} alt="" />
+            <div className={`themeimage ${isequal(5) && "primaryborder"}`} onClick={()=>{setclassbanner(5)}}>
+                <img src={classbanner5} alt="" />
                 </div>         
             </div>
             <div className="col-lg-3 themeimageminwidth">
-                <div className="themeimage">
-                <img src={BSEE1} alt="" />
+            <div className={`themeimage ${isequal(6) && "primaryborder"}`} onClick={()=>{setclassbanner(6)}}>
+                <img src={classbanner6} alt="" />
                 </div>         
             </div>
             <div className="col-lg-3 themeimageminwidth">
-                <div className="themeimage">
-                <img src={ENT1} alt="" />
+            <div className={`themeimage ${isequal(7) && "primaryborder"}`} onClick={()=>{setclassbanner(7)}}>
+                <img src={classbanner7} alt="" />
                 </div>         
             </div>
             <div className="col-lg-3 themeimageminwidth">
-                <div className="themeimage">
-                <img src={ED1} alt="" />
+            <div className={`themeimage ${isequal(8) && "primaryborder"}`} onClick={()=>{setclassbanner(8)}}>
+                <img src={classbanner8} alt="" />
                 </div>         
             </div>
-            <div className="col-lg-3 themeimageminwidth">
-                <div className="themeimage primaryborder">
-                <img src={BSIE1} alt="" />
-                </div>         
-            </div>
-
-            <div className="col-lg-3 themeimageminwidth">
-            <div className="themeimage primaryborder">
-            <img src={BSBA1} alt="" />
-            </div>         
-        </div>
+     
+          
         </div>
 
 
         <h4 className='margintop12'> Discussion link</h4>
-
-
+ 
         <div className="row">
             <div className="col-lg-10">
-            <Textbox value={discussionlink} handleChange={setdicussionlink} placeholdervalue='discussion link'/>
+
+                <input type="text" className='commontextbox primaryborder'  defaultValue={discussionlink} onChange={(e)=>{setdicussionlink(e.target.value)}} />
+           
             </div>
-            <div className="col-lg-2">                   
-                    <button className='commonbutton secondary lighttext'>change</button>
+
+            {!issaved ? 
+              <div className="col-lg-3">                   
+              <button className='commonbutton secondary lighttext ' onClick={()=>{saveinfo(); setissaved(true)}}>Change</button>
+      </div>
+      :  <div className="col-lg-3">                   
+            <button className='commonbutton secondary lighttext ' disabled> <AiFillCheckCircle/> Saved</button>
             </div>
+      }
+          
         </div>
        
       
