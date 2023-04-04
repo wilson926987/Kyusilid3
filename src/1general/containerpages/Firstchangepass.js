@@ -75,13 +75,13 @@ function Firstchangepass() {
       {userinfo !== null ?
         <div className='Backgroundlog absolute'>
      
-        <div className='resetpass1 primary col-lg-12  borderradius-md'>
-       <form className='form-group-form' action="" onSubmit={handlechangepass} >
+        <div className='resetpass1 primary borderradius-md'>
+       <form action="" onSubmit={handlechangepass} >
        <center><h1>UPDATE PASSWORD</h1></center>
        <br></br>
-         <input type='text'  className='editt' placeholder='New Password' onChange={(e)=>{setnewpass(e.target.value)}}/>
+         <input type='password'  className='editt' placeholder='New Password' onChange={(e)=>{setnewpass(e.target.value)}}/>
          <br></br>       
-         <input type='text'className='editt1' placeholder='Confirm Password' onChange={(e)=>{setconfirmnewpass(e.target.value)}}/>
+         <input type='password'className='editt1' placeholder='Confirm Password' onChange={(e)=>{setconfirmnewpass(e.target.value)}}/>
          <br></br>
          <button className="secondary commonbutton lighttext col-lg-4"> Save</button>
        </form>

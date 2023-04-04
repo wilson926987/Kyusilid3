@@ -25,11 +25,19 @@ function ImportStudent() {
   }
 
   return (
-    <div>
-      <h1>Import Student</h1>
-      <input type="file" onChange={handleFileChange} />
-      <button onClick={handleImportClick}>Import</button>
-    </div>
+    <div className='flex padding12'>
+    <div className='Import-file tertiary borderradius-lg padding12'>
+    <div className='Import-file-container'>
+    <h1>IMPORT STUDENT FILE</h1>
+      <input className='Choose-File commonbutton secondary lighttext width100' type="file" onChange={handleFileChange} />
+      </div>
+      </div>
+     
+      <div className='import-button'>
+      <button className='commonbutton secondary lighttext width100' onClick={handleImportClick}>Import</button>
+      </div>
+      
+      </div>
   );
 }
 

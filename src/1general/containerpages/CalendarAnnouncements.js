@@ -4,6 +4,8 @@ import axios from 'axios'
 
 function CalendarAnnouncements() {
   const [Adminannouncements, setadminannouncements] = useState();
+  const [currentTime, setCurrentTime] = useState(new Date());
+
 
   useEffect(()=>{
     axios.get('https://api.kyusillid.online/api/getadminannouncement/' + 1).then(response =>{
@@ -12,13 +14,34 @@ function CalendarAnnouncements() {
     }).catch();
   },[])
 
+  
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+
+    return () => clearInterval(intervalId);
+
+
+  }, []);
+
 
 
 
   return (
     <div className='col-md-3'>
     <div className='eventscontainer tertiary borderradius-lg'>
-        <div className="calendarcontainer primary borderradius-lg"></div>
+       
+        <div className="calendarcontainer primary borderradius-lg">
+          <div className="box2">
+            <div className="cards">
+              <h2>{currentTime.toLocaleTimeString()}</h2>
+              <br></br>
+              <h3>{currentTime.toLocaleDateString()}</h3>
+            </div>
+          </div>
+          </div>
+    
         <div className='announcementscontainer'>
            <h4> Announcements</h4>
 
@@ -31,9 +54,9 @@ function CalendarAnnouncements() {
            {/* <Adminpostpanel /><Adminpostpanel /><Adminpostpanel /><Adminpostpanel /><Adminpostpanel /> */}
             
         </div>
-    
     </div>
-</div>
+    </div>
+
   )
 }
 
