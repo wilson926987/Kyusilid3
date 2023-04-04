@@ -108,7 +108,7 @@ function Archived() {
       <div className='flex '>
       <h4> Archived classes</h4>
      <div className='marginleftauto'>
-      {userinfo.user.user_type=== "prof" && 
+      {userinfo.user.usertype=== "prof" && 
       <div>
         
      {!selectclasses ?   <button className='commonbutton secondary lighttext' onClick={()=>setselectclasses(true)}> <h4>select classes </h4></button>
