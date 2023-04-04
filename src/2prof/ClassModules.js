@@ -74,22 +74,28 @@ function ClassModules() {
      </div>
      </div>
 
+     {topiclist.topiclist !== undefined &&
+     
+     <div className='col-md-12 margintop12'>
+
+     {topiclist.topiclist.length === 0 &&
+     
+       <div className="emptylist">
+         <h4>No Classworks yet</h4>
+       </div>
+     }
+     {topiclist.topiclist.map((topicitem)=>(
+       <Topicpanel key={topicitem.topic_id} topicitem={topicitem}/>
+
+     ))}
+       
+   </div>
+     
+     
+     }
 
 
-        <div className='col-md-12 margintop12'>
 
-          {topiclist.topiclist.length ===0 &&
-          
-            <div className="emptylist">
-              <h4>No Classworks yet</h4>
-            </div>
-          }
-          {topiclist.topiclist.map((topicitem)=>(
-            <Topicpanel key={topicitem.topic_id} topicitem={topicitem}/>
-
-          ))}
-            
-        </div>
 
      
 

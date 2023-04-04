@@ -733,15 +733,35 @@ justify-content: space-around;
   display: flex;
   align-items: flex-end;
   padding: 16px 20px;
-  background-repeat: no-repeat;
-  background-size: cover;
-  
+
 }
 
+.classtitle{
+  position: absolute;
+  bottom: 30px;
+  z-index: 1;
+}
 
+.classbanner{
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 
 .classheader-lg{
   height: 325px;
+}
+
+.classheader-md .classbanner{
+  opacity: 0;
+}
+
+.classheader-md .classtitle{
+  bottom: 15px;
 }
 
 .notransition{
@@ -1716,6 +1736,22 @@ padding: 12px;
   width: 80%;
   font-weight: bold;
   color: #e2e4fa;
+}
+
+.commentbutton{
+  transform: scale(.7);
+  display: none;
+  margin-top: -6px;
+  margin-bottom: -6px;
+ 
+}
+
+.commentheader:hover .commentbutton{
+  display: block !important;
+}
+
+.submissionpanel button:disabled{
+  background-color: var(--darktextprimary);
 }
 
 .attendancecontainer{

@@ -78,8 +78,9 @@ function Createnew() {
   const [activitytype, setactivitytype] = useState(sourcematerial !==undefined ? sourcematerial.activity_type : "Material");
   const [duedate, setduedate] = useState('none');
   const [allowedit, setallowedit] = useState(false);
-  const [allowlate, setallowlate] = useState(false)
+  const [allowlate, setallowlate] = useState(true)
   const [formduration, setformduration] = useState();
+  const [points, setpoints] = useState(100);
 
   
   const Postoptions = [
@@ -145,7 +146,7 @@ async function createnewtopic(e){
     'classes_id' :  currentclass.classes_id
   }
 
-  await axios.post('https://api.kyusillid.online/api/createtopic/' , newtopicitem)
+  await axios.post('https://api.kyusillid.online/api/createtopic' , newtopicitem)
   .then(response => {    
       console.log(response.data)  ;    
 
@@ -184,6 +185,7 @@ async function createActivity(){
     'schedule' : postdate,
     'postschedtype' : postscheduletype,
     'scheduleoffset' : schedoffset, 
+    'points' : points
   }
 
   await axios.post('https://api.kyusillid.online/api/createactivity' , newtopicitem)
@@ -217,9 +219,9 @@ const handlecreateactivity=()=>{
                           {activitytype !== 'Attendance' ?
                            <div>
                                    
-                          <p className="smallfont">TITLE</p><input type="text"  disabled={sourcematerial!==undefined} className='primaryborder' placeholder='title' defaultValue={posttitle}  onChange={(e)=>{setposttitle(e.target.value)}}/> <br />
+                          <p className="smallfont">TITLE</p><input type="text"  disabled={sourcematerial!==undefined} className='primaryborder' placeholder='Title' defaultValue={posttitle}  onChange={(e)=>{setposttitle(e.target.value)}}/> <br />
                            <br />
-                           <p className="smallfont">DESCRIPTION</p><textarea name="" id="" cols="30" rows="6" className='primaryborder'  value={description} placeholder='description' onChange={(e)=>{setdescription(e.target.value)}}></textarea><br />
+                           <p className="smallfont">DESCRIPTION</p><textarea name="" id="" cols="30" rows="6" className='primaryborder'  value={description} placeholder='Description' onChange={(e)=>{setdescription(e.target.value)}}></textarea><br />
                            <br />
                            
  
@@ -281,6 +283,8 @@ const handlecreateactivity=()=>{
                             </div>
                             <br />
 
+
+
                             
                
                             {activitytype!== 'Attendance' &&
@@ -303,8 +307,13 @@ const handlecreateactivity=()=>{
                                 defaultValue= {sourcematerial !== undefined ? {'value' : sourcematerial.category , 'label' : sourcematerial.category} : undefined}
                          
                             />
+
+
                             </div>
                             <br />
+
+                        
+
 
                             <div>
                               <p className="smallfont">MODULE</p>
@@ -400,9 +409,15 @@ const handlecreateactivity=()=>{
                               <>
                               <br />
                               <div>
-                                <input type="checkbox" name='' id='allowlate' onChange={(e)=> {setallowlate(e.target.checked)}}/> <label htmlFor="allowlate"><b>ALLOW LATE SUBMISSION</b></label> <br />
+                                <input type="checkbox" name='' id='allowlate'  defaultChecked={allowlate} onChange={(e)=> {setallowlate(e.target.checked)}}/> <label htmlFor="allowlate"><b>ALLOW LATE SUBMISSION</b></label> <br />
+                              
+
+                              <div className='flex margintop12'> <h4>Points</h4>  <input type="text" defaultValue={points} onChange={(e)=>{setpoints(e.target.value)}} className='commontextbox col-lg-4 primaryborder'  />
+</div>
+                               
+                              
                                <br />
-                               <p className="smallfont">LIMIT AVAILABILITY</p>
+                               <p className="smallfont margintop12">LIMIT AVAILABILITY</p>
 
                               <div className="flex">
                               <Dropdown

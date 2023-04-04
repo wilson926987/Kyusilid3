@@ -78,6 +78,26 @@ function Announcementpanel({announcementitem , forcerefresh}) {
 
   }
 
+  const deletecomment = async(e)=>{
+
+    if(window.confirm('delete this post?') === true){
+      await axios.delete('https://api.kyusillid.online/api/deleteannouncementcomment/' + e).then().catch();
+      await axios.get(url + currentclass.classes_id)
+      .then(response => {
+        setannouncementlist(response.data)
+       
+      })
+      .catch(error => {
+        console.log(error);
+      });
+
+    }
+   
+  }
+
+
+
+
 
 
  
@@ -113,8 +133,12 @@ function Announcementpanel({announcementitem , forcerefresh}) {
                     <div className="">
                        {announcementitem !== undefined  && announcementitem.commentlist.map((commentitem , key)=>(
                          <div key={key} className='padding12'>
-                            <div className="flex">
+                            <div className="flex commentheader">
                               <h5>{commentitem.title + " " + commentitem.firstname + ' ' + commentitem.lastname + ' '  + commentitem.suffix }</h5>
+
+                              
+                              {commentitem.acc_id === userinfo.user.acc_id &&
+                              <button className="commonbutton secondary lighttext commentbutton" onClick={()=>{deletecomment(commentitem.com_id)}}>delete</button>}
                               <p className='smallfont marginleftauto'>{commentitem.date_posted}</p>
                             </div>
                             <div className='ellipsis '>

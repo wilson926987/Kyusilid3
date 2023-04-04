@@ -97,10 +97,10 @@ function CreateClass() {
   />
 </div>
 <div className="Schedd ">
-   schedfrom 2 <input type="time"  required onChange={(e)=>{setschedfrom2(e.target.value)}}/>
+   schedfrom 2 <input type="time"   onChange={(e)=>{setschedfrom2(e.target.value)}}/>
 </div>
 <div className="Schedd1 ">
-   sched to 2 <input type="time" required  onChange={(e)=>{setschedto2(e.target.value)}}/>
+   sched to 2 <input type="time"   onChange={(e)=>{setschedto2(e.target.value)}}/>
 </div>
 <div className="col-lg-6">
    year level  

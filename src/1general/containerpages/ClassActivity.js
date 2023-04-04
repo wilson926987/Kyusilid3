@@ -10,7 +10,6 @@ import axios from 'axios';
 import Textbox from '../formcomponents/Textbox';
 
 
-
 function ClassActivity() {
 
   const {setmodulelist} = useContext(modulelistContext)
@@ -26,6 +25,19 @@ function ClassActivity() {
   const [edittitle, setedittitle] = useState(currentactivity.activity_title)
   const [editdescription, seteditdescription] = useState(currentactivity.description);
 
+  const [mark, setmark] = useState();
+  const [activitystatus, setactivitystatus]= useState();
+  const [fileuploads, setfileuploads] = useState();
+
+  const [isassigned, setisassigned] = useState(false);
+
+
+  const [statusfilter , setstatusfilter] = useState("All");
+
+
+
+
+
 
   const postcomments = async ()=>{
 
@@ -35,7 +47,7 @@ function ClassActivity() {
         "activity_id" : currentactivity.activity_id,
         "comment_content" : commentinput
       }
-      console.log(JSON.stringify(temp))
+    
   
       await axios.put('https://api.kyusillid.online/api/createactivitycomment', temp).then(response =>{
         set_actcommnentlist(response.data);
@@ -87,7 +99,22 @@ function ClassActivity() {
 
     navigate('/classes/sampleclass');
   }
-  
+
+
+  const [responselist, setresponselist] = useState();
+
+  const deletecomment = async(e)=>{
+    if(window.confirm('delete this comment?') === true){
+      await axios.delete('https://api.kyusillid.online/api/deleteactivitycomment/' + e).then(
+       
+      set_actcommnentlist( act_commentlist.filter(ee=> ee.comment_id != e))
+
+  ).catch();
+
+    }
+
+  }
+
 
   useEffect(()=>{
     if(currentactivity===undefined){
@@ -97,7 +124,26 @@ function ClassActivity() {
       {set_actcommnentlist(response.data)}
      )
 
+     axios.get('https://api.kyusillid.online/api/getactivitystatus/' + currentactivity.activity_id + '/' + userinfo.user.acc_id).then(
+      response=>{
+        if(response.data !== "unassigned"){
+          setactivitystatus(response.data);
+          setisassigned(true);
+        }
+      }
+     ).catch()
 
+
+     if(userinfo.user.usertype ==="prof"){
+      axios.get('https://api.kyusillid.online/api/getactivityresponses/' + currentactivity.activity_id).then(
+        response =>{
+          setresponselist(response.data);
+          console.log(response.data)
+        }
+      ).catch();
+     }
+
+  
 
   },[currentactivity])
   
@@ -122,7 +168,7 @@ function ClassActivity() {
                        </div>
         </div>
           
-        <h4 className='ellipsis'> { currentactivity.topic_name}: {currentactivity.activity_title}</h4>
+        <h4 className='ellipsis'> { currentactivity.topic_name !== 'no topic' &&  currentactivity.topic_name + ': '} {currentactivity.activity_title}</h4>
 
        </div>
 
@@ -133,6 +179,10 @@ function ClassActivity() {
         <div className= {`flex activitytab ${activitytab === 'responses'  ? 'primary' : 'background'}`} onClick={()=>{setactivitytab('responses') ; setactivitysettings(false)}}>
             
          <h4>Responses</h4>
+
+
+
+
  
         </div>
        
@@ -159,7 +209,7 @@ function ClassActivity() {
       }
 
    </div>  
-   }
+   } 
 
         <div className="marginleftauto smallfont">
           <p>Date posted : {currentactivity.date_schedule}</p>
@@ -210,11 +260,58 @@ function ClassActivity() {
            
          {userinfo.usertype==='stud' && (currentactivity.activitytype!== 'material' && currentactivity.activitytype !=='questionnaire') &&
            <div className="col-lg-4">
-           <div className=" background borderradius-md submissionpanel">
+            {
+              isassigned ?
+          
+              <div className=" background borderradius-md margintop12 padding12">
+                {activitystatus.status === 'marked' ?
+                 <h4>Marked {activitystatus.grade} / {activitystatus.points}</h4>
+                 :
+                 activitystatus.status ==='late'?
+
+           
+                 <h4>Late</h4>
+                 :
+                 <h4>Assigned</h4>
+                
+                }
+                
+              </div>
+              :         
+              <div><h4>Activity not Assigned</h4></div>
+            }
+             
+
+
+           <div className=" background borderradius-md submissionpanel margintop12">
              <h4>Your work</h4>
              <div className='flex '>
                 <button className='secondary'>Add file</button>
-                <button className='secondary'> Hand In</button>
+
+
+             
+                    {isassigned ? 
+                    <>
+                    {activitystatus.status === 'pending' ?
+                    <button className='secondary' > Hand In</button>
+                  :
+                  <button className='tertiary' > Unsubmit</button>
+                  }
+
+                    </>
+
+                    :
+                    <button className='secondary' disabled > Not assinged</button>
+
+                       
+                    
+
+                       
+                    
+                  }
+                    
+               
+            
                
              </div>
            </div>
@@ -227,7 +324,7 @@ function ClassActivity() {
           <hr/>  
           {act_commentlist.map((item)=>(
             <div key={item.comment_id} className='margintop12'>
-              <div className='flex'> <h6>{item.firstname} {item.middle} {item.lastname} {item.suffix}</h6> <p className='smallfont marginleftauto'>{item.date_posted}</p></div>
+              <div className='flex commentheader'> <h6>{item.firstname} {item.middle} {item.lastname} {item.suffix}</h6>   <button className='commentbutton commonbutton secondary lighttext' onClick={()=>{deletecomment(item.comment_id)}}>delete</button> <p className='smallfont marginleftauto'>{item.date_posted}</p></div>
               <div> {item.comment_content}</div>
             </div>
           ))}
@@ -245,7 +342,93 @@ function ClassActivity() {
 
         activitytab ==='responses' ?
         <div>
-            <h4>Response here</h4>
+
+<div class="row ">
+            
+
+        <div className="col-lg-2 margintop12">
+          <div className='primary borderradius-md '>
+              <a  className='btn' onClick={() => setstatusfilter('Pending')}>
+                <h4>2</h4>
+                <h6>Pending</h6>
+              </a>
+          </div>
+        
+        </div>
+        <div className="col-lg-2 margintop12">
+          <div className='primary borderradius-md '>
+              <a  className='btn' onClick={() => setstatusfilter('Done')}>
+                <h4>0</h4>
+                <h6>Done</h6>
+              </a>
+          </div>
+        
+        </div>
+        <div className="col-lg-2 margintop12">
+          <div className='primary borderradius-md '>
+              <a  className='btn' onClick={() => setstatusfilter('Missing')}>
+                <h4>0</h4>
+                <h6>Missing</h6>
+              </a>
+          </div>
+        
+        </div>
+        <div className="col-lg-2 margintop12">
+          <div className='primary borderradius-md '>
+              <a  className='btn' onClick={() => setstatusfilter('Late')}>
+                <h4>0</h4>
+                <h6>Late</h6>
+              </a>
+          </div>
+        
+        </div>
+        <div className="col-lg-2 margintop12">
+          <div className='primary borderradius-md '>
+              <a  className='btn' onClick={() => setstatusfilter('Unassigned')}>
+                <h4>50</h4>
+                <h6>Unassigned</h6>
+              </a>
+          </div>
+        
+        </div>
+
+      
+
+      </div>
+
+
+
+
+
+
+
+
+          <table className='width100 margintop12'>
+            <thead >
+              <tr className='primary borderradius-md'>
+                <th className='padding12'>Name</th>
+                <th className="padding12">Status</th>
+                <th className="padding12"></th>
+             
+             
+              </tr>
+            </thead>
+            <tbody>
+              {responselist != undefined && responselist.map((item , key)=>(
+                <tr key={key}> 
+                  <td>{item.name}</td>
+                  <td>{item.status}</td>
+                  <td>{item.grade !== null ?  item.grade : '?'} / {item.points}</td>
+                  <td> <button className='commonbutton secondary lighttext' onClick={()=>{navigate('/classes/sampleclass/activity/activityId/response')}}> view</button></td>
+                </tr>
+              ))}
+              
+            </tbody>
+          </table>
+           
+
+
+        
         </div>
         :
         activitytab ==="postmodule"?

@@ -56,11 +56,13 @@ function Profiilepage() {
   const [togglewarning,settogglewarning] = useState(false)
 
  useEffect(()=>{
+
     if((cpassword !== undefined || cpassword !== "") && cpassword !== password){
         settogglewarning(true);
     }else{
       settogglewarning(false);
     }
+    
  },[cpassword])
 
 

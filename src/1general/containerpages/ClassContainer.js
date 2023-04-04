@@ -220,16 +220,20 @@ function toggleStudentselect(studentitem){
       <div className='classcontentmain'>
         <div className='row'> 
             <div className="col-lg-12 " >
-              <div id='top' className={`primary classheader relative borderradius-lg dbpanelmargin ${((isactive('/classes/sampleclass/createnew') || isactive('/classes/sampleclass/activity/activityId')) ? ' classheader-md' : ' classheader-lg')}`}
-                  style={{backgroundImage: `url(${classbannerlist[classbanner]})`}}
+              <div id='top' className={`primary classheader relative borderradius-lg dbpanelmargin ${((isactive('/classes/sampleclass/createnew') || isactive('/classes/sampleclass/activity/activityId') || isactive('/classes/sampleclass/marks')) ? ' classheader-md' : ' classheader-lg')}`}
+              
               
               >
+
+                <div className='classbanner borderradius-lg'      style={{backgroundImage: `url(${classbannerlist[classbanner]})`}}>
+
+                </div>
            
 
                 
               
-                <div>
-                  {!(isactive('/classes/sampleclass/createnew')|| isactive('/classes/sampleclass/activity/activityId') ) ?
+                <div className='classtitle'>
+                  {!(isactive('/classes/sampleclass/createnew')|| isactive('/classes/sampleclass/activity/activityId') || isactive('/classes/sampleclass/marks') ) ?
                      <div>      
                       <h3 >{currentclass.sub_name} </h3>
                      <h4 className='margintop12'>{currentclass.sub_code}</h4>
@@ -237,8 +241,7 @@ function toggleStudentselect(studentitem){
                     <h4> {currentclass.title!== ''|| currentclass.title !== null && currentclass.title}{ ' '+ currentclass.firstname +' ' +  currentclass.lastname + ' ' } {currentclass.suffix!== '' && currentclass.suffix !== null && currentclass.suffix}</h4>
                 
                    </div> :
-           
-
+ 
                     <div>
                        <h3 > {currentclass.sub_code + '- '+ currentclass.sub_name}</h3>
                        <h5>{currentclass.day_label} {currentclass.sched_from} - {currentclass.sched_to}</h5>
@@ -426,7 +429,7 @@ function toggleStudentselect(studentitem){
 
       </div>
 
-     {!(isactive('/classes/sampleclass/createnew') || isactive('/classes/sampleclass/activity/activityId') )  ?
+     {!(isactive('/classes/sampleclass/createnew') || isactive('/classes/sampleclass/activity/activityId') || isactive('/classes/sampleclass/marks') )  ?
          <div className='activitylog borderradius-md tertiary'>
          <h4>Class Activity log</h4>
 

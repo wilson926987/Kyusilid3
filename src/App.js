@@ -55,6 +55,7 @@ import Createstud from './4admin/Createstud';
 import ClassSettings from './1general/containerpages/ClassSettings';
 import AdminCreateActivity from './4admin/AdminCreateActivity';
 import Firstchangepass from './1general/containerpages/Firstchangepass';
+import Viewresponse from './2prof/Viewresponse';
 
 
 
@@ -88,6 +89,8 @@ function App() {
                         <Route path='sourcematerials' element={<SourceMaterials/>} />
                         <Route  path='attendance' element={<Attendance/> }/>
                         <Route path= 'activity/activityId' element={<ClassActivity/>} />
+                        <Route path='activity/activityId/response' element ={<Viewresponse/>}/>
+                      
                         <Route path='messages' element={<MessagesPage/>} />  
                         <Route path= 'settings' element={<ClassSettings/>} />        
                   </Route>

@@ -108,25 +108,24 @@ function Archived() {
       <div className='flex '>
       <h4> Archived classes</h4>
      <div className='marginleftauto'>
-
+      {userinfo.user.user_type=== "prof" && 
+      <div>
+        
      {!selectclasses ?   <button className='commonbutton secondary lighttext' onClick={()=>setselectclasses(true)}> <h4>select classes </h4></button>
       :<button className='commonbutton secondary lighttext' onClick={()=>{setselectclasses(false)}}> <h4> Cancel </h4></button>}
-    
+      </div> 
+      }
+
      </div>
     
     </div>
-
-   
-
         <div className="row">
 
           {myarchive !== undefined && myarchive.map((element, key)=>(
               <Classpanel  key ={key} classitem = {element}/> 
 
           ))}
-           
-      
-            
+        
         </div>
       </div></div>
 
