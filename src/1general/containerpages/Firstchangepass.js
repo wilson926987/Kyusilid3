@@ -9,65 +9,56 @@ function Firstchangepass() {
   const [confirmnewpass, setconfirmnewpass]= useState();
   const {userinfo , setuserinfo } = useContext(userInfoContext);
   const navigate = useNavigate();
+  const [countdown, setCountdown] = useState(0);
+
+
 
 
   useEffect(()=>{
-    if(userinfo === null){
+    console.log(JSON.stringify(userinfo))
+
+    if(userinfo.user.first_login === 0){
       navigate('/')
     }
-
-    if(userinfo!== undefined && userinfo.user !== undefined &&  userinfo.user.first_login ===0){
-      navigate('/')
-
-    }
-  },[userinfo])
+  },[])
 
 
 
 
-  const handlechangepass = async(e)=>{
+  const handlechangepass = (e) => {
     e.preventDefault();
-
-    if((newpass !== undefined && newpass.length <6) || (newpass !== undefined && newpass.length <6)){
-      alert("password minimum length is 6")
-      return 
+  
+    if (newpass === confirmnewpass && newpass !== undefined && confirmnewpass !== undefined) {
+  
+      const temp = {
+        "acc_id": userinfo.user.acc_id,
+        "acc_password": newpass
+      }
+  
+      axios.post('https://api.kyusillid.online/api/reset-pass', temp)
+        .then(() => {
+          console.log("password successfully changed");
+          setnewpass("");
+          setconfirmnewpass("");
+          const confirmLogout = window.confirm("Your password has been change successfully, You will now be redirected to the login page. Click OK to continue.");
+          if (confirmLogout) {
+            window.location.href = '/';
+          }
+        })
+        .catch()
     }
-
-    if(newpass!== confirmnewpass){
+  
+    if ((newpass !== undefined && newpass.length < 6) || (newpass !== undefined && newpass.length < 6)) {
+      alert("password minimum length is 6")
+      return
+    }
+  
+    if (newpass !== confirmnewpass) {
       alert("passwords must match")
       return
     }
-    
-
-    if(userinfo!== undefined &&  newpass === confirmnewpass && newpass !== undefined && confirmnewpass !== undefined){
-     
-      const temp = {
-        "acc_id" : userinfo.user.acc_id,
-        "acc_password" : newpass
-      }
-
-   
-      await axios.post('https://api.kyusillid.online/api/reset-pass' , temp).then(
-        alert('password successfully changed')
-      ).then(
-        setuserinfo()
-      ).then(
-        navigate('/')
-      ).catch()
-     
-    }
-   
- 
-   
-   
-   
-
- 
   }
-
-
-
-
+  
   
 
   return (
