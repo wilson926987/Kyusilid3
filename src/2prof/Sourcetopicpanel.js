@@ -9,7 +9,7 @@ function Sourcetopicpanel({sourcetopicitem}) {
   const {currentclass} = useContext(currentclassContext)
 
   useEffect(()=>{
-    console.log("module source :" + sourcetopicitem.topic_id)
+
     axios.get('https://api.kyusillid.online/api/get-activitylist/' + sourcetopicitem.topic_id)
     .then(response => {
       setClassActivitylist(response.data)

@@ -66,7 +66,9 @@ function Classespage() {
           </thead>
           <tbody>
 
-          {filteredList.map((item, key) => (
+          {filteredList.filter(
+            item1 => item1.yearlvl === yearlistfilter
+          ).map((item, key) => (
             <tr key={key}>
               <td>{item.classes_id}</td>
               <td>{item.yearsection}</td>
@@ -74,6 +76,7 @@ function Classespage() {
               <td>{item.profname}</td>
               <td>{item.schedule}</td>
               <td>{item.studentcount}</td>
+              <td>{item.yearlvl}</td>
               <td> <button className="secondary lighttext commonbutton" onClick={() => {setsampleclassid(item); navigate('/kyusilidAdmin/department/sections/samplesection') }}>Class Info</button></td>
             </tr>
           ))}

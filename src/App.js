@@ -56,6 +56,9 @@ import ClassSettings from './1general/containerpages/ClassSettings';
 import AdminCreateActivity from './4admin/AdminCreateActivity';
 import Firstchangepass from './1general/containerpages/Firstchangepass';
 import Viewresponse from './2prof/Viewresponse';
+import Updatelist from './4admin/Updatelist';
+import Updatelistproff from './4admin/Updatelistproff';
+import Updatedliststud from './4admin/Updatedliststud';
 
 
 
@@ -118,6 +121,9 @@ function App() {
                   <Route  path='createclass' element={<CreateClass/>}/>
                   <Route  path='createproff' element={<Createproff/>}/>
                   <Route  path='createstud' element={<Createstud/>}/>
+                  <Route path = 'updatelist' element={<Updatelist/>} />
+                  <Route path='updatelistproff' element={<Updatelistproff/>}></Route>
+                  <Route path='updateliststud' element={<Updatedliststud/>}></Route>
               
                 </Route>
                 <Route path='adminlog' element={<Adminlog/>}/>

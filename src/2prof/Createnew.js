@@ -80,7 +80,6 @@ function Createnew() {
   const [allowedit, setallowedit] = useState(false);
   const [allowlate, setallowlate] = useState(true)
   const [formduration, setformduration] = useState();
-  const [points, setpoints] = useState(100);
 
   
   const Postoptions = [
@@ -185,7 +184,7 @@ async function createActivity(){
     'schedule' : postdate,
     'postschedtype' : postscheduletype,
     'scheduleoffset' : schedoffset, 
-    'points' : points
+    'points' : 100
   }
 
   await axios.post('https://api.kyusillid.online/api/createactivity' , newtopicitem)
@@ -412,8 +411,6 @@ const handlecreateactivity=()=>{
                                 <input type="checkbox" name='' id='allowlate'  defaultChecked={allowlate} onChange={(e)=> {setallowlate(e.target.checked)}}/> <label htmlFor="allowlate"><b>ALLOW LATE SUBMISSION</b></label> <br />
                               
 
-                              <div className='flex margintop12'> <h4>Points</h4>  <input type="text" defaultValue={points} onChange={(e)=>{setpoints(e.target.value)}} className='commontextbox col-lg-4 primaryborder'  />
-</div>
                                
                               
                                <br />

@@ -1,22 +1,34 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { FcEmptyTrash } from "react-icons/fc";
-import { FiEdit } from "react-icons/fi";
-import { accountlistContext } from '../Globalcontext';
+import React, { useContext, useState } from 'react'
 
+import { accountlistContext , currentdeptContext} from '../Globalcontext';
+import axios from 'axios';
 
 function Accountsstud() {
 
-  const {accountlist} = useContext(accountlistContext);
+  const {accountlist , setaccountlist} = useContext(accountlistContext);
+  const {currentdept} = useContext(currentdeptContext)
+
+  const handleativate= async (id , active)=>{
+    const temp ={
+      "acc_id" : id,
+      "active" : active,
+      "dep_id" : currentdept.dep_id
+    }
 
 
-  
- useEffect(()=>{
-    console.log(accountlist)
- },[])
+    await axios.post('https://api.kyusillid.online/api/setuseractivate' , temp).then(
+      response =>{
+        setaccountlist(response.data);
+        console.log(response.data)
 
- 
+      }
+    ).catch();
 
-  const [showTextbox, setShowTextbox] = useState(false);
+  }
+
+
+
+
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedRow, setSelectedRow] = useState(null);
 
@@ -26,9 +38,7 @@ function Accountsstud() {
   };
 
 
-  const handleView = (index) => {
-    setShowTextbox(!showTextbox);
-  };
+
 
 
   return (
@@ -53,24 +63,7 @@ function Accountsstud() {
       
       
 
-      {showTextbox && (
-  <div className='Editext'>
-    <input className='Inputext' type="text" />
-    <button 
-    className='Savee'
-    onClick={() => {
-      setShowTextbox(false);
-      setSelectedRow(null);
-    }}>Save</button>
-    <button 
-    className='Cancel'
-    onClick={() => {
-      setShowTextbox(false);
-      setSelectedRow(null);
-    }}>Cancel</button>
-  </div>
-  
-)}
+
    
  <div className='tertiary borderradius-lg padding12'>
      
@@ -106,19 +99,16 @@ function Accountsstud() {
             <td data-label="Last Name">{item.name}</td>
 
             <td>
-              <button className="Dele buttonstud2">
-                <FcEmptyTrash /> Delete
-              </button>
+            {item.active ? 
+                  <button className='commonbutton secondary lighttext' onClick={()=>{handleativate( item.acc_id , 0) }}> Active </button>
+                  :
+                  <button className='commonbutton background darktext' onClick={()=>{handleativate( item.acc_id , 1)}}> Deactivated </button>
+                }
 
-              <button
-                className="Edit margin10l buttonstud1"
-                onClick={() => {
-                  setSelectedRow(index);
-                  setShowTextbox(true);
-                }}
-              >
-                <FiEdit /> Edit
-              </button>
+             
+            
+
+             
             </td>
           </tr>
         ))}

@@ -79,7 +79,8 @@ function ClassActivity() {
       "classes_id" : currentclass.moduleSource
     }
 
-    console.log(JSON.stringify(temp))
+   
+    
 
     await axios.post("https://api.kyusillid.online/api/posttomodule", temp).then(
       response=> console.log(response.data)
@@ -117,6 +118,7 @@ function ClassActivity() {
 
 
   useEffect(()=>{
+
     if(currentactivity===undefined){
         navigate('/')
     }

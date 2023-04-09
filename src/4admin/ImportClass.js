@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-function ImportClass() {
+import { useNavigate } from 'react-router-dom';
+
+function ImportClass({setupdatelist , setcreateclassmodal}) {
   const [file, setFile] = useState(null);
 
   function handleFileChange(event) {
     setFile(event.target.files[0]);
   }
+  const navigate = useNavigate();
 
   function handleImportClick() {
     const formData = new FormData();
@@ -14,9 +17,14 @@ function ImportClass() {
 
     axios.post('https://api.kyusillid.online/api/import-class', formData)
       .then(response => {
-        console.log(response.data)
+      
         if (response.data.success) {
           alert('Import successful!');
+          setupdatelist(response.data.updatelist);
+          setcreateclassmodal(false);
+          navigate('updatelist')
+          
+   
         }
       })
       .catch(error => {

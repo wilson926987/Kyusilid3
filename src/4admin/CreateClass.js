@@ -1,17 +1,28 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Dropdown from '../1general/formcomponents/Dropdown';
 import Textbox from '../1general/formcomponents/Textbox';
+import { currentdeptContext, subjectlistContext} from '../Globalcontext';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function CreateClass() {
+  const {currentdept} = useContext(currentdeptContext)  
+  const {subjectlist} = useContext(subjectlistContext)
+  const [subjectoptions, setsubjectoptions] = useState([]);
+  const navigate = useNavigate();
+
+
+    useEffect(()=>{
+    if(subjectlist !== undefined){
+      setsubjectoptions(subjectlist.map(item=>({
+        'value' : item.sub_id,
+        'label' : item.sub_code
+      })))
+    }
+    },[subjectlist])
+
  
-    const yearoption = [
-        {'value' : 1 ,'label' : 1},
-        {'value' : 2 ,'label' : 2},
-        {'value' : 3 ,'label' : 3},
-        {'value' : 4 ,'label' : 4}
-
-    ]
-
+ 
     const dayoption = [
         {'value' : 1 , 'label': 'Monday'},
         {'value' : 2, 'label': 'Tuesday'},
@@ -22,6 +33,21 @@ function CreateClass() {
 
     ]
 
+    const section =[
+      {'value' : 1 , 'label' : "A"},
+      {'value' : 2 , 'label' : "B"},
+      {'value' : 3 , 'label' : "C"},
+      {'value' : 4 , 'label' : "D"},
+      {'value' : 5 , 'label' : "E"},
+      {'value' : 6 , 'label' : "F"},
+      {'value' : 7 , 'label' : "G"},
+      {'value' : 8 , 'label' : "H"},
+      {'value' : 9 , 'label' : "I"},
+      {'value' : 10 , 'label' : "J"},
+      {'value' : 11 , 'label' : "K"}
+
+    ]
+
     const [classcomment, setclasscomment] = useState();
     const [schedfrom1, setschedfrom1] = useState();
     const [schedfrom2, setschedfrom2] = useState();
@@ -29,19 +55,21 @@ function CreateClass() {
     const [schedto1, setschedto1] = useState();
     const [schedto2, setschedto2] = useState();
     
-    const [sessionname1, setsessionname1] = useState();
+    const [sessionname1, setsessionname1] = useState("Lecture");
     const [sessionname2, setsessionname2] = useState();
-    const [yearlvl, setyearlvl] = useState(yearoption[0].value);
-    const [day, setday] = useState(dayoption[0].value);
+
+    const [day, setday] = useState(1);
+    const [selectedsection, setsection]  = useState();
+    const [selectedsub,setselectedsub] = useState();
 
 
-    const handleSubmit = (e)=>{
+    const handleSubmit = async(e)=>{
         e.preventDefault();
 
         const temp = {
-            "dep_id": 1,
-            'sec_id' :1,
-            'sub_id' :1,
+            "dep_id": currentdept.dep_id,
+            'sec_id' :selectedsection,
+            'sub_id' :selectedsub,
             'day_id' :day,
             'sched_from' :schedfrom1 ,
             'sched_to' : schedto1,
@@ -50,12 +78,25 @@ function CreateClass() {
             'sched_from2' :schedfrom2,
             'sched_to2' : schedto2 ,
             'moduleSource' :5,
-            'yearlvl' : yearlvl
+          
 
-
-   
         }
-        console.log(JSON.stringify(temp));
+
+
+  
+    await axios.put('https://api.kyusillid.online/api/createclass' , temp).then(
+      response=> {console.log(response.data) ;
+                 alert("Sucessfully added class") ;
+                 
+                })
+      .catch(
+        
+      );
+
+      navigate("/kyusilidAdmin/department")
+
+    
+
     }
     
 
@@ -69,12 +110,21 @@ function CreateClass() {
         <form onSubmit={handleSubmit}>
         <div className="row">
 
-<div className="CD col-lg-7">
-  <Textbox 
-    value={classcomment}
-    handleChange={setclasscomment}
-    placeholdervalue={'Class description'}
-  />
+<div className="CD col-lg-7 margintop12">
+        Subject
+        <Dropdown
+                                options={subjectoptions}
+                                onChangeHandler= {setselectedsub}
+                                mainClass= 'dropdownmain primary borderradius-md'
+                                itemClass= 'dropdownitem'
+                             
+                                controlClass='dropdowncontrol'
+                                menuClass='dropdownmenu primary'
+                                controlActiveClass='dropdowncontrolactive'
+                                mainActiveClass='dropdownmain-active'
+                              
+                            />  
+ 
 </div>
 <div className="CD col-lg-6">
 <Textbox 
@@ -102,12 +152,13 @@ function CreateClass() {
 <div className="Schedd1 ">
    sched to 2 <input type="time"   onChange={(e)=>{setschedto2(e.target.value)}}/>
 </div>
-<div className="col-lg-6">
-   year level  
+
+<div className="col-lg-2">
+    Section 
    <Dropdown
-                                options={yearoption}
-                                onChangeHandler= {setyearlvl}
-                                mainClass= 'dropdownmain primary    '
+                                options={section}
+                                onChangeHandler= {setsection}
+                                mainClass= 'dropdownmain primary borderradius-md'
                                 itemClass= 'dropdownitem'
                              
                                 controlClass='dropdowncontrol'
@@ -117,8 +168,10 @@ function CreateClass() {
                               
                             />  
 </div>
-<div className="CD col-lg-6">
-   day
+
+
+<div className="CD col-lg-3">
+   Day
    <Dropdown
                                 options={dayoption}
                                 onChangeHandler= {setday}

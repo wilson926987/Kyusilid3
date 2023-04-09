@@ -1,13 +1,13 @@
 import axios from 'axios'
 import React, { useState, useEffect, useContext } from 'react'
 import { Outlet , useNavigate , useLocation, useOutletContext} from 'react-router-dom'
-import {subjectmoduleContext, adminSampleClassContext, adminYearfilterContext, accountlistContext, adminclasslistContext, subjectlistContext, currentdeptContext , userInfoContext , departmentsContext , deptInfoContext , subjectfilterContext} from '../Globalcontext'
+import {updatelistContext, subjectmoduleContext, adminSampleClassContext, adminYearfilterContext, accountlistContext, adminclasslistContext, subjectlistContext, currentdeptContext , userInfoContext , departmentsContext , deptInfoContext , subjectfilterContext} from '../Globalcontext'
 import {BiEdit} from 'react-icons/bi'
 import {FaUpload} from 'react-icons/fa'
 import ImportClass from './ImportClass'
 import ImportProfessor from './ImportProfessor'
 import ImportStudent from './ImportStudent'
-import ExcelImporter from './ExcelImporter'
+import { ContentChild } from '@angular/core'
 
 
 function Department() {
@@ -30,28 +30,33 @@ function Department() {
     const [yearlistfilter, setyearlistfilter] = useState();
     const [sampleclassid, setsampleclassid] = useState();
     const [topicid, settopicsid] = useState();
+    const [updatelist, setupdatelist] = useState();
+    
 
 
 
     useEffect(()=>{
      if(currentdept != undefined){
+      axios.get('https://api.kyusillid.online/api/getsubjectlist/'+ currentdept.dep_id  ).then(response1 =>{
+        setsubjectlist(response1.data);
+        console.log(response1.data)
+      }).catch();
+
       axios.get('https://api.kyusillid.online/api/getdeptinfo/' + currentdept.dep_id ).then(response =>{  
         setdepartmentinfo(response.data)  
       }).catch(); 
 
-      axios.get('https://api.kyusillid.online/api/getsubjectlist/'+ currentdept.dep_id  ).then(response =>{
-        setsubjectlist(response.data)
-      }).catch();
-
+  
       axios.get('https://api.kyusillid.online/api/getclasslist2/' + currentdept.dep_id ).then(
-        response=>setadminclasslist(response.data)
+        response2=>setadminclasslist(response2.data)
       ).catch();
 
       axios.get('https://api.kyusillid.online/api/accountlist/' +currentdept.dep_id).then(
-        response=> setaccountlist(response.data)
+        response3=> setaccountlist(response3.data)
       ).catch();
       
      }
+    
 
     } , [currentdept])
 
@@ -67,12 +72,6 @@ function Department() {
     return e===currentpage ? true : false;
 
  }
-
- useEffect(() => {
-  console.log(yearlistfilter)
-}, [yearlistfilter])
-
-
 
 
 
@@ -152,11 +151,14 @@ function Department() {
           <subjectlistContext.Provider value = {{subjectlist}}>
             <subjectfilterContext.Provider value = {{subjectfilter}}>
             <adminclasslistContext.Provider value={{adminclasslist}}>
-              <accountlistContext.Provider value={{accountlist}}>
+              <accountlistContext.Provider value={{accountlist , setaccountlist}}>
                 <adminYearfilterContext.Provider value={{yearlistfilter}}>
                   <adminSampleClassContext.Provider value={{sampleclassid , setsampleclassid}}>
                     <subjectmoduleContext.Provider  value={{topicid, settopicsid}}>
-                    <Outlet />
+                      <updatelistContext.Provider value={{updatelist, setupdatelist}}>
+                      <Outlet />
+                      </updatelistContext.Provider>
+                 
                     </subjectmoduleContext.Provider>       
                   </adminSampleClassContext.Provider>
                 </adminYearfilterContext.Provider>
@@ -182,7 +184,7 @@ function Department() {
           <div className='sideoption borderradius-md'onClick={()=>{navigate('createclass') ; setcreateclassmodal(false) }} > <BiEdit/><h2>ADD CLASS MANUALLY</h2></div>
           <div className='sideoption borderradius-md' onClick={()=>{setupclass(true)}}> <FaUpload/><h2>UPLOAD FILE</h2></div></> 
           :
-          <div><ImportClass/></div>
+          <div><ImportClass setupdatelist = {setupdatelist} setcreateclassmodal= {setcreateclassmodal}/></div>
           
         }
       </div>
@@ -202,7 +204,7 @@ function Department() {
           <div className='sideoption borderradius-md' onClick={ ()=>{setupstud(true)}}> <FaUpload/><h2>Upload file</h2></div>
           </>
           :
-          <div><ImportStudent/></div>
+          <div><ImportStudent setupdatelist={setupdatelist} setcreatestudmodal={setcreatestudmodal}/></div>
           }
       </div>
           
@@ -220,7 +222,7 @@ function Department() {
         <>  <div className='sideoption borderradius-md'onClick={()=>{navigate('createproff') ; setcreateproffmodal(false) }} > <BiEdit/><h2>ADD CLASS MANUALLY</h2></div>
         <div className='sideoption borderradius-md' onClick={()=>{setupproff(true) }}> <FaUpload/><h2>Upload file</h2></div></>
         :
-        <div><ImportProfessor/></div>
+        <div><ImportProfessor  setupdatelist={setupdatelist} setcreateproffmodal={setcreateproffmodal}/></div>
 }
       </div>
           

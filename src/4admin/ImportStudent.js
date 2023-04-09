@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-function ImportStudent() {
+function ImportStudent({setupdatelist, setcreatestudmodal}) {
   const [file, setFile] = useState(null);
+  const navigate =useNavigate();
 
   function handleFileChange(event) {
     setFile(event.target.files[0]);
@@ -16,6 +18,9 @@ function ImportStudent() {
       .then(response => {
         if (response.data.success) {
           alert('Import successful!');
+          setupdatelist(response.data.updatelist);
+          setcreatestudmodal(false);
+          navigate('updateliststud')
         }
       })
       .catch(error => {

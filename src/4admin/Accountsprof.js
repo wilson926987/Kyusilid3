@@ -1,10 +1,11 @@
 import React, { useContext, useState } from 'react';
 import { FcEmptyTrash } from 'react-icons/fc';
 import { FiEdit } from 'react-icons/fi';
-import { accountlistContext } from '../Globalcontext';
+import { accountlistContext , currentdeptContext} from '../Globalcontext';
+import axios from 'axios';
 
 function Accountsprof() {
-  const { accountlist } = useContext(accountlistContext);
+  const { accountlist , setaccountlist} = useContext(accountlistContext);
 
   const [showTextbox, setShowTextbox] = useState(false);
   const [selectedRow, setSelectedRow] = useState(null);
@@ -13,6 +14,7 @@ function Accountsprof() {
   const handleView = (index) => {
     setShowTextbox(!showTextbox);
   };
+  const {currentdept} = useContext(currentdeptContext)
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
@@ -21,6 +23,24 @@ function Accountsprof() {
   const filteredProfs = accountlist.proflist.filter((prof) =>
     prof.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  const handleativate= async (id , active)=>{
+    const temp ={
+      "acc_id" : id,
+      "active" : active,
+      "dep_id" : currentdept.dep_id
+    }
+
+
+    await axios.post('https://api.kyusillid.online/api/setuseractivate' , temp).then(
+      response =>{
+        setaccountlist(response.data);
+        console.log(response.data)
+
+      }
+    ).catch();
+
+  }
 
   return (
     <div className="">
@@ -36,34 +56,13 @@ function Accountsprof() {
         />
       </div>
 
-      {showTextbox && (
-        <div className="Editext">
-          <input className="Inputext" type="text" />
-          <button
-            className="Savee"
-            onClick={() => {
-              setShowTextbox(false);
-              setSelectedRow(null);
-            }}
-          >
-            Save
-          </button>
-          <button
-            className="Cancel"
-            onClick={() => {
-              setShowTextbox(false);
-              setSelectedRow(null);
-            }}
-          >
-            Cancel
-          </button>
-        </div>
-      )}
+   
 
       <div className="tertiary borderradius-lg padding12">
         <table class="table col-lg-12">
           <thead>
             <tr>
+              <th>Faculty ID</th>
               <th>Name</th>
               <th>Action</th>
             </tr>
@@ -75,21 +74,24 @@ function Accountsprof() {
           ).map((item, index) => (
               
               <tr key={index}>
+                <td data-label="Faculty">{item.faculty_id}</td>
                 <td data-label="Name">{item.name}</td>
                 <td>
-                  <button className="Dele buttonstud2">
-                    <FcEmptyTrash /> Delete
-                  </button>
 
-                  <button
-                    className="Edit margin10l buttonstud1"
-                    onClick={() => {
-                      setShowTextbox(true);
-                      setSelectedRow(index);
-                    }}
-                  >
-                    <FiEdit /> Edit
-                  </button>
+
+
+                
+
+                  {item.active ? 
+                  <button className='commonbutton secondary lighttext' onClick={()=>{handleativate( item.acc_id , 0) }}> Active </button>
+                  :
+                  <button className='commonbutton background darktext' onClick={()=>{handleativate( item.acc_id , 1)}}> Deactivated </button>
+                }
+
+                  
+                 
+
+                 
                 </td>
               </tr>
             ))}

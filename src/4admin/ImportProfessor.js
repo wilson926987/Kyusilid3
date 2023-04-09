@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-function ImportProfessor() {
+function ImportProfessor({setupdatelist, setcreateproffmodal}) {
   const [file, setFile] = useState(null);
+  const navigate = useNavigate();
 
   function handleFileChange(event) {
     setFile(event.target.files[0]);
@@ -17,6 +19,9 @@ function ImportProfessor() {
       console.log(response.data)
       if (response.data.success) {
         alert('Import successful!');
+        setupdatelist(response.data.updatelist);
+        setcreateproffmodal(false);
+        navigate('updatelistproff')
       }
     })
     .catch(error => {
