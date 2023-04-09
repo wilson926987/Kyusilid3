@@ -13,12 +13,14 @@ function Container() {
   const {userinfo} = useContext(userInfoContext);
   const [myclasses, setmyclasses] = useState();
   const [myarchive, setmyarchive] = useState();
+  const [currentclass, setcurrentclass] = useState()
 
 
-
-
+  const navigate = useNavigate();
+ 
   useEffect(() => {
     filldata(); 
+    console.log(userinfo.user.first_login)
   
     if(userinfo.user.first_login ===1){
     
@@ -28,7 +30,7 @@ function Container() {
     if(userinfo.usertype === 'admin'){
       navigate('/kyusilidAdmin');
     }
-     //this should fix it
+    
   },[userinfo]);
 
 
@@ -36,8 +38,7 @@ async function filldata(){
   await axios.get('https://api.kyusillid.online/api/getclasslist/' + userinfo.user.acc_id)
     .then(response => {
       setmyclasses(response.data);
-    
-     
+
     })
     .catch(error => {
       console.log(error);
@@ -54,15 +55,7 @@ async function filldata(){
 
 }
 
-  const [currentclass, setcurrentclass] = useState()
-
-
-  const navigate = useNavigate();
-  useEffect(()=>{
-    if(userinfo.usertype === 'admin'){
-      navigate('/kyusilidAdmin');
-    }
-  })
+ 
 
 
   return (

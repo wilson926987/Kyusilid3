@@ -15,9 +15,9 @@ function Firstchangepass() {
 
 
   useEffect(()=>{
-    console.log(JSON.stringify(userinfo))
-
-    if(userinfo.user.first_login === 0){
+  
+ 
+    if( (userinfo !== undefined && userinfo.user.first_login ===0)  || userinfo.undefined){
       navigate('/')
     }
   },[])
