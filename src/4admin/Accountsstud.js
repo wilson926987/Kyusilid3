@@ -72,18 +72,12 @@ function Accountsstud() {
   
 )}
    
- <div className='tertiary borderradius-lg padding12'>
-     
- 
-      
-
+ <div className='persontable tertiary borderradius-lg padding12'>
 
       <table class="table col-lg-12">
         
-        <thead>
-          
-          
-          
+        <thead className='primary'>
+
           <tr>
             <th>Student Number</th>
            <th>Name</th>

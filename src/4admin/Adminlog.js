@@ -43,15 +43,7 @@ function Adminlog() {
   };
   return (
     <div>
-      
-      <div class="search">
-        <input
-          type="text"
-          placeholder="Search by name"
-          name="search"
-          onChange={handleSearch}
-        />
-      </div>
+
 
       {showTextbox && (
   <div className='Editext'>
@@ -74,8 +66,18 @@ function Adminlog() {
     }}>Cancel</button>
   </div>
 )}
-      <table class="table">
-        <thead>
+<div className='persontable tertiary borderradius-lg padding12'>   
+<div class="search">
+<input
+  type="text"
+  placeholder="Search by name"
+  name="search"
+  onChange={handleSearch}
+/>
+</div>
+
+      <table class="table width100">
+        <thead className='primary'>
           <tr>
             <th>Name</th>
             <th>date</th>
@@ -96,7 +98,7 @@ function Adminlog() {
 
         </tbody>
       </table>
-
+</div>
   
     </div>
   );

@@ -1,5 +1,5 @@
 import React, { useContext,  useState } from 'react'
-import kyusilidlogo from '../assets/images/Kyusilid.jpg'
+import kyusilidlogo from '../assets/images/Kyusilid.png'
 import {MdSpaceDashboard , MdBrightness1} from 'react-icons/md'
 import { themeContext , departmentsContext, currentdeptContext } from '../Globalcontext'
 import {BiChevronsLeft ,BiChevronsRight} from 'react-icons/bi'

@@ -41,9 +41,9 @@ function Classmarks() {
         />
       </div>
 
-      <table class="table">
+      <table className="table">
         <thead>
-          <tr>
+          <tr className='primary'>
             <th>Name</th>
             <th>Activities</th>
             <th>Assignment</th>

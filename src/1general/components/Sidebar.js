@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import kyusilidlogo from '../../assets/images/Kyusilid.jpg'
+import kyusilidlogo from '../../assets/images/Kyusilid.png'
 import {MdSpaceDashboard} from 'react-icons/md'
 import {FaBookReader, FaDove} from 'react-icons/fa'
 import { themeContext } from '../../Globalcontext'

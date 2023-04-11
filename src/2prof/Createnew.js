@@ -214,11 +214,12 @@ const handlecreateactivity=()=>{
   return (
     <div>
                 <div className='row margintop12'>
-                        <div className="col-lg-7 createactivitytitle">
-
+                        <div className="col-lg-7 vertical createactivitytitle ">
+                          
                           {activitytype !== 'Attendance' ?
                            <div>
-                                   
+                         
+
                           <p className="smallfont">TITLE</p><input type="text"  disabled={sourcematerial!==undefined} className='primaryborder' placeholder='Title' defaultValue={posttitle}  onChange={(e)=>{setposttitle(e.target.value)}}/> <br />
                            <br />
                            <p className="smallfont">DESCRIPTION</p><textarea name="" id="" cols="30" rows="6" className='primaryborder'  value={description} placeholder='Description' onChange={(e)=>{setdescription(e.target.value)}}></textarea><br />
@@ -259,7 +260,6 @@ const handlecreateactivity=()=>{
                           }
                                           
                         </div>
-
                         <div className="col-lg-5 createactivitytitle">
                           <div>
                             <div>

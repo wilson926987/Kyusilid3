@@ -32,13 +32,13 @@ function Classespage() {
       <div className="flex">
         <div>
           <h4>Active Classes</h4>
-          <p className='smallfont'> Last Updated : September 2  by Juan dela Cruz</p>
+          <p className='smallfont'>Last Update: </p>
         </div>
 
         <div className='search'>
         <input
         type="text"
-        placeholder="Search by name or subject"
+        placeholder="Search"
         name="search"
         value={searchValue}
         onChange={handleSearchChange}

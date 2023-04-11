@@ -84,12 +84,12 @@ function AdminCreateActivity() {
     <div className='tertiary borderradius-lg padding12' >
        <h4>Creating a new activity for  #</h4>
 
-       <div className='margintop12 admincreateactivity padding12'>
+       <div className=' margintop12 admincreateactivity padding12'>
 
         <form onSubmit={handleSubmit}>
 
           <div className="row">
-            <div className="col-lg-6">
+            <div className="col-lg-6 vertical">
               <div className='createactivitytitle'>
                   <p className="smallfont">TITLE</p><input type="text"   className='primaryborder' placeholder='title' onChange={e=>{settitle(e.target.value)}}/> 
               </div>

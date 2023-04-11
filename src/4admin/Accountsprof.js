@@ -60,10 +60,10 @@ function Accountsprof() {
         </div>
       )}
 
-      <div className="tertiary borderradius-lg padding12">
+      <div className="persontable tertiary borderradius-lg padding12">
         <table class="table col-lg-12">
           <thead>
-            <tr>
+            <tr className='primary'>
               <th>Name</th>
               <th>Action</th>
             </tr>

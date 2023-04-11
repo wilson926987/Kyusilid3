@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useContext , useState, useEffect} from 'react'
 import { userInfoContext } from '../../Globalcontext'
-import logoiconimage from '../../assets/images/Kyusilid.jpg'
+import logoiconimage from '../../assets/images/Kyusilid.png'
 import logoiconimage1 from '../../assets/images/avatarlogo.webp'
 
 
@@ -76,7 +76,7 @@ function Login() {
  
   return (
     <div className='Backgroundlog'>
-      <div className='logotext col-lg-5'>
+      <div className='logotext col-lg-5 '>
       <img src={logoiconimage} alt="" srcset="" className='avatar'/>
       <h1>QCU ONLINE CLASSROOM</h1>
       </div>
@@ -94,10 +94,9 @@ function Login() {
             
 
         <label> Password:<div className='errortext'>{passmessage}</div> </label>
+
             <input type="password" placeholder='password...' defaultValue ={password} onChange={handlePasswordChange}/>
-            
-           
-       
+
         <button type="submit" className='buttonsubmit secondary'>login
         </button>
 

@@ -1,5 +1,6 @@
 import React  from 'react'
 import axios from 'axios';
+import logoiconimage1 from '../../assets/images/avatarlogo.webp'
 import { userInfoContext } from '../../Globalcontext';
 import { useContext , useState , useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -64,17 +65,18 @@ function Firstchangepass() {
   return (
     <div>
       {userinfo !== null ?
-        <div className='Backgroundlog absolute'>
-     
-        <div className='resetpass1 primary borderradius-md'>
+        <div className='Backgroundlog'>
+      
+        <div className='resetpass1 primary'>
+        <img src={logoiconimage1} alt="" srcset="" className='avatar'/>
        <form action="" onSubmit={handlechangepass} >
-       <center><h1>UPDATE PASSWORD</h1></center>
+       <center><h1>Update Password</h1></center>
        <br></br>
          <input type='password'  className='editt' placeholder='New Password' onChange={(e)=>{setnewpass(e.target.value)}}/>
          <br></br>       
-         <input type='password'className='editt1' placeholder='Confirm Password' onChange={(e)=>{setconfirmnewpass(e.target.value)}}/>
+         <input type='password' className='editt1' placeholder='Confirm Password' onChange={(e)=>{setconfirmnewpass(e.target.value)}}/>
          <br></br>
-         <button className="secondary commonbutton lighttext col-lg-4"> Save</button>
+         <button className="secondary commonbutton lighttext"> Save</button>
        </form>
        </div>
  
