@@ -60,6 +60,9 @@ function CreateAnnouncementprof() {
     time = time.replace(':' , " ");
     const temp = time.split(" ")
         if(temp.length===3){
+
+
+
            return temp[1]
         }
         return 0;
@@ -94,17 +97,13 @@ function CreateAnnouncementprof() {
                         "an_content" : announcementcontent,
                         "acc_id" : userinfo.user.acc_id,
                         "classes_id" : selectedclass[x].value.classes_id,
-                        "created_at" : new Date(postdate).toISOString().slice(0, 19).replace('T', ' '),
                         "schedule" : posttype==='fixed' ? new Date(postdate).toISOString().slice(0, 19).replace('T', ' ') : setfuturedate(selectedclass[x].value.day_label, selectedclass[x].value.sched_from).toISOString().slice(0, 19).replace('T', ' ')
                     }
                     //    
-                    console.log(JSON.stringify(ggt)); 
+              
                 
                     await axios.post('https://api.kyusillid.online/api/add-announcement' , ggt)
-                    .then(response => {    
-                        console.log(response.data)   ;    
-                     
-                    })
+                    .then()
                     .catch(error => {
                       console.log(error);
                     });
@@ -208,8 +207,8 @@ function CreateAnnouncementprof() {
                 </div>
                 <form action="" onSubmit={(e)=>{saveAnnouncement(e)}}>
                 <div className='margintop12'>
-                <input type='text' className='commontextarea primaryborder' placeholder='Enter title...' onChange={(e)=>{setannouncementtitle(e.target.value)}} />
-                <textarea name="" id="" cols="30" rows="3" className='commontextarea primaryborder' placeholder='Enter content...' onChange={(e)=>{setannouncementcontent(e.target.value)}}></textarea>
+                <input type='text' className='commontextarea primaryborder' placeholder='Enter title...' required onChange={(e)=>{setannouncementtitle(e.target.value)}} />
+                <textarea name="" id="" cols="30" rows="3" required className='commontextarea primaryborder' placeholder='Enter content...' onChange={(e)=>{setannouncementcontent(e.target.value)}}></textarea>
   
             </div>
                     <div className="postannouncementfooter flex">

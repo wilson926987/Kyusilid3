@@ -96,13 +96,11 @@
     margin-top: 3%;
     text-align: center;
     width: 90%;
-    border-collapse: collapse;
+    border-radius: 5px;
     font-family: 'Century Gothic';
     overflow: scroll;
 }
 .table thead tr th { 
-    background-color: #6893ee;
-    border-radius: 20px;
     font-size: 16px;
 }
 .name{ 
@@ -114,7 +112,6 @@
     letter-spacing: 0.20px;
     opacity: 1;
     padding: 10px;
-    border-radius: 15px;
     vertical-align: top;
 }
 .table tbody tr td{ 
@@ -155,6 +152,18 @@
     text-align: center;
     border-color: #6893ee;
 }
+@media only screen and (max-width: 768px) {
+  .search {
+    margin-left: 0;
+    text-align: center;
+  }
+
+  .search input {
+    width: 100%;
+    max-width: 250px;
+    margin: 0 auto;
+  }
+}
 .flex .search1{ 
     margin-left: 30%;
     width: 250px;
@@ -176,6 +185,18 @@
   text-align: center;
   border-color: #6893ee;
   
+}
+@media only screen and (max-width: 768px) {
+  .search2 {
+    margin-left: 0;
+    text-align: center;
+  }
+
+  .search2 input {
+    width: 100%;
+    max-width: 250px;
+    margin: 0 auto;
+  }
 }
 .extra-textbox .GradeText{ 
     background-color: white;
@@ -700,7 +721,6 @@
     padding-left: 3px;
     height: 30px;
   }
-
 /*-----Profile------*/
   
 /*PROFILE PIC*/
@@ -709,27 +729,29 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100px;
-  width: 100px;
+  height: 90px;
+  width: 90px;
   border-radius: 50%;
   overflow: hidden;
   border: 1px solid grey;
-  margin-right: 50px;
-  margin-left: 20px;
+  margin-left: 80px;
+  /* margin-right: 40px;
+  margin-left: 20px; */
 }
 
 .profile-pic-div img{
-  transform: translateX(-8%);
+  transform: translateX(-10%);
+ 
 }
 #photo{
   height: 100%;
   width: 100%;
   object-fit: cover;
   align-self: center;
-  padding-left: 100px;  
+  padding-left: 50px;  
 }
 
-#uploadBtnn{
+/* #uploadBtnn{
   position: absolute;
   bottom: 0;
   left: 0;
@@ -742,34 +764,17 @@
   line-height: 40px;
   text-align: center;
   cursor: pointer;
-}
+} */
 #file{
   display: none;
 }
 
-.inputss{
+/* .inputss{
     z-index: 9980!important;
-}
-.profile-pic-div {
-    border-radius: 50%;
-    border: 1px solid grey;
-    height: 100px;
-    width: 100px;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+} */
+
   
-  .profile-pic-div img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    
-  }
-  
-  #file {
+  /* #file {
     position: absolute;
     top: 0;
     left: 0;
@@ -777,13 +782,14 @@
     height: 100%;
     opacity: 0;
     cursor: pointer;
-  }
+  } */
   
   #uploadBtn {
-    position: absolute;
+    padding-right:50px;
+    margin-left: 15px;
     bottom: 0;
     left: 0;
-    width: 100%;
+    width: 150px;
     height: 30px;
     line-height: 30px;
     font-size: 10px;
@@ -793,12 +799,29 @@
     font-family: sans-serif;
     cursor: pointer;
   }
-  
-.information-prof{
+
+  .UP-Button{
     margin-left: 5%;
+    
+  }
+  .UP-Button label{
+    margin-left: 0px;
+    width: 200px;
+    padding-left: 45px;
+    
+  }
+  .UP-Button button{
+    margin-left: 15px;
+    width: 165px;
+    padding-left: 15px;
+    
+  }
+.information-prof{
+    margin-left: 10%;
 }
+
 .accountinfo{
-  padding-left:100px;
+  padding-left:150px;
   }
 /*------ overview------*/
 /* Targeting the BsFillJournalBookmarkFill icon */
@@ -808,5 +831,9 @@
   width: 16px; /* Set the width of the icon to 16px */
   height: 16px; /* Set the height of the icon to 16px */
   margin-right: 0.5em; /* Add some space between the icon and the text */
+}
+.vertical{ 
+  border-right: 3px solid ;
+  border-radius: 5px;
 }
 

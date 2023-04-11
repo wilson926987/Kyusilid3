@@ -50,6 +50,16 @@ function ClassContainer() {
 
   }
 
+  const [sampleurl, setsampleurl] = useState()
+
+
+  
+ 
+
+  const goToURL =()=>{
+    window.open(sampleurl, '_blank' ,'noopener,noreferrer');
+  }
+
 
 
   const url = userinfo.user.usertype ==='prof' ?  'https://api.kyusillid.online/api/get-announcement/' : 'https://api.kyusillid.online/api/get-announcementforstudent/'
@@ -63,6 +73,10 @@ function ClassContainer() {
         
       }
 
+      setsampleurl(currentclass.class_link)
+
+
+
   },[location , currentclass])
 
 
@@ -73,7 +87,7 @@ function ClassContainer() {
       navigate('/')
     }
  
-    console.log(currentclass)
+  
 
    },[])
 
@@ -252,7 +266,7 @@ function toggleStudentselect(studentitem){
 
                   {currentclass.isarchived === 0 && userinfo.usertype === 'stud' && 
                         <div className="secondary lighttext navcreatenew borderradius-lg dbpanelmargin">
-                        <h4>Attendance</h4>
+                        <h4 onClick={goToURL}>Class Link</h4>
                         
                       </div>
                     }

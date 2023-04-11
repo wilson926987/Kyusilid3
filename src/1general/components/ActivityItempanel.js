@@ -27,6 +27,14 @@ function ActivityItempanel({actItem}) {
     });
   },[])
 
+  const localise = (iso)=>{
+ 
+    const date = new Date(`${iso}Z`);
+    const options = { month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
+    const formattedDate = date.toLocaleString(undefined, options);
+    return formattedDate;
+   }
+
 
   return (
      <React.Fragment>
@@ -53,8 +61,8 @@ function ActivityItempanel({actItem}) {
 
                     <div className="col-lg-4 ">                   
                       <div className=' activitypanelsub2 marginleftauto'>
-                        <p>Date posted : {actItem.date_schedule}</p>
-                        {actItem.activity_type!=='Material' ? <p>Date due: {actItem.date_due !== null ? actItem.date_due : 'no due date'}</p> : <p>&nbsp;</p>}   
+                        <p>Date posted : {localise(actItem.date_schedule)}</p>
+                        {actItem.activity_type!=='Material' ? <p>Date due: {actItem.date_due !== null ? localise(actItem.date_due) : 'no due date'}</p> : <p>&nbsp;</p>}   
                       </div>
                     </div>
               </div>

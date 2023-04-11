@@ -43,15 +43,12 @@ function Adminlog() {
   };
   return (
     <div>
-      
-      <div class="search">
-        <input
-          type="text"
-          placeholder="Search by name"
-          name="search"
-          onChange={handleSearch}
-        />
+
+      <div>
+        <h3>Admin Log</h3>
       </div>
+      
+
 
       {showTextbox && (
   <div className='Editext'>
@@ -78,8 +75,8 @@ function Adminlog() {
         <thead>
           <tr>
             <th>Name</th>
-            <th>date</th>
-            <th>In</th>
+            <th>Date and Time</th>
+            <th>Action</th>
   
 
           </tr>
@@ -87,9 +84,9 @@ function Adminlog() {
         <tbody>
         {filteredData !== undefined &&  filteredData.map((item, index) => (
   <tr key={index}>
-    <td data-label="Name">{item.firstname} {item.lastname}</td>
+    <td data-label="Name">{item.firstname} {item.middle} {item.lastname}</td>
     <td data-label="date">{item.created_at}</td>
-    <td data-label="In">{item.created_at_time}</td>
+    <td data-label="In">{item.action}</td>
   
   </tr>
 ))}

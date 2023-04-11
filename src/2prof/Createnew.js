@@ -187,8 +187,9 @@ async function createActivity(){
     'points' : 100
   }
 
-  await axios.post('https://api.kyusillid.online/api/createactivity' , newtopicitem)
 
+
+  await axios.post('https://api.kyusillid.online/api/createactivity' , newtopicitem)
   .then(response => {    
       console.log(response.data)  ;    
 
@@ -409,32 +410,10 @@ const handlecreateactivity=()=>{
                               <br />
                               <div>
                                 <input type="checkbox" name='' id='allowlate'  defaultChecked={allowlate} onChange={(e)=> {setallowlate(e.target.checked)}}/> <label htmlFor="allowlate"><b>ALLOW LATE SUBMISSION</b></label> <br />
-                              
-
-                               
-                              
+                  
                                <br />
-                               <p className="smallfont margintop12">LIMIT AVAILABILITY</p>
-
-                              <div className="flex">
-                              <Dropdown
-                                options={availabilitylist}
-                                onChangeHandler= {setavailability}
-                                mainClass= 'dropdownmain primary borderradius-md'
-                                itemClass= 'dropdownitem'
-                              
-                                controlClass='dropdowncontrol'
-                                menuClass='dropdownmenu primary'
-                                controlActiveClass='dropdowncontrolactive'
-                                mainActiveClass='dropdownmain-active'
-                                defaultValue={availabilitylist[0]} /> 
-
-                                <Infobox infocontent={'available only to students who filled up the attendance. Automatically creates an attendance form if there is none'} />
-                              </div>
-                             
-                              
-                               
-
+            
+ 
                                 <br />
 
                               </div>

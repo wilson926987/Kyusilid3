@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import Dropdown from '../1general/formcomponents/Dropdown';
 import Textbox from '../1general/formcomponents/Textbox';
-import { currentdeptContext, subjectlistContext} from '../Globalcontext';
+import { currentdeptContext, subjectlistContext, userInfoContext} from '../Globalcontext';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -9,6 +9,7 @@ function CreateClass() {
   const {currentdept} = useContext(currentdeptContext)  
   const {subjectlist} = useContext(subjectlistContext)
   const [subjectoptions, setsubjectoptions] = useState([]);
+  const {userinfo} = useContext(userInfoContext)
   const navigate = useNavigate();
 
 
@@ -78,8 +79,12 @@ function CreateClass() {
             'sched_from2' :schedfrom2,
             'sched_to2' : schedto2 ,
             'moduleSource' :5,
-          
 
+        }
+
+        const temp2 = {
+          "acc_id" : userinfo.user.acc_id,
+          "action" : "manual add class"
         }
 
 
@@ -87,7 +92,9 @@ function CreateClass() {
     await axios.put('https://api.kyusillid.online/api/createclass' , temp).then(
       response=> {console.log(response.data) ;
                  alert("Sucessfully added class") ;
-                 
+                 axios.put('https://api.kyusillid.online/api/adminlog', temp2).catch(error => console.log(error.data))
+
+
                 })
       .catch(
         

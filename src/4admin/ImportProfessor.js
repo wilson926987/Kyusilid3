@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { userInfoContext } from '../Globalcontext';
 
 function ImportProfessor({setupdatelist, setcreateproffmodal}) {
   const [file, setFile] = useState(null);
   const navigate = useNavigate();
+  const {userinfo} = useContext(userInfoContext)
 
   function handleFileChange(event) {
     setFile(event.target.files[0]);
@@ -13,6 +15,11 @@ function ImportProfessor({setupdatelist, setcreateproffmodal}) {
   function handleImportClick() {
     const formData = new FormData();
     formData.append('file', file);
+    const temp ={
+      "acc_id": userinfo.user.acc_id,
+      "action" : "professor list import"
+    }
+
 
     axios.post('https://api.kyusillid.online/api/import-prof', formData)
     .then(response => {
@@ -21,6 +28,12 @@ function ImportProfessor({setupdatelist, setcreateproffmodal}) {
         alert('Import successful!');
         setupdatelist(response.data.updatelist);
         setcreateproffmodal(false);
+
+        
+
+        axios.put('https://api.kyusillid.online/api/adminlog', temp).catch(error => console.log(error.data))
+
+
         navigate('updatelistproff')
       }
     })

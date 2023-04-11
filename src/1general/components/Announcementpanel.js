@@ -8,7 +8,7 @@ import {AiFillEdit} from 'react-icons/ai'
 
 function Announcementpanel({announcementitem , forcerefresh}) {
 
-  const  currentdatestamp =   new Date().toISOString().slice(0, 19).replace('T', ' ');
+  const  [currentdatestamp , setdatestamp] = useState();
   const [commentinput, setcommentinput] = useState();
   const {userinfo} = useContext(userInfoContext);
   const {setannouncementlist} = useContext(announcementlistContext);
@@ -17,6 +17,11 @@ function Announcementpanel({announcementitem , forcerefresh}) {
 
   const url = userinfo.user.usertype ==='prof' ?  'https://api.kyusillid.online/api/get-announcement/' : 'https://api.kyusillid.online/api/get-announcementforstudent/'
   
+
+  useEffect(()=>{
+    setdatestamp(new Date().toISOString().slice(0, 19).replace('T', ' '));
+    
+  },[])
  
  
   const postcomments = async (e)=>{
@@ -74,9 +79,17 @@ function Announcementpanel({announcementitem , forcerefresh}) {
       });
     
     }
-
-
   }
+
+
+ const localise = (iso)=>{
+ 
+  const date = new Date(`${iso}Z`);
+  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
+  const formattedDate = date.toLocaleString(undefined, options);
+  return formattedDate;
+ }
+
 
   const deletecomment = async(e)=>{
 
@@ -97,15 +110,11 @@ function Announcementpanel({announcementitem , forcerefresh}) {
 
 
 
-
-
-
- 
-
-
   return (
 
     <div>
+    
+       
           {announcementitem !== undefined ? 
             <div className="announcementpanel borderradius-md background margintop12">
             <div className="announcementheader">
@@ -113,7 +122,7 @@ function Announcementpanel({announcementitem , forcerefresh}) {
                   <h5>{ announcementitem !== undefined  && announcementitem.announcementitem.an_title}</h5>
               </div>
               <div className='flex'>
-                <h6>Created {announcementitem !== undefined  && announcementitem.announcementitem.created_at} by {announcementitem !== undefined  && announcementitem.announcementitem.firstname} { announcementitem !== undefined  && announcementitem.announcementitem.lastname}</h6>
+                <h6>Created: {announcementitem !== undefined  && localise(announcementitem.announcementitem.created_at)} by {announcementitem !== undefined  && announcementitem.announcementitem.firstname} { announcementitem !== undefined  && announcementitem.announcementitem.lastname}</h6>
                  {userinfo.user.usertype ==='prof' &&  <div className='marginleft12 relative'> <AiFillEdit onClick={()=>{setedditmenu(!editmenu)}}/>
                     {editmenu && <div className='absolute tertiary editmenu  borderradius-md'> <ul><li className='padding12 borderradius-md' onClick={()=>{ setedditmenu(!editmenu) ;confirmdelete(announcementitem.announcementitem.an_id) }}>delete</li></ul> </div>  }
                   </div>}
@@ -122,6 +131,8 @@ function Announcementpanel({announcementitem , forcerefresh}) {
         
             <div className='announcementcontent'>
                 {announcementitem !== undefined  && announcementitem.announcementitem.an_content}
+               
+              
             </div>
             <hr className='margintop12'/>
         
@@ -139,7 +150,7 @@ function Announcementpanel({announcementitem , forcerefresh}) {
                               
                               {commentitem.acc_id === userinfo.user.acc_id &&
                               <button className="commonbutton secondary lighttext commentbutton" onClick={()=>{deletecomment(commentitem.com_id)}}>delete</button>}
-                              <p className='smallfont marginleftauto'>{commentitem.date_posted}</p>
+                              <p className='smallfont marginleftauto'>{localise(commentitem.date_posted)}</p>
                             </div>
                             <div className='ellipsis '>
                                   {commentitem.com_content}
@@ -160,20 +171,21 @@ function Announcementpanel({announcementitem , forcerefresh}) {
         
         
         
-         <> 
+         <div> 
           <textarea name="Text1"  cols='1' rows="2"  placeholder='Enter comment' className='commontextarea tertiary primaryborder margintop12' value={commentinput} onChange={(e)=> setcommentinput(e.target.value)} ></textarea>
            
            <div className='sendbutton' onClick={postcomments}>   <MdSend/></div> 
         
-           </>
+           </div>
           
            :
            <div className='flex '>
               <div className='marginleftauto flex'>
              
-                <h6>To be posted at :  {announcementitem !== undefined  && announcementitem.announcementitem.schedule}</h6> 
+                <h6>To be posted at :  {announcementitem !== undefined  && localise(announcementitem.announcementitem.schedule)}</h6> 
                 <button className='commonbutton secondary borderradius-md lighttext' onClick={postnow}> Post now</button>
               
+    
               </div>
             
            </div>

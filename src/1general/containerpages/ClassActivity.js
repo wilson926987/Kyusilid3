@@ -128,6 +128,7 @@ function ClassActivity() {
 
      axios.get('https://api.kyusillid.online/api/getactivitystatus/' + currentactivity.activity_id + '/' + userinfo.user.acc_id).then(
       response=>{
+        console.log(response.data)
         if(response.data !== "unassigned"){
           setactivitystatus(response.data);
           setisassigned(true);
@@ -144,10 +145,69 @@ function ClassActivity() {
         }
       ).catch();
      }
-
-  
-
   },[currentactivity])
+
+
+
+
+const handIn = async(e)=>{
+
+  var temp = {
+    "assign_id" : e
+  }
+
+  await axios.post('https://api.kyusillid.online/api/handIn' , temp).then(
+    response=>{
+      console.log(response.data)
+    }
+  )
+
+  await axios.get('https://api.kyusillid.online/api/getactivitystatus/' + currentactivity.activity_id + '/' + userinfo.user.acc_id).then(
+    response=>{
+      console.log(response.data)
+      if(response.data !== "unassigned"){
+        setactivitystatus(response.data);
+        setisassigned(true);
+      }
+    }
+   ).catch()
+
+}
+
+const unSubmit= async (e)=>{
+  var temp = {
+    "assign_id" : e
+  }
+
+  await axios.post('https://api.kyusillid.online/api/unSubmit' , temp).then(
+    response=>{
+      console.log(response.data)
+    }
+  )
+
+  await axios.get('https://api.kyusillid.online/api/getactivitystatus/' + currentactivity.activity_id + '/' + userinfo.user.acc_id).then(
+    response=>{
+      console.log(response.data)
+      if(response.data !== "unassigned"){
+        setactivitystatus(response.data);
+        setisassigned(true);
+      }
+    }
+   ).catch()
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
   
   if(currentactivity=== undefined){
     return (<div></div>)
@@ -269,10 +329,10 @@ function ClassActivity() {
                 {activitystatus.status === 'marked' ?
                  <h4>Marked {activitystatus.grade} / {activitystatus.points}</h4>
                  :
-                 activitystatus.status ==='late'?
+                 activitystatus.status ==='handed in late'?
 
            
-                 <h4>Late</h4>
+                 <h4>Handed in Late</h4>
                  :
                  <h4>Assigned</h4>
                 
@@ -295,9 +355,9 @@ function ClassActivity() {
                     {isassigned ? 
                     <>
                     {activitystatus.status === 'pending' ?
-                    <button className='secondary' > Hand In</button>
+                    <button className='secondary' onClick={()=>{handIn(activitystatus.assign_id)}}> Hand In</button>
                   :
-                  <button className='tertiary' > Unsubmit</button>
+                  <button className='tertiary' onClick={()=>{unSubmit(activitystatus.assign_id)}} > Unsubmit</button>
                   }
 
                     </>
@@ -348,7 +408,7 @@ function ClassActivity() {
 <div class="row ">
             
 
-        <div className="col-lg-2 margintop12">
+        {/* <div className="col-lg-2 margintop12">
           <div className='primary borderradius-md '>
               <a  className='btn' onClick={() => setstatusfilter('Pending')}>
                 <h4>2</h4>
@@ -392,7 +452,7 @@ function ClassActivity() {
               </a>
           </div>
         
-        </div>
+        </div> */}
 
       
 
@@ -410,7 +470,7 @@ function ClassActivity() {
               <tr className='primary borderradius-md'>
                 <th className='padding12'>Name</th>
                 <th className="padding12">Status</th>
-                <th className="padding12"></th>
+                <th className="padding12">Grade</th>
              
              
               </tr>

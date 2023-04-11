@@ -1,6 +1,17 @@
 import React from 'react'
 
 function Activitylogpanel({classlog}) {
+
+
+  const localise = (iso)=>{
+ 
+    const date = new Date(`${iso}Z`);
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
+    const formattedDate = date.toLocaleString(undefined, options);
+    return formattedDate;
+   }
+
+
   return (
     <div className='activitylogpanel'>
         <div className='activitylogicon'>
@@ -9,7 +20,7 @@ function Activitylogpanel({classlog}) {
         {classlog.log_type === 'activity' ?
          <div>    
           <div className='flex'> <p className='activitysubtitle smol'> <b> {classlog.title} {classlog.firstname} {classlog.lastname} {classlog.suffix} </b>
-           has posted a new {classlog.category} {classlog.activity_type} on {classlog.created_at} : 
+           has posted a new {classlog.category} {classlog.activity_type} on {localise(classlog.created_at)} : 
           </p>
         
          </div>
