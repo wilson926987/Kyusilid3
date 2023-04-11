@@ -32,6 +32,7 @@ function ClassActivity() {
   const [mark, setmark] = useState();
   const [activitystatus, setactivitystatus]= useState();
   const [fileuploads, setfileuploads] = useState();
+  const [uploadedFile, setUploadedFile] = useState(null);
 
   const [isassigned, setisassigned] = useState(false);
 
@@ -120,6 +121,18 @@ function ClassActivity() {
 
   }
 
+  //Upload file
+  const handleFileInput = (event) => {
+    setfileuploads(event.target.files[0]);
+  };
+
+  const handleUploadFile = () => {
+   
+    
+    //pagkaupload nito kunin ung url
+  }
+
+
 
   useEffect(()=>{
 
@@ -154,29 +167,52 @@ function ClassActivity() {
 
 
 
-const handIn = async(e)=>{
-
-  var temp = {
-    "assign_id" : e
-  }
-
-  await axios.post('https://api.kyusillid.online/api/handIn' , temp).then(
-    response=>{
-      console.log(response.data)
-    }
-  )
-
-  await axios.get('https://api.kyusillid.online/api/getactivitystatus/' + currentactivity.activity_id + '/' + userinfo.user.acc_id).then(
-    response=>{
-      console.log(response.data)
-      if(response.data !== "unassigned"){
-        setactivitystatus(response.data);
-        setisassigned(true);
+  const handIn = async (e) => {
+    const formData = new FormData();
+    formData.append("uploadedfile", fileuploads);
+  
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "https://api.kyusillid.online/api/uploadstudent");
+    let uploadedFileUrl = "";
+    xhr.onload = () => {
+      if (xhr.status === 200) {
+        const response = JSON.parse(xhr.responseText);
+        uploadedFileUrl = response.url;
+        setUploadedFile(uploadedFileUrl);
+        console.log(uploadedFileUrl);
+  
+        const temp = {
+          assign_id: e,
+          uploadedfile: uploadedFileUrl,
+          url: uploadedFileUrl
+        };
+  
+        axios.post("https://api.kyusillid.online/api/handIn", temp)
+          .then((response) => {
+            console.log(response.data);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+  
+        axios.get("https://api.kyusillid.online/api/getactivitystatus/" + currentactivity.activity_id + "/" + userinfo.user.acc_id)
+          .then((response) => {
+            console.log(response.data);
+            if (response.data !== "unassigned") {
+              setactivitystatus(response.data);
+              setisassigned(true);
+            }
+          })
+          .catch((error) => {
+            console.error(error);
+          });
       }
-    }
-   ).catch()
-
-}
+    };
+    xhr.send(formData);
+  };
+  
+  
+  
 
 const unSubmit= async (e)=>{
   var temp = {
@@ -353,6 +389,7 @@ const unSubmit= async (e)=>{
              <h4>Your work</h4>
              <div className='flex '>
                 <button className='secondary'>Add file</button>
+                <input  className ='secondary' type="file" onChange={handleFileInput} />
 
 
              

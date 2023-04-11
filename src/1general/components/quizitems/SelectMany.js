@@ -1,6 +1,6 @@
 import React from 'react'
 
-function SelectMany({content, item, handleaddoption}) {
+function SelectMany({content, item, handleaddoption, handleAnswerChange}) {
 
     const addcontent = ()=>{
         const newcontent = content.concat({"value" : "option "+content.length , "index" : content.length})
@@ -19,7 +19,7 @@ function SelectMany({content, item, handleaddoption}) {
           <ul className=''>
             {content.map((item, key)=>(
               <li key={key} className="flex width100 ">  <div>
-               <label ><input type="text" className='commontextbox' defaultValue={item.value}/></label>
+               <label ><input type="text" className='commontextbox' defaultValue={item.value} onChange={e=>handleAnswerChange(item, e.target.value)}/></label>
                </div> 
                <div ><button className='secondary commonbutton lighttext' onClick={()=>{deletecontent(item)}}>delete option</button></div>
                <div> <input type="checkbox"/></div>

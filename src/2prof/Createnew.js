@@ -7,6 +7,7 @@ import ArrowSelector from '../1general/formcomponents/ArrowSelector'
 import Dropdown from '../1general/formcomponents/Dropdown'
 import {FaPlusCircle} from 'react-icons/fa'
 import Infobox from '../1general/formcomponents/Infobox'
+import { FileUploadSharp } from '@mui/icons-material'
 
 
 function Createnew() {
@@ -22,7 +23,7 @@ function Createnew() {
   const [categorylist, setcategorylist] = useState([{
     'value' : currentclass.sessionname1, 'label' : currentclass.sessionname1
   }])
-
+  const [filename, setfilename] = useState();
 
  
    
@@ -80,6 +81,21 @@ function Createnew() {
   const [allowedit, setallowedit] = useState(false);
   const [allowlate, setallowlate] = useState(true)
   const [formduration, setformduration] = useState();
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [uploadedFile, setUploadedFile] = useState(null);
+
+  useEffect(()=>{
+    
+    if(selectedFile !== null){
+      console.log("selected file")
+      console.log(selectedFile)
+      setfilename(selectedFile.name)
+    }else{
+      setfilename();
+      console.log('no selected file')
+    }
+    
+  },[selectedFile])
 
   
   const Postoptions = [
@@ -167,47 +183,118 @@ async function createnewtopic(e){
 
 async function createActivity(){
 
-  let newtopicitem = {
-    'created_by' : sourcematerial !== undefined ? sourcematerial.createdby : userinfo.user.acc_id,
-    'posted_by': userinfo.user.acc_id,
-    'title' :    posttitle.length!== 0 ? posttitle : 'new ' + activitytype,
-    'description':  description,
-    'activity_type' :  activitytype,
-    'category' : sourcematerial!==undefined ? sourcematerial.category   :  category['value'] ,
-    'topic' :    module.length !== 0 ? module :  'no topic',
-    'allowedit' : allowedit,
-    'allowlate' : allowlate,
-    'availability' : availability,
-    'duedate' : duedate,
-    'questionnaire_link' : 'google.com',
-    'studentselection' : studentselection,
-    'schedule' : postdate,
-    'postschedtype' : postscheduletype,
-    'scheduleoffset' : schedoffset, 
-    'points' : 100
+
+
+  // Upload file to the server and get the file link
+  
+  //if selected file has file
+
+  if(selectedFile !==null){
+  
+    const formData = new FormData();
+    formData.append("file_link", selectedFile);
+
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "https://api.kyusillid.online/api/uploadfile");
+    xhr.onload = () => {
+      if (xhr.status === 200) {
+        const response = JSON.parse(xhr.responseText);
+        setUploadedFile(response.url);
+     
+        console.log("filelink :  " + response.url);
+
+        let newtopicitem = {
+          'created_by' : sourcematerial !== undefined ? sourcematerial.createdby : userinfo.user.acc_id,
+          'posted_by': userinfo.user.acc_id,
+          'title' :    posttitle.length!== 0 ? posttitle : 'new ' + activitytype,
+          'description':  description,
+          'activity_type' :  activitytype,
+          'category' : sourcematerial!==undefined ? sourcematerial.category   :  category['value'] ,
+          'topic' :    module.length !== 0 ? module :  'no topic',
+          'allowedit' : allowedit,
+          'allowlate' : allowlate,
+          'availability' : availability,
+          'duedate' : duedate,
+          'questionnaire_link' : 'google.com',
+          'studentselection' : studentselection,
+          'schedule' : postdate,
+          'postschedtype' : postscheduletype,
+          'scheduleoffset' : schedoffset, 
+          'points' : 100,
+          'file_link': response.url 
+        }
+       
+        console.log(JSON.stringify(newtopicitem))
+  
+      
+        axios.post('https://api.kyusillid.online/api/createactivity' , newtopicitem)  
+        .then(response => {    
+            console.log(response.data)  ;    
+      
+        })
+        .catch(error => {
+          console.log(error);
+        });
+        
+
+
+       
+      }
+    };
+    xhr.send(formData);
+  }else{
+
+
+    let newtopicitem = {
+      'created_by' : sourcematerial !== undefined ? sourcematerial.createdby : userinfo.user.acc_id,
+      'posted_by': userinfo.user.acc_id,
+      'title' :    posttitle.length!== 0 ? posttitle : 'new ' + activitytype,
+      'description':  description,
+      'activity_type' :  activitytype,
+      'category' : sourcematerial!==undefined ? sourcematerial.category   :  category['value'] ,
+      'topic' :    module.length !== 0 ? module :  'no topic',
+      'allowedit' : allowedit,
+      'allowlate' : allowlate,
+      'availability' : availability,
+      'duedate' : duedate,
+      'questionnaire_link' : 'google.com',
+      'studentselection' : studentselection,
+      'schedule' : postdate,
+      'postschedtype' : postscheduletype,
+      'scheduleoffset' : schedoffset, 
+      'points' : 100,
+      'file_link': null
+    }
+   
+  
+    await axios.post('https://api.kyusillid.online/api/createactivity' , newtopicitem)
+    console.log(JSON.stringify(newtopicitem))
+  
+    .then(response => {    
+        console.log(response.data)  ;    
+  
+    })
+    .catch(error => {
+      console.log(error);
+    });
+
   }
 
 
+ 
 
-  await axios.post('https://api.kyusillid.online/api/createactivity' , newtopicitem)
-  .then(response => {    
-      console.log(response.data)  ;    
-
-  })
-  .catch(error => {
-    console.log(error);
-  });
+ 
   
-}   
+}
 
+const handleFileInput = (event) => {
+  setSelectedFile(event.target.files[0]);
+};
 
 const handlecreateactivity=()=>{
    createActivity();
    navigate('/classes/sampleclass')
-}
-
-
-
+} 
 
 
 
@@ -237,13 +324,27 @@ const handlecreateactivity=()=>{
                                  </div>
                                 :
                                  <>
+                                      {filename !== undefined && 
+                                  <div className='commonbutton flex primary borderradius-md'>
+                                  <AiFillFile/>
+                                  <h5 className='ellipsis'>{filename}</h5>
+                          
+
+                              </div>
+                                 
+                                 }
+                           
                                 <label htmlFor="">UPLOAD</label>
                                  <div className="flex">
                                  <div className='primary uploadpanel borderradius-md'>
                                
-                                   <h4>File</h4>
+                               
+                                 <input type="file" onChange={handleFileInput} />
+                                    
+                                 
                                  </div>                    
                                  </div> 
+                          
                                  
                                 </> )                               
                          }
