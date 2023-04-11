@@ -14,6 +14,9 @@ function Profiilepage() {
   const [activitystatus, setactivitystatus]= useState();
   const [password, setpassword] = useState("");
   const [cpassword, setcpassword] = useState();
+  const [imageUrl, setImageUrl] = useState(null);
+  const [file, setFile] = useState(null);
+
 
 
   useEffect(()=>{
@@ -21,6 +24,16 @@ function Profiilepage() {
         response => setactivitystatus(response.data)
       ).catch();
   },[])
+
+  //Profile pic get
+  useEffect(()=>{
+    console.log();
+    if (userinfo && userinfo.user && userinfo.user.profile_pic) {
+      const imageUrl = `https://api.kyusillid.online/laravel/public${userinfo.user.profile_pic}`;
+      setImageUrl(imageUrl);
+    }
+  }, [userinfo]);
+
 
 
 
@@ -65,6 +78,38 @@ function Profiilepage() {
     
  },[cpassword])
 
+ //Profile pic function 
+ const handleFileChange = (event)=>{
+  setFile(event.target.files[0]);
+};
+
+const handleProfile = (event) => {
+  event.preventDefault();
+  const formData = new FormData();
+  formData.append('profile_pic', file);
+  fetch(`https://api.kyusillid.online/api/profile-pic/${userinfo.user.acc_id}`, {
+    method: 'POST',
+    body: formData,
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Failed to upload profile picture');
+      }
+      return response.json();
+    })
+    .then((data) => {
+      alert(data.message);
+    })
+    .catch((error) => {
+      console.error(error);
+      alert('Failed to upload profile picture');
+    });
+};
+
+
 
   return (
     <div>
@@ -77,10 +122,20 @@ function Profiilepage() {
 
           <div className='flex'>
           <div className='profile-pic-div'>
-            <img src={Avater} alt=""/>
-            <input type="file" id="file"></input>
-            <label className='uploadBtnn' for="file" id="uploadBtnn" style={{display: "block"}}>Choose Photo</label>
-</div>
+           <form onSubmit={handleProfile} enctype ='multipart/form-data'>
+            <img src={imageUrl}/>
+            
+            </form>
+          </div>
+
+
+          <div className='col-lg-'>
+        
+              <input type="file" id="file"  onChange={handleFileChange}></input>
+                <label className='uploadBtnn' for="file" id="uploadBtnn" style={{display: "block"}}>Choose Photo</label>
+                <button onClick={handleProfile}>Upload</button>
+             
+            </div>
           
           <div>
             <h3>{userinfo.user.firstname} {userinfo.user.middle} {userinfo.user.lastname}</h3>

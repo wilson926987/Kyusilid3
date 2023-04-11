@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Outlet , useNavigate, useLocation} from 'react-router-dom'
 import Activitylogpanel from '../components/Activitylogpanel';
-import {classbannerContext , settingsContext, modulelistContext, forcerefreshContext, classAndstudentselectionContext, announcementlistContext, userInfoContext, topicfilterContext, activitytypefilterContext , topiclistContext , currentActivityContext , sourceMaterialContext , currentclassContext, myClasesContext , personlistContext } from '../../Globalcontext';
+import {responseContext, classbannerContext , settingsContext, modulelistContext, forcerefreshContext, classAndstudentselectionContext, announcementlistContext, userInfoContext, topicfilterContext, activitytypefilterContext , topiclistContext , currentActivityContext , sourceMaterialContext , currentclassContext, myClasesContext , personlistContext } from '../../Globalcontext';
 import {FaPlusCircle ,FaArrowCircleLeft} from  'react-icons/fa'
 import ClassSelectionitem from '../components/ClassSelectionitem';
 import axios from 'axios';
@@ -33,6 +33,8 @@ function ClassContainer() {
   const location = useLocation();
   const [announcementlist, setannouncementlist] = useState([]);
   const [classsettings, setclasssettings] = useState();
+
+  const [responseinfo, setresponseinfo] = useState();
 
   const [studentselection ,setstudentselection] = useState();
   const [class_log, setclass_log] = useState([]);
@@ -74,8 +76,6 @@ function ClassContainer() {
       }
 
       setsampleurl(currentclass.class_link)
-
-
 
   },[location , currentclass])
 
@@ -205,16 +205,6 @@ function toggleStudentselect(studentitem){
   })))
 
 }
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -407,7 +397,11 @@ function toggleStudentselect(studentitem){
                                 <modulelistContext.Provider value={{modulelist, setmodulelist}}>
                                <settingsContext.Provider value={{classsettings, setclasssettings}}>
                                 <classbannerContext.Provider value={{classbanner, setclassbanner}}>
-                                <Outlet /> 
+
+                                  <responseContext.Provider value={{responseinfo, setresponseinfo}}>
+                                  <Outlet /> 
+                                  </responseContext.Provider>
+                            
 
                                 </classbannerContext.Provider>
                            

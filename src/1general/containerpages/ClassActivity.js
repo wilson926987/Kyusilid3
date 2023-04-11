@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import {currentclassContext, currentActivityContext , userInfoContext , modulelistContext} from '../../Globalcontext'
+import {responseContext, currentclassContext, currentActivityContext , userInfoContext , modulelistContext} from '../../Globalcontext'
 import {FaClipboardList} from 'react-icons/fa'
 import {RiBookFill} from 'react-icons/ri'
 import {MdQuiz ,MdAssignment, MdSend} from 'react-icons/md'
@@ -11,6 +11,8 @@ import Textbox from '../formcomponents/Textbox';
 
 
 function ClassActivity() {
+
+  const {setresponseinfo} = useContext(responseContext) 
 
   const {setmodulelist} = useContext(modulelistContext)
   const navigate = useNavigate();
@@ -24,6 +26,8 @@ function ClassActivity() {
   const [activitysettings, setactivitysettings] = useState(false);
   const [edittitle, setedittitle] = useState(currentactivity.activity_title)
   const [editdescription, seteditdescription] = useState(currentactivity.description);
+
+
 
   const [mark, setmark] = useState();
   const [activitystatus, setactivitystatus]= useState();
@@ -460,11 +464,6 @@ const unSubmit= async (e)=>{
 
 
 
-
-
-
-
-
           <table className='width100 margintop12'>
             <thead >
               <tr className='primary borderradius-md'>
@@ -481,7 +480,7 @@ const unSubmit= async (e)=>{
                   <td>{item.name}</td>
                   <td>{item.status}</td>
                   <td>{item.grade !== null ?  item.grade : '?'} / {item.points}</td>
-                  <td> <button className='commonbutton secondary lighttext' onClick={()=>{navigate('/classes/sampleclass/activity/activityId/response')}}> view</button></td>
+                  <td> <button className='commonbutton secondary lighttext' onClick={()=>{setresponseinfo(item); navigate('/classes/sampleclass/activity/activityId/response')}}> view</button></td>
                 </tr>
               ))}
               

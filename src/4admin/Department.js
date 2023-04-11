@@ -181,7 +181,16 @@ function Department() {
       <div className='tertiary borderradius-md padding12 modal-body flex'>
       {!upclass ? 
           <>     
-          <div className='sideoption borderradius-md'onClick={()=>{navigate('createclass') ; setcreateclassmodal(false) }} > <BiEdit/><h2>ADD CLASS MANUALLY</h2></div>
+          <div className='sideoption borderradius-md'onClick={()=>{navigate('createclass') ; setcreateclassmodal(false) }} > <BiEdit/><h2>ADD CLASS MANUALLY</h2>
+          <div>
+          <h3>Uploading a class file will:</h3>
+            <ul>
+              <li>Add new Classes</li>
+              <li>Add new Source Modules</li>
+              <li>Update Existing Classes</li>
+            </ul>
+          </div>
+          </div>
           <div className='sideoption borderradius-md' onClick={()=>{setupclass(true)}}> <FaUpload/><h2>UPLOAD FILE</h2></div></> 
           :
           <div><ImportClass setupdatelist = {setupdatelist} setcreateclassmodal= {setcreateclassmodal}/></div>
@@ -200,8 +209,18 @@ function Department() {
       <div className='tertiary borderradius-md padding12 modal-body flex'>
         {!upstud ? 
           <>
-          <div className='sideoption borderradius-md'onClick={()=>{navigate('createstud') ; setcreatestudmodal(false) }} > <BiEdit/><h2>ADD CLASS MANUALLY</h2></div>
-          <div className='sideoption borderradius-md' onClick={ ()=>{setupstud(true)}}> <FaUpload/><h2>Upload file</h2></div>
+          {/* <div className='sideoption borderradius-md'onClick={()=>{navigate('createstud') ; setcreatestudmodal(false) }} > <BiEdit/><h2>ADD CLASS MANUALLY</h2></div> */}
+          <div className='sideoption borderradius-md' onClick={ ()=>{setupstud(true)}}> <FaUpload/><h2>Upload file</h2>
+          <div>
+          <h3>Uploading a student list file will:</h3>
+            <ul>
+              <li>Add new Student Accounts</li>
+              <li>Update existing students</li>
+             
+            </ul>
+          </div>
+        
+          </div>
           </>
           :
           <div><ImportStudent setupdatelist={setupdatelist} setcreatestudmodal={setcreatestudmodal}/></div>
@@ -219,8 +238,17 @@ function Department() {
       </div>
       <div className='tertiary borderradius-md padding12 modal-body flex'>
 {!upproff ?  
-        <>  <div className='sideoption borderradius-md'onClick={()=>{navigate('createproff') ; setcreateproffmodal(false) }} > <BiEdit/><h2>ADD CLASS MANUALLY</h2></div>
-        <div className='sideoption borderradius-md' onClick={()=>{setupproff(true) }}> <FaUpload/><h2>Upload file</h2></div></>
+        <>  <div className='sideoption borderradius-md'onClick={()=>{navigate('createproff') ; setcreateproffmodal(false) }} > <BiEdit/><h2>ADD PROFESSORS MANUALLY</h2></div>
+        <div className='sideoption borderradius-md' onClick={()=>{setupproff(true) }}> <FaUpload/><h2>Upload file</h2>
+        <div>
+          <h3>Uploading a professor list file will:</h3>
+            <ul>
+              <li>Add new Professor Accounts</li>
+              <li>Update existing professors</li>
+             
+            </ul>
+          </div>
+        </div></>
         :
         <div><ImportProfessor  setupdatelist={setupdatelist} setcreateproffmodal={setcreateproffmodal}/></div>
 }
