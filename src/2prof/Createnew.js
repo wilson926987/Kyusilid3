@@ -267,6 +267,8 @@ async function createActivity(){
       'points' : 100,
       'file_link': null
     }
+    console.log(JSON.stringify(newtopicitem))
+  
    
   
     await axios.post('https://api.kyusillid.online/api/createactivity' , newtopicitem)

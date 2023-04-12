@@ -50,6 +50,10 @@ function ClassActivity() {
   },[fileuploads])
 
 
+  const [filelinktemp, setfiletemp]= useState();
+
+
+
 
 
   const postcomments = async ()=>{
@@ -169,6 +173,26 @@ function ClassActivity() {
         }
       ).catch();
      }
+
+     axios
+     .get(`https://api.kyusillid.online/api/getFile2/${currentactivity.activity_id}`)
+     .then((response) => {
+     if (response.data.success) {
+         setfiletemp(response.data.url);
+         console.log(response.data.url)
+     } else {
+         console.log(response.data.message);
+         setUploadedFile(response.data.url);
+         console.log(response.data.url)
+     }
+     })
+     .catch((error) => {
+     console.log(error.response.data);
+   
+     });
+
+
+
   },[currentactivity])
 
 
@@ -353,10 +377,16 @@ useEffect(()=>{
             {currentactivity.activity_type ==='Material' ?
               <div className="flex">
                 {currentactivity.file_name !== null &&
-                  <div className='materialpanel primary borderradius-md'>
+
+
+<a href={filelinktemp} target="_blank">
+
+<div className='materialpanel primary borderradius-md'>
                   <RiBookFill />
                   <p className='textcenter'>{currentactivity.file_name}</p>
-             </div>  }
+             </div> 
+</a>
+                  }
               </div>
             :currentactivity.activity_type==='Questionnaire' ?
                   <div className="flex">
