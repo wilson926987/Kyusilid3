@@ -64,8 +64,11 @@ function Classmarks() {
                 <tr key={index}>
                   <td data-label="Name">{item.student.name} </td>
          
-                  <td>{item.activity.grade} / {item.activity.points}</td>
-                  <td>{item.assignment.grade} / {item.assignment.points}</td>
+                  <td>{item.activity.grade}</td>
+                  <td>{item.assignment.grade} </td>
+                  <td>{item.questionnaire.grade}</td>
+                  <td>{item.exam.grade}</td>
+                  <td>{item.attendance.grade}</td>
                
                   
                 </tr>

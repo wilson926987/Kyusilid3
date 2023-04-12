@@ -97,6 +97,10 @@ svg{
   background-color: var(--defaulttertiary);
 }
 
+
+.textcenter{
+  text-align: center;
+}
 .default *{
   color: var(--darktextprimary);
 }

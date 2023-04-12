@@ -145,7 +145,6 @@ function ClassActivity() {
 
      axios.get('https://api.kyusillid.online/api/getactivitystatus/' + currentactivity.activity_id + '/' + userinfo.user.acc_id).then(
       response=>{
-        console.log(response.data)
         if(response.data !== "unassigned"){
           setactivitystatus(response.data);
           setisassigned(true);
@@ -236,6 +235,12 @@ const unSubmit= async (e)=>{
    ).catch()
 
 }
+
+useEffect(()=>{
+
+    console.log(currentactivity.file_name)
+
+},[currentactivity.file_name])
 
 
 
@@ -329,16 +334,20 @@ const unSubmit= async (e)=>{
           <div className='activitydescription'> 
           {currentactivity.description}
 
+
+
         </div>
           <div className='activitycontent'>
-            {currentactivity.activitytype ==='material' ?
+    
+            {currentactivity.activity_type ==='Material' ?
               <div className="flex">
-                 <div className='materialpanel primary borderradius-md'>
-                      <RiBookFill />
-                      <p>file name</p>
-                 </div>  
+                {currentactivity.file_name !== null &&
+                  <div className='materialpanel primary borderradius-md'>
+                  <RiBookFill />
+                  <p className='textcenter'>{currentactivity.file_name}</p>
+             </div>  }
               </div>
-            :currentactivity.activitytype==='questionnaire' ?
+            :currentactivity.activity_type==='Questionnaire' ?
                   <div className="flex">
                     <div className='questionnairepanel primary borderradius-md'>
                       <h4>Quizz 1</h4>

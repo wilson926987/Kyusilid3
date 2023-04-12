@@ -84,6 +84,7 @@ function Createnew() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [uploadedFile, setUploadedFile] = useState(null);
 
+  
   useEffect(()=>{
     
     if(selectedFile !== null){
@@ -221,8 +222,9 @@ async function createActivity(){
           'postschedtype' : postscheduletype,
           'scheduleoffset' : schedoffset, 
           'points' : 100,
-          'file_link': response.url 
-        }
+          'file_link': response.url ,
+          'file_name' : filename
+         }
        
         console.log(JSON.stringify(newtopicitem))
   
@@ -268,8 +270,6 @@ async function createActivity(){
    
   
     await axios.post('https://api.kyusillid.online/api/createactivity' , newtopicitem)
-    console.log(JSON.stringify(newtopicitem))
-  
     .then(response => {    
         console.log(response.data)  ;    
   
