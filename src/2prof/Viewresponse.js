@@ -6,6 +6,8 @@ import axios from 'axios'
 
 function Viewresponse() {
 
+
+
     const [score, setscore] = useState()
     const [uploadedFile, setUploadedFile] = useState('')
     const [ifsaved, setsaved] = useState(false)
@@ -34,15 +36,26 @@ function Viewresponse() {
         if(responseinfo !== undefined){
             setscore(responseinfo.grade)
 
-        // Call the API endpoint to get the uploaded file for the student
-        axios.get(`https://api.kyusillid.online/api/getfile/${responseinfo.assign_id}`)
-        .then((response) => {
-            setUploadedFile(response.data.url)
-        })
-        .catch((error) => {
-            console.log(error)
-        })
+       // Call the API endpoint to get the uploaded file for the student
+       axios
+       .get(`https://api.kyusillid.online/api/getFile/${responseinfo.assign_id}`)
+       .then((response) => {
+       if (response.data.success) {
+           setUploadedFile(response.data.url);
+           console.log(response.data.url)
+       } else {
+           console.log(response.data.message);
+           setUploadedFile(response.data.url);
+           console.log(response.data.url)
+       }
+       })
+       .catch((error) => {
+       console.log(error.response.data);
+     
+       });
     }
+
+    console.log(responseinfo)
 
 },[responseinfo])
   return (
@@ -59,9 +72,14 @@ function Viewresponse() {
             </div>
         </div>
         <h4>{responseinfo.status}</h4>
+  {/* Display the uploaded file if it exists */}
+      {responseinfo.file_name !== undefined &&
+    
+     <a href={uploadedFile} target="_blank" className='responsefile primary borderradius-md '>{responseinfo.file_name}</a>
+      
+      }
 
-        {/* Display the uploaded file if it exists */}
-        {uploadedFile && <a href={uploadedFile} target="_blank">View Uploaded File</a>}
+        
     </div>
   )
 }

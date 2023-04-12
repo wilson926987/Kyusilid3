@@ -10,6 +10,7 @@ import axios from 'axios';
 import Textbox from '../formcomponents/Textbox';
 
 
+
 function ClassActivity() {
 
   const {setresponseinfo} = useContext(responseContext) 
@@ -40,6 +41,13 @@ function ClassActivity() {
   const [statusfilter , setstatusfilter] = useState("All");
 
 
+  const [submitedfilename, setsubmitedfilename] = useState();
+  useEffect(()=>{
+    if(fileuploads !== undefined){
+      setsubmitedfilename(fileuploads.name)
+    }
+
+  },[fileuploads])
 
 
 
@@ -183,7 +191,10 @@ function ClassActivity() {
         const temp = {
           assign_id: e,
           uploadedfile: uploadedFileUrl,
-          url: uploadedFileUrl
+          url: uploadedFileUrl,
+          "file_name" : submitedfilename
+
+
         };
   
         axios.post("https://api.kyusillid.online/api/handIn", temp)
@@ -350,11 +361,11 @@ useEffect(()=>{
             :currentactivity.activity_type==='Questionnaire' ?
                   <div className="flex">
                     <div className='questionnairepanel primary borderradius-md'>
-                      <h4>Quizz 1</h4>
+                      <h4>Quizz</h4>
                       <hr />
                       <div className='margintop12'>
-                      <h5> 20 items</h5>
-                      <h5> 50 points</h5>
+                      {/* <h5> 20 items</h5>
+                      <h5> 50 points</h5> */}
                       </div>
                       <div className='questionnairefooter flex'>
                  

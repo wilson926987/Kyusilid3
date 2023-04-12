@@ -98,6 +98,16 @@ svg{
 }
 
 
+.responsefile{
+    height: 140px;
+   display: flex;
+    width: 90px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 12;
+}
+
 .textcenter{
   text-align: center;
 }
