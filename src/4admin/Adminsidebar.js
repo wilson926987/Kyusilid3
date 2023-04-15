@@ -1,7 +1,7 @@
 import React, { useContext,  useState } from 'react'
 import kyusilidlogo from '../assets/images/Kyusilid.jpg'
 import {MdSpaceDashboard , MdBrightness1} from 'react-icons/md'
-import { themeContext , departmentsContext, currentdeptContext } from '../Globalcontext'
+import { themeContext , departmentsContext, currentdeptContext, userInfoContext } from '../Globalcontext'
 import {BiChevronsLeft ,BiChevronsRight} from 'react-icons/bi'
 import { useNavigate } from 'react-router-dom'
 
@@ -11,6 +11,7 @@ function Adminsidebar() {
     const {departments} = useContext(departmentsContext)
     const {setcurrentdept} = useContext(currentdeptContext);
     const [sidebar, setsidebar] = useState(true);
+    const {userinfo} = useContext(userInfoContext);
 
 
 
@@ -18,6 +19,8 @@ function Adminsidebar() {
     const togglesidebar=()=>{
         setsidebar(!sidebar)
     }
+
+    
 
 
    const navigate = useNavigate();
@@ -50,10 +53,14 @@ function Adminsidebar() {
 {sidebar && <div className='sidebarcontent'>
     <ul>
         <li className='sidebarmenu' onClick={()=>{navigate('/kyusilidAdmin')}}> <div className="highlight"></div> <MdSpaceDashboard />  Dashboard</li>
-        {departments.map((item)=>(
+        {userinfo.admintype === 1 ? 
+            departments.map((item)=>(
              <li key={item.dep_id} className='sidebarmenu' onClick={()=>{setcurrentdept(item); navigate('department')}}> <div className="highlight"></div> <MdBrightness1 className='clear ellipsis'/> {item.dep_name} </li>
-        ))}
-        <li className='sidebarmenu' onClick={()=>{navigate('adminlog')}}> <div className="highlight"></div> <MdSpaceDashboard /> Admin log</li>
+        )):
+        <li className='sidebarmenu'> <div className="highlight" onClick={()=>{navigate('adminhead')}}></div> <MdBrightness1 className='clear ellipsis'/> Admin Accounts </li>
+    
+    }
+     <li className='sidebarmenu' onClick={()=>{navigate('adminlog')}}> <div className="highlight"></div> <MdSpaceDashboard /> Admin log</li>
 
     </ul>              
 </div>}
