@@ -198,6 +198,29 @@
     margin: 0 auto;
   }
 }
+.search3 input{ 
+  margin-left: 70%;
+  width: 300px;
+  height: 35px;
+  border-radius: 50px;
+  font-size: 16px;
+  font-family: 'Century Gothic';
+  text-align: center;
+  border-color: #6893ee;
+  
+}
+@media only screen and (max-width: 768px) {
+  .search3 {
+    margin-left: 0;
+    text-align: center;
+  }
+
+  .search3 input {
+    width: 100%;
+    max-width: 250px;
+    margin: 0 auto;
+  }
+}
 .extra-textbox .GradeText{ 
     background-color: white;
     margin-top: 3%;
@@ -724,6 +747,8 @@
 /*-----Profile------*/
   
 /*PROFILE PIC*/
+  
+/*PROFILE PIC*/
 .profile-pic-div{
   position: relative;
   display: flex;
@@ -751,6 +776,7 @@
   padding-left: 50px;  
 }
 
+
 /* #uploadBtnn{
   position: absolute;
   bottom: 0;
@@ -768,7 +794,6 @@
 #file{
   display: none;
 }
-
 /* .inputss{
     z-index: 9980!important;
 } */
@@ -802,7 +827,7 @@
 
   .UP-Button{
     margin-left: 5%;
-    
+
   }
   .UP-Button label{
     margin-left: 0px;
@@ -822,6 +847,7 @@
 
 .accountinfo{
   padding-left:150px;
+  margin-top: -10%;
   }
 /*------ overview------*/
 /* Targeting the BsFillJournalBookmarkFill icon */
@@ -836,4 +862,29 @@
   border-right: 3px solid ;
   border-radius: 5px;
 }
+.fil input{ 
+  text-decoration: none;
+  position:absolute;
+
+}
+#file-input {
+  opacity: 0;
+  position: absolute;
+  left: -9999px;
+}
+
+.custom-file-upload {
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 3px;
+  font-weight: bold;
+  align-items: center;
+}
+
+.custom-file-upload i {
+  margin-right: 5px;
+}
+
+
 

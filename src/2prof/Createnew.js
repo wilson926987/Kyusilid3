@@ -282,10 +282,6 @@ async function createActivity(){
 
   }
 
-
- 
-
- 
   
 }
 
@@ -303,7 +299,7 @@ const handlecreateactivity=()=>{
   return (
     <div>
                 <div className='row margintop12'>
-                        <div className="col-lg-7 createactivitytitle">
+                        <div className="vertical col-lg-7 createactivitytitle">
 
                           {activitytype !== 'Attendance' ?
                            <div>
@@ -326,7 +322,20 @@ const handlecreateactivity=()=>{
                                  </div>
                                 :
                                  <>
-                                      {filename !== undefined && 
+                               
+                           
+                                <label htmlFor="">UPLOAD</label> 
+                                <br></br> <br></br>
+
+                                <label for="file-input" class="custom-file-upload secondary borderradius-md lighttext">
+                               
+                                <i class="fa fa-cloud-upload lighttext"></i> CHOOSE FILE
+                              </label>
+                              <input id="file-input" type="file" onChange={handleFileInput} />
+                              
+                                 
+                              <br></br> <br></br>
+                                {filename !== undefined && 
                                   <div className='commonbutton flex primary borderradius-md'>
                                   <AiFillFile/>
                                   <h5 className='ellipsis'>{filename}</h5>
@@ -335,19 +344,8 @@ const handlecreateactivity=()=>{
                               </div>
                                  
                                  }
-                           
-                                <label htmlFor="">UPLOAD</label>
-                                 <div className="flex">
-                                 <div className='primary uploadpanel borderradius-md'>
-                               
-                               
-                                 <input type="file" onChange={handleFileInput} />
-                                    
-                                 
-                                 </div>                    
-                                 </div> 
                           
-                                 
+            
                                 </> )                               
                          }
                           

@@ -45,7 +45,7 @@ function Multiplechoice({content ,item , handleaddoption , handleAnswerChange}) 
           ))}
       </select>
 
-      <button className='secondary commonbutton lighttext' onClick={()=>addcontent}>Add Option</button>
+      <button className='secondary commonbutton lighttext' onClick={()=>addcontent()}>Add Option</button>
 
 
 
