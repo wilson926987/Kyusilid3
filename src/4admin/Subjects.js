@@ -27,7 +27,7 @@ function Subjects() {
       <p className='smallfont'> Last Updated :</p>
       </div>
 
-<div className='search'>
+<div className='search2'>
       <input
            type="text"
             placeholder="Subject Code"

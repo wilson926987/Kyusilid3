@@ -33,13 +33,13 @@ function CalendarAnnouncements() {
     <div className='eventscontainer tertiary borderradius-lg'>
        
         <div className="calendarcontainer primary borderradius-lg">
-          <div className="box2">
-            <div className="cards">
-              <h2>{currentTime.toLocaleTimeString()}</h2>
-              <br></br>
-              <h3>{currentTime.toLocaleDateString()}</h3>
-            </div>
-          </div>
+        <div className="box2">
+        <div className="cards">
+          <h2>{currentTime.toLocaleTimeString()}</h2>
+          <br></br>
+          <h3>{currentTime.toLocaleString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</h3>
+        </div>
+      </div>
           </div>
     
         <div className='announcementscontainer'>

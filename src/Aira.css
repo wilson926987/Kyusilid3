@@ -138,45 +138,14 @@
     align-items: center;
     border: none;
 }
+/*-----search---*/
+.search {
+  display: flex;
+  margin-bottom: 20px;
+  margin-left: auto;
+}
 
-/*search*/
-.search{ 
-    margin-left: 65%;
-}
-.search input{ 
-    width: 250px;
-    height: 35px;
-    border-radius: 50px;
-    font-size: 16px;
-    font-family: 'Century Gothic';
-    text-align: center;
-    border-color: #6893ee;
-}
-@media only screen and (max-width: 768px) {
-  .search {
-    margin-left: 0;
-    text-align: center;
-  }
-
-  .search input {
-    width: 100%;
-    max-width: 250px;
-    margin: 0 auto;
-  }
-}
-.flex .search1{ 
-    margin-left: 30%;
-    width: 250px;
-    height: 35px;
-    border-radius: 50px;
-    font-size: 16px;
-    font-family: 'Century Gothic';
-    text-align: center;
-    border-color: #6893ee;
-    
-}
-.search2 input{ 
-  margin-left: 50%;
+.search input {
   width: 250px;
   height: 35px;
   border-radius: 50px;
@@ -184,22 +153,77 @@
   font-family: 'Century Gothic';
   text-align: center;
   border-color: #6893ee;
-  
 }
+
+@media only screen and (max-width: 768px) {
+  .search {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .search input {
+    width: 100%;
+    max-width: 300px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .search input {
+    max-width: 200px;
+  }
+}
+
+.search2 {
+  display: flex;
+  margin-bottom: 20px;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+}
+
+.search2 input {
+  width: 250px;
+  height: 35px;
+  border-radius: 50px;
+  font-size: 16px;
+  font-family: 'Century Gothic';
+  text-align: center;
+  border-color: #6893ee;
+}
+
 @media only screen and (max-width: 768px) {
   .search2 {
-    margin-left: 0;
-    text-align: center;
+    margin: 0 auto;
+ 
+    max-width: 300px;
   }
 
   .search2 input {
     width: 100%;
-    max-width: 250px;
-    margin: 0 auto;
+    max-width: 300px;
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
 }
+
+@media only screen and (max-width: 480px) {
+  .search2 input {
+    max-width: 200px;
+  }
+}
+
+
+.search3 {
+  display: flex;
+  margin-bottom: 20px;
+  justify-content: flex-end;
+  margin-left: auto;
+}
+
 .search3 input{ 
-  margin-left: 70%;
   width: 300px;
   height: 35px;
   border-radius: 50px;
@@ -211,16 +235,26 @@
 }
 @media only screen and (max-width: 768px) {
   .search3 {
-    margin-left: 0;
-    text-align: center;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 
   .search3 input {
     width: 100%;
-    max-width: 250px;
-    margin: 0 auto;
+    max-width: 300px;
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
 }
+
+@media only screen and (max-width: 480px) {
+  .search3 input {
+    max-width: 200px;
+  }
+}
+
+
 .extra-textbox .GradeText{ 
     background-color: white;
     margin-top: 3%;
@@ -412,6 +446,7 @@
   border-radius: 50px;
   display: block;
   cursor: pointer;
+
   
 }
 
@@ -422,6 +457,7 @@
   background-size: cover;
   width: 100%;
   border-radius: 20px;
+  flex-direction: column;
 }
 .boxes1{ 
   margin-top: 10%;
@@ -490,7 +526,6 @@
     margin-left: -30px;
     margin-top: 3%;
     padding-top: 5px;
-
 }
 .box2 h2{ 
     font-size: 50px;
