@@ -112,12 +112,6 @@ function SuperAdmin() {
 
 
   
-
-
-
-
-
-  
   return (
     <div>
       <h3>Kyusilid Admin List</h3>

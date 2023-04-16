@@ -55,12 +55,16 @@ function Createnew() {
 
 
   useEffect(()=>{
-    settopiclisttem(
-      topiclist.topiclist.map(function (obj) {
-      
-        return {'value': obj.topic_name, 'label': obj.topic_name}
-       })
-    )
+    if(topiclist!= undefined && topiclist !== null){
+      settopiclisttem(
+       
+
+         topiclist.topiclist.map(item =>(
+          {"value" : item.topic_name , "label" : item.topic_name}
+         ))
+      )
+    }
+   
   },[topiclist])
 
   
@@ -82,15 +86,38 @@ function Createnew() {
   const [allowlate, setallowlate] = useState(true)
   const [formduration, setformduration] = useState();
   const [selectedFile, setSelectedFile] = useState(null);
-  const [uploadedFile, setUploadedFile] = useState(null);
+
+
+  const [filelist, setfilelist] = useState([]);
+
+  useEffect(()=>{
+    console.log(filelist)
+  },[filelist])
+
 
   
   useEffect(()=>{
     
-    if(selectedFile !== null){
-      console.log("selected file")
-      console.log(selectedFile)
-      setfilename(selectedFile.name)
+    if(selectedFile !== null && selectedFile !== undefined){
+      const formData = new FormData();
+    formData.append("file_link", selectedFile);
+
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "https://api.kyusillid.online/api/uploadfile");
+    xhr.onload = () => {
+      if (xhr.status === 200) {
+        const response = JSON.parse(xhr.responseText);
+        setfilelist(filelist =>[...filelist, {
+          "id" : response.id,
+          "filename" :  response.data.name,
+          "url" : response.url
+
+        }])
+       
+
+      }
+    };
+    xhr.send(formData);
     }else{
       setfilename();
       console.log('no selected file')
@@ -182,105 +209,46 @@ async function createnewtopic(e){
 
 }
 
+
+
 async function createActivity(){
 
-
-
-  // Upload file to the server and get the file link
-  
-  //if selected file has file
-
-  if(selectedFile !==null){
-  
-    const formData = new FormData();
-    formData.append("file_link", selectedFile);
-
-    const xhr = new XMLHttpRequest();
-    xhr.open("POST", "https://api.kyusillid.online/api/uploadfile");
-    xhr.onload = () => {
-      if (xhr.status === 200) {
-        const response = JSON.parse(xhr.responseText);
-        setUploadedFile(response.url);
-     
-        console.log("filelink :  " + response.url);
-
-        let newtopicitem = {
-          'created_by' : sourcematerial !== undefined ? sourcematerial.createdby : userinfo.user.acc_id,
-          'posted_by': userinfo.user.acc_id,
-          'title' :    posttitle.length!== 0 ? posttitle : 'new ' + activitytype,
-          'description':  description,
-          'activity_type' :  activitytype,
-          'category' : sourcematerial!==undefined ? sourcematerial.category   :  category['value'] ,
-          'topic' :    module.length !== 0 ? module :  'no topic',
-          'allowedit' : allowedit,
-          'allowlate' : allowlate,
-          'availability' : availability,
-          'duedate' : duedate,
-          'questionnaire_link' : 'google.com',
-          'studentselection' : studentselection,
-          'schedule' : postdate,
-          'postschedtype' : postscheduletype,
-          'scheduleoffset' : schedoffset, 
-          'points' : 100,
-          'file_link': response.url ,
-          'file_name' : filename
-         }
-       
-        console.log(JSON.stringify(newtopicitem))
-  
-      
-        axios.post('https://api.kyusillid.online/api/createactivity' , newtopicitem)  
-        .then(response => {    
-            console.log(response.data)  ;    
-      
-        })
-        .catch(error => {
-          console.log(error);
-        });
-        
-
-
-       
-      }
-    };
-    xhr.send(formData);
-  }else{
-
-
-    let newtopicitem = {
-      'created_by' : sourcematerial !== undefined ? sourcematerial.createdby : userinfo.user.acc_id,
-      'posted_by': userinfo.user.acc_id,
-      'title' :    posttitle.length!== 0 ? posttitle : 'new ' + activitytype,
-      'description':  description,
-      'activity_type' :  activitytype,
-      'category' : sourcematerial!==undefined ? sourcematerial.category   :  category['value'] ,
-      'topic' :    module.length !== 0 ? module :  'no topic',
-      'allowedit' : allowedit,
-      'allowlate' : allowlate,
-      'availability' : availability,
-      'duedate' : duedate,
-      'questionnaire_link' : 'google.com',
-      'studentselection' : studentselection,
-      'schedule' : postdate,
-      'postschedtype' : postscheduletype,
-      'scheduleoffset' : schedoffset, 
-      'points' : 100,
-      'file_link': null
-    }
-    console.log(JSON.stringify(newtopicitem))
-  
-   
-  
-    await axios.post('https://api.kyusillid.online/api/createactivity' , newtopicitem)
-    .then(response => {    
-        console.log(response.data)  ;    
-  
-    })
-    .catch(error => {
-      console.log(error);
-    });
-
+  let newtopicitem = {
+    'created_by' : sourcematerial !== undefined ? sourcematerial.createdby : userinfo.user.acc_id,
+    'posted_by': userinfo.user.acc_id,
+    'title' :    posttitle.length!== 0 ? posttitle : 'new ' + activitytype,
+    'description':  description,
+    'activity_type' :  activitytype,
+    'category' : sourcematerial!==undefined ? sourcematerial.category   :  category['value'] ,
+    'topic' :    module.length !== 0 ? module :  'no topic',
+    'allowedit' : allowedit,
+    'allowlate' : allowlate,
+    'availability' : availability,
+    'duedate' : duedate,
+    'questionnaire_link' : 'google.com',
+    'studentselection' : studentselection,
+    'schedule' : postdate,
+    'postschedtype' : postscheduletype,
+    'scheduleoffset' : schedoffset, 
+    'points' : 100,
+    'file_list': filelist
   }
+  console.log(JSON.stringify(newtopicitem))
+
+ 
+
+  await axios.post('https://api.kyusillid.online/api/createactivity' , newtopicitem)
+  .then(response => {    
+      console.log(response.data)  ;    
+
+  })
+  .catch(error => {
+    console.log(error);
+  });
+
+
+
+  
 
   
 }
@@ -304,7 +272,7 @@ const handlecreateactivity=()=>{
                           {activitytype !== 'Attendance' ?
                            <div>
                                    
-                          <p className="smallfont">TITLE</p><input type="text"  disabled={sourcematerial!==undefined} className='primaryborder' placeholder='Title' defaultValue={posttitle}  onChange={(e)=>{setposttitle(e.target.value)}}/> <br />
+                          <p className="smallfont">TITLE</p><input type="text" required  disabled={sourcematerial!==undefined} className='primaryborder' placeholder='Title' defaultValue={posttitle}  onChange={(e)=>{setposttitle(e.target.value)}}/> <br />
                            <br />
                            <p className="smallfont">DESCRIPTION</p><textarea name="" id="" cols="30" rows="6" className='primaryborder'  value={description} placeholder='Description' onChange={(e)=>{setdescription(e.target.value)}}></textarea><br />
                            <br />
@@ -335,15 +303,14 @@ const handlecreateactivity=()=>{
                               
                                  
                               <br></br> <br></br>
-                                {filename !== undefined && 
-                                  <div className='commonbutton flex primary borderradius-md'>
+                               {filelist.map((item, key)=>(
+                                <a href={item.url} key={key}>
+                                    <div className='commonbutton flex primary borderradius-md'>
                                   <AiFillFile/>
-                                  <h5 className='ellipsis'>{filename}</h5>
-                          
-
-                              </div>
-                                 
-                                 }
+                                  <h5 className='ellipsis'>{item.filename}</h5>
+                                  </div>
+                                </a>
+                               ))}
                           
             
                                 </> )                               

@@ -37,6 +37,8 @@ function ClassActivity() {
 
   const [isassigned, setisassigned] = useState(false);
 
+  const [filelist , setfilelist] = useState([]);
+
 
   const [statusfilter , setstatusfilter] = useState("All");
 
@@ -78,8 +80,38 @@ function ClassActivity() {
     } 
   }
 
-  const handledit = (e)=>{
+  const handledit = async (e)=>{
     e.preventDefault();
+
+    const temp = {
+      "title" : edittitle, 
+      "description" : editdescription,
+      "activity_id" : currentactivity.activity_id
+    }
+
+    await axios.post('https://api.kyusillid.online/api/updateactivity', temp).then(
+    response=>{
+      alert('successfully edited');
+      navigate('/classes/sampleclass/modules');
+    }
+    ).catch(error => console.log(error.data))
+
+  }
+
+  const handledelete = async (e) =>{
+
+    if(window.confirm('delete this activity?') === true){
+        await axios.delete('https://api.kyusillid.online/api/deleteactivity/' + e).then(
+          response=>{
+            alert('successfully deleted');
+            navigate('/classes/sampleclass/modules');
+          }
+        )
+
+  .catch();
+
+    }
+  
   }
 
 
@@ -191,6 +223,12 @@ function ClassActivity() {
    
      });
 
+     axios.get('https://api.kyusillid.online/api/activityfiles/' + currentactivity.activity_id).then(
+      response=>{
+        setfilelist(response.data)
+      }
+     ).catch(error=> console.log(error.data));
+
 
 
   },[currentactivity])
@@ -271,12 +309,6 @@ const unSubmit= async (e)=>{
 
 }
 
-useEffect(()=>{
-
-    console.log(currentactivity.file_name)
-
-},[currentactivity.file_name])
-
 
 
 
@@ -343,7 +375,7 @@ useEffect(()=>{
            <div className='activitysettings tertiary borderradius-md'>
         <ul>
           <li className='padding12' onClick={()=>{setactivitytab('edit') ; setactivitysettings(false) }}>Edit {currentactivity.activity_type}</li>
-          <li className='padding12'>Delete {currentactivity.activity_type}</li>
+          <li className='padding12' onClick={()=>{handledelete(currentactivity.activity_id)}}>Delete {currentactivity.activity_type}</li>
           <li className='padding12' onClick={()=>{setactivitytab('postmodule') ; setactivitysettings(false) }}>Post to Source Modules</li>
 
          </ul>
@@ -376,17 +408,15 @@ useEffect(()=>{
     
             {currentactivity.activity_type ==='Material' ?
               <div className="flex">
-                {currentactivity.file_name !== null &&
+               {filelist.map((item, key)=>(
+                <a href={item.stringpath} target="_blank" key={key} className='padding12'>
 
-
-<a href={filelinktemp} target="_blank">
-
-<div className='materialpanel primary borderradius-md'>
+                <div className='materialpanel primary borderradius-md'>
                   <RiBookFill />
-                  <p className='textcenter'>{currentactivity.file_name}</p>
-             </div> 
-</a>
-                  }
+                  <p className='textcenter'>{item.file_name}</p>
+                 </div> 
+                </a>
+               ))}
               </div>
             :currentactivity.activity_type==='Questionnaire' ?
                   <div className="flex">
