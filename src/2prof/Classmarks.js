@@ -71,7 +71,6 @@ function Classmarks() {
             <th>Activities</th>
             <th>Assignment</th>
             <th>Quizzes</th>
-            <th>Exam</th>
             <th>Attendance</th>
           </tr>
         </thead>
