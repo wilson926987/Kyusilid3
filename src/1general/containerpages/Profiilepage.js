@@ -29,8 +29,9 @@ function Profiilepage() {
   useEffect(()=>{
     console.log();
     if (userinfo && userinfo.user && userinfo.user.profile_pic) {
-      const imageUrl = `https://api.kyusillid.online/laravel/public${userinfo.user.profile_pic}`;
+      const imageUrl = `https://api.kyusillid.online/${userinfo.user.profile_pic}`;
       setImageUrl(imageUrl);
+      console.log(imageUrl)
     }
   }, [userinfo]);
 

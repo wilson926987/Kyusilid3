@@ -84,7 +84,7 @@ const [questions, setQuestions] = useState([
   };
 
   const handleaddoption= ( item , content)=>{
-    
+    console.log('FAKDHF');
 
     setQuestions(questions.map(item2=>({
       "question": item2.question,

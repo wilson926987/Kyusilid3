@@ -55,7 +55,7 @@ function ClassModules() {
      </div>
 
 
-     <div className='col-lg-4'>
+     <div className='col-lg-4'> 
    
 
                         <Dropdown
@@ -69,8 +69,8 @@ function ClassModules() {
                                 controlActiveClass='dropdowncontrolactive'
                                 mainActiveClass='dropdownmain-active'                         
                             />  
-     
-     
+      
+      
      </div>
      </div>
 

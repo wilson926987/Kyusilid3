@@ -1,6 +1,7 @@
 import React from 'react'
 import avatar from '../../assets/images/avatar.jpg'
 
+
 function Classinfoitem({personitem}) {
   return (
     <div className='personpanel'>

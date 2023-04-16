@@ -145,7 +145,9 @@ const Dueoptions =[
   {'value' : 'Assignment','label' : 'Assignment'},
   {'value' : 'Activity','label' : 'Activity'},
   {'value' : 'Questionnaire','label' : 'Questionnaire'},
-  {'value' : 'Attendance','label' : 'Attendance'}
+  {'value' : 'Attendance','label' : 'Attendance'},
+  {'value' : 'Midterm_Exam','label' : 'Midterm Exam'},
+  {'value' : 'Final_Exam','label' : 'Final Exam'}
 
 ]
 
@@ -315,7 +317,7 @@ const handlecreateactivity=()=>{
                            
  
  
-                           {!(activitytype==='Questionnaire' || activitytype==='Attendance') &&
+                           {!(activitytype==='Questionnaire' || activitytype==='Attendance' || activitytype === 'Midterm Exam' || activitytype === 'Final Exam') &&
                                (  (sourcematerial !== undefined )?
                               
                                
@@ -351,8 +353,12 @@ const handlecreateactivity=()=>{
                                 </> )                               
                          }
                           
-                              {activitytype==='Questionnaire' &&
+                              {activitytype ==='Questionnaire' &&
                               <label htmlFor="" className='primary'>Questionaire( pag questionaire ung type)</label>}
+                              {activitytype ==='Midterm Exam' &&
+                              <label htmlFor="" className='primary'>Midterm Exam</label>}
+                              {activitytype ==='Final Exam' &&
+                              <label htmlFor="" className='primary'>Final Exam</label>}
                            </div> 
                            :
                            <div>
@@ -508,7 +514,7 @@ const handlecreateactivity=()=>{
                             }
             
                             
-                            {(activitytype==='Assignment' || activitytype ==='Activity' || activitytype==='Questionnaire') &&
+                            {(activitytype==='Assignment' || activitytype ==='Activity' || activitytype==='Questionnaire' || activitytype === 'Midterm Exam' || activitytype == 'Final Exam') &&
                               <>
                               <br />
                               <div>

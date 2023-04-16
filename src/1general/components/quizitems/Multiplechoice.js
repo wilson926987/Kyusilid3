@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 function Multiplechoice({content ,item , handleaddoption , handleAnswerChange}) {
 
   const addcontent = ()=>{
+    
     const newcontent = content.concat({"value" : "option "+content.length , "index" : content.length})
    handleaddoption(item, newcontent)
   }
@@ -45,7 +46,7 @@ function Multiplechoice({content ,item , handleaddoption , handleAnswerChange}) 
           ))}
       </select>
 
-      <button className='secondary commonbutton lighttext' onClick={()=>addcontent}>Add Option</button>
+      <button className='secondary commonbutton lighttext' onClick={()=>addcontent()}>Add Option </button>
 
 
 
