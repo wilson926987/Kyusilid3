@@ -18,14 +18,13 @@ function Profiilepage() {
   const [file, setFile] = useState(null);
 
 
-
   useEffect(()=>{
       axios.get('https://api.kyusillid.online/api/getprofilestatus/' + userinfo.user.acc_id).then(
         response => setactivitystatus(response.data)
       ).catch();
   },[])
 
-  //Profile pic get
+
   useEffect(()=>{
     console.log();
     if (userinfo && userinfo.user && userinfo.user.profile_pic) {
@@ -34,7 +33,6 @@ function Profiilepage() {
       console.log(imageUrl)
     }
   }, [userinfo]);
-
 
 
 
@@ -59,7 +57,6 @@ function Profiilepage() {
     }
   }
 
- 
 
   const [settings, setsettings] = useState(false);
   const togglesetting = ()=>{
@@ -79,7 +76,6 @@ function Profiilepage() {
     
  },[cpassword])
 
- //Profile pic function 
  const handleFileChange = (event)=>{
   setFile(event.target.files[0]);
 };
@@ -111,7 +107,6 @@ const handleProfile = (event) => {
 };
 
 
-
   return (
     <div>
     <div className='col-lg-12'>
@@ -123,26 +118,36 @@ const handleProfile = (event) => {
 
           <div className='flex'>
           <div className='profile-pic-div'>
-           <form onSubmit={handleProfile} enctype ='multipart/form-data'>
+          <form onSubmit={handleProfile} encType ='multipart/form-data'>
             <img src={imageUrl}/>
             
             </form>
           </div>
-
-
-          <div className='col-lg-'>
-        
-              <input type="file" id="file"  onChange={handleFileChange}></input>
-                <label className='uploadBtnn' for="file" id="uploadBtnn" style={{display: "block"}}>Choose Photo</label>
-                <button onClick={handleProfile}>Upload</button>
-             
-            </div>
           
-          <div>
+          
+            
+          
+         
+
+
+          <div className='information-prof'>
             <h3>{userinfo.user.firstname} {userinfo.user.middle} {userinfo.user.lastname}</h3>
             <p>Information Technology</p>
             </div>
           </div>
+
+
+
+          <div className='UP-Button'>
+        
+              <input type="file" id="file"  onChange={handleFileChange}></input>
+                <label className='commonbutton secondary lighttext' for="file" id="uploadBtn">Choose Photo</label>
+                <br></br>
+                <button className='commonbutton secondary lighttext' type="submit" onClick={handleProfile} >Upload</button>
+             
+            </div>
+
+
           <div className='accountinfo'>
             <h4>Account info</h4>
             <p>email: {userinfo.user.acc_email=== null ? " no email yet" : userinfo.user.acc_email}</p>
@@ -157,7 +162,7 @@ const handleProfile = (event) => {
     
     </div>
  {settings &&
-     <div className="col-lg-6 ">
+     <div className="col-lg-6">
 
 
      <div className='tertiary profilepanelmain  borderradius-lg '>
@@ -203,34 +208,31 @@ const handleProfile = (event) => {
 </div>
     </div>
     
-{userinfo.user.usertype ==="stud"&& 
 
-<div className="col-md-12">
-<div className="row">
-    <div className="col-md-4">
-        <div className="tertiary attendancepanel borderradius-lg dbpanelmargin margintop12">
-        <h2 className="text-left">Attendance Status</h2>
+
+
+    <div className="col-md-12">
+    <div className="row">
+        <div className="col-md-4">
+            <div className="tertiary attendancepanel borderradius-lg dbpanelmargin margintop12">
+            <h2 className="text-left">Attendance Status</h2>
 
 <div className='DonutChart'><DonutChart></DonutChart></div>
 
+            </div>
         </div>
-    </div>
 
-    <div className='col-md-8'>
-        <div className="tertiary borderradius-lg activitystatuspanel dbpanelmargin margintop12">
-        <h2 className="text-left">Activity Status</h2>
-        <div className='BarChart'> {activitystatus !== undefined && <BarChart item= {activitystatus}/>}</div>
+        <div className='col-md-8'>
+            <div className="tertiary borderradius-lg activitystatuspanel dbpanelmargin margintop12">
+            <h2 className="text-left">Activity Status</h2>
+            <div className='BarChart'> {activitystatus !== undefined && <BarChart item= {activitystatus}/>}</div>
+            </div>
         </div>
+
+        
+
     </div>
-
-    
-
 </div>
-</div>
-
-}
-
-
 
 
  

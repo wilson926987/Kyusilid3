@@ -138,46 +138,93 @@
     align-items: center;
     border: none;
 }
+/*-----search---*/
+.search {
+  display: flex;
+  margin-bottom: 20px;
+  margin-left: auto;
+}
 
-/*search*/
-.search{ 
-    margin-left: 65%;
+.search input {
+  width: 250px;
+  height: 35px;
+  border-radius: 50px;
+  font-size: 16px;
+  font-family: 'Century Gothic';
+  text-align: center;
+  border-color: #6893ee;
 }
-.search input{ 
-    width: 250px;
-    height: 35px;
-    border-radius: 50px;
-    font-size: 16px;
-    font-family: 'Century Gothic';
-    text-align: center;
-    border-color: #6893ee;
-}
+
 @media only screen and (max-width: 768px) {
   .search {
-    margin-left: 0;
-    text-align: center;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 
   .search input {
     width: 100%;
-    max-width: 250px;
-    margin: 0 auto;
+    max-width: 300px;
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
 }
-.flex .search1{ 
-    margin-left: 30%;
-    width: 250px;
-    height: 35px;
-    border-radius: 50px;
-    font-size: 16px;
-    font-family: 'Century Gothic';
-    text-align: center;
-    border-color: #6893ee;
-    
+
+@media only screen and (max-width: 480px) {
+  .search input {
+    max-width: 200px;
+  }
 }
-.search2 input{ 
-  margin-left: 50%;
+
+.search2 {
+  display: flex;
+  margin-bottom: 20px;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+}
+
+.search2 input {
   width: 250px;
+  height: 35px;
+  border-radius: 50px;
+  font-size: 16px;
+  font-family: 'Century Gothic';
+  text-align: center;
+  border-color: #6893ee;
+}
+
+@media only screen and (max-width: 768px) {
+  .search2 {
+    margin: 0 auto;
+ 
+    max-width: 300px;
+  }
+
+  .search2 input {
+    width: 100%;
+    max-width: 300px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .search2 input {
+    max-width: 200px;
+  }
+}
+
+
+.search3 {
+  display: flex;
+  margin-bottom: 20px;
+  justify-content: flex-end;
+  margin-left: auto;
+}
+
+.search3 input{ 
+  width: 300px;
   height: 35px;
   border-radius: 50px;
   font-size: 16px;
@@ -187,17 +234,27 @@
   
 }
 @media only screen and (max-width: 768px) {
-  .search2 {
-    margin-left: 0;
-    text-align: center;
+  .search3 {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 
-  .search2 input {
+  .search3 input {
     width: 100%;
-    max-width: 250px;
-    margin: 0 auto;
+    max-width: 300px;
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
 }
+
+@media only screen and (max-width: 480px) {
+  .search3 input {
+    max-width: 200px;
+  }
+}
+
+
 .extra-textbox .GradeText{ 
     background-color: white;
     margin-top: 3%;
@@ -389,6 +446,7 @@
   border-radius: 50px;
   display: block;
   cursor: pointer;
+
   
 }
 
@@ -399,6 +457,7 @@
   background-size: cover;
   width: 100%;
   border-radius: 20px;
+  flex-direction: column;
 }
 .boxes1{ 
   margin-top: 10%;
@@ -467,7 +526,6 @@
     margin-left: -30px;
     margin-top: 3%;
     padding-top: 5px;
-
 }
 .box2 h2{ 
     font-size: 50px;
@@ -724,6 +782,8 @@
 /*-----Profile------*/
   
 /*PROFILE PIC*/
+  
+/*PROFILE PIC*/
 .profile-pic-div{
   position: relative;
   display: flex;
@@ -751,6 +811,7 @@
   padding-left: 50px;  
 }
 
+
 /* #uploadBtnn{
   position: absolute;
   bottom: 0;
@@ -768,7 +829,6 @@
 #file{
   display: none;
 }
-
 /* .inputss{
     z-index: 9980!important;
 } */
@@ -802,7 +862,7 @@
 
   .UP-Button{
     margin-left: 5%;
-    
+
   }
   .UP-Button label{
     margin-left: 0px;
@@ -822,6 +882,7 @@
 
 .accountinfo{
   padding-left:150px;
+  margin-top: -10%;
   }
 /*------ overview------*/
 /* Targeting the BsFillJournalBookmarkFill icon */
@@ -836,4 +897,29 @@
   border-right: 3px solid ;
   border-radius: 5px;
 }
+.fil input{ 
+  text-decoration: none;
+  position:absolute;
+
+}
+#file-input {
+  opacity: 0;
+  position: absolute;
+  left: -9999px;
+}
+
+.custom-file-upload {
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 3px;
+  font-weight: bold;
+  align-items: center;
+}
+
+.custom-file-upload i {
+  margin-right: 5px;
+}
+
+
 

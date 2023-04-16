@@ -15,6 +15,8 @@ function AdminContainer() {
     if(userinfo.usertype !=='admin'){
         navigate('/')
     }
+
+    console.log(userinfo)
   },[userinfo, navigate])
 
 

@@ -46,14 +46,14 @@ function ClassInfo() {
           </div>
         </div>
 
-        <div className='search'>
-          <input
-            type="text"
-            placeholder="Search by name"
-            value={searchTerm}
-            onChange={handleSearch}
-          />
-        </div>
+        <div className='search3'>
+        <input
+          type="text"
+          placeholder="Search by name"
+          value={searchTerm}
+          onChange={handleSearch}
+        />
+      </div>
 
         {filteredStudents &&
           filteredStudents.map((personitem, key) => (

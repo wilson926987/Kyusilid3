@@ -97,6 +97,11 @@ svg{
   background-color: var(--defaulttertiary);
 }
 
+td{
+  text-align: center;
+}
+
+
 
 .responsefile{
     height: 140px;

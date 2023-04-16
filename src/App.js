@@ -60,6 +60,7 @@ import Viewresponse from './2prof/Viewresponse';
 import Updatelist from './4admin/Updatelist';
 import Updatelistproff from './4admin/Updatelistproff';
 import Updatedliststud from './4admin/Updatedliststud';
+import SuperAdmin from './4admin/SuperAdmin';
 
 
 
@@ -119,7 +120,7 @@ function App() {
                   </Route>
                   <Route path='accounts_prof' element={<Accountsprof/>}></Route>
                   <Route path='accounts_stud' element ={<Accountsstud/>}></Route>
-              
+               
                   <Route  path='createclass' element={<CreateClass/>}/>
                   <Route  path='createproff' element={<Createproff/>}/>
                   <Route  path='createstud' element={<Createstud/>}/>
@@ -128,7 +129,10 @@ function App() {
                   <Route path='updateliststud' element={<Updatedliststud/>}></Route>
               
                 </Route>
+                <Route path='adminhead' element={<SuperAdmin/>} />
+              
                 <Route path='adminlog' element={<Adminlog/>}/>
+
              
                 
                 

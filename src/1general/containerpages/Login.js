@@ -50,10 +50,17 @@ function Login() {
 
    if(username!==undefined && password!==undefined){
     try {
+
+      console.log(JSON.stringify({
+        'acc_username': username,
+        'acc_password': password
+    }))
       const response = await axios.post('https://api.kyusillid.online/api/login', {
           'acc_username': username,
           'acc_password': password
       });
+
+
 
       if (response.data.status === 'success') {
           console.log('Authentication Successful!');

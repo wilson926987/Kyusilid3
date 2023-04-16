@@ -83,14 +83,14 @@ function AdminDashboard() {
           </div>
 
           <div className="box2">
-            <div className="cards">
-              <h2>{currentTime.toLocaleTimeString()}</h2>
-              <br></br>
-              <h3>{currentTime.toLocaleDateString()}</h3>
-            </div>
-          </div>
-          </div>
+  <div className="cards">
+    <h2>{currentTime.toLocaleTimeString()}</h2>
+    <br></br>
+    <h3>{currentTime.toLocaleString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</h3>
+  </div>
+</div>
 
+</div>
           <div className="boxes1">
 
           <div class="linkk1" >
@@ -113,17 +113,16 @@ function AdminDashboard() {
 
           </div></div>
 
-          </div>
 
 
-
+ </div>
       </div>
       
     
 
    
    
-    
+   
     </div>
   );
 }
