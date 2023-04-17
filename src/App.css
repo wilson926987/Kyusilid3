@@ -1835,8 +1835,6 @@ padding: 12px;
   left: 0;
 } */
 .stickheader{
-  
-    background: white;
     position: sticky;
     top: 0; /* Don't forget this, required for the stickiness */
     z-index: 3;

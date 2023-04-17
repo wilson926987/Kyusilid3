@@ -41,7 +41,6 @@ function Classmarks() {
   const handleView = (index) => {
     setShowTextbox(!showTextbox);
   };
-
 function exportGrades() {
   if (data) {
     const exportData = data.map((item) => {
@@ -95,6 +94,7 @@ function exportGrades() {
     XLSX.writeFile(workbook, "grades.xlsx");
   }
 }
+
   return (
     <div>
       <div class="container">
@@ -115,21 +115,23 @@ function exportGrades() {
       </div>
       <div class="buttons">
   <div className={gradeType === 'midterm' ? 'active' : 'btnsss'}>
-    <button id='gradetype' onClick={() => setGradeType('midterm')} style={{ width: '100%', color: gradeType === 'midterm' ? '#064273' : '#064273', border: 'none' }}>
-      Midterm Grade
-    </button>
-  </div>
-  <div className={gradeType === 'final' ? 'active' : 'btnsss1'}>
-    <button id='gradetype' onClick={() => setGradeType('final')} style={{ width: '100%', color: gradeType === 'final' ? '#064273' : '#064273', border: 'none'}}>
-      Final Grade
-    </button>
-  </div>
+  <button id='gradetype' onClick={() => setGradeType('midterm')} style={{ width: '100%', color: gradeType === 'midterm' ? '#064273' : '#000', border: 'none', borderBottom: gradeType === 'midterm' ? '4px solid #064273' : '',}}>
+    Midterm Grade
+  </button>
 </div>
-
-
-      <table class="table">
+<div className={gradeType === 'final' ? 'active' :'btnsss1'}>
+  <button id='gradetype' onClick={() => setGradeType('final')} style={{ width: '100%', color: gradeType === 'final' ? '#064273' : '#000', border: 'none', borderBottom: gradeType === 'final' ? '4px solid #064273' : '',}}>
+    Final Grade
+  </button>
+</div>
+</div>
+<br></br>
+<br></br>
+        
+      <div className="persontable width100">
+      <table className='width100' cellSpacing={0}>
         <thead>
-          <tr>
+          <tr className="primary">
             <th>Name</th>
             <th>Activities</th>
             <th>Assignment</th>
@@ -138,17 +140,14 @@ function exportGrades() {
             {gradeType === "midterm" && (
               <>
                 <th>Midterm Exam</th>
-                <th>Midterm Grade</th>
               </>
             )}
             {gradeType === "final" && (
               <>
                 <th>Final Exam</th>
-                <th>Final Term Grade</th>
-                <th>Final Grade</th>
-
               </> 
             )}
+            
           </tr> 
         </thead>  
  
@@ -179,13 +178,6 @@ function exportGrades() {
                       </td>
                       <td>{Math.round(item.attendance.grade)}</td>
                       <td>{Math.round(item.midterm_exam.grade)} / 100</td>
-                      <td>
-                        {Math.round((item.activity.grade / (item.activity_count || 1)) * 0.2 +
-                        (item.assignment.grade / (item.assignment_count || 1)) * 0.2 +
-                          (item.questionnaire.grade / (item.questionnaire_count || 1)) * 0.15 +
-                          0 * 0.05 + (item.midterm_exam.grade || 0) * 0.4
-                        )}
-                      </td> 
                     </>
                   )}
                   {gradeType === "final" && (
@@ -195,19 +187,6 @@ function exportGrades() {
                       <td>{Math.round(item.finals_questionnaire.grade / (item.finals_quiz_count || 1))} / 100</td>
                       <td>{Math.round(item.attendance.grade)}</td>
                       <td>{Math.round(item.finals_exam.grade)}</td>
-                      <td>{Math.round((item.finals_activity.grade / (item.finals_activity_count || 1)) * 0.2 +
-                          (item.finals_assignment.grade /(item.finals_assignment_count || 1)) * 0.2 +
-                          (item.finals_questionnaire.grade /(item.finals_quiz_count || 1)) * 0.15 +
-                          0 * 0.05 + (item.finals_exam.grade || 0) * 0.4) }</td>
-
-                      <td>{((Math.round((item.finals_activity.grade / (item.finals_activity_count || 1)) * 0.2 +
-                          (item.finals_assignment.grade /(item.finals_assignment_count || 1)) * 0.2 +
-                          (item.finals_questionnaire.grade /(item.finals_quiz_count || 1)) * 0.15 +
-                          0 * 0.05 + (item.finals_exam.grade || 0) * 0.4))/2)+((Math.round((item.activity.grade / (item.activity_count || 1)) * 0.2 +
-                          (item.assignment.grade / (item.assignment_count || 1)) * 0.2 +
-                            (item.questionnaire.grade / (item.questionnaire_count || 1)) * 0.15 +
-                            0 * 0.05 + (item.midterm_exam.grade || 0) * 0.4)/2
-                          ))}</td>
                     </> 
                   )}    
                 </tr> 
@@ -215,6 +194,7 @@ function exportGrades() {
           </tbody>
         )} 
       </table> 
+      </div>
       <br />
       <style jsx>{`
         #export {
@@ -231,18 +211,13 @@ function exportGrades() {
           padding: 5px;
           border-bottom: none;
         }
-
         .buttons {
           display: flex;
           justify-content: space-between;
           max-width: 100%;
         } 
-        .buttons .btnsss:hover { 
-          border-bottom: 4px solid #064273;
-        }
-        .buttons .btnsss1:hover { 
-          border-bottom: 4px solid #064273;
-        }
+        
+
         .active {
           border-radius: 10px;
         }
