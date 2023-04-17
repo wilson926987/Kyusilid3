@@ -42,68 +42,64 @@ function Classmarks() {
     setShowTextbox(!showTextbox);
   };
 
-  function exportGrades() {
-    if (data) {
-      const exportData = data.map((item) => {
-        const midtermGrade = Math.round(
-          (item.activity.grade / (item.activity_count || 1)) * 0.2 +
-            (item.assignment.grade / (item.assignment_count || 1)) * 0.2 +
-            (item.questionnaire.grade / (item.questionnaire_count || 1)) *
-              0.15 +
-            0 * 0.05 +
-            (item.midterm_exam.grade || 0) * 0.4
-        );
-        let equivalent = 5.0;
 
-        if (midtermGrade >= 98) {
-          equivalent = 1.0;
-        } else if (midtermGrade >= 95) {
-          equivalent = 1.25;
-        } else if (midtermGrade >= 92) {
-          equivalent = 1.5;
-        } else if (midtermGrade >= 89) {
-          equivalent = 1.75;
-        } else if (midtermGrade >= 86) {
-          equivalent = 2.0;
-        } else if (midtermGrade >= 83) {
-          equivalent = 2.25;
-        } else if (midtermGrade >= 80) {
-          equivalent = 2.5;
-        } else if (midtermGrade >= 77) {
-          equivalent = 2.75;
-        } else if (midtermGrade >= 75) {
-          equivalent = 3.0;
-        }
+function exportGrades() {
+  if (data) {
+    const exportData = data.map((item) => {
+       const midtermGrade = (Math.round((item.activity.grade / (item.activity_count || 1)) * 0.2 +
+       (item.assignment.grade / (item.assignment_count || 1)) * 0.2 +
+         (item.questionnaire.grade / (item.questionnaire_count || 1)) * 0.15 +
+         0 * 0.05 + (item.midterm_exam.grade || 0) * 0.4));
+      let equivalent = 5.0;
 
-        return {
-          Name: item.student.name,
-          Activity: Math.round(
-            item.activity.grade / (item.activity_count || 1)
-          ),
-          Assignment: Math.round(
-            item.assignment.grade / (item.assignment_count || 1)
-          ),
-          Quiz: Math.round(
-            item.questionnaire.grade / (item.questionnaire_count || 1)
-          ),
-          Attendance: Math.round(item.attendance.grade),
-          "Midterm Exam": item.midterm_exam.grade || 0,
-          "Midterm Grade": midtermGrade.toFixed(2),
-          Equivalent: equivalent.toFixed(2),
-        };
-      });
+      if (midtermGrade >= 98) {
+        equivalent = 1.0;
+      } else if (midtermGrade >= 95) {
+        equivalent = 1.25;
+      } else if (midtermGrade >= 92) {
+        equivalent = 1.5;
+      } else if (midtermGrade >= 89) {
+        equivalent = 1.75;
+      } else if (midtermGrade >= 86) { 
+        equivalent = 2.0;
+      } else if (midtermGrade >= 83) {
+        equivalent = 2.25;
+      } else if (midtermGrade >= 80) {
+        equivalent = 2.5;
+      } else if (midtermGrade >= 77) {
+        equivalent = 2.75;
+      } else if (midtermGrade >= 75) {
+        equivalent = 3.0;
+      }
 
-      const worksheet = XLSX.utils.json_to_sheet(exportData);
-      const workbook = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(workbook, worksheet, "Grades");
-      XLSX.writeFile(workbook, "grades.xlsx");
-    }
+      return {
+        Name: item.student.name,
+        Activity: Math.round(
+          item.activity.grade / (item.activity_count || 1)
+        ),
+        Assignment: Math.round(
+          item.assignment.grade / (item.assignment_count || 1)
+        ),
+        Quiz: Math.round(
+          item.questionnaire.grade / (item.questionnaire_count || 1)
+        ),
+        Attendance: Math.round(item.attendance.grade),
+        "Midterm Exam": item.midterm_exam.grade || 0,
+        "Midterm Grade": midtermGrade.toFixed(2),
+        Equivalent: equivalent.toFixed(2),
+      };
+    });
+
+    const worksheet = XLSX.utils.json_to_sheet(exportData);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Grades");
+    XLSX.writeFile(workbook, "grades.xlsx");
   }
-
+}
   return (
     <div>
       <div class="container">
-        <button id="export" onClick={() => exportGrades()}>
+        <button className='commonbutton primary ' id="export" onClick={() => exportGrades()}> 
           Export
         </button>
 
@@ -119,21 +115,23 @@ function Classmarks() {
         </div>
       </div>
       <div class="buttons">
-  <div className={gradeType === 'midterm' ? 'active' : ''}>
-    <button id='gradetype' onClick={() => setGradeType('midterm')} style={{ width: '100%', backgroundColor: gradeType === 'midterm' ? '#064273' : '#fff', color: gradeType === 'midterm' ? '#fff' : '#000', border: 'none' }}>
+  <div className={gradeType === 'midterm' ? 'active' : 'btnsss'}>
+    <button id='gradetype' onClick={() => setGradeType('midterm')} style={{ width: '100%', color: gradeType === 'midterm' ? '#064273' : '#000', border: 'none', borderBottom: gradeType === 'midterm' ? '4px solid #064273' : '',}}>
       Midterm Grade
     </button>
   </div>
-  <div className={gradeType === 'final' ? 'active' : ''}>
-    <button id='gradetype' onClick={() => setGradeType('final')} style={{ width: '100%', backgroundColor: gradeType === 'final' ? '#064273' : '#fff', color: gradeType === 'final' ? '#fff' : '#000', border: 'none'}}>
+  <div className={gradeType === 'final' ? 'active' :'btnsss1'}>
+    <button id='gradetype' onClick={() => setGradeType('final')} style={{ width: '100%', color: gradeType === 'final' ? '#064273' : '#000', border: 'none', borderBottom: gradeType === 'final' ? '4px solid #064273' : '',}}>
       Final Grade
     </button>
   </div>
 </div>
-
-
-      <table class="table">
-        <thead>
+<br></br>
+<br></br>
+        
+      <div className="persontable width100">
+      <table className='width100' cellSpacing={0}>
+        <thead className="primary">
           <tr>
             <th>Name</th>
             <th>Activities</th>
@@ -143,116 +141,90 @@ function Classmarks() {
             {gradeType === "midterm" && (
               <>
                 <th>Midterm Exam</th>
-                <th>Midterm Grade</th>
               </>
             )}
             {gradeType === "final" && (
               <>
                 <th>Final Exam</th>
-                <th>Final Temp Grade</th>
-                <th>Final Grade</th>
-
-              </>
+              </> 
             )}
-          </tr>
-        </thead>
-
+          </tr> 
+        </thead>  
+ 
         {data != undefined && (
-          <tbody>
-            {data
-              .filter(
+          <tbody> 
+            {data 
+              .filter(  
                 (item1) =>
                   searchfilter === "" ||
                   item1.student.name.toLowerCase().includes(searchfilter)
               )
               .map((item, index) => (
+                
                 <tr key={index}>
                   <td data-label="Name">{item.student.name} </td>
                   {gradeType === "midterm" && (
                     <>
                       <td>
                         {Math.round(
-                          item.activity.grade / (item.activity_count || 1)
-                        )}{" "}
-                        / 100
+                          item.activity.grade / (item.activity_count || 1))}{" "} / 100
                       </td>
                       <td>
                         {Math.round(
-                          item.assignment.grade / (item.assignment_count || 1)
-                        )}{" "}
-                        / 100
+                          item.assignment.grade / (item.assignment_count || 1))}{" "} / 100
                       </td>
                       <td>
-                        {Math.round(
-                          item.questionnaire.grade /
-                            (item.questionnaire_count || 1)
-                        )}{" "}
-                        / 100
+                        {Math.round( item.questionnaire.grade /(item.questionnaire_count || 1))}{" "}/ 100
                       </td>
                       <td>{Math.round(item.attendance.grade)}</td>
                       <td>{Math.round(item.midterm_exam.grade)} / 100</td>
-                      <td>
-                        {Math.round(
-                          (item.activity.grade / (item.activity_count || 1)) *
-                            0.2 +
-                            (item.assignment.grade /
-                              (item.assignment_count || 1)) *
-                              0.2 +
-                            (item.questionnaire.grade /
-                              (item.questionnaire_count || 1)) *
-                              0.15 +
-                            0 * 0.05 +
-                            (item.midterm_exam.grade || 0) * 0.4
-                        )}
-                      </td>
                     </>
                   )}
                   {gradeType === "final" && (
                     <>
-                      <td>100 / 100</td>
-                      <td>69 / 100</td>
-                      <td>75 / 100</td>
-                      <td>100</td>
-                      <td>100 / 100</td>
-                      <td>75</td>
-                    </>
-                  )}
-                </tr>
+                      <td>{Math.round(item.finals_activity.grade / (item.finals_activity_count || 1))} / 100</td>
+                      <td>{Math.round(item.finals_assignment.grade / (item.finals_assignment_count || 1))} / 100</td>
+                      <td>{Math.round(item.finals_questionnaire.grade / (item.finals_quiz_count || 1))} / 100</td>
+                      <td>{Math.round(item.attendance.grade)}</td>
+                      <td>{Math.round(item.finals_exam.grade)}</td>
+                    </> 
+                  )}    
+                </tr> 
               ))}
           </tbody>
-        )}
-      </table>
+        )} 
+      </table> 
+      </div>
       <br />
       <style jsx>{`
         #export {
-          background-color: #064273;
-          border: 1px solid;
-          font-size: 24px;
+          font-size: 16px;
           cursor: pointer;
           border-radius: 8px;
-          color: white;
-          width: auto%;
+          width: auto%; 
           padding: 5px;
         }
         #gradetype {
           font-size: 15px;
           cursor: pointer;
-          color: white;
           width: 100%;
           padding: 5px;
-          border: 5px solid #064273;
           border-bottom: none;
         }
+
         .buttons {
           display: flex;
           justify-content: space-between;
-          background-color: #064273;
           max-width: 100%;
+        } 
+        .buttons .btnsss:hover { 
+          border-bottom: 4px solid #064273;
+
+        }
+        .buttons .btnsss1:hover { 
+          border-bottom: 4px solid #064273;
         }
         .active {
-          border-top: 2px solid black;
-          border-left: 2px solid black;
-          border-right: 2px solid black;
           border-radius: 10px;
         }
         .buttons > div {
