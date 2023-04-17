@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect,useState } from 'react'
 import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Avatar from '../../assets/images/avatar.jpg'
@@ -11,13 +11,29 @@ import classbanner5 from '../../assets/images/classbanner5.png'
 import classbanner6 from '../../assets/images/classbanner6.png'
 import classbanner7 from '../../assets/images/classbanner7.png'
 import classbanner8 from '../../assets/images/classbanner8.png'
+import axios from 'axios';
 
 
 function Classpanel({classitem}) {
   const navigate = useNavigate()
   const {setcurrentclass} = useContext(currentclassContext);
   const classbanner = [classbanner1, classbanner1,classbanner2, classbanner3, classbanner4, classbanner5 , classbanner6, classbanner7, classbanner8]
-  
+  const [profilePic, setProfilePic] = useState('');
+
+  useEffect(() => {
+    async function fetchProfilePic() {
+      try {
+        const response = await axios.get(`https://api.kyusillid.online/api/getprofilepic/${classitem.acc_id}`);
+        setProfilePic(response.data.profile_pic);
+        console.log(response.data.profile_pic);
+      
+      } catch (error) {
+        console.error(error.response.data);
+        console.log(classitem);
+      }
+    }
+    fetchProfilePic();
+  }, [classitem.acc_id]);
  
   return (
    
@@ -32,7 +48,7 @@ function Classpanel({classitem}) {
             </div>
             <div className='classpaneltitle'>
                     <div className='classpanelprofile'>
-                    <img src={Avatar} alt="" />
+                    <img src={profilePic} alt="" />
                     </div>
                 <div>
                   <h4 className='ellipsis'>{classitem.sub_code +'- ' + classitem.sub_name}</h4>

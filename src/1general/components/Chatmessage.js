@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { userInfoContext } from '../../Globalcontext'
 import {BsFillTrashFill} from 'react-icons/bs'
 import axios from 'axios';
@@ -7,6 +7,20 @@ import axios from 'axios';
 function Chatmessage({item}) {
     const {userinfo} = useContext(userInfoContext);
     const [isdeleted, setisdeleted] = useState(item.isdeleted);
+    const [profilePic, setProfilePic] = useState('');
+
+    useEffect(() => {
+      async function fetchProfilePic() {
+        try {
+          const response = await axios.get(`https://api.kyusillid.online/api/getprofilepic/${item.acc_id}`);
+          setProfilePic(response.data.profile_pic);
+          console.log(response.data.profile_pic);
+        } catch (error) {
+          console.error(error);
+        }
+      }
+      fetchProfilePic();
+    }, [userinfo.user.acc_id]);
 
     const handledelete = async()=>{
       
@@ -27,7 +41,7 @@ function Chatmessage({item}) {
     <div className='chatmessage padding12 relative'>
    
         <div>
-        <img src="https://i.pravatar.cc/50" alt="" />
+        <img src={profilePic} alt='' />
     
         </div>
            
