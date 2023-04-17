@@ -103,6 +103,24 @@ td{
 
 
 
+.submitted-activity>div:last-child{
+  display: none;
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%) scale(1.3);
+}
+
+.submitted-activity:hover >div:last-child{
+  display: block;
+
+}
+
+
+
+
+
+
 .responsefile{
     height: 140px;
    display: flex;

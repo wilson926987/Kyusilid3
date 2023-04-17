@@ -17,7 +17,7 @@ function Attendance() {
 
   return (
     <div>
-      <div className='flex'> <h4>Attendance</h4> {userinfo.usertype==='stud' && <p className='marginleftauto smallfont'>## out of ## discussions attended</p>}</div>
+      <div className='flex'> <h4>Attendance</h4> </div>
 
   <div class="Searrchh">     
       <div class="search1">

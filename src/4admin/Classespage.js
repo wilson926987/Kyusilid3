@@ -32,7 +32,7 @@ function Classespage() {
       <div className="flex">
         <div>
           <h4>Active Classes</h4>
-          <p className='smallfont'> Last Updated : September 2  by Juan dela Cruz</p>
+       
         </div>
 
         <div className='search'>
@@ -61,7 +61,8 @@ function Classespage() {
             <th>Professor</th>
             <th>Schedule</th>
             <th>Number of Students</th>
-            <th></th>
+            <th> &nbsp;</th>
+
 
           </thead>
           <tbody>
@@ -76,7 +77,7 @@ function Classespage() {
               <td>{item.profname}</td>
               <td>{item.schedule}</td>
               <td>{item.studentcount}</td>
-              <td>{item.yearlvl}</td>
+              
               <td> <button className="secondary lighttext commonbutton" onClick={() => {setsampleclassid(item); navigate('/kyusilidAdmin/department/sections/samplesection') }}>Class Info</button></td>
             </tr>
           ))}

@@ -172,7 +172,8 @@ const Dueoptions =[
   {'value' : 'Assignment','label' : 'Assignment'},
   {'value' : 'Activity','label' : 'Activity'},
   {'value' : 'Questionnaire','label' : 'Questionnaire'},
-  {'value' : 'Attendance','label' : 'Attendance'}
+  {'value' : 'Attendance','label' : 'Attendance'},
+  {'value' : 'Examination','label' : 'Examination'}
 
 ]
 
@@ -303,7 +304,7 @@ const handlecreateactivity=()=>{
                               
                                  
                               <br></br> <br></br>
-                               {filelist.map((item, key)=>(
+                               { filelist.map((item, key)=>(
                                 <a href={item.url} key={key}>
                                     <div className='commonbutton flex primary borderradius-md'>
                                   <AiFillFile/>
@@ -473,7 +474,7 @@ const handlecreateactivity=()=>{
                             }
             
                             
-                            {(activitytype==='Assignment' || activitytype ==='Activity' || activitytype==='Questionnaire') &&
+                            {(activitytype==='Assignment' || activitytype ==='Activity' || activitytype==='Questionnaire' || activitytype==='Examination') &&
                               <>
                               <br />
                               <div>

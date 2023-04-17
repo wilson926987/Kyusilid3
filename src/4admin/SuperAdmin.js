@@ -1,12 +1,15 @@
 import axios from 'axios';
 import { th, tr } from 'date-fns/locale';
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Dropdown from '../1general/formcomponents/Dropdown';
+import { useNavigate } from 'react-router-dom';
+import { userInfoContext } from '../Globalcontext';
 
 function SuperAdmin() {
 
   const [adminlist, setadminlist] = useState([]);
   const [ deplist , setdeplist] = useState();
+  const {userinfo} = useContext(userInfoContext)
 
 
   const [username, setusername] = useState();
@@ -18,8 +21,15 @@ function SuperAdmin() {
   const [middle , setmiddle] = useState();
   const [title, settitle] = useState(); 
   const [suffix, setsuffix]= useState()
+  const navigate= useNavigate();
 
   useEffect(()=>{
+
+    console.log(userinfo)
+
+    if(userinfo.admintype ===1){
+      navigate('/kyusilidAdmin');
+    }
     axios.get('https://api.kyusillid.online/api/manageadmin').then(
       response=>{
         setadminlist(response.data.adminlist);

@@ -24,7 +24,7 @@ function Subjects() {
      <div className="flex"> 
       <div>
       <h4>Subjects table</h4>
-      <p className='smallfont'> Last Updated :</p>
+   
       </div>
 
 <div className='search2'>
@@ -63,8 +63,7 @@ function Subjects() {
         <td>{item.sub_id}</td>
 
    
-        <td> <button className='commonbutton lighttext secondary' onClick={()=>{settopicsid(item.sub_id); navigate('/kyusilidAdmin/department/adminsidemodules')}}> Class Modules</button></td>
-        <td></td>
+        
       </tr>
     ))}
   </>

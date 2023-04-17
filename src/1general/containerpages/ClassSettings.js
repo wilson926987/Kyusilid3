@@ -3,7 +3,7 @@ import { currentclassContext, classbannerContext } from '../../Globalcontext'
 import {AiFillCheckCircle} from 'react-icons/ai'
 
 
-import Textbox from '../formcomponents/Textbox'
+
 import classbanner1 from '../../assets/images/classbanner1.png'
 import classbanner2 from '../../assets/images/classbanner2.png'
 import classbanner3 from '../../assets/images/classbanner3.png'
@@ -36,8 +36,7 @@ function ClassSettings() {
             "classes_id": currentclass.currentclass.classes_id
         }
 
-        console.log(JSON.stringify(temp))
-            await axios.post("https://api.kyusillid.online/api/updateclassinfosettings" ,temp).then().catch();
+        await axios.post("https://api.kyusillid.online/api/updateclassinfosettings" ,temp).then().catch();
     }
 
 
