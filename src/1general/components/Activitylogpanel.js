@@ -1,4 +1,6 @@
 import React from 'react'
+import avatar from '../../assets/images/avatar.jpg'
+import axios from 'axios';
 
 function Activitylogpanel({classlog}) {
 
