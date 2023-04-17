@@ -24,7 +24,7 @@ const [questions, setQuestions] = useState([
     // console.log(JSON.stringify(temp));
   
 
-    axios.post("http://127.0.0.1:8000/api/quiz-question", temp).then((response) => {
+    axios.post("https://api.kyusillid.online/api/quiz-question", temp).then((response) => {
       console.log(response.data);
     }).catch();
   };

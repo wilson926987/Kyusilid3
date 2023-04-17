@@ -9,7 +9,7 @@ function QuizAnswer({ questions }) {
 
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:8000/api/getID")
+      .get("https://api.kyusillid.online/api/getID")
       .then((response) => {
         setTitle(response.data.title);
         setDescription(response.data.description);
@@ -76,7 +76,7 @@ function QuizAnswer({ questions }) {
 
   const handleSubmit = () => {
     axios
-      .post("http://127.0.0.1:8000/api/score", { score })
+      .post("https://api.kyusillid.online/api/score", { score })
       .then((response) => {
         console.log(response.data);
       })
