@@ -91,11 +91,22 @@ function QuizAnswer({ questions }) {
     );
   };
 
-  const handleSubmit = () => {
-    axios
-      .post("https://api.kyusillid.online/api/score", { score })
+  const [buttondisabled, setbuttondisabled] = useState(false)
+
+  const handleSubmit = async () => {
+    const temp ={
+      assign_id : id2,
+      score : score
+    }
+
+
+
+   await axios.post("https://api.kyusillid.online/api/submitscore",  score )
       .then((response) => {
         console.log(response.data);
+        alert("Score Submitted");
+        setbuttondisabled(true)
+
       })
       .catch((error) => {
         console.error(error);
@@ -136,8 +147,27 @@ function QuizAnswer({ questions }) {
       ) : (
         <p>No questions found.</p>
       )}
-      <h2>Score: {score}</h2>
-      <button onClick={handleSubmit}>Submit</button>
+
+      <div className="flex width100 divcenter margintop12 padding12 "> 
+
+      {!buttondisabled ?
+          <button className="secondary commonbutton borderradius-md lighttext col-lg-6 divcenter margintop12" onClick={handleSubmit}>
+          <h2>Submit</h2>
+        </button>
+        :
+        <button className="secondary commonbutton borderradius-md lighttext col-lg-6 divcenter margintop12" disabled >
+        <h2>Done</h2>
+      </button>
+      }
+      
+
+      </div>
+
+     
+
+      
+     
+
 
     
 
