@@ -6,6 +6,7 @@ function QuizAnswer({ questions }) {
   const [score, setScore] = useState(0);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [answeredQuestions, setAnsweredQuestions] = useState([]);
   const [question, setQuestion] = useState([]);
   const {id} = useParams();
   const {id2} = useParams();
@@ -26,14 +27,20 @@ function QuizAnswer({ questions }) {
   }, []);
 
   const handleAnswerChange = (questionId, selectedAnswer) => {
-
-   
     const temp = question.find((q) => q.questionid === questionId);
-
+    const previousAnswer = answeredQuestions.find((q) => q.questionid === questionId);
+  
     if (temp.answer === selectedAnswer) {
-      setScore(score + temp.points)
-   
- 
+      if (!previousAnswer) {
+        setScore(score + temp.points);
+        setAnsweredQuestions([...answeredQuestions, {questionid: questionId, answer: selectedAnswer}]); // add question to answeredQuestions
+      }
+    } else {
+      if (previousAnswer) {
+        const newScore = score - temp.points;
+        setScore(newScore < 0 ? 0 : newScore);
+        setAnsweredQuestions(answeredQuestions.filter(q => q.questionid !== questionId));
+      }
     }
   };
 
