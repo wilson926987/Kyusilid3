@@ -48,6 +48,22 @@ function Viewresponse() {
 
     }
 
+    const returnActivity = async() =>{
+        const temp = {
+            assign_id : responseinfo.assign_id
+        }
+
+        await axios.post('https://api.kyusillid.online/api/returnActivity', temp).then(
+            ()=>{
+                alert("activity returned");
+              
+
+            }
+          
+        ).catch();
+        
+    }
+
     useEffect(()=>{
         if(responseinfo !== undefined){
             setscore(responseinfo.grade)
@@ -74,28 +90,53 @@ function Viewresponse() {
     console.log(responseinfo)
 
 },[responseinfo])
+
+
+
+  
+
+
+
+
   return (
     <div>
-        <div className="flex"> 
-             <button className='commonbutton lighttext secondary' onClick={()=>{navigate('/classes/sampleclass/activity/activityId')}}>Back to Response list</button> <h4>Student's Work , {responseinfo.status}</h4>
-            <div className="flex marginleftauto">
-                <h4>Score</h4>
-                <input type="number" min={0} max={100} className="commontextbox primaryborder col-lg-4" defaultValue={score} onChange={(e)=>{setscore(e.target.value)}}/>
-                {!ifsaved ?
-                <button className='commontextbox secondary lighttext col-lg-4' onClick={tt}>Mark response</button>
-            :
-            <button className='commontextbox secondary lighttext col-lg-4' >Saved </button>}
+  
+
+     <div className="flex">
+     <button className='commonbutton lighttext secondary col-lg-3' onClick={()=>{navigate('/classes/sampleclass/activity/activityId')}}>Back to Response list</button>
+   
+            <h4 className='marginleftauto'>Score</h4>
+            <input type="number" min={0} max={100} className="commontextbox primaryborder  col-lg-1" defaultValue={score} onChange={(e)=>{setscore(e.target.value)}}/>
+            {!ifsaved ?
+                <button className='commonbutton secondary lighttext widthset' onClick={tt}>Mark response</button>
+                :
+                <button className='commonbutton secondary lighttext widthset' >Saved </button>}
+
+ 
+
+     </div>
+
+
+        <div className="flex margintop12 marginleft12"> 
+             <h4>Student's Work , {responseinfo.status} </h4>
+          <div className="flex marginleftauto">
+
+                
+               
+            <button className='commonbutton secondary lighttext widthset' onClick={()=>{returnActivity()}}> Return</button>
             </div>
         </div>
     
 
+        <div className="margintop12">
         {filelist !== undefined && filelist.map((item)=>(
-            <a href={item.stringpath} target='_blank'>
-                <div className='primary padding12  borderradius-md col-lg-6'>
+            <a href={"https://api.kyusillid.online/laravel"+item.stringpath} target='_blank' className='col-lg-6 ' >
+                <div className='primary padding12  borderradius-md margintop12'>
                     <h3>{item.file_name}</h3>
                 </div>
             </a>
         ))}
+        </div>
 
         
     </div>

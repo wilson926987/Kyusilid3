@@ -21,7 +21,7 @@ function Sourcematerialpanel({actItem}) {
 
     navigate('/classes/sampleclass/createnew');
     setsourcematerial(actItem)
-    console.log(actItem);
+   
   }
 
   return (

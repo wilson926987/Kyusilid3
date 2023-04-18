@@ -33,7 +33,7 @@ function ClassContainer() {
   const location = useLocation();
   const [announcementlist, setannouncementlist] = useState([]);
   const [classsettings, setclasssettings] = useState();
-
+  const [attendance, setAttendance] = useState("");
   const [responseinfo, setresponseinfo] = useState();
 
   const [studentselection ,setstudentselection] = useState();
@@ -208,6 +208,30 @@ function toggleStudentselect(studentitem){
 
 
 
+const markAttendance = () => {
+  const temp ={
+    classes_id: currentclass.classes_id,
+    acc_id: userinfo.user.acc_id,
+  }
+
+
+  console.log(JSON.stringify(temp))
+  axios.post("https://api.kyusillid.online/api/AttendanceIn", {
+      classes_id: currentclass.classes_id,
+      acc_id: userinfo.user.acc_id,
+    })
+    .then((response) => {
+      setAttendance(response.data.attendance.att_status);
+      console.log(response.data)
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
+
+
+
+
 
  
  if(currentclass===undefined){
@@ -251,13 +275,26 @@ function toggleStudentselect(studentitem){
             <div className="classcontentsub">
               <div className="row">
                   <div className="col-lg-4 classnav-min">
+                        
+                        
 
                   {currentclass.isarchived === 0 && userinfo.usertype === 'stud' && 
-                        <div className="secondary lighttext navcreatenew borderradius-lg dbpanelmargin">
+
+                  <>
+                     <div className="secondary lighttext navcreatenew borderradius-lg dbpanelmargin">
                         <h4 onClick={goToURL}>Class Link</h4>
-                        
+            
                       </div>
+
+                      <div className="secondary lighttext navcreatenew borderradius-lg dbpanelmargin">
+                        <h4 onClick={markAttendance}>Attendance</h4>
+            
+                      </div>
+                  </>
+                     
+                      
                     }
+                         
 
                     {currentclass.isarchived ===0 &&
                       

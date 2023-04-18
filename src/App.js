@@ -20,7 +20,7 @@ import MyclassesDefault from './1general/containerpages/MyclassesDefault';
 import ClassStats from './1general/containerpages/ClassStats';
 import ClassInfo from './1general/containerpages/ClassInfo';
 import Quiz from './1general/containerpages/Quiz';
-import QuizDisplay from './1general/containerpages/QuizDisplay';
+import QuizAnswer from './1general/containerpages/QuizAnswer';
 import ClassActivity from './1general/containerpages/ClassActivity';
 import Classmarks from './2prof/Classmarks';
 import ClassModules from './2prof/ClassModules';
@@ -80,8 +80,8 @@ function App() {
       <div className='appbody background'>
         <BrowserRouter>
             <Routes>
-            <Route path='/Quiz' element={<Quiz/>} />
-            <Route path='/QuizDisplay' element={<QuizDisplay/>} />
+            <Route path='/Quiz/:id' element={<Quiz/>} />
+            <Route path='/QuizAnswer/:id/:id2' element={<QuizAnswer/>} />
             <Route path = '/Changepassword' element={userinfo !== null ? <Firstchangepass/> :<Login/>}/>
             <Route path='/ClassMarkPage' element={<ClassMarkPage/>} />
               <Route path={'/'} element={userinfo!=null ? <Container/> : <Login/> } > 

@@ -41,50 +41,38 @@ function Classmarks() {
   const handleView = (index) => {
     setShowTextbox(!showTextbox);
   };
+
 function exportGrades() {
   if (data) {
     const exportData = data.map((item) => {
-       const midtermGrade = (Math.round((item.activity.grade / (item.activity_count || 1)) * 0.2 +
-       (item.assignment.grade / (item.assignment_count || 1)) * 0.2 +
-         (item.questionnaire.grade / (item.questionnaire_count || 1)) * 0.15 +
-         0 * 0.05 + (item.midterm_exam.grade || 0) * 0.4));
-      let equivalent = 5.0;
-
-      if (midtermGrade >= 98) {
-        equivalent = 1.0;
-      } else if (midtermGrade >= 95) {
-        equivalent = 1.25;
-      } else if (midtermGrade >= 92) {
-        equivalent = 1.5;
-      } else if (midtermGrade >= 89) {
-        equivalent = 1.75;
-      } else if (midtermGrade >= 86) { 
-        equivalent = 2.0;
-      } else if (midtermGrade >= 83) {
-        equivalent = 2.25;
-      } else if (midtermGrade >= 80) {
-        equivalent = 2.5;
-      } else if (midtermGrade >= 77) {
-        equivalent = 2.75;
-      } else if (midtermGrade >= 75) {
-        equivalent = 3.0;
-      }
-
       return {
         Name: item.student.name,
-        Activity: Math.round(
-          item.activity.grade / (item.activity_count || 1)
-        ),
-        Assignment: Math.round(
-          item.assignment.grade / (item.assignment_count || 1)
-        ),
-        Quiz: Math.round(
-          item.questionnaire.grade / (item.questionnaire_count || 1)
-        ),
-        Attendance: Math.round(item.attendance.grade),
-        "Midterm Exam": item.midterm_exam.grade || 0,
-        "Midterm Grade": midtermGrade.toFixed(2),
-        Equivalent: equivalent.toFixed(2),
+        'Activity 1': '75 / 100',
+        'Activity 2': '75 / 100',
+        'Activity 3': '75 / 100',
+        'Assignment 1': '84 / 100',
+        'Assignment 2': '84 / 100',
+        'Assignment 3': '84 / 100',
+        'Quiz 1' : '82 / 100',
+        'Quiz 2' : '82 / 100',
+        'Quiz 3' : '82 / 100',
+        Attendance: '100',
+        "Midterm Exam": '94 / 100',
+        "Midterm Grade": '87.62',
+        'Final Activity 1': '75 / 100',
+        'Final Activity 2': '75 / 100',
+        'Final Activity 3': '75 / 100',
+        'Final Assignment 1': '84 / 100',
+        'Final Assignment 2': '84 / 100',
+        'Final Assignment 3': '84 / 100',
+        'Final Quiz 1' : '82 / 100',
+        'Final Quiz 2' : '82 / 100',
+        'Final Quiz 3' : '82 / 100',
+        Attendance: '100',
+        "Final Exam": '94 / 100',
+        "Final Term Grade": '87.62',
+        "Final Grade" : '2.75',
+        "" : "This is a placeholder, Export in progress"
       };
     });
 
@@ -98,7 +86,7 @@ function exportGrades() {
   return (
     <div>
       <div class="container">
-        <button className='commonbutton primary ' id="export" onClick={() => exportGrades()}> 
+        <button id="export" onClick={() => exportGrades()}>
           Export
         </button>
 
@@ -115,12 +103,12 @@ function exportGrades() {
       </div>
       <div class="buttons">
   <div className={gradeType === 'midterm' ? 'active' : 'btnsss'}>
-  <button id='gradetype' onClick={() => setGradeType('midterm')} style={{ width: '100%', color: gradeType === 'midterm' ? '#064273' : '#000', border: 'none', borderBottom: gradeType === 'midterm' ? '4px solid #064273' : '',}}>
+  <button id='gradetype' onClick={() => setGradeType('midterm')} style={{ width: '100%', color: gradeType === 'midterm' ? '#064273' : '#000', border: '#FFFFFF', borderBottom: gradeType === 'midterm' ? '4px solid #064273' : '',}}>
     Midterm Grade
   </button>
 </div>
 <div className={gradeType === 'final' ? 'active' :'btnsss1'}>
-  <button id='gradetype' onClick={() => setGradeType('final')} style={{ width: '100%', color: gradeType === 'final' ? '#064273' : '#000', border: 'none', borderBottom: gradeType === 'final' ? '4px solid #064273' : '',}}>
+  <button id='gradetype' onClick={() => setGradeType('final')} style={{ width: '100%', color: gradeType === 'final' ? '#064273' : '#000', border: '#FFFFFF', borderBottom: gradeType === 'final' ? '4px solid #064273' : '',}}>
     Final Grade
   </button>
 </div>
@@ -143,24 +131,28 @@ function exportGrades() {
                       <>
                         {Array.from({ length: item.activity_count ? item.activity_count : 1 }, (_, i) => (
                           <th key={`activity-${i+1}`}>
-                            Activity {i+1}
-                          </th>
+                          {item.midterm_activity && item.midterm_activity[`midterm_activity_${i+1}`] && item.midterm_activity[`midterm_activity_${i+1}`].midterm_activity_name ? item.midterm_activity[`midterm_activity_${i+1}`].midterm_activity_name : 'Activity #'}
+
+                          </th>                         
                         ))}
+                        <th>|</th>
                         {Array.from({ length: item.assignment_count ? item.assignment_count : 1 }, (_, i) => (
                           <th key={`assignment-${i+1}`}>
-                            Assignment {i+1}
+                            {item.midterm_assignment && item.midterm_assignment[`midterm_assignment_${i+1}`] && item.midterm_assignment[`midterm_assignment_${i+1}`].midterm_assignment_name ? item.midterm_assignment[`midterm_assignment_${i+1}`].midterm_assignment_name : 'Assignment #'}
                           </th>
                         ))}
+                        <th>|</th>
                         {Array.from({ length: item.quiz_count ? item.quiz_count : 1 }, (_, i) => (
                           <th key={`quiz-${i+1}`}>
-                            Quiz {i+1}
+                           {item.midterm_quiz && item.midterm_quiz[`midterm_quiz_${i+1}`] && item.midterm_quiz[`midterm_quiz_${i+1}`].midterm_quiz_name ? item.midterm_quiz[`midterm_quiz_${i+1}`].midterm_quiz_name : 'Quiz #'}
                           </th>
                         ))}
                       </>
                     );
                   })}
-
+<th>|</th>
                 <th>Midterm Exam</th>
+                <th>|</th>
               </>
             )}
            {gradeType === "final" && (
@@ -173,24 +165,25 @@ function exportGrades() {
                       <>
                         {Array.from({ length: item.finals_activity_count ? item.finals_activity_count : 1 }, (_, i) => (
                           <th key={`activity-${i+1}`}>
-                            Activity {i+1}
+                            {item.finals_activity[`finals_activity_${i+1}`] && item.finals_activity[`finals_activity_${i+1}`].finals_activity_name ? item.finals_activity[`finals_activity_${i+1}`].finals_activity_name : 'Activity #'}
                           </th>
-                        ))}
+                        ))}<th>|</th>
                         {Array.from({ length: item.finals_assignment_count ? item.finals_assignment_count : 1 }, (_, i) => (
                           <th key={`assignment-${i+1}`}>
-                            Assignment {i+1}
+                            {item.finals_assignment && item.finals_assignment[`finals_assignment_${i+1}`] && item.finals_assignment[`finals_assignment_${i+1}`].finals_assignment_name ? item.finals_assignment[`finals_assignment_${i+1}`].finals_assignment_name : 'Assignment #'}
                           </th>
-                        ))}
+                        ))}<th>|</th>
                         {Array.from({ length: item.finals_quiz_count ? item.finals_quiz_count : 1 }, (_, i) => (
                           <th key={`quiz-${i+1}`}>
-                            Quiz {i+1}
+                            {item.finals_quiz && item.finals_quiz[`finals_quiz_${i+1}`] && item.finals_quiz[`finals_quiz_${i+1}`].finals_quiz_name ? item.finals_quiz[`finals_quiz_${i+1}`].finals_quiz_name : 'Quiz #'}
                           </th>
-                        ))}
+                        ))}<th>|</th>
                         <th>Final Exam</th>
+                        <th>|</th>
                       </>
                     );
                   })}
-              </>
+              </> 
             )} 
 
             <th>Attendance</th>
@@ -211,23 +204,54 @@ function exportGrades() {
                   <td data-label="Name">{item.student.name} </td>
                   {gradeType === "midterm" && (
                     <>
-                      <td></td>
-                      <td></td>
-                      <td> </td>
-                      <td></td>
-                      <td></td>
-                    </>
+                     {Array.from({ length: item.activity_count ? item.activity_count : 1 }, (_, i) => (
+                        <td key={`activity-${i+1}`}>
+                          {item.midterm_activity && item.midterm_activity[`midterm_activity_${i+1}`] && item.midterm_activity[`midterm_activity_${i+1}`].midterm_activity_grade ? item.midterm_activity[`midterm_activity_${i+1}`].midterm_activity_grade : 0} / 100
+                        </td>
+                      ))}
+                      <td><p style={{color:'#FFFFFF'}}>---</p></td>
+                      {Array.from({ length: item.assignment_count ? item.assignment_count : 1 }, (_, i) => (
+                          <td key={`assignment-${i+1}`}>
+                            {item.midterm_assignment && item.midterm_assignment[`midterm_assignment_${i+1}`] && item.midterm_assignment[`midterm_assignment_${i+1}`].midterm_assignment_grade ? item.midterm_assignment[`midterm_assignment_${i+1}`].midterm_assignment_grade : 0} / 100
+                          </td>
+                        ))}
+                        <td><p style={{color:'#FFFFFF'}}>---</p></td>
+                        {Array.from({ length: item.quiz_count ? item.quiz_count : 1 }, (_, i) => (
+                          <td key={`quiz-${i+1}`}>
+                            {item.midterm_quiz && item.midterm_quiz[`midterm_quiz_${i+1}`] && item.midterm_quiz[`midterm_quiz_${i+1}`].midterm_quiz_grade ? item.midterm_quiz[`midterm_quiz_${i+1}`].midterm_quiz_grade : 0} / 100
+                          </td>
+                        ))}
+                      <td><p style={{color:'#FFFFFF'}}>---</p></td>
+                      <td>{item.midterm_exam && item.midterm_exam.midterm_exam_1 && item.midterm_exam.midterm_exam_1.midterm_exam_grade ? item.midterm_exam.midterm_exam_1.midterm_exam_grade : 0} / 100</td>
+                      <td><p style={{color:'#FFFFFF'}}>---</p></td>
+                      <td>{Math.round(item.attendance.grade)}</td>
+                    </> 
                   )}
                   {gradeType === "final" && (
                     <>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
+                      {Array.from({ length: item.finals_activity_count ? item.finals_activity_count : 1 }, (_, i) => (
+                        <td key={`activity-${i+1}`}>
+                          {item.finals_activity && item.finals_activity[`finals_activity_${i+1}`] && item.finals_activity[`finals_activity_${i+1}`].finals_activity_grade ? item.finals_activity[`finals_activity_${i+1}`].finals_activity_grade : 0} / 100
+                        </td>
+                      ))}
+                      <td><p style={{color:'#FFFFFF'}}>---</p></td>
+                      {Array.from({ length: item.finals_assignment_count ? item.finals_assignment_count : 1 }, (_, i) => (
+                          <td key={`assignment-${i+1}`}>
+                            {item.finals_assignment && item.finals_assignment[`finals_assignment_${i+1}`] && item.finals_assignment[`finals_assignment_${i+1}`].finals_assignment_grade ? item.finals_assignment[`finals_assignment_${i+1}`].finals_assignment_grade : 0} / 100
+                          </td>
+                        ))}
+                        <td><p style={{color:'#FFFFFF'}}>---</p></td>
+                        {Array.from({ length: item.finals_quiz_count ? item.finals_quiz_count : 1 }, (_, i) => (
+                          <td key={`quiz-${i+1}`}>
+                            {item.finals_quiz && item.finals_quiz[`finals_quiz_${i+1}`] && item.finals_quiz[`finals_quiz_${i+1}`].finals_quiz_grade ? item.finals_quiz[`finals_quiz_${i+1}`].finals_quiz_grade : 0} / 100
+                          </td>
+                        ))}
+                      <td><p style={{color:'#FFFFFF'}}>---</p></td>
+                      <td>{item.finals_exam.finals_exam_1.finals_exam_grade ? item.finals_exam.finals_exam_1.finals_exam_grade : "0" } / 100</td>
+                      <td><p style={{color:'#FFFFFF'}}>---</p></td>
+                      <td>{Math.round(item.attendance.grade)}</td> 
                     </> 
                   )}   
-                  <td>{Math.round(item.attendance.grade)}</td> 
                 </tr> 
               ))}
           </tbody>
@@ -248,7 +272,7 @@ function exportGrades() {
           cursor: pointer;
           width: 100%;
           padding: 5px;
-          border-bottom: none;
+          border-bottom: #FFFFFF;
         }
         .buttons {
           display: flex;

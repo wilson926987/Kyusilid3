@@ -25,7 +25,7 @@ function Classpanel({classitem}) {
       try {
         const response = await axios.get(`https://api.kyusillid.online/api/getprofilepic/${classitem.acc_id}`);
         setProfilePic(response.data.profile_pic);
-        console.log(response.data.profile_pic);
+
       
       } catch (error) {
         console.error(error.response.data);

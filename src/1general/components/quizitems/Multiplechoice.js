@@ -31,18 +31,19 @@ function Multiplechoice({content ,item , handleaddoption , handleAnswerChange}) 
       <ul className=''>
         {content.map((item, key)=>(
           <li key={key} className="flex width100 ">  <div>
-           <label ><input type="text" className='commontextbox' defaultValue={item.value} onChange={(e)=>{editcontent(e.target.value , item.index)}}/></label>
-           </div> 
-           <div ><button className='secondary commonbutton lighttext' onClick={()=>{deletecontent(item)}}>Delete</button></div></li>
+           <label ><input type="text" className='Q commontextbox' defaultValue={item.value} onChange={(e)=>{editcontent(e.target.value , item.index)}}/></label>
+           </div>
+           
+           <div className='Qbtn'><button className='secondary commonbutton lighttext' onClick={()=>{deletecontent(item)}}>Delete</button></div></li>
         ))}
         
       
       </ul>
 
-      <select className='secondary commonbutton lighttext primary padding12'  onChange={e=>{handleAnswerChange(item, e.target.value)}}>
+      <select className='secondary commonbutton lighttext primary padding12' onChange={e=>{handleAnswerChange(item, e.target.value)}}>
             <option value='select answer' >Select Answer</option>
           {content.map((item,key)=>(
-            <option key={key} value={item.value}> {item.value}</option>
+            <option  key={key} value={item.value}> {item.value}  </option>
           ))}
       </select>
 

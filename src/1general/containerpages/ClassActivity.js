@@ -53,7 +53,7 @@ function ClassActivity() {
   const deletesubmittedfile = (e)=>{
 
  
-    if(activitystatus.status !== 'pending'){
+    if(activitystatus.status !== 'assigned'){
       setfilesubmitlist(filesubmitlist.filter(item=> item.id !== e))
     }
     
@@ -62,6 +62,9 @@ function ClassActivity() {
   }
 
 
+  const takequiz= ()=>{
+    window.open('/Quizanswer/' + currentactivity.quiz_link + "/" + activitystatus.assign_id , '_blank')
+  }
 
 
 
@@ -124,6 +127,7 @@ function ClassActivity() {
 
   const posttomodule = async()=>{
     console.log(currentclass)
+    console.log(currentactivity)
   
     let temp = {
       "activity_title" : currentactivity.activity_title,
@@ -132,7 +136,9 @@ function ClassActivity() {
       "description" : currentactivity.description,
       "created_by" : userinfo.user.acc_id,
       "topic_name" : currentactivity.topic_name,
-      "classes_id" : currentclass.moduleSource
+      "classes_id" : currentclass.moduleSource,
+      "quiz_link" : currentactivity.quiz_link
+      
     }
 
    
@@ -233,6 +239,8 @@ function ClassActivity() {
      axios.get('https://api.kyusillid.online/api/activityfiles/' + currentactivity.activity_id).then(
       response=>{
         setfilelist(response.data)
+        console.log("fadkshfkhkj")
+        console.log(response.data)
       }
      ).catch(error=> console.log(error.data));
 
@@ -433,7 +441,7 @@ const unSubmit= async (e)=>{
             {currentactivity.activity_type ==='Material' ?
               <div className="flex">
                {filelist.map((item, key)=>(
-                <a href={item.stringpath} target="_blank" key={key} className='padding12'>
+                <a href={"https://api.kyusillid.online/laravel" +item.stringpath} target="_blank" key={key} className='padding12'>
 
                 <div className='materialpanel primary borderradius-md'>
                   <RiBookFill />
@@ -453,7 +461,7 @@ const unSubmit= async (e)=>{
                       </div>
                       <div className='questionnairefooter flex'>
                  
-                        {userinfo.usertype==='prof' ? <button className='secondary'>view quiz</button> : <button className='secondary'>take quiz</button>}
+                        {userinfo.usertype==='prof' ? <button className='secondary'>view quiz</button> : <button className='secondary' onClick={takequiz}>take quiz </button>}
                       </div>
                   </div>
                   </div>
@@ -519,7 +527,7 @@ const unSubmit= async (e)=>{
               </div>
 
               {activitystatus != undefined &&
-              <button className='secondary' disabled={activitystatus.status !== 'pending'} onClick={()=>{document.getElementById('addfile').click();}}>Add file</button>
+              <button className='secondary' disabled={activitystatus.status !== 'assigned'} onClick={()=>{document.getElementById('addfile').click();}}>Add file</button>
             }
              
                 
@@ -529,7 +537,7 @@ const unSubmit= async (e)=>{
              
                     {isassigned ? 
                     <>
-                    {activitystatus.status === 'pending' ?
+                    {activitystatus.status === 'assigned' ?
                     <button className='secondary' onClick={()=>{handIn(activitystatus.assign_id)}}> Hand In</button>
                   :
                   <button className='tertiary' onClick={()=>{unSubmit(activitystatus.assign_id)}} > Unsubmit {activitystatus.status}</button>
