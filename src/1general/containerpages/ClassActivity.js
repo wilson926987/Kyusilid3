@@ -62,6 +62,9 @@ function ClassActivity() {
   }
 
 
+  const takequiz= ()=>{
+    window.open('/Quizanswer/' + currentactivity.quiz_link + "/" + activitystatus.assign_id , '_blank')
+  }
 
 
 
@@ -124,6 +127,7 @@ function ClassActivity() {
 
   const posttomodule = async()=>{
     console.log(currentclass)
+    console.log(currentactivity)
   
     let temp = {
       "activity_title" : currentactivity.activity_title,
@@ -132,7 +136,9 @@ function ClassActivity() {
       "description" : currentactivity.description,
       "created_by" : userinfo.user.acc_id,
       "topic_name" : currentactivity.topic_name,
-      "classes_id" : currentclass.moduleSource
+      "classes_id" : currentclass.moduleSource,
+      "quiz_link" : currentactivity.quiz_link
+      
     }
 
    
@@ -453,7 +459,7 @@ const unSubmit= async (e)=>{
                       </div>
                       <div className='questionnairefooter flex'>
                  
-                        {userinfo.usertype==='prof' ? <button className='secondary'>view quiz</button> : <button className='secondary'>take quiz</button>}
+                        {userinfo.usertype==='prof' ? <button className='secondary'>view quiz</button> : <button className='secondary' onClick={takequiz}>take quiz </button>}
                       </div>
                   </div>
                   </div>

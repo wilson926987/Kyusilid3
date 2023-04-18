@@ -238,7 +238,7 @@ function Department() {
       </div>
       <div className='tertiary borderradius-md padding12 modal-body flex'>
 {!upproff ?  
-        <>  <div className='sideoption borderradius-md'onClick={()=>{navigate('createproff') ; setcreateproffmodal(false) }} > <BiEdit/><h2>ADD PROFESSORS MANUALLY</h2></div>
+        <> 
         <div className='sideoption borderradius-md' onClick={()=>{setupproff(true) }}> <FaUpload/><h2>Upload file</h2>
         <div>
           <h3>Uploading a professor list file will:</h3>

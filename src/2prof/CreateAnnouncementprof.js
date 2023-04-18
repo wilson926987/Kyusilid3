@@ -14,10 +14,10 @@ function CreateAnnouncementprof() {
     const [saveannouncementready, setsaveannouncement] = useState(true);
     const posttypes = [
         {
-            'value' : 'fixed', 'label' : 'fixed schedule' 
+            'value' : 'fixed', 'label' : 'Set Time and Date' 
         },
         {
-            'value' : 'timed' , 'label' : 'relative schedule'
+            'value' : 'timed' , 'label' : 'Class Schedule'
         }
     ]
     const [posttype, setposttype] = useState('fixed')

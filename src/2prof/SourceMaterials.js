@@ -5,9 +5,6 @@ import { modulelistContext } from '../Globalcontext'
 function SourceMaterials() {
 
   const {modulelist} = useContext(modulelistContext);
-  useEffect(()=>{
-    console.log(modulelist)
-  },[modulelist])
   
 
 

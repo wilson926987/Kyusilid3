@@ -3,11 +3,14 @@ import React, { useState } from "react";
 import Dropdown from "../formcomponents/Dropdown";
 import QuizitemContainer from "../components/quizitems/QuizitemContainer";
 import axios from "axios";
+import { useParams } from "react-router";
 
 function Quiz() {
   
   const [title, settitle] = useState();
   const [description, setdescrtiption] = useState();
+
+  const {id} = useParams();
   
 const [questions, setQuestions] = useState([
     { "questionid": 1, "question": "", "points": 1, "type": "Multiplechoice", "content":[], "answer": "" }
@@ -16,17 +19,20 @@ const [questions, setQuestions] = useState([
   const handleQuizSubmit = () => {
    
     const temp = {
+      "id" : id,
       "title" : title,
       "description" : description,
       "questions" : questions
     }
 
-    // console.log(JSON.stringify(temp));
+     console.log(JSON.stringify(temp));
   
 
-    axios.post("https://api.kyusillid.online/api/quiz-question", temp).then((response) => {
+    axios.post("https://api.kyusillid.online/api/quiz-questions", temp).then((response) => {
       console.log(response.data);
     }).catch();
+
+    alert("Successfully created Quiz")
   };
 
  
@@ -113,7 +119,7 @@ return(
 
         <header className="Quiz-Header primary margintop12">
         
-            <h1 className='quiz-text'>Form Title</h1>
+            <h1 className='quiz-text'>Form Title </h1>
             <input type="text" className="quiz-input-text commontextbox col-lg-4"   defaultValue={title} onChange={(e)=>{settitle(e.target.value)}} placeholder="Enter Title"/> 
             <br></br>
             <h1 className='quiz-text'>Form Description</h1>

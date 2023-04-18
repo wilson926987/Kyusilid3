@@ -80,8 +80,8 @@ function App() {
       <div className='appbody background'>
         <BrowserRouter>
             <Routes>
-            <Route path='/Quiz' element={<Quiz/>} />
-            <Route path='/QuizAnswer' element={<QuizAnswer/>} />
+            <Route path='/Quiz/:id' element={<Quiz/>} />
+            <Route path='/QuizAnswer/:id/:id2' element={<QuizAnswer/>} />
             <Route path = '/Changepassword' element={userinfo !== null ? <Firstchangepass/> :<Login/>}/>
             <Route path='/ClassMarkPage' element={<ClassMarkPage/>} />
               <Route path={'/'} element={userinfo!=null ? <Container/> : <Login/> } > 

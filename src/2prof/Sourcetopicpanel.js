@@ -13,6 +13,8 @@ function Sourcetopicpanel({sourcetopicitem}) {
     axios.get('https://api.kyusillid.online/api/get-activitylist/' + sourcetopicitem.topic_id)
     .then(response => {
       setClassActivitylist(response.data)
+      console.log(response.data)
+
     })
     .catch(error => {
       console.log(error);

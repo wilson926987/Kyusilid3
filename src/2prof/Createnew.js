@@ -23,7 +23,13 @@ function Createnew() {
   const [categorylist, setcategorylist] = useState([{
     'value' : currentclass.sessionname1, 'label' : currentclass.sessionname1
   }])
+
   const [filename, setfilename] = useState();
+
+
+  useEffect(()=>{
+    console.log(sourcematerial)
+  },[])
 
  
    
@@ -67,6 +73,21 @@ function Createnew() {
    
   },[topiclist])
 
+
+  const NewQuiz = async ()=>{
+    if(sourcematerial === undefined){
+      await axios.post('https://api.kyusillid.online/api/quizID').then(
+      response=> {
+        setQuizId(response.data);
+
+   
+        window.open('/Quiz/' + response.data , '_blank');
+      }
+    ).catch();
+    }
+    
+  }
+
   
 
   
@@ -86,6 +107,7 @@ function Createnew() {
   const [allowlate, setallowlate] = useState(true)
   const [formduration, setformduration] = useState();
   const [selectedFile, setSelectedFile] = useState(null);
+  const [QuizId, setQuizId] = useState();
 
 
   const [filelist, setfilelist] = useState([]);
@@ -171,9 +193,7 @@ const Dueoptions =[
   {'value' : 'Material','label' : 'Material'},
   {'value' : 'Assignment','label' : 'Assignment'},
   {'value' : 'Activity','label' : 'Activity'},
-  {'value' : 'Questionnaire','label' : 'Questionnaire'},
-  {'value' : 'Attendance','label' : 'Attendance'},
-  {'value' : 'Examination','label' : 'Examination'}
+  {'value' : 'Questionnaire','label' : 'Questionnaire'}
 
 ]
 
@@ -226,7 +246,7 @@ async function createActivity(){
     'allowlate' : allowlate,
     'availability' : availability,
     'duedate' : duedate,
-    'questionnaire_link' : 'google.com',
+    'quiz_link' : sourcematerial !== undefined ? sourcematerial.quiz_link: QuizId,
     'studentselection' : studentselection,
     'schedule' : postdate,
     'postschedtype' : postscheduletype,
@@ -317,8 +337,17 @@ const handlecreateactivity=()=>{
                                 </> )                               
                          }
                           
-                              {activitytype==='Questionnaire' &&
-                              <label htmlFor="" className='primary'>Questionaire( pag questionaire ung type)</label>}
+                              {(activitytype==='Questionnaire') && 
+
+                              <div className='secondary lighttext createquestionnaire' onClick={()=>{NewQuiz();}}>
+                                  <h3>Edit Questionnaire</h3>
+
+                             
+                              </div>
+
+
+
+}
                            </div> 
                            :
                            <div>

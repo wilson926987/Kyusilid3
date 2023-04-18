@@ -1,29 +1,39 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useParams } from "react-router";
 
 function QuizAnswer({ questions }) {
   const [score, setScore] = useState(0);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [question, setQuestion] = useState([]);
+  const {id} = useParams();
+  const {id2} = useParams();
 
   useEffect(() => {
     axios
-      .get("https://api.kyusillid.online/api/getID")
+      .get("https://api.kyusillid.online/api/getID/" + id)
       .then((response) => {
         setTitle(response.data.title);
         setDescription(response.data.description);
         setQuestion(response.data.questions);
+       
       })
       .catch((error) => {
         console.error(error);
       });
+   
   }, []);
 
   const handleAnswerChange = (questionId, selectedAnswer) => {
-    const question = questions.find((q) => q.questionid === questionId);
-    if (question.answer === selectedAnswer) {
-      setScore(score + question.points);
+
+   
+    const temp = question.find((q) => q.questionid === questionId);
+
+    if (temp.answer === selectedAnswer) {
+      setScore(score + temp.points)
+   
+ 
     }
   };
 
@@ -87,7 +97,7 @@ function QuizAnswer({ questions }) {
 
   return (
     <div>
-      <h1>{title}</h1>
+      <h1>{title}  {id2}</h1>
       <p>{description}</p>
       {question.length > 0 ? (
         question.map((question) => {
