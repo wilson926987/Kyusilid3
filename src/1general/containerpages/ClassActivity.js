@@ -656,7 +656,7 @@ function exportGrades() {
       
 
       </div>
-      <button id="export" onClick={() => exportGrades()}  style={{fontSize:'24px', cursor:'pointer', borderRadius:'8px', width:'auto', padding:'5px', backgroundColor: '#064273', color:'white'}}>
+      <button id="export" onClick={() => exportGrades()}  style={{fontSize:'24px', cursor:'pointer', borderRadius:'8px', width:'auto', padding:'5px'}}>
           Export
         </button>
       
