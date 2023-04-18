@@ -14,8 +14,8 @@ function Profiilepage() {
   const [activitystatus, setactivitystatus]= useState();
   const [password, setpassword] = useState("");
   const [cpassword, setcpassword] = useState();
-  const [imageUrl, setImageUrl] = useState(null);
   const [file, setFile] = useState(null);
+  const [profilePic, setProfilePic] = useState('');
 
 
   useEffect(()=>{
@@ -25,14 +25,18 @@ function Profiilepage() {
   },[])
 
 
-  useEffect(()=>{
-    console.log();
-    if (userinfo && userinfo.user && userinfo.user.profile_pic) {
-      const imageUrl = `https://api.kyusillid.online/${userinfo.user.profile_pic}`;
-      setImageUrl(imageUrl);
-      console.log(imageUrl)
+  useEffect(() => {
+    async function fetchProfilePic() {
+      try {
+        const response = await axios.get(`https://api.kyusillid.online/api/getprofilepic/${userinfo.user.acc_id}`);
+        setProfilePic(response.data.profile_pic);
+        console.log(response.data.profile_pic);
+      } catch (error) {
+        console.error(error);
+      }
     }
-  }, [userinfo]);
+    fetchProfilePic();
+  }, [userinfo.user.acc_id]);
 
 
 
@@ -119,7 +123,7 @@ const handleProfile = (event) => {
           <div className='flex'>
           <div className='profile-pic-div'>
           <form onSubmit={handleProfile} encType ='multipart/form-data'>
-            <img src={imageUrl}/>
+            <img src={profilePic}/>
             
             </form>
           </div>

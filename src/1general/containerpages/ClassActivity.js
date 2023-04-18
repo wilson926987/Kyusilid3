@@ -4,7 +4,7 @@ import {responseContext, currentclassContext, currentActivityContext , userInfoC
 import {FaClipboardList} from 'react-icons/fa'
 import {RiBookFill} from 'react-icons/ri'
 import {MdQuiz ,MdAssignment, MdSend} from 'react-icons/md'
-
+import {AiFillDelete} from 'react-icons/ai'
 import {BsGearFill} from 'react-icons/bs'
 import axios from 'axios';
 import Textbox from '../formcomponents/Textbox';
@@ -38,21 +38,28 @@ function ClassActivity() {
   const [isassigned, setisassigned] = useState(false);
 
   const [filelist , setfilelist] = useState([]);
+  const [filesubmitlist, setfilesubmitlist] = useState([])
 
 
   const [statusfilter , setstatusfilter] = useState("All");
 
-
+  const [selectedFile, setSelectedFile] = useState(null);
   const [submitedfilename, setsubmitedfilename] = useState();
-  useEffect(()=>{
-    if(fileuploads !== undefined){
-      setsubmitedfilename(fileuploads.name)
-    }
 
-  },[fileuploads])
 
 
   const [filelinktemp, setfiletemp]= useState();
+
+  const deletesubmittedfile = (e)=>{
+
+ 
+    if(activitystatus.status !== 'pending'){
+      setfilesubmitlist(filesubmitlist.filter(item=> item.id !== e))
+    }
+    
+
+    
+  }
 
 
 
@@ -167,7 +174,7 @@ function ClassActivity() {
 
   //Upload file
   const handleFileInput = (event) => {
-    setfileuploads(event.target.files[0]);
+    setSelectedFile(event.target.files[0]);
   };
 
   const handleUploadFile = () => {
@@ -230,58 +237,75 @@ function ClassActivity() {
      ).catch(error=> console.log(error.data));
 
 
-
   },[currentactivity])
 
 
+  useEffect(()=>{
+    
+    if(selectedFile !== null && selectedFile !== undefined){
+      const formData = new FormData();
+    formData.append("file_link", selectedFile);
 
-
-  const handIn = async (e) => {
-    const formData = new FormData();
-    formData.append("uploadedfile", fileuploads);
-  
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", "https://api.kyusillid.online/api/uploadstudent");
-    let uploadedFileUrl = "";
+    xhr.open("POST", "https://api.kyusillid.online/api/uploadfile2");
     xhr.onload = () => {
       if (xhr.status === 200) {
         const response = JSON.parse(xhr.responseText);
-        uploadedFileUrl = response.url;
-        setUploadedFile(uploadedFileUrl);
-        console.log(uploadedFileUrl);
-  
-        const temp = {
-          assign_id: e,
-          uploadedfile: uploadedFileUrl,
-          url: uploadedFileUrl,
-          "file_name" : submitedfilename
+        setfilesubmitlist(filesubmitlist =>[...filesubmitlist, {
+          "id" : response.id,
+          "filename" :  response.data.name,
+          "url" : response.url
 
+        }])
+       
 
-        };
-  
-        axios.post("https://api.kyusillid.online/api/handIn", temp)
-          .then((response) => {
-            console.log(response.data);
-          })
-          .catch((error) => {
-            console.error(error);
-          });
-
-          axios.get('https://api.kyusillid.online/api/getactivitystatus/' + currentactivity.activity_id + '/' + userinfo.user.acc_id).then(
-            response=>{
-              console.log(response.data)
-              if(response.data !== "unassigned"){
-                setactivitystatus(response.data);
-                setisassigned(true);
-              }
-            }
-           ).catch()
-  
-      
       }
     };
     xhr.send(formData);
+    }else{
+   
+      console.log('no selected file')
+    }
+
+    console.log(filesubmitlist)
+    
+  },[selectedFile])
+
+
+
+
+  
+
+ 
+
+  const handIn = async (e) => {
+
+    const temp = {
+      assign_id: e,
+      filelist: filesubmitlist
+    };
+    await axios.post("https://api.kyusillid.online/api/handIn", temp)
+    .then((response) => {
+      console.log(response.data);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+
+    await axios.get('https://api.kyusillid.online/api/getactivitystatus/' + currentactivity.activity_id + '/' + userinfo.user.acc_id).then(
+      response=>{
+        console.log(response.data)
+        if(response.data !== "unassigned"){
+          setactivitystatus(response.data);
+          setisassigned(true);
+        }
+      }
+     ).catch()
+   
   };
+
+
+  
   
   
   
@@ -440,7 +464,7 @@ const unSubmit= async (e)=>{
 
           </div>
            
-         {userinfo.usertype==='stud' && (currentactivity.activitytype!== 'material' && currentactivity.activitytype !=='questionnaire') &&
+         {userinfo.usertype==='stud' && (currentactivity.activity_type!== 'Material' && currentactivity.activity_type !=='Questionnaire') &&
            <div className="col-lg-4">
             {
               isassigned ?
@@ -451,21 +475,21 @@ const unSubmit= async (e)=>{
                  :
                  activitystatus.status ==='handed in late'?
       
-                 <h4>Handed in Late</h4>
+                 <h4>Handed in Late  </h4>
                  :
 
                  activitystatus.status ==='done'?
       
-                 <h4>Done</h4>
+                 <h4>Done </h4>
                  :
 
-                 <h4>Assigned</h4>
+                 <h4>Assigned </h4>
                 
                 }
                 
               </div>
               :         
-              <div><h4>Activity not Assigned</h4></div>
+              <div><h4>Activity not Assigned </h4></div>
             }
              
 
@@ -473,8 +497,33 @@ const unSubmit= async (e)=>{
            <div className=" background borderradius-md submissionpanel margintop12">
              <h4>Your work</h4>
              <div className='flex '>
-                <button className='secondary'>Add file</button>
-                <input  className ='secondary' type="file" onChange={handleFileInput} />
+
+              <div className='padding12'>
+                {filesubmitlist.map((item, key)=> (
+
+                  <div key={key} className=' margintop12 relative submitted-activity' onClick={()=> {deletesubmittedfile(item.id)}}>
+                    <div className='primary borderradius-md padding12'>
+                        {item.filename} 
+                    </div>
+
+                    
+
+                    <div >
+                      <AiFillDelete />
+                    </div>
+
+
+                  </div>
+                  
+                ))}
+              </div>
+
+              {activitystatus != undefined &&
+              <button className='secondary' disabled={activitystatus.status !== 'pending'} onClick={()=>{document.getElementById('addfile').click();}}>Add file</button>
+            }
+             
+                
+                <input  className ='secondary' type="file"  id='addfile' hidden onChange={handleFileInput} />
 
 
              
@@ -483,7 +532,7 @@ const unSubmit= async (e)=>{
                     {activitystatus.status === 'pending' ?
                     <button className='secondary' onClick={()=>{handIn(activitystatus.assign_id)}}> Hand In</button>
                   :
-                  <button className='tertiary' onClick={()=>{unSubmit(activitystatus.assign_id)}} > Unsubmit</button>
+                  <button className='tertiary' onClick={()=>{unSubmit(activitystatus.assign_id)}} > Unsubmit {activitystatus.status}</button>
                   }
 
                     </>

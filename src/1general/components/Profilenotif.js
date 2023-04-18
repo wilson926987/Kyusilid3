@@ -9,6 +9,7 @@ import {GrMail} from 'react-icons/gr'
 import { useNavigate } from 'react-router-dom'
 import { userInfoContext } from '../../Globalcontext'
 import {RiSunFill ,RiMoonFill} from 'react-icons/ri'
+import axios from 'axios'
 
 
 
@@ -23,6 +24,7 @@ function Profilenotif() {
     const {userinfo, setuserinfo}= useContext(userInfoContext);
     const [imageUrl, setImageUrl] = useState(null);
 
+    const [profilePic, setProfilePic] = useState('');
  
 
     const [profilepanel, setprofilepanel] = useState(false);
@@ -67,17 +69,18 @@ function Profilenotif() {
     
     }
 
-
-
-      //Profile pic get
-  useEffect(()=>{
-    console.log();
-    if (userinfo && userinfo.user && userinfo.user.profile_pic) {
-      const imageUrl = `https://api.kyusillid.online/${userinfo.user.profile_pic}`;
-      setImageUrl(imageUrl);
-      console.log(imageUrl)
-    }
-  }, [userinfo]);
+    useEffect(() => {
+        async function fetchProfilePic() {
+          try {
+            const response = await axios.get(`https://api.kyusillid.online/api/getprofilepic/${userinfo.user.acc_id}`);
+            setProfilePic(response.data.profile_pic);
+            console.log(response.data.profile_pic);
+          } catch (error) {
+            console.error(error);
+          }
+        }
+        fetchProfilePic();
+      }, [userinfo.user.acc_id]);
 
    
 
@@ -106,14 +109,14 @@ function Profilenotif() {
         
         <div className='profileicon' >
              
-            <img src={imageUrl} alt="" onClick={toggleprofilepanel}/>
+            <img src={profilePic} alt="" onClick={toggleprofilepanel}/>
             {profilepanel &&
                 <div >
                 <div className="modalbackground" onClick={toggleprofilepanel}>
                     
                 </div>
                 <div className='profilemodal background borderradius-md'>
-                        <img src={imageUrl} alt=""/>
+                        <img src={profilePic} alt=""/>
 
                         {userinfo.user.usertype !== 'admin' && <button className='secondary commonbutton' onClick={ gotoprofile}>Go to Account</button>}
                     

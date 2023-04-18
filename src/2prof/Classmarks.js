@@ -2,10 +2,16 @@ import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { currentclassContext } from "../Globalcontext";
 import * as XLSX from "xlsx";
+import axios from "axios";
+import React, { useContext, useEffect, useState } from "react";
+import { currentclassContext } from "../Globalcontext";
+import * as XLSX from "xlsx";
 
 function Classmarks() {
-  const [data, setData] = useState();
-  const { currentclass } = useContext(currentclassContext);
+  const [data, setData] = useState();;
+  const {  currentclass  } = useContext(currentclassContext);
+  const [searchFilter, setSearchFilter] = useState("");
+  const [gradeType, setGradeType] = useState("midterm"); // add this line to define gradeType state;
   const [searchFilter, setSearchFilter] = useState("");
   const [gradeType, setGradeType] = useState("midterm"); // add this line to define gradeType state
 
@@ -41,8 +47,6 @@ function Classmarks() {
   const handleView = (index) => {
     setShowTextbox(!showTextbox);
   };
-
-
 function exportGrades() {
   if (data) {
     const exportData = data.map((item) => {
@@ -96,6 +100,7 @@ function exportGrades() {
     XLSX.writeFile(workbook, "grades.xlsx");
   }
 }
+
   return (
     <div>
       <div class="container">
@@ -116,23 +121,23 @@ function exportGrades() {
       </div>
       <div class="buttons">
   <div className={gradeType === 'midterm' ? 'active' : 'btnsss'}>
-    <button id='gradetype' onClick={() => setGradeType('midterm')} style={{ width: '100%', color: gradeType === 'midterm' ? '#064273' : '#000', border: 'none', borderBottom: gradeType === 'midterm' ? '4px solid #064273' : '',}}>
-      Midterm Grade
-    </button>
-  </div>
-  <div className={gradeType === 'final' ? 'active' :'btnsss1'}>
-    <button id='gradetype' onClick={() => setGradeType('final')} style={{ width: '100%', color: gradeType === 'final' ? '#064273' : '#000', border: 'none', borderBottom: gradeType === 'final' ? '4px solid #064273' : '',}}>
-      Final Grade
-    </button>
-  </div>
+  <button id='gradetype' onClick={() => setGradeType('midterm')} style={{ width: '100%', color: gradeType === 'midterm' ? '#064273' : '#000', border: 'none', borderBottom: gradeType === 'midterm' ? '4px solid #064273' : '',}}>
+    Midterm Grade
+  </button>
+</div>
+<div className={gradeType === 'final' ? 'active' :'btnsss1'}>
+  <button id='gradetype' onClick={() => setGradeType('final')} style={{ width: '100%', color: gradeType === 'final' ? '#064273' : '#000', border: 'none', borderBottom: gradeType === 'final' ? '4px solid #064273' : '',}}>
+    Final Grade
+  </button>
+</div>
 </div>
 <br></br>
 <br></br>
         
       <div className="persontable width100">
       <table className='width100' cellSpacing={0}>
-        <thead className="primary">
-          <tr>
+        <thead>
+          <tr className="primary">
             <th>Name</th>
             <th>Activities</th>
             <th>Assignment</th>
@@ -148,6 +153,7 @@ function exportGrades() {
                 <th>Final Exam</th>
               </> 
             )}
+            
           </tr> 
         </thead>  
  
@@ -211,19 +217,13 @@ function exportGrades() {
           padding: 5px;
           border-bottom: none;
         }
-
         .buttons {
           display: flex;
           justify-content: space-between;
           max-width: 100%;
         } 
-        .buttons .btnsss:hover { 
-          border-bottom: 4px solid #064273;
+        
 
-        }
-        .buttons .btnsss1:hover { 
-          border-bottom: 4px solid #064273;
-        }
         .active {
           border-radius: 10px;
         }

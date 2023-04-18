@@ -103,6 +103,24 @@ td{
 
 
 
+.submitted-activity>div:last-child{
+  display: none;
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%) scale(1.3);
+}
+
+.submitted-activity:hover >div:last-child{
+  display: block;
+
+}
+
+
+
+
+
+
 .responsefile{
     height: 140px;
    display: flex;
@@ -1817,8 +1835,6 @@ padding: 12px;
   left: 0;
 } */
 .stickheader{
-  
-    background: white;
     position: sticky;
     top: 0; /* Don't forget this, required for the stickiness */
     z-index: 3;

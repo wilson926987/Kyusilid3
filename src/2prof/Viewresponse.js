@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { responseContext } from '../Globalcontext'
 import { SiAeromexico } from 'react-icons/si'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 
 function Viewresponse() {
@@ -14,8 +15,23 @@ function Viewresponse() {
 
     const {responseinfo} = useContext(responseContext)
 
+    const [filelist, setfilelist] = useState([]);
+    const navigate= useNavigate();
+
+    useEffect(()=>{
+  
+        axios.get('https://api.kyusillid.online/api/activityassignfiles/' + responseinfo.assign_id).then(
+            response => setfilelist(response.data)
+        )
+
+    },[])
+
+  
+
+
     const tt = async ()=>{
 
+      
         const temp = {
             "assign_id": responseinfo.assign_id,
             "score" : score,
@@ -61,23 +77,25 @@ function Viewresponse() {
   return (
     <div>
         <div className="flex"> 
-            <h4>Student's Work</h4>  
+             <button className='commonbutton lighttext secondary' onClick={()=>{navigate('/classes/sampleclass/activity/activityId')}}>Back to Response list</button> <h4>Student's Work , {responseinfo.status}</h4>
             <div className="flex marginleftauto">
                 <h4>Score</h4>
-                <input type="text" className="commontextbox primaryborder col-lg-4" defaultValue={score} onChange={(e)=>{setscore(e.target.value)}}/>
+                <input type="number" min={0} max={100} className="commontextbox primaryborder col-lg-4" defaultValue={score} onChange={(e)=>{setscore(e.target.value)}}/>
                 {!ifsaved ?
                 <button className='commontextbox secondary lighttext col-lg-4' onClick={tt}>Mark response</button>
             :
-            <button className='commontextbox secondary lighttext col-lg-4' onClick={tt}>Saved </button>}
+            <button className='commontextbox secondary lighttext col-lg-4' >Saved </button>}
             </div>
         </div>
-        <h4>{responseinfo.status}</h4>
-  {/* Display the uploaded file if it exists */}
-      {responseinfo.file_name !== undefined &&
     
-     <a href={uploadedFile} target="_blank" className='responsefile primary borderradius-md '>{responseinfo.file_name}</a>
-      
-      }
+
+        {filelist !== undefined && filelist.map((item)=>(
+            <a href={item.stringpath} target='_blank'>
+                <div className='primary padding12  borderradius-md col-lg-6'>
+                    <h3>{item.file_name}</h3>
+                </div>
+            </a>
+        ))}
 
         
     </div>
