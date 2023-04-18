@@ -3,6 +3,7 @@ import Multiselector from '../1general/formcomponents/Multiselector';
 import Dropdown from '../1general/formcomponents/Dropdown';
 import axios from 'axios';
 import { announcementlistContext , myClasesContext , currentclassContext, userInfoContext} from '../Globalcontext';
+import {AiFillCaretDown}  from 'react-icons/ai'
 
 function CreateAnnouncementprof() {
     const[announcementcontent, setannouncementcontent] = useState();
@@ -12,15 +13,11 @@ function CreateAnnouncementprof() {
     const {userinfo} = useContext(userInfoContext);
     const {myclasses} = useContext(myClasesContext);
     const [saveannouncementready, setsaveannouncement] = useState(true);
-    const posttypes = [
-        {
-            'value' : 'fixed', 'label' : 'Set Time and Date' 
-        },
-        {
-            'value' : 'timed' , 'label' : 'Class Schedule'
-        }
-    ]
-    const [posttype, setposttype] = useState('fixed')
+    const [dropdown, setdropdown]= useState(false)
+
+
+  
+    const [posttype, setposttype] = useState('postnow')
     const [selectedclass, setselectedclass] =useState([]) 
 
     var tzoffset = (new Date()).getTimezoneOffset() * 60000;
@@ -97,9 +94,12 @@ function CreateAnnouncementprof() {
                         "an_content" : announcementcontent,
                         "acc_id" : userinfo.user.acc_id,
                         "classes_id" : selectedclass[x].value.classes_id,
-                        "schedule" : posttype==='fixed' ? new Date(postdate).toISOString().slice(0, 19).replace('T', ' ') : setfuturedate(selectedclass[x].value.day_label, selectedclass[x].value.sched_from).toISOString().slice(0, 19).replace('T', ' ')
+                        "schedule" : posttype==='postnow' ? new Date(currentdate).toISOString().slice(0, 19).replace('T', ' ') : 
+                        new Date(postdate).toISOString().slice(0, 19).replace('T', ' ')
                     }
                     //    
+
+                    console.log(JSON.stringify(ggt))
               
                 
                     await axios.post('https://api.kyusillid.online/api/add-announcement' , ggt)
@@ -176,34 +176,9 @@ function CreateAnnouncementprof() {
                     />
              
                     </div>
-                    <div className="col-lg-3">
-                        <div>
-                            <p className='smallfont'>Schedule post</p>
-                  
-                            <Dropdown
-                                options={posttypes}
-                                onChangeHandler= {setposttype}
-                                mainClass= 'dropdownmain primary borderradius-md'
-                                itemClass= 'dropdownitem'
-                                controlClass='dropdowncontrol'
-                                menuClass='dropdownmenu primary'
-                                controlActiveClass='dropdowncontrolactive'
-                                mainActiveClass='dropdownmain-active'
-                            />                        
-                        </div>
-                    </div>
+              
 
-                    <div className='col-lg-4'>
-                        <div>
-                            <p className='smallfont'>Schedule post</p>
-                            {posttype==="fixed" ?
-                            <input type="datetime-local" className='dropdowncontrol primary borderradius-md' defaultValue={postdate}  min={currentdate} onChange={(e)=>{setpostdate(e.target.value)}}/>
-                            :
-                            <div>At the start of the class</div>
-                            }
-                            
-                        </div>
-            </div>
+            
                 </div>
                 <form action="" onSubmit={(e)=>{saveAnnouncement(e)}}>
                 <div className='margintop12'>
@@ -213,7 +188,34 @@ function CreateAnnouncementprof() {
             </div>
                     <div className="postannouncementfooter flex">
                              <button onClick={temp2} className='secondary lighttext commonbutton'> Cancel</button>
-                            <input type="submit" className='secondary  lighttext commonbutton' value="Post" />
+                             <div className={`datecontainer ${posttype !== 'postnow'&& 'datecontainer-active'}`}>
+                           <input type="datetime-local" className='commonbutton secondary lighttext' defaultValue={postdate}  min={currentdate} onChange={(e)=>{setpostdate(e.target.value)}}/>
+
+                           </div>
+
+                           
+
+                            <input type="submit" className='secondary  lighttext commonbuttonleft' value={posttype === "postnow" ? "Post Now" : " Scheduled Post"} />
+                           <div className='relative'>
+                                <div className="commonbuttonright secondary lighttext" onClick={()=>{setdropdown(!dropdown)}}>
+                                    <AiFillCaretDown/>
+                                    
+                                </div>
+
+                               {dropdown && 
+                                <div className='commonbuttondrop tertiary borderradius-md' >
+                                <ul>
+                                    <li className='padding12' onClick={()=>{setdropdown(false) ;setposttype('postnow')}}>Post Now</li>
+                                    <li className='padding12' onClick={()=>{setdropdown(false); setposttype('scheduled')}}>Scheduled Post</li>
+                                </ul>
+                            </div>}
+                           </div>
+
+                        
+                     
+
+                          
+                           
                     </div>  
                 </form>
                 

@@ -108,7 +108,7 @@ function Viewresponse() {
             <h4 className='marginleftauto'>Score</h4>
             <input type="number" min={0} max={100} className="commontextbox primaryborder  col-lg-1" defaultValue={score} onChange={(e)=>{setscore(e.target.value)}}/>
             {!ifsaved ?
-                <button className='commonbutton secondary lighttext widthset' onClick={tt}>Mark response</button>
+                <button className='commonbutton secondary lighttext widthset' onClick={tt}>Set Grade and Return</button>
                 :
                 <button className='commonbutton secondary lighttext widthset' >Saved </button>}
 
@@ -119,12 +119,7 @@ function Viewresponse() {
 
         <div className="flex margintop12 marginleft12"> 
              <h4>Student's Work , {responseinfo.status} </h4>
-          <div className="flex marginleftauto">
-
-                
-               
-            <button className='commonbutton secondary lighttext widthset' onClick={()=>{returnActivity()}}> Return</button>
-            </div>
+      
         </div>
     
 

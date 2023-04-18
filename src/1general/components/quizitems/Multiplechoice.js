@@ -41,7 +41,7 @@ function Multiplechoice({content ,item , handleaddoption , handleAnswerChange}) 
       </ul>
 
       <select className='secondary commonbutton lighttext primary padding12' onChange={e=>{handleAnswerChange(item, e.target.value)}}>
-            <option value='select answer' >Select Answer</option>
+            <option value='select answer' >Select Correct Answer</option>
           {content.map((item,key)=>(
             <option  key={key} value={item.value}> {item.value}  </option>
           ))}

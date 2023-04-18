@@ -41,6 +41,7 @@ function ClassContainer() {
   
 
   const forecerefreshHandler= async()=>{
+    console.log('refreshed')
     await axios.get(url + currentclass.classes_id)
     .then(response => {
       setannouncementlist(response.data)

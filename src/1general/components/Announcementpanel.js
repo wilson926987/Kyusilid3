@@ -52,7 +52,10 @@ function Announcementpanel({announcementitem , forcerefresh}) {
     }
   }
 
+  const [forcetrue, setforcetrue] = useState(false)
+
   const postnow = async ()=>{
+    setforcetrue(true)
   
 
   await axios.put('https://api.kyusillid.online/api/updateannouncement' , {"an_id" : announcementitem.announcementitem.an_id}).then(
@@ -167,7 +170,7 @@ function Announcementpanel({announcementitem , forcerefresh}) {
         
         
         
-        {announcementitem !== undefined  && announcementitem.announcementitem.schedule < currentdatestamp ?
+        {(announcementitem !== undefined  && announcementitem.announcementitem.schedule <= currentdatestamp) || forcetrue ?
         
         
         

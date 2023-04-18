@@ -1606,6 +1606,62 @@ background-color: var(--defaultprimary);
   font-weight: bold;
 }
 
+.commonbuttonleft{
+  padding: 6px 12px;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+
+  margin-top: 4px;
+  margin-left: 4px;
+  margin-right: 1px;
+  margin-bottom: 4px;
+  font-weight: bold;
+}
+
+.commonbuttonright{
+  padding: 6px 12px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  margin-top: 4px;
+  margin-left: 1px;
+  margin-right: 4px;
+  margin-bottom: 4px;
+  font-weight: bold;
+  font-size: 15px;
+
+}
+
+.datecontainer{
+  width: 0px;
+  overflow: hidden;
+}
+
+.datecontainer-active{
+  width: 230px !important;
+  overflow: auto;
+}
+
+.datecontainer-active::-webkit-scrollbar {
+  display: none;
+}
+
+.commonbuttondrop{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  transform: translateY(100%);
+  z-index: 4;
+  box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.75);
+  -webkit-box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.75);
+  
+}
+
+.commonbuttondrop li{
+  white-space: nowrap;
+}
+
+
 .profilemodal img{
   transform: scale(2);
   margin-bottom: 30px;
@@ -1614,6 +1670,8 @@ background-color: var(--defaultprimary);
 .default .profilemodal button{
   color: var(--lighttextprimary);
 }
+
+
 
 
 

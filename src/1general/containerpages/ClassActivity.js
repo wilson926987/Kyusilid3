@@ -495,7 +495,7 @@ function exportGrades() {
           
               <div className=" background borderradius-md margintop12 padding12">
                 {activitystatus.status === 'marked' ?
-                 <h4>Marked {activitystatus.grade} / {activitystatus.points}</h4>
+                 <h4>Grade {activitystatus.grade} / {activitystatus.points}</h4>
                  :
                  activitystatus.status ==='handed in late'?
       
@@ -656,9 +656,8 @@ function exportGrades() {
       
 
       </div>
-      <button id="export" onClick={() => exportGrades()}  style={{fontSize:'24px', cursor:'pointer', borderRadius:'8px', width:'auto', padding:'5px'}}>
-          Export
-        </button>
+    
+        <button className='commonbutton secondary lighttext padding12'  onClick={() => exportGrades()} >Export activity status as excel</button>
       
 
           <table className='width100 margintop12'>
