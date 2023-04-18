@@ -2,18 +2,12 @@ import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { currentclassContext } from "../Globalcontext";
 import * as XLSX from "xlsx";
-import axios from "axios";
-import React, { useContext, useEffect, useState } from "react";
-import { currentclassContext } from "../Globalcontext";
-import * as XLSX from "xlsx";
 
 function Classmarks() {
   const [data, setData] = useState();;
   const {  currentclass  } = useContext(currentclassContext);
-  const [searchFilter, setSearchFilter] = useState("");
   const [gradeType, setGradeType] = useState("midterm"); // add this line to define gradeType state;
   const [searchFilter, setSearchFilter] = useState("");
-  const [gradeType, setGradeType] = useState("midterm"); // add this line to define gradeType state
 
   const handleMidtermClick = () => {
     setGradeType("midterm");
@@ -110,11 +104,11 @@ function exportGrades() {
 
         <div class="search">
           <input
-            type="text"
+            type="text" 
             placeholder="Search by name"
             name="search"
             onChange={(e) => {
-              setsearchfilter(e.target.value);
+              setsearchfilter(e.target.value);  
             }}
           />
         </div>
@@ -139,21 +133,67 @@ function exportGrades() {
         <thead>
           <tr className="primary">
             <th>Name</th>
-            <th>Activities</th>
-            <th>Assignment</th>
-            <th>Quizzes</th>
-            <th>Attendance</th>
-            {gradeType === "midterm" && (
+            {gradeType === "midterm" && (  
               <>
+              {data &&
+                  data.map((item, index) => {
+                    if (index > 0) return null; // skip rendering for other students
+                    let loopHasRun = false; // Define a boolean variable to keep track of whether the loop has run or not
+                    return (
+                      <>
+                        {Array.from({ length: item.activity_count ? item.activity_count : 1 }, (_, i) => (
+                          <th key={`activity-${i+1}`}>
+                            Activity {i+1}
+                          </th>
+                        ))}
+                        {Array.from({ length: item.assignment_count ? item.assignment_count : 1 }, (_, i) => (
+                          <th key={`assignment-${i+1}`}>
+                            Assignment {i+1}
+                          </th>
+                        ))}
+                        {Array.from({ length: item.quiz_count ? item.quiz_count : 1 }, (_, i) => (
+                          <th key={`quiz-${i+1}`}>
+                            Quiz {i+1}
+                          </th>
+                        ))}
+                      </>
+                    );
+                  })}
+
                 <th>Midterm Exam</th>
               </>
             )}
-            {gradeType === "final" && (
-              <>
-                <th>Final Exam</th>
-              </> 
-            )}
-            
+           {gradeType === "final" && (
+  <>
+                {data &&
+                  data.map((item, index) => {
+                    if (index > 0) return null; // skip rendering for other students
+                    let loopHasRun = false; // Define a boolean variable to keep track of whether the loop has run or not
+                    return (
+                      <>
+                        {Array.from({ length: item.finals_activity_count ? item.finals_activity_count : 1 }, (_, i) => (
+                          <th key={`activity-${i+1}`}>
+                            Activity {i+1}
+                          </th>
+                        ))}
+                        {Array.from({ length: item.finals_assignment_count ? item.finals_assignment_count : 1 }, (_, i) => (
+                          <th key={`assignment-${i+1}`}>
+                            Assignment {i+1}
+                          </th>
+                        ))}
+                        {Array.from({ length: item.finals_quiz_count ? item.finals_quiz_count : 1 }, (_, i) => (
+                          <th key={`quiz-${i+1}`}>
+                            Quiz {i+1}
+                          </th>
+                        ))}
+                        <th>Final Exam</th>
+                      </>
+                    );
+                  })}
+              </>
+            )} 
+
+            <th>Attendance</th>
           </tr> 
         </thead>  
  
@@ -171,30 +211,23 @@ function exportGrades() {
                   <td data-label="Name">{item.student.name} </td>
                   {gradeType === "midterm" && (
                     <>
-                      <td>
-                        {Math.round(
-                          item.activity.grade / (item.activity_count || 1))}{" "} / 100
-                      </td>
-                      <td>
-                        {Math.round(
-                          item.assignment.grade / (item.assignment_count || 1))}{" "} / 100
-                      </td>
-                      <td>
-                        {Math.round( item.questionnaire.grade /(item.questionnaire_count || 1))}{" "}/ 100
-                      </td>
-                      <td>{Math.round(item.attendance.grade)}</td>
-                      <td>{Math.round(item.midterm_exam.grade)} / 100</td>
+                      <td></td>
+                      <td></td>
+                      <td> </td>
+                      <td></td>
+                      <td></td>
                     </>
                   )}
                   {gradeType === "final" && (
                     <>
-                      <td>{Math.round(item.finals_activity.grade / (item.finals_activity_count || 1))} / 100</td>
-                      <td>{Math.round(item.finals_assignment.grade / (item.finals_assignment_count || 1))} / 100</td>
-                      <td>{Math.round(item.finals_questionnaire.grade / (item.finals_quiz_count || 1))} / 100</td>
-                      <td>{Math.round(item.attendance.grade)}</td>
-                      <td>{Math.round(item.finals_exam.grade)}</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
                     </> 
-                  )}    
+                  )}   
+                  <td>{Math.round(item.attendance.grade)}</td> 
                 </tr> 
               ))}
           </tbody>
