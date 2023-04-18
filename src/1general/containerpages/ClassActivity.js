@@ -9,6 +9,8 @@ import {BsGearFill} from 'react-icons/bs'
 import axios from 'axios';
 import Textbox from '../formcomponents/Textbox';
 
+import * as XLSX from "xlsx"; 
+
 
 
 function ClassActivity() {
@@ -343,7 +345,21 @@ const unSubmit= async (e)=>{
 
 
 
-
+function exportGrades() {
+  if(responselist){
+    const exportData = responselist.map((item) => {
+   return{
+    Name: item.name ? item.name : '',
+    Status: item.status ? item.status : '',
+    Grade: item.grade ? item.grade : 'n/a'
+  };
+});
+  const worksheet = XLSX.utils.json_to_sheet(exportData);
+  const workbook = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(workbook, worksheet, "Grades");
+  XLSX.writeFile(workbook, `${currentactivity.topic_name} Responses.xlsx`);
+  }
+}
 
 
 
@@ -640,8 +656,10 @@ const unSubmit= async (e)=>{
       
 
       </div>
-
-
+      <button id="export" onClick={() => exportGrades()}  style={{fontSize:'24px', cursor:'pointer', borderRadius:'8px', width:'auto', padding:'5px', backgroundColor: '#064273', color:'white'}}>
+          Export
+        </button>
+      
 
           <table className='width100 margintop12'>
             <thead >
@@ -718,6 +736,7 @@ const unSubmit= async (e)=>{
   
   
       </div>
+      
     )
 
   }

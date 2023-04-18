@@ -45,34 +45,101 @@ function Classmarks() {
 function exportGrades() {
   if (data) {
     const exportData = data.map((item) => {
+      const activityNames = Array.from({ length: item.activity_count ? item.activity_count : 1 }, (_, i) => (
+        item.midterm_activity && item.midterm_activity[`midterm_activity_${i+1}`] && item.midterm_activity[`midterm_activity_${i+1}`].midterm_activity_name ? item.midterm_activity[`midterm_activity_${i+1}`].midterm_activity_name : 'Activity #'
+      ));
+  
+      const activityGrades = Array.from({ length: item.activity_count ? item.activity_count : 1 }, (_, i) => (
+        item.midterm_activity && item.midterm_activity[`midterm_activity_${i+1}`] && item.midterm_activity[`midterm_activity_${i+1}`].midterm_activity_grade ? item.midterm_activity[`midterm_activity_${i+1}`].midterm_activity_grade : 0
+      ));
+
+      const assignmentNames = Array.from({ length: item.assignment_count ? item.assignment_count : 1 }, (_, i) => (
+        item.midterm_assignment && item.midterm_assignment[`midterm_assignment_${i+1}`] && item.midterm_assignment[`midterm_assignment_${i+1}`].midterm_assignment_name ? item.midterm_assignment[`midterm_assignment_${i+1}`].midterm_assignment_name : 'assignment #'
+      ));
+  
+      const assignmentGrades = Array.from({ length: item.assignment_count ? item.assignment_count : 1 }, (_, i) => (
+        item.midterm_assignment && item.midterm_assignment[`midterm_assignment_${i+1}`] && item.midterm_assignment[`midterm_assignment_${i+1}`].midterm_assignment_grade ? item.midterm_assignment[`midterm_assignment_${i+1}`].midterm_assignment_grade : 0
+      ));
+      const quizNames = Array.from({ length: item.quiz_count ? item.quiz_count : 1 }, (_, i) => (
+        item.midterm_quiz && item.midterm_quiz[`midterm_quiz_${i+1}`] && item.midterm_quiz[`midterm_quiz_${i+1}`].midterm_quiz_name ? item.midterm_quiz[`midterm_quiz_${i+1}`].midterm_quiz_name : 'quiz #'
+      ));
+  
+      const quizGrades = Array.from({ length: item.quiz_count ? item.quiz_count : 1 }, (_, i) => (
+        item.midterm_quiz && item.midterm_quiz[`midterm_quiz_${i+1}`] && item.midterm_quiz[`midterm_quiz_${i+1}`].midterm_quiz_grade ? item.midterm_quiz[`midterm_quiz_${i+1}`].midterm_quiz_grade : 0
+      ));
+      const factivityNames = Array.from({ length: item.finals_activity_count ? item.finals_activity_count : 1 }, (_, i) => (
+        item.finals_activity && item.finals_activity[`finals_activity_${i+1}`] && item.finals_activity[`finals_activity_${i+1}`].finals_activity_name ? item.finals_activity[`finals_activity_${i+1}`].finals_activity_name : 'activity #'
+      ));
+  
+      const factivityGrades = Array.from({ length: item.finals_activity_count ? item.finals_activity_count : 1 }, (_, i) => (
+        item.finals_activity && item.finals_activity[`finals_activity_${i+1}`] && item.finals_activity[`finals_activity_${i+1}`].finals_activity_grade ? item.finals_activity[`finals_activity_${i+1}`].finals_activity_grade : 0
+      ));
+      const fassignmentNames = Array.from({ length: item.finals_assignment_count ? item.finals_assignment_count : 1 }, (_, i) => (
+        item.finals_assignment && item.finals_assignment[`finals_assignment_${i+1}`] && item.finals_assignment[`finals_assignment_${i+1}`].finals_assignment_name ? item.finals_assignment[`finals_assignment_${i+1}`].finals_assignment_name : 'assignment #'
+      ));
+  
+      const fassignmentGrades = Array.from({ length: item.finals_assignment_count ? item.finals_assignment_count : 1 }, (_, i) => (
+        item.finals_assignment && item.finals_assignment[`finals_assignment_${i+1}`] && item.finals_assignment[`finals_assignment_${i+1}`].finals_assignment_grade ? item.finals_assignment[`finals_assignment_${i+1}`].finals_assignment_grade : 0
+      ));
+      const fquizNames = Array.from({ length: item.finals_quiz_count ? item.finals_quiz_count : 1 }, (_, i) => (
+        item.finals_quiz && item.finals_quiz[`finals_quiz_${i+1}`] && item.finals_quiz[`finals_quiz_${i+1}`].finals_quiz_name ? item.finals_quiz[`finals_quiz_${i+1}`].finals_quiz_name : 'quiz #'
+      ));
+  
+      const fquizGrades = Array.from({ length: item.finals_quiz_count ? item.finals_quiz_count : 1 }, (_, i) => (
+        item.finals_quiz && item.finals_quiz[`finals_quiz_${i+1}`] && item.finals_quiz[`finals_quiz_${i+1}`].finals_quiz_grade ? item.finals_quiz[`finals_quiz_${i+1}`].finals_quiz_grade : 0
+      ));
+
+      const totalActivityGrade = activityGrades.reduce((accumulator, currentValue) => isNaN(currentValue) ? accumulator : accumulator + currentValue, 0);
+      const totalAssignmentGrade = assignmentGrades.reduce((accumulator, currentValue) => isNaN(currentValue) ? accumulator : accumulator + currentValue, 0);
+      const totalQuizGrade = quizGrades.reduce((accumulator, currentValue) => isNaN(currentValue) ? accumulator : accumulator + currentValue, 0);
+
+      const totalfActivityGrade = factivityGrades.reduce((accumulator, currentValue) => isNaN(currentValue) ? accumulator : accumulator + currentValue, 0);
+      const totalfAssignmentGrade = fassignmentGrades.reduce((accumulator, currentValue) => isNaN(currentValue) ? accumulator : accumulator + currentValue, 0);
+      const totalfQuizGrade = fquizGrades.reduce((accumulator, currentValue) => isNaN(currentValue) ? accumulator : accumulator + currentValue, 0);
+      const midtermgrade = Math.round(((totalActivityGrade/item.activity_count?item.activity_count:1)*0.2)+((totalAssignmentGrade/item.assignment_count?item.assignment_count:1)*0.15)+((totalQuizGrade/item.quiz_count?item.quiz_count:1)*0.2)+(100*0.05)+((item.midterm_exam && item.midterm_exam.midterm_exam_1 && item.midterm_exam.midterm_exam_1.midterm_exam_grade) ? item.midterm_exam.midterm_exam_1.midterm_exam_grade*0.4 : 0));
+      const finalterm = Math.round(((totalfActivityGrade/item.finals_activity_count?item.finals_activity_count:1)*0.2)+((totalfAssignmentGrade/item.finals_assignment_count?item.finals_assignment_count:1)*0.15)+((totalfQuizGrade/item.finals_quiz_count?item.finals_quiz_count:1)*0.2)+(100*0.05)+((item.finals_exam && item.finals_exam.finals_exam_1 && item.finals_exam.finals_exam_1.finals_exam_grade) ? item.finals_exam.finals_exam_1.finals_exam_grade*0.4 : 0));
+      const finalgrade = Math.round((midtermgrade*.5)+(finalterm*.5));
+        let grade;
+      
+        if (finalgrade >= 96 && finalgrade <= 100) {
+          grade = 1.00;
+        } else if (finalgrade >= 94 && finalgrade <= 95.99) {
+          grade = 1.25;
+        } else if (finalgrade >= 91 && finalgrade <= 93.99) {
+          grade = 1.50;
+        } else if (finalgrade >= 89 && finalgrade <= 90.99) {
+          grade = 1.75;
+        } else if (finalgrade >= 86 && finalgrade <= 88.99) {
+          grade = 2.00;
+        } else if (finalgrade >= 83 && finalgrade <= 85.99) {
+          grade = 2.25;
+        } else if (finalgrade >= 80 && finalgrade <= 82.99) {
+          grade = 2.50;
+        } else if (finalgrade >= 77 && finalgrade <= 79.99) {
+          grade = 2.75;
+        } else if (finalgrade >= 75 && finalgrade <= 76.99) {
+          grade = 3.00;
+        } else {
+          grade = 5.00;
+        }
+
+
+      
       return {
         Name: item.student.name,
-        'Activity 1': '75 / 100',
-        'Activity 2': '75 / 100',
-        'Activity 3': '75 / 100',
-        'Assignment 1': '84 / 100',
-        'Assignment 2': '84 / 100',
-        'Assignment 3': '84 / 100',
-        'Quiz 1' : '82 / 100',
-        'Quiz 2' : '82 / 100',
-        'Quiz 3' : '82 / 100',
+        ...Object.fromEntries(activityNames.map((name, i) => [name, `${activityGrades[i]} `])),
+        ...Object.fromEntries(assignmentNames.map((name, i) => [name, `${assignmentGrades[i]}`])),
+        ...Object.fromEntries(quizNames.map((name, i) => [name, `${quizGrades[i]}`])),
         Attendance: '100',
-        "Midterm Exam": '94 / 100',
-        "Midterm Grade": '87.62',
-        'Final Activity 1': '75 / 100',
-        'Final Activity 2': '75 / 100',
-        'Final Activity 3': '75 / 100',
-        'Final Assignment 1': '84 / 100',
-        'Final Assignment 2': '84 / 100',
-        'Final Assignment 3': '84 / 100',
-        'Final Quiz 1' : '82 / 100',
-        'Final Quiz 2' : '82 / 100',
-        'Final Quiz 3' : '82 / 100',
+        //"Midterm Exam": item.midterm_exam && item.midterm_exam.midterm_exam_1 && item.midterm_exam.midterm_exam_1.midterm_exam_grade ? item.midterm_exam.midterm_exam_1.midterm_exam_grade + '' : '0',
+        //"Midterm Grade": midtermgrade,
+        ...Object.fromEntries(fassignmentNames.map((name, i) => [name, `${fassignmentGrades[i]}`])),
+        ...Object.fromEntries(factivityNames.map((name, i) => [name, `${factivityGrades[i]}`])),
+        ...Object.fromEntries(fquizNames.map((name, i) => [name, `${fquizGrades[i]}`])),
         Attendance: '100',
-        "Final Exam": '94 / 100',
-        "Final Term Grade": '87.62',
-        "Final Grade" : '2.75',
-        "" : "This is a placeholder, Export in progress"
+        //"Final Exam": item.finals_exam && item.finals_exam.finals_exam_1 && item.finals_exam.finals_exam_1.finals_exam_grade ? item.finals_exam.finals_exam_1.finals_exam_grade + '' : '0',
+        //"Final Term Grade": finalterm,
+        //"Final Grade" : grade.toFixed(2),
       };
     });
 
@@ -165,7 +232,7 @@ function exportGrades() {
                       <>
                         {Array.from({ length: item.finals_activity_count ? item.finals_activity_count : 1 }, (_, i) => (
                           <th key={`activity-${i+1}`}>
-                            {item.finals_activity[`finals_activity_${i+1}`] && item.finals_activity[`finals_activity_${i+1}`].finals_activity_name ? item.finals_activity[`finals_activity_${i+1}`].finals_activity_name : 'Activity #'}
+                            {item.finals_activity && item.finals_activity[`finals_activity_${i+1}`] && item.finals_activity[`finals_activity_${i+1}`].finals_activity_name ? item.finals_activity[`finals_activity_${i+1}`].finals_activity_name : 'Activity #'}
                           </th>
                         ))}<th>|</th>
                         {Array.from({ length: item.finals_assignment_count ? item.finals_assignment_count : 1 }, (_, i) => (
@@ -204,11 +271,13 @@ function exportGrades() {
                   <td data-label="Name">{item.student.name} </td>
                   {gradeType === "midterm" && (
                     <>
-                     {Array.from({ length: item.activity_count ? item.activity_count : 1 }, (_, i) => (
-                        <td key={`activity-${i+1}`}>
-                          {item.midterm_activity && item.midterm_activity[`midterm_activity_${i+1}`] && item.midterm_activity[`midterm_activity_${i+1}`].midterm_activity_grade ? item.midterm_activity[`midterm_activity_${i+1}`].midterm_activity_grade : 0} / 100
-                        </td>
-                      ))}
+                     {Array.from({ length: item.activity_count ? item.activity_count: 1 }, (_, i) => (
+                      <td key={`activity-${i+1}`}>
+                        {item.midterm_activity && item.midterm_activity[`midterm_activity_${i+1}`] && item.midterm_activity[`midterm_activity_${i+1}`].midterm_activity_grade ? item.midterm_activity[`midterm_activity_${i+1}`].midterm_activity_grade : 0} / 100
+                      </td>
+                    ))}
+
+
                       <td><p style={{color:'#FFFFFF'}}>---</p></td>
                       {Array.from({ length: item.assignment_count ? item.assignment_count : 1 }, (_, i) => (
                           <td key={`assignment-${i+1}`}>
@@ -247,11 +316,11 @@ function exportGrades() {
                           </td>
                         ))}
                       <td><p style={{color:'#FFFFFF'}}>---</p></td>
-                      <td>{item.finals_exam.finals_exam_1.finals_exam_grade ? item.finals_exam.finals_exam_1.finals_exam_grade : "0" } / 100</td>
+                      <td>{item.finals_exam && item.finals_exam.finals_exam_1 && item.finals_exam.finals_exam_1.finals_exam_grade ? item.finals_exam.finals_exam_1.finals_exam_grade : 0 } / 100</td>
                       <td><p style={{color:'#FFFFFF'}}>---</p></td>
                       <td>{Math.round(item.attendance.grade)}</td> 
                     </> 
-                  )}   
+                  )}    
                 </tr> 
               ))}
           </tbody>
