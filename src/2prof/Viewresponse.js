@@ -118,7 +118,7 @@ function Viewresponse() {
 
 
         <div className="flex margintop12 marginleft12"> 
-             <h4>Student's Work , {responseinfo.status} {responseinfo.assign_id}</h4>
+             <h4>Student's Work , {responseinfo.status} </h4>
           <div className="flex marginleftauto">
 
                 
@@ -130,7 +130,7 @@ function Viewresponse() {
 
         <div className="margintop12">
         {filelist !== undefined && filelist.map((item)=>(
-            <a href={item.stringpath} target='_blank' className='col-lg-6 ' >
+            <a href={"https://api.kyusillid.online/laravel"+item.stringpath} target='_blank' className='col-lg-6 ' >
                 <div className='primary padding12  borderradius-md margintop12'>
                     <h3>{item.file_name}</h3>
                 </div>

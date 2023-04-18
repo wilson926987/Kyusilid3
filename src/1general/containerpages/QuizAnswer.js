@@ -46,11 +46,11 @@ function QuizAnswer({ questions }) {
     };
 
     return (
-      <div>
-        <p>{question.question}</p>
-        <ul>
+      <div className="tertiary padding12 borderradius-md margintop12 col-lg-6 divcenter">
+        <h4>{question.question}</h4>
+        <ul className="margintop12">
           {question.content.map((option) => (
-            <li key={option.index}>
+            <li key={option.index} className="padding12">
               <label>
                 <input
                   type="radio"
@@ -59,7 +59,7 @@ function QuizAnswer({ questions }) {
                   onChange={handleSelection}
                   checked={selectedAnswer === option.value}
                 />
-                {option.value}
+                &nbsp;&nbsp; {option.value}
               </label>
             </li>
           ))}
@@ -77,9 +77,9 @@ function QuizAnswer({ questions }) {
     };
 
     return (
-      <div>
-        <p>{question.question}</p>
-        <input type="text" value={selectedAnswer} onChange={handleInput} />
+      <div className="tertiary padding12 borderradius-md margintop12 col-lg-6 divcenter">
+       <h4>{question.question}</h4>
+        <input type="text" className="commontextbox" defaultValue={selectedAnswer} onChange={handleInput} />
       </div>
     );
   };
@@ -97,8 +97,16 @@ function QuizAnswer({ questions }) {
 
   return (
     <div>
-      <h1>{title}  {id2}</h1>
-      <p>{description}</p>
+
+
+<header className="Quiz-Header primary margintop12">
+        
+        <h1 className='quiz-text'>{title}</h1>
+          <br></br>
+        <h3>{description}</h3>
+       
+    </header>
+     
       {question.length > 0 ? (
         question.map((question) => {
           if (question.type == "Multiplechoice") {
@@ -123,6 +131,24 @@ function QuizAnswer({ questions }) {
       )}
       <h2>Score: {score}</h2>
       <button onClick={handleSubmit}>Submit</button>
+
+    
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
     </div>
   );
 }

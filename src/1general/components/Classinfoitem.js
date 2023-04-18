@@ -24,7 +24,7 @@ function Classinfoitem({personitem}) {
             <img src={profilePic} alt=""/>
             </div>
             <div className='personpanelcontent'>
-                <p>{personitem.title} {personitem.firstname} {personitem.lastname} {personitem.middle} {personitem.suffix} </p>
+                <p> {personitem.lastname}, {personitem.firstname} {personitem.middle} {personitem.suffix}  {personitem.title} </p>
                 <p> {personitem.usertype === 'prof' ? personitem.dep_name : personitem.stud_no }</p>
             </div>
 
