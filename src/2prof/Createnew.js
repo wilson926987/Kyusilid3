@@ -463,10 +463,10 @@ const handlecreateactivity=()=>{
                                   <Dropdown
                                    options={[
                                     {'value' :'fixed',
-                                      'label' : 'fixed'  
+                                      'label' : 'Set Date and Time'  
                                     },
                                     {'value' :'timed',
-                                    'label' : 'relative schedule'  
+                                    'label' : 'Class Schedule'  
                                     }
                                   ]}
                                 onChangeHandler= {setpostscheduletype}
@@ -483,7 +483,7 @@ const handlecreateactivity=()=>{
                          
                                   /> 
                                   
-                                  <Infobox infocontent={'select whether it will be a fixed date or will be based by the class schedule'}/></div>                   
+                                  <Infobox infocontent={'select whether if you can Set Date and Time or will be based by the class schedule'}/></div>                   
                             
                           
                             <div>

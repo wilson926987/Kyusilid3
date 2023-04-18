@@ -127,7 +127,7 @@ return(
             
         </header>
         
-<div className="Questions-Options primary padding12 margintop12 paddingleft12">
+<div className="Questions-Options tertiary padding12 margintop12 paddingleft12 divcenter">
    
 {questions.map((item, key)=>(<div className="Ques">  
           <QuizitemContainer key={key} item={item} 
@@ -138,7 +138,7 @@ return(
               handleAnswerChange={handleAnswerChange}/>
         </div>     ))}
 
-
+<hr></hr>
         <button onClick={()=>{handleAddQuestion()}} className="secondary commonbutton lighttext col-lg-4">ADD QUESTIONS</button>
         <button onClick={()=>{handleQuizSubmit()}} className="secondary commonbutton lighttext col-lg-4">SUBMIT</button>
         </div>

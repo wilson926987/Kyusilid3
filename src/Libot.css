@@ -173,12 +173,45 @@
 
 .Quiz-Header{
 padding: 20px;
-border-radius: 40px;
+border-radius: 10px;
 text-align: center;
 }
 .Quiz-Header input{ 
 text-align: center;
 }
+.Quiz-title{
+font-weight: bolder;
+font-size: 50px;
+
+}
+.Quiz-Desc{
+	font-size: 25px;
+}
+.Q{
+	height: 40px;
+	font-size: 20px;
+}
+
+.QQ{
+margin-left: 50px;
+font-size:25px;
+
+}
+.QQQ{
+	font-size: 30px;
+	margin-left: 20px;
+	margin-bottom: 5px;
+}
+.Qbtn{
+
+	margin-left: 50px;
+}
+
+.QBG{
+	background-color: #6893ee;
+}
+
+
 
 
 .quiz-text{ 
@@ -193,12 +226,13 @@ text-align: center;
 }
 .Questions-Options .Ques{ 
 	border-bottom: 2px solid #fff;	
+	align-items: center;
 
 }
 .Questions-Options{
 	width: 70%;
-	margin-left: 250px;
 	border-radius: 10px;
+	
 }
 .flex .textttt{ 
 	width: 100%;

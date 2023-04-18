@@ -21,7 +21,7 @@ function QuizitemContainer({item , handleOptionChange ,handleaddoption, handleDe
 
     <h1 style={{fontSize:20 }}> {item.questionid}</h1>
          <div className='flex'>
-            <input type= "text " className=' commontextbox padding12' placeholder='Enter Question' onChange={e=>{handleQuestionChange(item, e.target.value)}}/>
+            <input type= "text " className='Q commontextbox padding12' placeholder='Enter Question' onChange={e=>{handleQuestionChange(item, e.target.value)}}/>
             <div className='marginleftauto'> 
             <select className='mult commonbutton lighttext secondary' onChange={(e)=>{handleOptionChange( item, e.target.value)}} >
                 {quizoption.map((item2,key)=>(

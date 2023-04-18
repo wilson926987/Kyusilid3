@@ -54,10 +54,11 @@ function QuizAnswer({ questions }) {
 
     return (
       <div className="tertiary padding12 borderradius-md margintop12 col-lg-6 divcenter">
-        <h4>{question.question}</h4>
+        <h4 className="QQQ">{question.question}</h4>
+        <hr></hr>
         <ul className="margintop12">
           {question.content.map((option) => (
-            <li key={option.index} className="padding12">
+            <li key={option.index} className="QQ padding12">
               <label>
                 <input
                   type="radio"
@@ -119,9 +120,10 @@ function QuizAnswer({ questions }) {
 
 <header className="Quiz-Header primary margintop12">
         
-        <h1 className='quiz-text'>{title}</h1>
+        <h1 className='Quiz-title'>{title}</h1>
           <br></br>
-        <h3>{description}</h3>
+          <hr></hr>
+        <h3 className='Quiz-Desc'>{description}</h3>
        
     </header>
      
