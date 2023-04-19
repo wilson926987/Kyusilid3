@@ -33,14 +33,14 @@ function ActivityItempanel({actItem}) {
       console.log(error);
     });
 
-  // if(userinfo.user.usertype ==='stud'){
-  //   axios.get('https://api.kyusillid.online/api/checkview/' + actItem.activity_id + "/"+ userinfo.user.acc_id).then(
-  //     response=> {
-  //       console.log(response.data)
-  //     }
-  //   ).catch(error => console.log(error.data));
+  if(userinfo.user.usertype ==='stud'){
+    axios.get('https://api.kyusillid.online/api/checkview/' + actItem.activity_id + "/"+ userinfo.user.acc_id).then(
+      response=> {
+           setshownew(response.data === 0 ?true : false)
+      }
+    ).catch(error => console.log(error.data));
 
-  // }
+  }
 
 
   },[])
