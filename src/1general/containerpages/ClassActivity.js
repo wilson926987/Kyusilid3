@@ -48,6 +48,8 @@ function ClassActivity() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [submitedfilename, setsubmitedfilename] = useState();
 
+ 
+
 
 
   const [filelinktemp, setfiletemp]= useState();
@@ -58,10 +60,23 @@ function ClassActivity() {
     if(activitystatus.status !== 'assigned'){
       setfilesubmitlist(filesubmitlist.filter(item=> item.id !== e))
     }
+
+  }
+
+
+  useEffect(()=>{
     
 
-    
-  }
+
+    if(activitystatus !== undefined && userinfo.user.usertype==="stud"){
+      axios.post('https://api.kyusillid.online/api/markview' ,{"assign_id" : activitystatus.assign_id}).then().catch(
+        error=>console.log(error.data)
+      )
+    }
+
+  },[activitystatus])
+
+
 
 
   const takequiz= ()=>{
@@ -245,6 +260,9 @@ function ClassActivity() {
         console.log(response.data)
       }
      ).catch(error=> console.log(error.data));
+
+
+
 
 
   },[currentactivity])

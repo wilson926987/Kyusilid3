@@ -38,9 +38,9 @@ function Topicpanel({topicitem}) {
                   return vartemp2.activity_type===activitytypefilter;
                 }
               }).map((actItem)=>(
-                <li className='relative flex activitypanel borderradius-md' key={actItem.activity_id}>
-                    <ActivityItempanel actItem = {actItem}/>
-                </li>
+             
+                    <ActivityItempanel actItem = {actItem} key={actItem.activity_id}/>
+          
                 
               ))}
        </ul>

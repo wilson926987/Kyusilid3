@@ -9,6 +9,7 @@ import axios from 'axios'
 
 function ActivityItempanel({actItem}) {
   const {setcurrentactivity} = useContext(currentActivityContext)
+  const {userinfo} = useContext(userInfoContext)
   const navigate = useNavigate()      
   const navigate2 =(e )=>{
     setcurrentactivity(e)
@@ -16,6 +17,12 @@ function ActivityItempanel({actItem}) {
   }
 
   const [commentcount, setcommentcount] = useState();
+
+  const [shownew, setshownew] = useState(false);
+
+
+
+
 
 
   useEffect(()=>{
@@ -25,6 +32,17 @@ function ActivityItempanel({actItem}) {
     .catch(error => {
       console.log(error);
     });
+
+  if(userinfo.user.usertype ==='stud'){
+    axios.get('https://api.kyusillid.online/api/checkview/' + actItem.activity_id + "/"+ userinfo.user.acc_id).then(
+      response=> {
+           setshownew(response.data === 0 ?true : false)
+      }
+    ).catch(error => console.log(error.data));
+
+  }
+
+
   },[])
 
   const localise = (iso)=>{
@@ -37,8 +55,9 @@ function ActivityItempanel({actItem}) {
 
 
   return (
-     <React.Fragment>
-          <div className="row width100" onClick={()=>{navigate2(actItem)}}>
+    
+        <li className={`relative flex activitypanel borderradius-md ${shownew && "primary2"}`} >
+           <div className="row width100" onClick={()=>{navigate2(actItem)}}>
                     <div className='col-lg-1 activityiconcontainer'>  
                       <div className='activityicon tertiary '>
                         {actItem.activity_type==='Material' ?
@@ -71,7 +90,10 @@ function ActivityItempanel({actItem}) {
                     <div className="flex"><BiCommentDetail /> <p>{commentcount}</p></div>
                     <p> &nbsp;</p>
                     </div>}
-     </React.Fragment>
+
+        </li>
+         
+    
   ) 
 }
 

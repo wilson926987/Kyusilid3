@@ -18,7 +18,7 @@ function Createnew() {
   const {studentselection} = useContext(classAndstudentselectionContext)
   const navigate = useNavigate()
   const [recordingtype, setrecordingtype] = useState('form');
-  const [topiclistemp, settopiclisttem]= useState()
+  const [topiclistemp, settopiclisttem]= useState([])
 
   const [categorylist, setcategorylist] = useState([{
     'value' : currentclass.sessionname1, 'label' : currentclass.sessionname1
@@ -27,12 +27,6 @@ function Createnew() {
   const [filename, setfilename] = useState();
 
 
-  useEffect(()=>{
-    console.log(sourcematerial)
-  },[])
-
- 
-   
      
 
 
@@ -61,9 +55,8 @@ function Createnew() {
 
 
   useEffect(()=>{
-    if(topiclist!= undefined && topiclist !== null){
+    if(topiclist.topiclist != undefined && topiclist.topiclist !== null){
       settopiclisttem(
-       
 
          topiclist.topiclist.map(item =>(
           {"value" : item.topic_name , "label" : item.topic_name}
@@ -88,6 +81,7 @@ function Createnew() {
     
   }
 
+
   
 
   
@@ -108,13 +102,9 @@ function Createnew() {
   const [formduration, setformduration] = useState();
   const [selectedFile, setSelectedFile] = useState(null);
   const [QuizId, setQuizId] = useState();
-
-
+ 
   const [filelist, setfilelist] = useState([]);
 
-  useEffect(()=>{
-    console.log(filelist)
-  },[filelist])
 
 
   
@@ -371,19 +361,20 @@ const handlecreateactivity=()=>{
                        
 
 
+                           {topiclist !== undefined &&
                               <Dropdown
-                                options={activitytpelist}
-                                onChangeHandler= {setactivitytype}
-                                mainClass= 'dropdownmain primary borderradius-md'
-                                itemClass= 'dropdownitem'
-                                placeholderValue= 'select activity type'
-                                controlClass='dropdowncontrol'
-                                menuClass='dropdownmenu primary'
-                                controlActiveClass='dropdowncontrolactive'
-                                mainActiveClass='dropdownmain-active'
-                                disabled ={sourcematerial !== undefined}
-                            />   
-
+                              options={activitytpelist}
+                              onChangeHandler= {setactivitytype}
+                              mainClass= 'dropdownmain primary borderradius-md'
+                              itemClass= 'dropdownitem'
+                              placeholderValue= 'select activity type'
+                              controlClass='dropdowncontrol'
+                              menuClass='dropdownmenu primary'
+                              controlActiveClass='dropdowncontrolactive'
+                              mainActiveClass='dropdownmain-active'
+                              disabled ={sourcematerial !== undefined}
+                          />   
+}
                             </div>
                             <br />
 
@@ -423,18 +414,28 @@ const handlecreateactivity=()=>{
                               <p className="smallfont">MODULE</p>
                               <div className="row">
                               <div className='col-lg-6'>
-                              <Dropdown
+
+                                {topiclist != undefined &&
+                                   <Dropdown
                                    options={topiclistemp}
                                 onChangeHandler= {setmodulename}
                                 mainClass= 'dropdownmain primary borderradius-md'
                                 itemClass= 'dropdownitem'
                                 controlClass='dropdowncontrol'
-                                placeholderValue= 'select topic '
+            
                                 menuClass='dropdownmenu primary'
                                 controlActiveClass='dropdowncontrolactive'
                                 mainActiveClass='dropdownmain-active'
                                 disabled ={sourcematerial !== undefined}
+                               defaultValue={topiclistemp !== undefined ? topiclistemp[0]: topiclistemp[0]}
+
                             />
+
+
+                         
+                                  
+                                }
+                           
                               </div>
 
                               <div className="col-lg-6">

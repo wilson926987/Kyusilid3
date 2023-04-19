@@ -11,6 +11,13 @@ function Dropdown({options, menuClass, itemClass, mainClass , controlClass, onCh
     }
    }
 
+   useEffect(()=>{
+        if(defaultValue !==undefined){
+            setvalue(defaultValue)
+        }
+      
+   },[defaultValue])
+
  
  
 
