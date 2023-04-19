@@ -934,9 +934,8 @@ justify-content: space-around;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+ 
 }
-
-
 .announcementpanel{
   padding:8px; 
 }
@@ -1092,6 +1091,7 @@ justify-content: space-around;
   padding-top: 4px;
   padding-bottom: 4px;
   text-align: center;
+  width: 100%;
 }
 
 .default .persontable table tr:nth-child(even){

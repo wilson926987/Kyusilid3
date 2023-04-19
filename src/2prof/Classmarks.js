@@ -153,7 +153,7 @@ function exportGrades() {
   return (
     <div>
       <div class="container">
-        <button id="export" onClick={() => exportGrades()}>
+        <button className='commonbutton primary' id="export" onClick={() => exportGrades()}>
           Export
         </button>
 
@@ -168,6 +168,7 @@ function exportGrades() {
           />
         </div>
       </div>
+
       <div class="buttons">
   <div className={gradeType === 'midterm' ? 'active' : 'btnsss'}>
   <button id='gradetype' onClick={() => setGradeType('midterm')} style={{ width: '100%', color: gradeType === 'midterm' ? '#064273' : '#000', border: '#FFFFFF', borderBottom: gradeType === 'midterm' ? '4px solid #064273' : '',}}>
@@ -182,11 +183,11 @@ function exportGrades() {
 </div>
 <br></br>
 <br></br>
-        
-      <div className="persontable width100">
-      <table className='width100' cellSpacing={0}>
+      <div className="table-container primary">
+      <div className=" fonttt persontable width100">
+      <table cellSpacing={0}>
         <thead>
-          <tr className="primary">
+          <tr>
             <th>Name</th>
             {gradeType === "midterm" && (  
               <>
@@ -222,6 +223,8 @@ function exportGrades() {
                 <th>|</th>
               </>
             )}
+           
+
            {gradeType === "final" && (
   <>
                 {data &&
@@ -252,7 +255,6 @@ function exportGrades() {
                   })}
               </> 
             )} 
-
             <th>Attendance</th>
           </tr> 
         </thead>  
@@ -325,15 +327,21 @@ function exportGrades() {
               ))}
           </tbody>
         )} 
+  
       </table> 
-      </div>
-      <br />
+      </div>   </div> 
+      <br /> 
       <style jsx>{`
+
+      .table-container{ 
+        width: 100%;
+        overflow: auto;
+      }
         #export {
           font-size: 16px;
           cursor: pointer;
           border-radius: 8px;
-          width: auto%; 
+          width: auto; 
           padding: 5px;
         }
         #gradetype {
@@ -346,7 +354,7 @@ function exportGrades() {
         .buttons {
           display: flex;
           justify-content: space-between;
-          max-width: 100%;
+   
         } 
         
 
@@ -354,14 +362,20 @@ function exportGrades() {
           border-radius: 10px;
         }
         .buttons > div {
-          flex-basis: 50%;
+          flex-basis: 100%;
         }
         .container {
           display: flex;
-          justify-content: space-between;
           padding: 15px;
           width: auto;
         }
+        .fonttt{ 
+          font-size: 12px;
+        }
+        .fonttt th{ 
+          background-color: #b5caf5;
+        }
+
       `}</style>
     </div>
   );
