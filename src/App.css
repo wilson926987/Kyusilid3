@@ -89,6 +89,10 @@ svg{
   background-color: var(--defaultprimary);
 }
 
+
+.default .primary2{
+  background-color: #d5e3ff;
+}
 .default .secondary{
   background-color: var(--defaultsecondary);
 }
@@ -848,7 +852,7 @@ justify-content: space-around;
 }
 
 .activitylog{
-  width: 350px;
+ 
   min-height: 90vh;
   padding: 18px;
   margin-left: 20px;
@@ -1233,8 +1237,7 @@ justify-content: space-around;
 
 .activitylogpanel{
   display: flex;
-  margin-bottom: 35px;
-
+  width: 300px;
 }
 
 .activityicon{
