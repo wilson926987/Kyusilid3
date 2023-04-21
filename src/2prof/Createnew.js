@@ -85,7 +85,7 @@ function Createnew() {
   
 
   
-  const [postscheduletype, setpostscheduletype] = useState('fixed');
+  const [postscheduletype, setpostscheduletype] = useState('Post Now');
   var tzoffset = (new Date()).getTimezoneOffset() * 60000;
   const [postdate, setpostdate] = useState();
   const [currentdate  , setcurrentdate] = useState(new Date(Date.now() -tzoffset).toISOString().slice(0, -8));
@@ -469,7 +469,7 @@ const handlecreateactivity=()=>{
                                   <div className="flex">
                                   <Dropdown
                                    options={[
-                                    {'value' :'fixed',
+                                    {'value' :'Post Now',
                                       'label' : 'Set Date and Time'  
                                     },
                                     {'value' :'timed',
@@ -484,8 +484,8 @@ const handlecreateactivity=()=>{
                                 menuClass='dropdownmenu primary'
                                 controlActiveClass='dropdowncontrolactive'
                                 mainActiveClass='dropdownmain-active'
-                                defaultValue={ {'value' :'fixed',
-                                'label' : 'fixed'  
+                                defaultValue={ {'value' :'Post Now',
+                                'label' : 'Post Now'  
                               }}
                          
                                   /> 
@@ -494,7 +494,7 @@ const handlecreateactivity=()=>{
                             
                           
                             <div>
-                            {postscheduletype==='fixed' &&
+                            {postscheduletype==='Post Now' &&
                        
                        
                              <input type="datetime-local" className='dropdowncontrol primary borderradius-md margintop12' defaultValue={postdate}  min={currentdate} onChange={(e)=>{setpostdate(e.target.value)}}/>
