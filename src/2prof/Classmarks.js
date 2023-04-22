@@ -370,7 +370,8 @@ function exportGrades() {
           width: auto;
         }
         .fonttt{ 
-          font-size: 12px;
+          font-size: 11px;
+    
         }
         .fonttt th{ 
           background-color: #b5caf5;
@@ -382,3 +383,4 @@ function exportGrades() {
 }
 
 export default Classmarks;
+
