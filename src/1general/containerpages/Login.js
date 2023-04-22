@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { useContext , useState, useEffect} from 'react'
+import { useNavigate } from 'react-router-dom'
 import { userInfoContext } from '../../Globalcontext'
 import logoiconimage from '../../assets/images/Kyusilid.png'
 import logoiconimage1 from '../../assets/images/avatarlogo.webp'
@@ -27,7 +28,18 @@ function Login() {
     setpassmessage('');
   }
 
+  const navigate = useNavigate();
 
+  useEffect(() => {
+  const isAuthenticated = localStorage.getItem('isAuthenticated');
+  const history = localStorage.getItem('history');
+  const user = JSON.parse(localStorage.getItem('user'));
+
+  if (isAuthenticated === 'true' && history) {
+    navigate(history);
+    setuserinfo(user);
+  }
+}, [navigate, setuserinfo]);
 
  
 
@@ -63,14 +75,17 @@ function Login() {
 
 
       if (response.data.status === 'success') {
-          console.log('Authentication Successful!');
-          setuserinfo(response.data);
-          console.log(response.data);
-          // Store user data in local storage or use it as needed
+        console.log('Authentication Successful!');
+        localStorage.setItem('isAuthenticated', 'true');
+        localStorage.setItem('user', JSON.stringify(response.data));
+        setuserinfo(response.data);
+        console.log(response.data);
+        navigate('/home');
       } else {
         alert("Username and password didn't match");
-          console.log('Authentication Failed!');
+        console.log('Authentication Failed!');
       }
+      
   } catch (error) {
       console.error(error.response.data);
   }
