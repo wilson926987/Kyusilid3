@@ -37,7 +37,7 @@ function Subjects() {
 </div>
 
 
-      <div className="persontable margintop12 width100">
+      <div className=" margintop12 width100">
       <table className='width100' cellSpacing={0}>
        <thead className='primary'>
         <th>Units</th>
@@ -60,9 +60,9 @@ function Subjects() {
         <td>{item.yearlvl}</td>
         <td>{item.sub_code}</td>
         <td>{item.sub_name}</td>
-        <td>{item.sub_id}</td>
-
-   
+      
+        <td> <button className='commonbutton lighttext secondary' onClick={()=>{settopicsid(item.sub_id); navigate('/kyusilidAdmin/department/adminsidemodules')}}> Class Modules</button></td>
+    <td></td>
         
       </tr>
     ))}
