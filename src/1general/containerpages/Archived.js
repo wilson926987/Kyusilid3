@@ -47,7 +47,7 @@ function Archived() {
   const updateclasslist = async ()=>{
     console.log(JSON.stringify(classselection));
     await axios.post("https://api.kyusillid.online/api/updateclasslist", classselection).then(
-      navigate('/')
+      navigate('/home')
     ).catch()
 
     await axios.get('https://api.kyusillid.online/api/getclasslist_archived/' + userinfo.user.acc_id)
