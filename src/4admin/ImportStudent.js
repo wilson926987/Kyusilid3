@@ -21,11 +21,13 @@ function ImportStudent({setupdatelist, setcreatestudmodal}) {
       "acc_id" : userinfo.user.acc_id,
       "action" : "studentlist import"
     }
+    
 
     axios.post('https://api.kyusillid.online/api/import-excel', formData)
       .then(response => {
-        if (response.data.success) {
+        
           alert('Import successful!');
+          console.log(response.data)
           setupdatelist(response.data.updatelist);
           setcreatestudmodal(false);
           axios.put('https://api.kyusillid.online/api/adminlog', temp2).catch(error => console.log(error.data))
@@ -33,10 +35,10 @@ function ImportStudent({setupdatelist, setcreatestudmodal}) {
 
 
           navigate('updateliststud')
-        }
+        
       })
       .catch(error => {
-        console.error(error);
+        console.error(error.data);
         alert('Import failed!');
       });
   }

@@ -99,8 +99,7 @@ function CreateAnnouncementprof() {
                     }
                     //    
 
-                    console.log(JSON.stringify(ggt))
-              
+                 
                 
                     await axios.post('https://api.kyusillid.online/api/add-announcement' , ggt)
                     .then()
@@ -160,7 +159,7 @@ function CreateAnnouncementprof() {
             <div className='postannouncement'>
 
                 <div className="row">
-                    <div className="col-lg-3">
+                    <div className="col-lg-4">
                         <p className='smallfont'> Select Classes</p>
                     <Multiselector
                         options={myclasses}

@@ -425,8 +425,7 @@ const handlecreateactivity=()=>{
             
                                 menuClass='dropdownmenu primary'
                                 controlActiveClass='dropdowncontrolactive'
-                                mainActiveClass='dropdownmain-active'
-                                disabled ={sourcematerial !== undefined}
+                                mainActiveClass='dropdownmain-active'                 
                                defaultValue={topiclistemp !== undefined ? topiclistemp[0]: topiclistemp[0]}
 
                             />
@@ -466,7 +465,7 @@ const handlecreateactivity=()=>{
                              
                                  <p className="smallfont">POSTING SCHEDULE</p>
                                
-                                  <div className="flex">
+                                  {/* <div className="flex">
                                   <Dropdown
                                    options={[
                                     {'value' :'Post Now',
@@ -490,21 +489,15 @@ const handlecreateactivity=()=>{
                          
                                   /> 
                                   
-                                  <Infobox infocontent={'select whether if you can Set Date and Time or will be based by the class schedule'}/></div>                   
+                                  <Infobox infocontent={'select whether if you can Set Date and Time or will be based by the class schedule'}/>
+                                  </div>                    */}
                             
-                          
-                            <div>
-                            {postscheduletype==='Post Now' &&
-                       
-                       
-                             <input type="datetime-local" className='dropdowncontrol primary borderradius-md margintop12' defaultValue={postdate}  min={currentdate} onChange={(e)=>{setpostdate(e.target.value)}}/>
-                                                 
-                            }
-                            {postscheduletype==='timed' &&                           
-                                <ArrowSelector options={Postoptions} startingvalue={4}  selectorHandler= {setschedoffst}/>
-                            }
                   
-                            </div>
+                       
+                             <input type="datetime-local" className='dropdowncontrol primary borderradius-md' defaultValue={postdate}  min={currentdate} onChange={(e)=>{setpostdate(e.target.value)}}/>
+                                                 
+                          
+                  
                             </>
                                                   
                             }
@@ -522,9 +515,7 @@ const handlecreateactivity=()=>{
                                 <br />
 
                               </div>
-                 
-
-                      
+                  
                         
                              <br />
                             <p className="smallfont">DUE DATE</p>
@@ -570,13 +561,8 @@ const handlecreateactivity=()=>{
                          
                                   /> 
                                   <Infobox infocontent={'set if the attendance will be displayed as form or will be tallied by the professor . Attendance can still be edited by the professor regardless of the type of form'} />
-                               
-                                 
 
                                 </div>
-
-                               
-
 
                                   <br/>
                                  {activitytype ==='Attendance' && recordingtype ==='form' &&

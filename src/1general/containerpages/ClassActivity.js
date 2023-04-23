@@ -48,6 +48,13 @@ function ClassActivity() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [submitedfilename, setsubmitedfilename] = useState();
 
+
+
+  useEffect( ()=>{
+    console.log("wilson")
+    console.log(currentactivity)
+  },[])
+
  
 
 
@@ -143,8 +150,7 @@ function ClassActivity() {
 
 
   const posttomodule = async()=>{
-    console.log(currentclass)
-    console.log(currentactivity)
+  
   
     let temp = {
       "activity_title" : currentactivity.activity_title,
@@ -231,7 +237,7 @@ function ClassActivity() {
       axios.get('https://api.kyusillid.online/api/getactivityresponses/' + currentactivity.activity_id).then(
         response =>{
           setresponselist(response.data);
-          console.log(response.data)
+      
         }
       ).catch();
      }
@@ -241,7 +247,7 @@ function ClassActivity() {
      .then((response) => {
      if (response.data.success) {
          setfiletemp(response.data.url);
-         console.log(response.data.url)
+        
      } else {
          console.log(response.data.message);
          setUploadedFile(response.data.url);
@@ -256,8 +262,8 @@ function ClassActivity() {
      axios.get('https://api.kyusillid.online/api/activityfiles/' + currentactivity.activity_id).then(
       response=>{
         setfilelist(response.data)
-        console.log("fadkshfkhkj")
-        console.log(response.data)
+       
+       
       }
      ).catch(error=> console.log(error.data));
 
@@ -295,7 +301,7 @@ function ClassActivity() {
       console.log('no selected file')
     }
 
-    console.log(filesubmitlist)
+    //console.log(filesubmitlist)
     
   },[selectedFile])
 
@@ -474,7 +480,7 @@ function exportGrades() {
     
             {currentactivity.activity_type ==='Material' ?
               <div className="flex">
-               {filelist.map((item, key)=>(
+               {filelist !== undefined && filelist.map((item, key)=>(
                   <a 
                     href={"https://api.kyusillid.online/laravel" + item.stringpath} target="_blank" key={key} 
                     className='padding12' rel="noopener noreferrer" onClick={() => {

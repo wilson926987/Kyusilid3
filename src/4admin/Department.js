@@ -182,6 +182,9 @@ function Department() {
       {!upclass ? 
           <>     
           <div className='sideoption borderradius-md'onClick={()=>{navigate('createclass') ; setcreateclassmodal(false) }} > <BiEdit/><h2>ADD CLASS MANUALLY</h2>
+        
+          </div>
+          <div className='sideoption borderradius-md' onClick={()=>{setupclass(true)}}> <FaUpload/><h2>UPLOAD FILE</h2>
           <div>
           <h3>Uploading a class file will:</h3>
             <ul>
@@ -191,7 +194,7 @@ function Department() {
             </ul>
           </div>
           </div>
-          <div className='sideoption borderradius-md' onClick={()=>{setupclass(true)}}> <FaUpload/><h2>UPLOAD FILE</h2></div></> 
+          </> 
           :
           <div><ImportClass setupdatelist = {setupdatelist} setcreateclassmodal= {setcreateclassmodal}/></div>
           
