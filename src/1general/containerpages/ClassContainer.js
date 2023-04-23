@@ -470,7 +470,7 @@ const markAttendance = () => {
       </div>
 
      {!(isactive('/classes/sampleclass/createnew') || isactive('/classes/sampleclass/activity/activityId') || isactive('/classes/sampleclass/marks') )  ?
-         <div className='activitylog borderradius-md tertiary'>
+         <div className='activitylog borderradius-md tertiary' style={{maxHeight: '500px', overflowY: 'scroll', backgroundcolor: 'red'}}>
          <h4>Class Activity log</h4>
 
          {class_log.map(item=>

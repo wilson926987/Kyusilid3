@@ -104,8 +104,10 @@ function Login() {
 
             <input type="password" placeholder='password...' defaultValue ={password} onChange={handlePasswordChange}/>
 
-        <button type="submit" className='buttonsubmit secondary'>login
-        </button>
+          <div className='forgot'>
+            <a><u>Forgot Password</u></a></div>
+            <button type="submit" className='buttonsubmit secondary'>login</button>
+            
 
         </form>
          
