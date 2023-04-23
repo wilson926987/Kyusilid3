@@ -19,8 +19,6 @@ function Dropdown({options, menuClass, itemClass, mainClass , controlClass, onCh
       
    },[defaultValue])
 
- 
- 
 
   return (
     <div className={`${mainClass} " " ${dropdownopen && mainActiveClass }`}>

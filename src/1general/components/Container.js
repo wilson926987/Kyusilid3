@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import Sidebar from './Sidebar'
 import Profilenotif from './Profilenotif'
 
-import { Outlet , useNavigate} from 'react-router-dom'
+import { Outlet , useNavigate, useLocation } from 'react-router-dom'
 import { userInfoContext , myClasesContext  , currentclassContext , myArchivedContext} from '../../Globalcontext'
 import axios from 'axios'
 
@@ -17,13 +17,14 @@ function Container() {
 
 
   const navigate = useNavigate();
+  const location = useLocation();
  
   useEffect(() => {
     filldata(); 
     console.log(userinfo.user.first_login)
   
     if(userinfo.user.first_login ===1){
-    
+      localStorage.removeItem('history')
       navigate('/Changepassword')
     }
   
@@ -33,6 +34,22 @@ function Container() {
     
   },[userinfo]);
 
+  useEffect(() => {
+    if (location.pathname === '/classes/sampleclass') {
+      localStorage.setItem('history', '/home');
+    } 
+    else if(location.pathname === '/Changepassword'){
+      localStorage.setItem('history', '/');
+    }
+    else {
+      localStorage.setItem('history', location.pathname);
+    }
+  }, [location]);
+
+  useEffect(() => {
+    console.log(myclasses)
+  }, [myclasses]);
+  
 
 async function filldata(){
   await axios.get('https://api.kyusillid.online/api/getclasslist/' + userinfo.user.acc_id)

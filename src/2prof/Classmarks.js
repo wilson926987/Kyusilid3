@@ -26,7 +26,7 @@ function Classmarks() {
       .then((response) => setData(response.data))
       .catch();
 
-    console.log(currentclass.classes_id);
+    console.log(currentclass.classes_id); 
 
     console.log(data);
   }, []);
@@ -143,13 +143,15 @@ function exportGrades() {
       };
     });
 
+    const date = new Date().toISOString().slice(0, 10);
     const worksheet = XLSX.utils.json_to_sheet(exportData);
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, "Grades");
-    XLSX.writeFile(workbook, "grades.xlsx");
+    XLSX.writeFile(workbook, `${currentclass.sub_name} Grades (${date}).xlsx`);
+
   }
 }
-
+ 
   return (
     <div>
       <div class="container">
@@ -161,9 +163,9 @@ function exportGrades() {
           <input
             type="text" 
             placeholder="Search by name"
-            name="search"
+            name="search" 
             onChange={(e) => {
-              setsearchfilter(e.target.value);  
+              setsearchfilter(e.target.value);   
             }}
           />
         </div>
@@ -197,7 +199,7 @@ function exportGrades() {
                     let loopHasRun = false; // Define a boolean variable to keep track of whether the loop has run or not
                     return (
                       <>
-                        {Array.from({ length: item.activity_count ? item.activity_count : 1 }, (_, i) => (
+                        {Array.from({ length: item.activity_count ? item.activity_count : 1 }, (_, i) => ( 
                           <th key={`activity-${i+1}`}>
                           {item.midterm_activity && item.midterm_activity[`midterm_activity_${i+1}`] && item.midterm_activity[`midterm_activity_${i+1}`].midterm_activity_name ? item.midterm_activity[`midterm_activity_${i+1}`].midterm_activity_name : 'Activity #'}
 

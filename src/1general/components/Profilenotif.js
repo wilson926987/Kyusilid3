@@ -45,6 +45,9 @@ function Profilenotif() {
     }
 
     const logout =()=>{
+        localStorage.removeItem('isAuthenticated');
+        localStorage.removeItem('user');
+        localStorage.removeItem('history')
         setprofilepanel(false) 
         setuserinfo();
     }
