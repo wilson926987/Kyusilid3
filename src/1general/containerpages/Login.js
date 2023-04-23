@@ -78,6 +78,7 @@ function Login() {
         console.log('Authentication Successful!');
         localStorage.setItem('isAuthenticated', 'true');
         localStorage.setItem('user', JSON.stringify(response.data));
+        localStorage.setItem('history', '/home');
         setuserinfo(response.data);
         console.log(response.data);
         navigate('/home');

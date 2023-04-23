@@ -8,8 +8,9 @@ import {AiFillDelete} from 'react-icons/ai'
 import {BsGearFill} from 'react-icons/bs'
 import axios from 'axios';
 import Textbox from '../formcomponents/Textbox';
-
+import Modal from 'react-modal';
 import * as XLSX from "xlsx"; 
+import { GrTextAlignCenter } from 'react-icons/gr';
 
 
 
@@ -380,8 +381,18 @@ function exportGrades() {
 }
 
 
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [modalSrc, setModalSrc] = useState("");
 
+  const openModal = (src) => {
+    setModalSrc(src);
+    setModalIsOpen(true);
+  };
 
+  const closeModal = () => {
+    setModalIsOpen(false);
+    setModalSrc("");
+  };
 
 
 
@@ -473,17 +484,61 @@ function exportGrades() {
           <div className='activitycontent'>
     
             {currentactivity.activity_type ==='Material' ?
-              <div className="flex">
-               {filelist.map((item, key)=>(
-                <a href={"https://api.kyusillid.online/laravel" +item.stringpath} target="_blank" key={key} className='padding12'>
-
-                <div className='materialpanel primary borderradius-md'>
-                  <RiBookFill />
-                  <p className='textcenter'>{item.file_name}</p>
-                 </div> 
-                </a>
+               <div className="flex">
+               {filelist.map((item, key) => (
+                 <div key={key} className="padding12" onClick={() => {
+                   if (item.file_name.endsWith('.docx') || item.file_name.endsWith('.pptx') || item.file_name.endsWith('.xlsx')) {
+                     openModal(`https://view.officeapps.live.com/op/embed.aspx?src=https://api.kyusillid.online/laravel${item.stringpath}`);
+                   } else {
+                    openModal("https://api.kyusillid.online/laravel" + item.stringpath);
+                   }
+                 }}>
+                   <div className="materialpanel primary borderradius-md">
+                     <RiBookFill />
+                     <p className="textcenter">{item.file_name}</p>
+                   </div>
+                 </div>
                ))}
-              </div>
+               <Modal
+                 isOpen={modalIsOpen}
+                 onRequestClose={closeModal}
+                 contentLabel="View File Modal"
+               >
+                 <button className="close-button" onClick={() => setModalIsOpen(false)}>X</button>
+                 <iframe
+                   src={modalSrc}
+                   width="100%"
+                   height="100%"
+                   frameBorder="0"
+                   title="View File"
+                 >
+                   <p>Your browser does not support iframes.</p>
+                 </iframe>
+                 <style>
+                    {`
+                      .close-button {
+                        float: right;
+                        top: 10px;
+                        right: 10px;
+                        font-size: 35px;
+                        font-weight: bold;
+                        background-color: transparent;
+                        border: 1px solid;
+                        cursor: pointer;
+                        width: 40px;
+                        height: 40px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        margin-bottom: 15px;
+                        border-radius: 10px;
+                        background-color: #6893EE;
+                        color: white;
+                      }
+                    `}
+                  </style>
+               </Modal>
+             </div>
             :currentactivity.activity_type==='Questionnaire' ?
                   <div className="flex">
                     <div className='questionnairepanel primary borderradius-md'>

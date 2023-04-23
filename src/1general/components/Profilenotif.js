@@ -42,6 +42,7 @@ function Profilenotif() {
     const gotoprofile= ()=>{
         toggleprofilepanel();
         navigate('/profile');
+        localStorage.setItem('history', '/profile')
     }
 
     const logout =()=>{

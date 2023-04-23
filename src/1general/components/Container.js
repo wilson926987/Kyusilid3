@@ -34,17 +34,22 @@ function Container() {
     
   },[userinfo]);
 
-  useEffect(() => {
-    if (location.pathname === '/classes/sampleclass') {
+  /*useEffect(() => {
+    if (location.pathname === '/classes/sampleclass' || location.pathname === '/classes/sampleclass/settings' || location.pathname === '/classes/sampleclass/messages' || 
+    location.pathname === '/classes/sampleclass/marks' || location.pathname === '/classes/sampleclass/info' || location.pathname === '/classes/sampleclass/attendance' || 
+    location.pathname === '/classes/sampleclass/sourcematerials' || location.pathname === '/classes/sampleclass/modules' ) {
       localStorage.setItem('history', '/home');
     } 
+    if (location.pathname === '/' && localStorage.getItem('user')) {
+      localStorage.setItem('history', '/home');
+    }
     else if(location.pathname === '/Changepassword'){
       localStorage.setItem('history', '/');
     }
     else {
       localStorage.setItem('history', location.pathname);
     }
-  }, [location]);
+  }, [location]);*/
 
   useEffect(() => {
     console.log(myclasses)
