@@ -45,6 +45,7 @@ body::-webkit-scrollbar{
   --defaultsecondary: #064273;
   --defaulttertiary: rgb(255, 255, 255);
   --defaultbackground: rgb(243, 242, 242);
+  --defaultwarning : #d85a5a;
 
 
   --lighttextprimary: rgb(207, 207, 207);
@@ -71,7 +72,32 @@ body::-webkit-scrollbar{
   font-family: 'Montserrat', sans-serif;
   user-select: none;
   scroll-behavior: smooth;
+  font-size: 17px;
 }
+
+h1{
+  font-size: 23px;
+}
+
+h2{
+  font-size: 21px;
+}
+
+
+h3{
+  font-size: 19px;
+}
+
+h4{
+  font-size: 17px;
+
+}
+
+h5{
+  font-size: 15px;
+}
+
+
 
 ul{
   list-style-type: none;
@@ -90,8 +116,34 @@ svg{
 }
 
 
+.optiontab{
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  transform: translateY(100%);
+  box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.75);
+  -webkit-box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.75);
+  z-index: 4;
+
+
+}
+
+.optiontab ul  {
+  justify-content: center;
+  align-items: center;
+}
+.capitalize{
+  text-transform: capitalize;
+}
+
+
 .default .primary2{
   background-color: #8fade92c;
+}
+
+.default .warning{
+  background-color: var(--defaultwarning);
 }
 .default .secondary{
   background-color: var(--defaultsecondary);
@@ -104,6 +156,9 @@ svg{
 td{
   text-align: center;
 }
+
+
+
 
 
 .createquestionnaire{
@@ -337,6 +392,8 @@ box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.75);
   margin-bottom: 40px;
   white-space: nowrap;
 }
+
+
 
 .clear{
   opacity: 0;
@@ -851,28 +908,12 @@ justify-content: space-around;
   height: 90px;
 }
 
-.activitylog{
- 
-  min-height: 90vh;
-  padding: 18px;
-  margin-left: 20px;
-}
-
-.activitysubtitle{
-  margin-left: 4px;
-}
 
 .space-between{
   justify-content: space-between;
 }
 
-.smol{
-  font-size: 12px;
-}
 
-.activitylog>h4{
-  margin-bottom: 24px ;
-}
 
 .classcontentsub{
   margin-left: 12px;
@@ -1235,10 +1276,6 @@ justify-content: space-around;
   font-size: 12px;
 }
 
-.activitylogpanel{
-  display: flex;
-  width: 300px;
-}
 
 .activityicon{
   display: flex;
@@ -1276,6 +1313,14 @@ justify-content: space-around;
   border-radius: 50%;
   background-color: rgba(131, 131, 131, 0.486);
   margin: 0 3px;
+}
+
+.inline{
+  min-height: 50vh;
+  
+  display: inline !important;
+  
+
 }
 
 .activitylogname{
@@ -1607,10 +1652,34 @@ background-color: var(--defaultprimary);
   border: none;
   margin: 4px;
   font-weight: bold;
+  white-space: nowrap;
+}
+
+.editannounce{
+  position: absolute;
+  right: 12px;
+  top: 2px;
+}
+.wrap{
+  overflow-wrap: break-word;
+}
+
+.marginright25{
+  margin-right: 25px;
+}
+
+
+.minwidth250{
+  min-width: 250px;
+}
+
+.minwidth350{
+  min-width: 350px;
+ 
 }
 
 .commonbuttonleft{
-  padding: 6px 12px;
+  padding: 4px 12px;
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
 
@@ -1622,7 +1691,7 @@ background-color: var(--defaultprimary);
 }
 
 .commonbuttonright{
-  padding: 6px 12px;
+  padding: 5px 12px;
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
   margin-top: 4px;
@@ -1762,8 +1831,8 @@ padding: 12px;
   border-left: 4px solid var(--darkthemeprimary);
 }
 
-.smallfont{
-  font-size: 11px;
+.smallfont , .smallfont *{
+  font-size: 13px;
 }
 .marginright12{
   margin-right: 12px;
@@ -2320,6 +2389,36 @@ padding: 12px;
 -moz-box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.75);
 }
 
+
+.activitylog{
+  width: 300px;
+  overflow: hidden;
+
+}
+.activitylog-closed{
+  width: 32px!important;
+  padding: 0 !important;
+
+  
+}
+
+.actlogbutton{
+  position: absolute;
+  transform: translateY(-100%);
+  top: 50vh;
+  height: 250px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.actlogbutton svg{
+  font-size: 30px;
+  margin-left: -13px;
+}
 
 .archiveselection{
   width: 0px;

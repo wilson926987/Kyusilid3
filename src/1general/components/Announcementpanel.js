@@ -120,19 +120,29 @@ function Announcementpanel({announcementitem , forcerefresh}) {
        
           {announcementitem !== undefined ? 
             <div className="announcementpanel borderradius-md background margintop12">
-            <div className="announcementheader">
-              <div>
-                  <h5>{ announcementitem !== undefined  && announcementitem.announcementitem.an_title}</h5>
-              </div>
-              <div className='flex'>
-                <h6>Created: {announcementitem !== undefined  && localise(announcementitem.announcementitem.created_at)} by {announcementitem !== undefined  && announcementitem.announcementitem.firstname} { announcementitem !== undefined  && announcementitem.announcementitem.lastname}</h6>
-                 {userinfo.user.usertype ==='prof' &&  <div className='marginleft12 relative'> <AiFillEdit onClick={()=>{setedditmenu(!editmenu)}}/>
-                    {editmenu && <div className='absolute tertiary editmenu  borderradius-md'> <ul><li className='padding12 borderradius-md' onClick={()=>{ setedditmenu(!editmenu) ;confirmdelete(announcementitem.announcementitem.an_id) }}>delete</li></ul> </div>  }
-                  </div>}
-              </div>
+            
+            <div className="relative padding12">
+              
+                 <h5 className='wrap marginright25'>{ announcementitem !== undefined  && announcementitem.announcementitem.an_title}</h5>
+
+           
+            
+                <div className='flex'>
+                  <h6 className='smallfont marginright25 wrap'>Created: {announcementitem !== undefined  && localise(announcementitem.announcementitem.created_at)} by {announcementitem !== undefined  && announcementitem.announcementitem.firstname} { announcementitem !== undefined  && announcementitem.announcementitem.lastname}</h6>
+                
+                </div>
+             
+
+              {userinfo.user.usertype ==='prof' &&  <div className='marginleft12 editannounce background borderradius-lg'> <AiFillEdit onClick={()=>{setedditmenu(!editmenu)}}/>
+                      {editmenu && <div className='absolute tertiary editmenu  borderradius-md marginleftauto'> <ul><li className='padding12 borderradius-md' onClick={()=>{ setedditmenu(!editmenu) ;confirmdelete(announcementitem.announcementitem.an_id) }}>delete</li></ul> </div>  }
+                    </div>}
+
+             
             </div>
+
+          
         
-            <div className='announcementcontent'>
+            <div className='announcementcontent wrap'>
                 {announcementitem !== undefined  && announcementitem.announcementitem.an_content}
                
               

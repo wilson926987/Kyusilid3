@@ -63,10 +63,20 @@ function Login() {
 
 
       if (response.data.status === 'success') {
+<<<<<<< HEAD
           console.log('Authentication Successful!');
           setuserinfo(response.data);
           console.log(response.data);
           // Store user data in local storage or use it as needed
+=======
+        console.log('Authentication Successful!');
+        localStorage.setItem('isAuthenticated', 'true');
+        localStorage.setItem('user', JSON.stringify(response.data));
+        localStorage.setItem('history', '/home');
+        setuserinfo(response.data);
+        console.log(response.data);
+        navigate('/home');
+>>>>>>> bb4ca54d7ba5fc1f993ab521e0323cb57c40b9b5
       } else {
         alert("Username and password didn't match");
           console.log('Authentication Failed!');

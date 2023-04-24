@@ -215,6 +215,7 @@ const handleProfile = (event) => {
 
 
 
+    {userinfo.user.usertype && 
     <div className="col-md-12">
     <div className="row">
         <div className="col-md-4">
@@ -236,7 +237,7 @@ const handleProfile = (event) => {
         
 
     </div>
-</div>
+</div>}
 
 
  

@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import avatar from '../../assets/images/avatar.jpg'
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { currentActivityContext } from '../../Globalcontext';
 
-function Activitylogpanel({classlog}) {
+function Activitylogpanel({classlog ,getactivitybyId}) {
 
 
   const localise = (iso)=>{
@@ -13,6 +15,8 @@ function Activitylogpanel({classlog}) {
     return formattedDate;
    }
 
+   const navigate = useNavigate();
+  // const {setcurrentactivity} = useContext(currentActivityContext)
    const [shownew, setshownew] = useState(false);
 
  
@@ -26,35 +30,37 @@ function Activitylogpanel({classlog}) {
 
 
    },[])
+
+   
+
+  
    
 
 
   
 
   return (
-    <div className={`activitylogpanel borderradius-md padding12 margintop12  ${shownew && "primary2"}`}>
-        <div className='activitylogicon'>
-
-        </div>
+    <div className={`flex borderradius-md padding12 margintop12  ${shownew && "primary2"}`} onClick={()=>{getactivitybyId(classlog.activity_id)}}>
+       
         {classlog.log_type === 'activity' ?
          <div>    
-          <div className='flex'> <p className='activitysubtitle smol'> <b> {classlog.title} {classlog.firstname} {classlog.lastname} {classlog.suffix} </b>
+          <div className='flex'> <p className='activitysubtitle smallfont'> <b> {classlog.title} {classlog.firstname} {classlog.lastname} {classlog.suffix} </b>
            has posted a new {shownew} {classlog.category} {classlog.activity_type} on {localise(classlog.created_at)} : 
           </p>
         
          </div>
-         <p className='smol activitylogname'><b > {classlog.topic_name} : {classlog.activity_title}</b></p> 
+         <h5 className=' activitylogname'> {classlog.topic_name} : {classlog.activity_title}</h5> 
  
          </div>
          :
 
          <div>    
-          <div className='flex'> <p className='activitysubtitle smol'> <b> {classlog.title} {classlog.firstname} {classlog.lastname} {classlog.suffix} </b>
+          <div className='flex'> <p className='activitysubtitle smallfont'> <b> {classlog.title} {classlog.firstname} {classlog.lastname} {classlog.suffix} </b>
            has commented on a {classlog.activity_type} on {classlog.created_at} : 
           </p>
         
          </div>
-         <p className='smol activitylogname'><b > {classlog.topic_name} : {classlog.activity_title}</b></p> 
+         <h5 className='activitylogname'>{classlog.topic_name} : {classlog.activity_title}</h5> 
  
          </div>
 

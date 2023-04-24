@@ -3,6 +3,7 @@ import { Outlet , useNavigate, useLocation} from 'react-router-dom'
 import Activitylogpanel from '../components/Activitylogpanel';
 import {responseContext, classbannerContext , settingsContext, modulelistContext, forcerefreshContext, classAndstudentselectionContext, announcementlistContext, userInfoContext, topicfilterContext, activitytypefilterContext , topiclistContext , currentActivityContext , sourceMaterialContext , currentclassContext, myClasesContext , personlistContext } from '../../Globalcontext';
 import {FaPlusCircle ,FaArrowCircleLeft} from  'react-icons/fa'
+import {BiChevronsLeft} from 'react-icons/bi'
 import ClassSelectionitem from '../components/ClassSelectionitem';
 import axios from 'axios';
 import classbanner1 from '../../assets/images/classbanner1.png'
@@ -13,6 +14,8 @@ import classbanner5 from '../../assets/images/classbanner5.png'
 import classbanner6 from '../../assets/images/classbanner6.png'
 import classbanner7 from '../../assets/images/classbanner7.png'
 import classbanner8 from '../../assets/images/classbanner8.png'
+
+
 
 function ClassContainer() {
  
@@ -38,6 +41,8 @@ function ClassContainer() {
 
   const [studentselection ,setstudentselection] = useState();
   const [class_log, setclass_log] = useState([]);
+
+  const [actlog, setactlog] = useState(true)
   
 
   const forecerefreshHandler= async()=>{
@@ -85,6 +90,23 @@ function ClassContainer() {
    
 
   },[location , currentclass])
+
+
+  const getactivitybyId =  (e)=>{
+  
+ 
+     axios.get('https://api.kyusillid.online/api/getactivitybyId/' + e).then(
+
+      response=>
+          {setcurrentactivity(response.data)
+            console.log(response.data)
+          }
+
+    ).then(
+        navigate( '/classes/sampleclass/activity/activityId')   
+    ).catch();
+
+ }
 
 
 
@@ -248,7 +270,7 @@ const markAttendance = () => {
               
               >
 
-                <div className='classbanner borderradius-lg'      style={{backgroundImage: `url(${classbannerlist[classbanner]})`}}>
+                <div className='classbanner borderradius-lg'  style={{backgroundImage: `url(${classbannerlist[classbanner]})`}}>
 
                 </div>
            
@@ -258,10 +280,10 @@ const markAttendance = () => {
                 <div className='classtitle'>
                   {!(isactive('/classes/sampleclass/createnew')|| isactive('/classes/sampleclass/activity/activityId') || isactive('/classes/sampleclass/marks') ) ?
                      <div>      
-                      <h3 >{currentclass.sub_name} </h3>
-                     <h4 className='margintop12'>{currentclass.sub_code}</h4>
-                    <h4>{currentclass.day_label} {currentclass.sched_from} - {currentclass.sched_to} {currentclass.sessionname2 != null && (", " + currentclass.sched_from2 + " - " + currentclass.sched_to2)}</h4>
-                    <h4> {currentclass.title!== ''|| currentclass.title !== null && currentclass.title}{ ' '+ currentclass.firstname +' ' +  currentclass.lastname + ' ' } {currentclass.suffix!== '' && currentclass.suffix !== null && currentclass.suffix}</h4>
+                      <h1 >{currentclass.sub_name} </h1>
+                     <h3 className='margintop12'>{currentclass.sub_code}</h3>
+                    <h3>{currentclass.day_label} {currentclass.sched_from} - {currentclass.sched_to} {currentclass.sessionname2 != null && (", " + currentclass.sched_from2 + " - " + currentclass.sched_to2)}</h3>
+                    <h3> {currentclass.title!== ''|| currentclass.title !== null && currentclass.title}{ ' '+ currentclass.firstname +' ' +  currentclass.lastname + ' ' } {currentclass.suffix!== '' && currentclass.suffix !== null && currentclass.suffix}</h3>
                 
                    </div> :
  
@@ -469,18 +491,28 @@ const markAttendance = () => {
 
       </div>
 
-     {!(isactive('/classes/sampleclass/createnew') || isactive('/classes/sampleclass/activity/activityId') || isactive('/classes/sampleclass/marks') )  ?
-         <div className='activitylog borderradius-md tertiary' style={{maxHeight: '500px', overflowY: 'scroll', backgroundcolor: 'red'}}>
-         <h4>Class Activity log</h4>
+     {!(isactive('/classes/sampleclass/createnew') || isactive('/classes/sampleclass/activity/activityId') || isactive('/classes/sampleclass/marks') )  &&
+         <div className={`padding12 marginleft12 borderradius-md activitylog ${!actlog ? 'activitylog-closed' : 'tertiary'}`}>
+        
+        {actlog  ?
+        <> <div className="flex">
+        <h4>Class Activity log</h4> 
+                <div className='marginleftauto'>
+                <button className="commonbutton primary lighttext smallfont" onClick={()=>{setactlog(false)}}>Hide</button>
+                </div>
+        </div>
+ 
+{class_log.map(item=>
+     (<Activitylogpanel key={item.classlog_id} classlog= {item} getactivitybyId={getactivitybyId}/>)
+)}</>
+:
+<div className='relative'>
 
-         {class_log.map(item=>
-              (<Activitylogpanel key={item.classlog_id} classlog= {item}/>)
-         )}
+  <div className='padding12 primary actlogbutton' onClick={()=>{setactlog(true)}}>  <BiChevronsLeft/></div>
+  
+  </div>}
          
-       </div>
-      :
-        <div>
-        </div>    
+       </div>  
     }
     </div>
   )

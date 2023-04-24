@@ -108,7 +108,7 @@ function Viewresponse() {
             <h4 className='marginleftauto'>Score</h4>
             <input type="number" min={0} max={100} className="commontextbox primaryborder  col-lg-1" defaultValue={score} onChange={(e)=>{setscore(e.target.value)}}/>
             {!ifsaved ?
-                <button className='commonbutton secondary lighttext widthset' onClick={tt}>Set Grade and Return</button> 
+                <button className='commonbutton secondary lighttext widthset' onClick={tt}>Set Grade</button> 
                 :
                 <button className='commonbutton secondary lighttext widthset' >Saved </button>}
 
