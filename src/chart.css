@@ -1,6 +1,5 @@
 .BarChart{
-
-  margin-left: 55px;
+    margin-left: 55px;
 }
 
 .DonutChart{
@@ -69,4 +68,10 @@
 .overviewpanel1{
   height: 240px;
   border-radius: 25px;
+}
+
+
+.act-panel{
+
+  height:100%;
 }

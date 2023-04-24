@@ -17,46 +17,46 @@
 
 
 .Logincontainer{
-    max-width: 420px;
-	max-height: 520px;
-	background: #2d444a;
+    width: 500px;
+	height: 800px;
 	top: 50%;
-	left: 40%;
+	left: 80%;
 	position: absolute;
 	transform: translate(-50%,-50%);
 	box-sizing:border-box;
 	padding: 70px 30px;
-	border-radius:25px;
 	font-family:"Century Gothic" , sans-serif;
     opacity: 0.8;
     float: left;
-    
-    
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);  
 }
-@media(max-width:790px){
-	.Logincontainer{
-	width:300px;
-	margin-top: -50px;
-	
-	
-	
-	}
-	.logotext{
-	margin-top: 700px;
+@media (max-width: 768px) {
+	.Logincontainer {
+		margin-left: -30%;
 
 	}
+	.logotext {
+        margin-left: 10%;
+        padding-top: 50px;
+		display: none;
+    }
 
-	.Backgroundlog{
-		height: 100vh;
-		margin-left: 0px;
-		background-repeat:no-repeat;
-		background-size: cover;
-	
-		
-	}
-	
+    .logotext .h16{
+        margin-top: 10%;
+        margin-right: 5%;
+        font-size: 4rem;
+    }
+
+    .logotext h3{
+        margin-top: 25%;
+        margin-right: 5%;
+        font-size: 16px;
+    }
+	.Logincontainer .avatar{
+		align-items: center;
 	}
 
+  }
 
 .Logincontainer .avatar{
             
@@ -67,6 +67,24 @@
 		top: -50px;
 		left: calc(50% - 50px);
 }
+.Logincontainer .TechLogo img{
+            
+	width: 700px;
+	height: 700px;
+	border-radius: 50%;
+	top: -60px;
+	left: calc(-5% - 110px);
+	position: relative;
+  z-index: 1;
+	opacity: .3;
+}
+label, input, button {
+	top: -600px;
+	position: relative;
+	z-index: 2;
+	font-size: 20px;
+  }
+
 
 .Logincontainer h1 {
 	margin:0;
@@ -89,7 +107,8 @@
 
 .Logincontainer input{
 	width:100%;
-	margin-bottom:40px;
+	margin-bottom:25px;
+
 }
 
 .Logincontainer input[type="text"], input[type="password"]{
@@ -97,11 +116,10 @@
 	border-bottom: 1px solid  #fff;
 	background: transparent;
 	outline:none;
-	height: 40px;
+	height: 50px;
 	color: Black;
 	font-size: 16px;
-	background-color:#fff;
-	border-radius:10px;
+	background-color: #b2b3b6;
 	padding-left: 10px;
 }
 
@@ -111,7 +129,6 @@
 	height: 40px;
 	color: white;
 	font-size: 18px;
-	border-radius:20px;
 	width:100%;
 
 }
@@ -137,18 +154,27 @@
 }
 
 .logotext{
-    float: right;
+	margin-left: 25%;
     padding-top: 100px;
     
 }
-.logotext h1{
-    margin-top: 60%;
-    margin-right: 20%;
+.logotext .h16{
+    margin-top: 30%;
+    margin-right: 10%;
 	padding:0 0 20px;
-	text-align:center;
-	font-size: 42px;
+	font-size: 6rem;
     position: absolute;
-
+	font-weight: 900;
+	
+}
+.logotext h3{
+    margin-top: 40%;
+    margin-right: 10%;
+	padding: 0 0 20px;
+	font-size: 20px;
+    position: absolute;
+	text-align: justify;
+	
 }
 
 .logotext .avatar{
@@ -158,9 +184,7 @@
 		border-radius: 50%;
 		position: absolute;
         right: 40%;
-       
-		
-		
+
 }
 
 .form-group-form .errortext{
@@ -340,3 +364,6 @@ font-size:25px;
 font-size: 18px;
 
 } 
+
+
+

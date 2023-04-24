@@ -227,7 +227,7 @@ const handleProfile = (event) => {
         </div>
 
         <div className='col-md-8'>
-            <div className="tertiary borderradius-lg activitystatuspanel dbpanelmargin margintop12">
+            <div className=" act-panel tertiary borderradius-lg activitystatuspanel dbpanelmargin margintop12">
             <h2 className="text-left">Activity Status</h2>
             <div className='BarChart'> {activitystatus !== undefined && <BarChart item= {activitystatus}/>}</div>
             </div>

@@ -7,7 +7,7 @@ function Barchart({item}) {
 
         <Chart
 
-            height = '85%'
+            height = '150%'
             width = '95%'
             type= "bar"
             series= {[
@@ -88,6 +88,8 @@ function Barchart({item}) {
               labels: {
               style: {
                 fontSize:  '10px',
+                
+
               }
             }
             },
