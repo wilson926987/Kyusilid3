@@ -1,13 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { userInfoContext , sourceMaterialContext , currentclassContext, topiclistContext , classAndstudentselectionContext} from '../Globalcontext'
-import {AiFillFile} from 'react-icons/ai'
+import {AiFillFile , AiFillDelete} from 'react-icons/ai'
 import axios from 'axios'
 import ArrowSelector from '../1general/formcomponents/ArrowSelector'
 import Dropdown from '../1general/formcomponents/Dropdown'
 import {FaPlusCircle} from 'react-icons/fa'
 import Infobox from '../1general/formcomponents/Infobox'
 import { FileUploadSharp } from '@mui/icons-material'
+
 
 
 function Createnew() {
@@ -25,6 +26,7 @@ function Createnew() {
   }])
 
   const [filename, setfilename] = useState();
+
 
 
      
@@ -104,6 +106,11 @@ function Createnew() {
   const [QuizId, setQuizId] = useState();
  
   const [filelist, setfilelist] = useState([]);
+
+  const deletefile= (e) =>{
+      setfilelist(filelist.filter(rr => rr.id !== e))
+  }
+
 
 
 
@@ -317,12 +324,20 @@ const handlecreateactivity=()=>{
                                  
                               <br></br> <br></br>
                                { filelist.map((item, key)=>(
-                                <a href={item.url} key={key}>
+                              <div className='flex' key={key}>
+
+                                      <a href={item.url} >
                                     <div className='commonbutton flex primary borderradius-md'>
                                   <AiFillFile/>
-                                  <h5 className='ellipsis'>{item.filename}</h5>
+                                  <h5 className='ellipsis'>{item.filename} {item.id}</h5>
                                   </div>
                                 </a>
+
+
+                                <AiFillDelete onClick={()=>deletefile(item.id)}/>
+
+
+                              </div>
                                ))}
                           
             

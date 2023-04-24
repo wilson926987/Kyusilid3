@@ -49,7 +49,7 @@ function Activitylogpanel({classlog ,getactivitybyId}) {
           </p>
         
          </div>
-         <h5 className=' activitylogname'> {classlog.activity_id} {classlog.topic_name} : {classlog.activity_title}</h5> 
+         <h5 className=' activitylogname'> {classlog.topic_name} : {classlog.activity_title}</h5> 
  
          </div>
          :

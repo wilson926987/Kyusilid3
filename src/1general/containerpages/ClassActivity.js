@@ -27,8 +27,83 @@ function ClassActivity() {
   const [act_commentlist, set_actcommnentlist] = useState([]);
   const [commentinput, setcommentinput] = useState();
   const [activitysettings, setactivitysettings] = useState(false);
-  const [edittitle, setedittitle] = useState(currentactivity.activity_title)
-  const [editdescription, seteditdescription] = useState(currentactivity.description);
+  const [edittitle, setedittitle] = useState()
+  const [editdescription, seteditdescription] = useState();
+
+  // useEffect(()=>{
+  //   console.log
+  // },[])
+  
+  
+  
+  useEffect(()=>{
+
+    if(currentactivity!==undefined){
+      axios.get('https://api.kyusillid.online/api/getactivitycommentlist/' + currentactivity.activity_id).then(response=>
+      {set_actcommnentlist(response.data)}
+     )
+
+     axios.get('https://api.kyusillid.online/api/getactivitystatus/' + currentactivity.activity_id + '/' + userinfo.user.acc_id).then(
+      response=>{
+        if(response.data !== "unassigned"){
+          setactivitystatus(response.data);
+          setisassigned(true);
+        }
+      }
+     ).catch()
+
+
+     if(userinfo.user.usertype ==="prof"){
+      axios.get('https://api.kyusillid.online/api/getactivityresponses/' + currentactivity.activity_id).then(
+        response =>{
+          setresponselist(response.data);
+      
+        }
+      ).catch();
+     }
+
+     axios
+     .get(`https://api.kyusillid.online/api/getFile2/${currentactivity.activity_id}`)
+     .then((response) => {
+     if (response.data.success) {
+         setfiletemp(response.data.url);
+        
+     } else {
+         console.log(response.data.message);
+         setUploadedFile(response.data.url);
+         console.log(response.data.url)
+     }
+     })
+     .catch((error) => {
+     console.log(error.response.data);
+   
+     });
+
+     axios.get('https://api.kyusillid.online/api/activityfiles/' + currentactivity.activity_id).then(
+      response=>{
+        setfilelist(response.data)
+       
+       
+      }
+     ).catch(error=> console.log(error.data));
+
+
+
+     setedittitle(currentactivity.activity_title)
+     seteditdescription(currentactivity.description)
+
+
+    }
+
+
+     
+
+
+
+  },[currentactivity])
+
+
+
 
 
 
@@ -50,10 +125,6 @@ function ClassActivity() {
 
 
 
-  useEffect( ()=>{
-    console.log("wilson")
-    console.log(currentactivity)
-  },[])
 
  
 
@@ -214,64 +285,6 @@ function ClassActivity() {
 
 
 
-  useEffect(()=>{
-
-    if(currentactivity===undefined){
-        navigate('/')
-    }
-     axios.get('https://api.kyusillid.online/api/getactivitycommentlist/' + currentactivity.activity_id).then(response=>
-      {set_actcommnentlist(response.data)}
-     )
-
-     axios.get('https://api.kyusillid.online/api/getactivitystatus/' + currentactivity.activity_id + '/' + userinfo.user.acc_id).then(
-      response=>{
-        if(response.data !== "unassigned"){
-          setactivitystatus(response.data);
-          setisassigned(true);
-        }
-      }
-     ).catch()
-
-
-     if(userinfo.user.usertype ==="prof"){
-      axios.get('https://api.kyusillid.online/api/getactivityresponses/' + currentactivity.activity_id).then(
-        response =>{
-          setresponselist(response.data);
-      
-        }
-      ).catch();
-     }
-
-     axios
-     .get(`https://api.kyusillid.online/api/getFile2/${currentactivity.activity_id}`)
-     .then((response) => {
-     if (response.data.success) {
-         setfiletemp(response.data.url);
-        
-     } else {
-         console.log(response.data.message);
-         setUploadedFile(response.data.url);
-         console.log(response.data.url)
-     }
-     })
-     .catch((error) => {
-     console.log(error.response.data);
-   
-     });
-
-     axios.get('https://api.kyusillid.online/api/activityfiles/' + currentactivity.activity_id).then(
-      response=>{
-        setfilelist(response.data)
-       
-       
-      }
-     ).catch(error=> console.log(error.data));
-
-
-
-
-
-  },[currentactivity])
 
 
   useEffect(()=>{

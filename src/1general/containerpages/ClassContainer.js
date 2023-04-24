@@ -93,12 +93,15 @@ function ClassContainer() {
 
 
   const getactivitybyId =  (e)=>{
-    console.log("jfjffjfj")
+  
  
      axios.get('https://api.kyusillid.online/api/getactivitybyId/' + e).then(
 
       response=>
-          setcurrentactivity(response.data)        
+          {setcurrentactivity(response.data)
+            console.log(response.data)
+          }
+
     ).then(
         navigate( '/classes/sampleclass/activity/activityId')   
     ).catch();
