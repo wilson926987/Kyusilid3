@@ -95,19 +95,7 @@ function ClassActivity() {
     }
 
 
-    if(userinfo.user.usertype ==="stud"){
-      axios.get('https://api.kyusillid.online/api/activityassignfiles/' + activitystatus.assign_id).then(
-      response=>{
-        setfilesubmitlist(response.data.map(item=>({
-          "id" : item.file_id,
-          "filename" :  item.file_name,
-          "url" : item.stringpath
-        })))
-
-       
-      }
-     ).catch(error=> console.log(error.data));
-    }
+   
 
 
      
@@ -164,6 +152,20 @@ function ClassActivity() {
       axios.post('https://api.kyusillid.online/api/markview' ,{"assign_id" : activitystatus.assign_id}).then().catch(
         error=>console.log(error.data)
       )
+    }
+
+    if(userinfo.user.usertype ==="stud" && activitystatus !== undefined && activitystatus.assign_id !== undefined ){
+      axios.get('https://api.kyusillid.online/api/activityassignfiles/' + activitystatus.assign_id).then(
+      response=>{
+        setfilesubmitlist(response.data.map(item=>({
+          "id" : item.file_id,
+          "filename" :  item.file_name,
+          "url" : item.stringpath
+        })))
+
+       
+      }
+     ).catch(error=> console.log(error.data));
     }
 
   },[activitystatus])
