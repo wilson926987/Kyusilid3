@@ -605,7 +605,7 @@ function exportGrades() {
                     {activitystatus.status === 'assigned' ?
                     <button className='secondary' onClick={()=>{handIn(activitystatus.assign_id)}}> Hand In</button>
                   :
-                  <button className='tertiary' onClick={()=>{unSubmit(activitystatus.assign_id)}} > Unsubmit {activitystatus.status}</button>
+                  <button className='tertiary' onClick={()=>{unSubmit(activitystatus.assign_id)}} > Unsubmit</button>
                   }
 
                     </>
