@@ -2131,7 +2131,15 @@ padding: 12px;
 
 .overviewpanel{
   height: 180px;
+  
 }
+
+.minwidth{
+  min-width: 300px;
+
+}
+
+
 
 .overviewlist{
   min-height: 200px;

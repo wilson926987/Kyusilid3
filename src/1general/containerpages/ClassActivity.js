@@ -611,7 +611,7 @@ function exportGrades() {
                     </>
 
                     :
-                    <button className='secondary' disabled > Not assinged</button>
+                    <button className='secondary' disabled > Not assigned</button>
 
                        
                     

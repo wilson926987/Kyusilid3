@@ -30,33 +30,7 @@
     float: left;
 	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);  
 }
-@media (max-width: 768px) {
-	.Logincontainer {
-		margin-left: -30%;
 
-	}
-	.logotext {
-        margin-left: 10%;
-        padding-top: 50px;
-		display: none;
-    }
-
-    .logotext .h16{
-        margin-top: 10%;
-        margin-right: 5%;
-        font-size: 4rem;
-    }
-
-    .logotext h3{
-        margin-top: 25%;
-        margin-right: 5%;
-        font-size: 16px;
-    }
-	.Logincontainer .avatar{
-		align-items: center;
-	}
-
-  }
 
 .Logincontainer .avatar{
             
@@ -368,5 +342,42 @@ font-size: 18px;
 
 } 
 
+@media screen and (max-width : 1450px) {
+	.logotext{
+		margin-left:20px;
+		
+	}
+
+	.logotext h3{
+		transform: translateY(50%);
+	}
+	
+}
+
+
+
+@media (max-width: 968px) {
+	.Logincontainer {
+		margin-left: -30%;
+
+	}
+	.logotext {
+        margin-left: 10%;
+        padding-top: 50px;
+		display: none;
+    }
+
+    .logotext .h16{
+      
+        margin-right: 5%;
+        font-size: 4rem;
+    }
+
+    
+	.Logincontainer .avatar{
+		align-items: center;
+	}
+
+  }
 
 
