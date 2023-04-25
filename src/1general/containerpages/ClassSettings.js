@@ -43,6 +43,8 @@ function ClassSettings() {
             "classes_id": currentclass.currentclass.classes_id
         }
 
+        
+
         await axios.post("https://api.kyusillid.online/api/updateclassinfosettings" ,temp).then().catch();
     }
 

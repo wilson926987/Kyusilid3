@@ -83,7 +83,6 @@ function ClassActivity() {
       response=>{
         setfilelist(response.data)
        
-       
       }
      ).catch(error=> console.log(error.data));
 
@@ -93,6 +92,21 @@ function ClassActivity() {
      seteditdescription(currentactivity.description)
 
 
+    }
+
+
+    if(userinfo.user.usertype ==="stud"){
+      axios.get('https://api.kyusillid.online/api/activityassignfiles/' + activitystatus.assign_id).then(
+      response=>{
+        setfilesubmitlist(response.data.map(item=>({
+          "id" : item.file_id,
+          "filename" :  item.file_name,
+          "url" : item.stringpath
+        })))
+
+       
+      }
+     ).catch(error=> console.log(error.data));
     }
 
 
@@ -135,7 +149,7 @@ function ClassActivity() {
   const deletesubmittedfile = (e)=>{
 
  
-    if(activitystatus.status !== 'assigned'){
+    if(activitystatus.status === 'assigned'){
       setfilesubmitlist(filesubmitlist.filter(item=> item.id !== e))
     }
 

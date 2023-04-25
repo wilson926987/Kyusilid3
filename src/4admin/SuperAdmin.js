@@ -182,11 +182,8 @@ function SuperAdmin() {
             <form action="" onSubmit={handlesubmit} className='margintop12'>
 
               <div className="row">
-                <div className='margintop12 col-lg-6 '> 
-                  <label htmlFor="username"><h5>Username</h5></label>
-                  <input type="text" id='username' className='commontextbox primaryborder width100' required defaultValue={username} onChange={e=>setusername(e.target.value)} placeholder='Enter Username'/>
-                </div>
-                <div className='margintop12 col-lg-6'> 
+               
+                <div className='margintop12 col-lg-12'> 
                  <label htmlFor="email"><h5>Email</h5></label>
                  <input type="text" id='email' className='commontextbox primaryborder width100'  required defaultValue={email} onChange={e=>setemail(e.target.value)} placeholder='Enter Email'/>
               </div>
@@ -222,7 +219,7 @@ function SuperAdmin() {
                                 onChangeHandler= {setdep_id}
                                 mainClass= 'dropdownmain primary borderradius-md'
                                 itemClass= 'dropdownitem'
-                                placeholderValue= 'select activity type'
+                                placeholderValue= 'Select Department'
                                 controlClass='dropdowncontrol'
                                 menuClass='dropdownmenu primary'
                                 controlActiveClass='dropdowncontrolactive'
