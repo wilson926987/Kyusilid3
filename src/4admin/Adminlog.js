@@ -4,9 +4,9 @@ import React, { useEffect, useState } from 'react';
 function Adminlog() {
   const [data, setData] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
 
-  const [filteredData, setFilteredData] = useState(data);
-  
   useEffect(() => {
     axios.get('https://api.kyusillid.online/api/getadminlog').then(
       response => setData(response.data)
@@ -14,18 +14,34 @@ function Adminlog() {
   }, []);
 
   useEffect(() => {
-    setFilteredData(
-      data.filter((item) =>
-        item.firstname.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        item.middle.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        item.lastname.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        item.created_at.toLowerCase().includes(searchTerm.toLowerCase())
-      )
-    );
-  }, [data, searchTerm]);
+    setCurrentPage(1);
+  }, [searchTerm]);
 
   const [showTextbox, setShowTextbox] = useState(false);
   const [selectedRow, setSelectedRow] = useState(null);
+
+  const filteredData = data.filter(item => {
+    const searchRegex = new RegExp(searchTerm, 'i');
+    return (
+      searchRegex.test(item.firstname) ||
+      searchRegex.test(item.middle) ||
+      searchRegex.test(item.lastname) ||
+      searchRegex.test(item.created_at)
+    );
+  });
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+  const pageNumbers = [];
+
+  for (let i = 1; i <= totalPages; i++) {
+    pageNumbers.push(i);
+  }
 
   return (
     <div>
@@ -73,7 +89,7 @@ function Adminlog() {
           </tr>
         </thead>
         <tbody>
-          {filteredData !== undefined &&  filteredData.map((item, index) => (
+          {currentItems !== undefined &&  currentItems.map((item, index) => (
             <tr key={index}>
               <td data-label="Name">{item.firstname} {item.middle} {item.lastname}</td>
               <td data-label="date">{item.created_at}</td>
@@ -82,8 +98,34 @@ function Adminlog() {
           ))}
         </tbody>
       </table>
+
+      <div className="pagination">
+  {currentPage > 1 && (
+    <button className="commonbutton secondary lighttext" onClick={() => paginate(currentPage - 1)}>Previous</button>
+  )}
+  {pageNumbers
+    .slice(
+      Math.max(currentPage - 2, 0),
+      Math.min(currentPage + 1, totalPages)
+    )
+    .map((pageNumber) => (
+      <button
+        key={pageNumber}
+        onClick={() => paginate(pageNumber)}
+        className={currentPage === pageNumber ? "active commonbutton primary lighttext " : "commonbutton secondary lighttext"}
+      >
+        {pageNumber}
+      </button>
+    ))}
+  {currentPage < totalPages && (
+    <button className="commonbutton secondary lighttext" onClick={() => paginate(currentPage + 1)}>Next</button>
+  )}
+</div>
     </div>
   );
 }
 
 export default Adminlog;
+
+
+
