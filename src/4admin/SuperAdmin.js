@@ -84,7 +84,7 @@ function SuperAdmin() {
         axios.get('https://api.kyusillid.online/api/manageadmin').then(
           response=>{
             setadminlist(response.data.adminlist);
-
+            console.log(response.data)
           }
         ).catch();
       }
@@ -222,7 +222,7 @@ function SuperAdmin() {
                                 onChangeHandler= {setdep_id}
                                 mainClass= 'dropdownmain primary borderradius-md'
                                 itemClass= 'dropdownitem'
-                                placeholderValue= 'select activity type'
+                                placeholderValue= 'select department'
                                 controlClass='dropdowncontrol'
                                 menuClass='dropdownmenu primary'
                                 controlActiveClass='dropdowncontrolactive'

@@ -120,13 +120,14 @@ function Login() {
 
             <input type="password" placeholder='password...' defaultValue ={password} onChange={handlePasswordChange}/>
 
-          <div className='forgot'>
-            <a><u>Forgot Password</u></a></div>
+          
             <button type="submit" className='buttonsubmit secondary'>login</button>
             
 
         </form>
-         
+        <br />
+        <div className='forgot' style={{float:'right'}}>
+            <a href='/forgotpass'><u>Forgot Password</u></a></div>
     </div> 
     </div> 
   )
