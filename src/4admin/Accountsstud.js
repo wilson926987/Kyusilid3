@@ -73,7 +73,7 @@ function Accountsstud() {
 
       <table class="table col-lg-12">
         
-        <thead>
+        <thead className='primary'>
           
           
           
@@ -82,7 +82,7 @@ function Accountsstud() {
            <th>Name</th>
       
            
-            <th>Action</th>
+            {/* <th>Action</th> */}
 
           </tr>
         </thead>
@@ -99,11 +99,11 @@ function Accountsstud() {
             <td data-label="Last Name">{item.name}</td>
 
             <td>
-            {item.active ? 
+            {/* {item.active ? 
                   <button className='commonbutton secondary lighttext' onClick={()=>{handleativate( item.acc_id , 0) }}> Active </button>
                   :
                   <button className='commonbutton background darktext' onClick={()=>{handleativate( item.acc_id , 1)}}> Deactivated </button>
-                }
+                } */}
 
              
             

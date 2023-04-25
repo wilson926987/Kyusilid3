@@ -924,8 +924,13 @@
   width: 100%;
   overflow: auto;
 }
-.forgot a{ 
-  text-align: right;
+.forgot { 
+  text-align: center;
   font-size: 16px;
   cursor: pointer;
+  margin-top: 10px;
+}
+.passbtnn{ 
+  width: 20%;
+  background-color: #6893ee;
 }

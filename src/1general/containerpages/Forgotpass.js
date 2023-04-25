@@ -1,58 +1,82 @@
-import React  from 'react'
-import axios from 'axios';
-import { useContext , useState , useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import axios from 'axios'
+import React, { useContext , useState, useEffect} from 'react'
+import { useNavigate } from 'react-router-dom'
+import { userInfoContext } from '../../Globalcontext'
+import logoiconimage from '../../assets/images/Kyusilid.png'
+import logoiconimage1 from '../../assets/images/avatarlogo.webp'
+
 
 function Forgotpass() {
-  const [forgotEmail, setforgotEmail]= useState();
-  const navigate = useNavigate();
 
 
+    const [email, setemail] = useState();
+    const [otp, setotp] = useState();
 
+    const [ step, setstep] = useState('send email')
 
-  const handleforgotpass = (e) => {
-    e.preventDefault();
-    axios.post('https://api.kyusillid.online/api/forgot-pass', {
-        acc_email: forgotEmail
-      })
-      .then((response) => {
-        console.log("email sent");
-        if (response.data.success) {
-          const confirmLogout = window.confirm("Email sent. Please check and follow instructions. Redirecting to login page. Click OK to continue.");
-          if (confirmLogout) {
-            window.location.href = '/';
-          }
-        } else if (response.data.error) {
-          alert(response.data.error);
-        }
-      })
-      .catch()
-  }
-  
-  
-  
   
 
-  return (
-    <div>
-        <div className='Backgroundlog absolute'>
-     
-        <div className='resetpass1 primary borderradius-md'>
-       <form action="" onSubmit={handleforgotpass} ><center>
-       <h1>FORGOT PASSWORD</h1><small style={{color:'red'}}>bobo ka kase</small>
-       <br></br>
-         <input type='text'  className='editt' placeholder='Email'/>
-         <br></br>
-         <button className="secondary commonbutton lighttext col-lg-6" > Send OTP</button></center>
-       </form>
-       </div>
+    const handleEmailSubmit =(e)=>{
+        e.preventDefault()
+        setstep('input otp')
+
+    }
+  
  
-     </div>
-    
-    </div>
+
   
-   
+
+
+ 
+  return (
+    <div className='Backgroundlog'>
+      <div className='logotext col-lg-5 '>
+      <img src={logoiconimage} alt="" srcset="" className='avatar'/>
+      <h1>QCU ONLINE CLASSROOM</h1>
+      </div>
+    <div className='Logincontainer primary'>
+      
+      <img src={logoiconimage1} alt="" srcset="" className='avatar'/>
+      <h1>Login</h1>
+
+      {step ==="send email" &&
+      <form className='form-group-form' autoComplete="off"
+      onSubmit={handleEmailSubmit}>
+
+  
+        <label> Enter Email:</label>
+            <input type="text" placeholder='Enter Email' required defaultValue ={email} onChange={e=>setemail(e.target.value)}/>
+            
+
+       
+            <button type="submit" className='buttonsubmit secondary' >Confirm</button>
+            
+
+        </form>   
+    }
+
+    {step ==='input otp' &&
+      <form className='form-group-form' autoComplete="off"
+      onSubmit={handleEmailSubmit}>
+
+  
+        <label> Enter OTP:</label>
+            <input type="text" placeholder='Enter OTP' defaultValue ={otp} onChange={e=>setotp(e.target.value)}/>
+            
+
+       
+            <button type="submit" className='buttonsubmit secondary'>Confirm</button>
+            <button  className='buttonsubmit secondary margintop12' onClick={()=>setstep('send email')}>Change Email</button>
+            
+
+        </form>}
+         
+    </div> 
+    </div> 
   )
+  
 }
+
+
 
 export default Forgotpass

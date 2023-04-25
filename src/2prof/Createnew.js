@@ -1,13 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { userInfoContext , sourceMaterialContext , currentclassContext, topiclistContext , classAndstudentselectionContext} from '../Globalcontext'
-import {AiFillFile} from 'react-icons/ai'
+import {AiFillFile , AiFillDelete} from 'react-icons/ai'
 import axios from 'axios'
 import ArrowSelector from '../1general/formcomponents/ArrowSelector'
 import Dropdown from '../1general/formcomponents/Dropdown'
 import {FaPlusCircle} from 'react-icons/fa'
 import Infobox from '../1general/formcomponents/Infobox'
 import { FileUploadSharp } from '@mui/icons-material'
+
 
 
 function Createnew() {
@@ -25,6 +26,7 @@ function Createnew() {
   }])
 
   const [filename, setfilename] = useState();
+
 
 
      
@@ -104,6 +106,11 @@ function Createnew() {
   const [QuizId, setQuizId] = useState();
  
   const [filelist, setfilelist] = useState([]);
+
+  const deletefile= (e) =>{
+      setfilelist(filelist.filter(rr => rr.id !== e))
+  }
+
 
 
 
@@ -317,12 +324,20 @@ const handlecreateactivity=()=>{
                                  
                               <br></br> <br></br>
                                { filelist.map((item, key)=>(
-                                <a href={item.url} key={key}>
+                              <div className='flex' key={key}>
+
+                                      <a href={item.url} >
                                     <div className='commonbutton flex primary borderradius-md'>
                                   <AiFillFile/>
-                                  <h5 className='ellipsis'>{item.filename}</h5>
+                                  <h5 className='ellipsis'>{item.filename} {item.id}</h5>
                                   </div>
                                 </a>
+
+
+                                <AiFillDelete onClick={()=>deletefile(item.id)}/>
+
+
+                              </div>
                                ))}
                           
             
@@ -425,8 +440,7 @@ const handlecreateactivity=()=>{
             
                                 menuClass='dropdownmenu primary'
                                 controlActiveClass='dropdowncontrolactive'
-                                mainActiveClass='dropdownmain-active'
-                                disabled ={sourcematerial !== undefined}
+                                mainActiveClass='dropdownmain-active'                 
                                defaultValue={topiclistemp !== undefined ? topiclistemp[0]: topiclistemp[0]}
 
                             />
@@ -466,7 +480,7 @@ const handlecreateactivity=()=>{
                              
                                  <p className="smallfont">POSTING SCHEDULE</p>
                                
-                                  <div className="flex">
+                                  {/* <div className="flex">
                                   <Dropdown
                                    options={[
                                     {'value' :'Post Now',
@@ -490,21 +504,15 @@ const handlecreateactivity=()=>{
                          
                                   /> 
                                   
-                                  <Infobox infocontent={'select whether if you can Set Date and Time or will be based by the class schedule'}/></div>                   
+                                  <Infobox infocontent={'select whether if you can Set Date and Time or will be based by the class schedule'}/>
+                                  </div>                    */}
                             
-                          
-                            <div>
-                            {postscheduletype==='Post Now' &&
-                       
-                       
-                             <input type="datetime-local" className='dropdowncontrol primary borderradius-md margintop12' defaultValue={postdate}  min={currentdate} onChange={(e)=>{setpostdate(e.target.value)}}/>
-                                                 
-                            }
-                            {postscheduletype==='timed' &&                           
-                                <ArrowSelector options={Postoptions} startingvalue={4}  selectorHandler= {setschedoffst}/>
-                            }
                   
-                            </div>
+                       
+                             <input type="datetime-local" className='dropdowncontrol primary borderradius-md' defaultValue={postdate}  min={currentdate} onChange={(e)=>{setpostdate(e.target.value)}}/>
+                                                 
+                          
+                  
                             </>
                                                   
                             }
@@ -522,9 +530,7 @@ const handlecreateactivity=()=>{
                                 <br />
 
                               </div>
-                 
-
-                      
+                  
                         
                              <br />
                             <p className="smallfont">DUE DATE</p>
@@ -570,13 +576,8 @@ const handlecreateactivity=()=>{
                          
                                   /> 
                                   <Infobox infocontent={'set if the attendance will be displayed as form or will be tallied by the professor . Attendance can still be edited by the professor regardless of the type of form'} />
-                               
-                                 
 
                                 </div>
-
-                               
-
 
                                   <br/>
                                  {activitytype ==='Attendance' && recordingtype ==='form' &&

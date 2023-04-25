@@ -1,13 +1,12 @@
 import axios from 'axios'
 import React, { useContext , useState, useEffect} from 'react'
-import { useNavigate } from 'react-router-dom'
 import { userInfoContext } from '../../Globalcontext'
 import logoiconimage from '../../assets/images/Kyusilid.png'
 import logoiconimage1 from '../../assets/images/avatarlogo.webp'
+import { useNavigate } from 'react-router-dom'
 
 
 function Login() {
-
   const {setuserinfo} = useContext(userInfoContext);
   const [username, setusername] = useState();
   const [password, setpassword] = useState();
@@ -95,39 +94,50 @@ function Login() {
 };
 
 
-
  
   return (
     <div className='Backgroundlog'>
       <div className='logotext col-lg-5 '>
-      <img src={logoiconimage} alt="" srcset="" className='avatar'/>
-      <h1>QCU ONLINE CLASSROOM</h1>
+          <h2 className='h16'>#KYUSILID</h2>
+          <br></br>
+          <br></br>
+          <h3>An integrated Learning System for Quezon City University 
+          which is a software application or web-based technology used 
+          to implement and assess a specific learning process.</h3>
       </div>
-    <div className='Logincontainer primary'>
+    <div className='Logincontainer'>
       
       <img src={logoiconimage1} alt="" srcset="" className='avatar'/>
-      <h1>Login</h1>
 
-      <form className='form-group-form' autoComplete="off"
-      onSubmit={handleFormSubmit}>
+      <h1>QCU ONLINE CLASSROOM</h1>
+
+
+      <div className='TechLogo absolute'>
+      <img src={logoiconimage} alt="" srcset="" className='avatar1'/>
+     </div>
 
   
-        <label> Username:<div className='errortext'>{usernamemessage}</div></label>
+      <form action="" onSubmit={handleFormSubmit}>
+
+
+      <label> Username:<div className='errortext'>{usernamemessage}</div></label>
             <input type="text" placeholder='Username...' defaultValue ={username} onChange={handleUsernameChange}/>
             
 
         <label> Password:<div className='errortext'>{passmessage}</div> </label>
 
-            <input type="password" placeholder='password...' defaultValue ={password} onChange={handlePasswordChange}/>
+            <input type="password" placeholder='Password...' defaultValue ={password} onChange={handlePasswordChange}/>
 
-          
-            <button type="submit" className='buttonsubmit secondary'>login</button>
             
+          
 
-        </form>
-        <br />
-        <div className='forgot' style={{float:'right'}}>
-            <a href='/forgotpass'><u>Forgot Password</u></a></div>
+        <button type="submit" className='secondary' >Log In
+        </button>
+      </form>
+        {/* <button className='forgot secondary'> Forgot Password?
+        </button> */}
+
+      
     </div> 
     </div> 
   )

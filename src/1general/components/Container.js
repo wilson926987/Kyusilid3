@@ -57,6 +57,7 @@ function Container() {
   
 
 async function filldata(){
+  console.log(userinfo.user.acc_id)
   await axios.get('https://api.kyusillid.online/api/getclasslist/' + userinfo.user.acc_id)
     .then(response => {
       setmyclasses(response.data);

@@ -29,8 +29,6 @@ function ImportProfessor({setupdatelist, setcreateproffmodal}) {
         setupdatelist(response.data.updatelist);
         setcreateproffmodal(false);
 
-        
-
         axios.put('https://api.kyusillid.online/api/adminlog', temp).catch(error => console.log(error.data))
 
 

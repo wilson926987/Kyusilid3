@@ -22,11 +22,18 @@ function ClassSettings() {
     const currentclass = useContext(currentclassContext)
     const [issaved, setissaved] = useState(false)
     
-    const [discussionlink, setdicussionlink] = useState(currentclass.currentclass.class_link);
+    const [discussionlink, setdicussionlink] = useState();
 
     const isequal =(e)=>{
         return e === classbanner;
     }
+
+   useEffect((
+
+   
+   )=>{ if(currentclass.currentclass.class_link){
+        setdicussionlink(currentclass.currentclass.class_link)
+   }},[currentclass])
 
     const saveinfo = async()=>{
 

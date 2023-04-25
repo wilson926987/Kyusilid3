@@ -7,6 +7,7 @@ function ImportClass({setupdatelist , setcreateclassmodal}) {
   const [file, setFile] = useState(null);
   const {userinfo} = useContext(userInfoContext)
 
+
   function handleFileChange(event) {
     setFile(event.target.files[0]);
   }
@@ -26,7 +27,8 @@ function ImportClass({setupdatelist , setcreateclassmodal}) {
       .then(response => {
       
         if (response.data.success) {
-          alert('Import successful!');
+         
+          console.log(response.data)
           setupdatelist(response.data.updatelist);
           setcreateclassmodal(false);
           navigate('updatelist');

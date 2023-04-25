@@ -51,11 +51,11 @@ function Classespage() {
       </div>
       
 
-      <div className="persontable margintop12 width100">
+      <div className=" margintop12 width100">
         <table className='width100' cellSpacing={0}>
           <thead className='primary'>
 
-            <th>Class Id</th>
+            {/* <th>Class Id</th> */}
             <th>Year and Section</th>
             <th>Subject</th>
             <th>Professor</th>
@@ -71,7 +71,7 @@ function Classespage() {
             item1 => item1.yearlvl === yearlistfilter
           ).map((item, key) => (
             <tr key={key}>
-              <td>{item.classes_id}</td>
+              {/* <td>{item.classes_id}</td> */}
               <td>{item.yearsection}</td>
               <td>{item.sub_name}</td>
               <td>{item.profname}</td>

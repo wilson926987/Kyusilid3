@@ -16,7 +16,7 @@ function Updatelist() {
                <table >
                 <thead className='primary'>
                 <tr>
-                    <th className='padding12'>Classes Id</th>
+                    
                     <th className='padding12'>Year and Section</th>
                     <th className='padding12'>Subject</th>
                    </tr>
@@ -24,7 +24,7 @@ function Updatelist() {
                 <tbody>
                     {updatelist.addedclasses.map((item, key)=>(
                         <tr key={key}>
-                            <td>{item.classes_id}</td>
+                            
                             <td>{item.yearandsection}</td>
                             <td>{item.subject}</td>
                         </tr>
@@ -37,7 +37,7 @@ function Updatelist() {
                <table >
                 <thead className='primary'>
                    <tr>
-                    <th className='padding12'>Classes Id</th>
+                   
                     <th className='padding12'>Year and Section</th>
                     <th className='padding12'>Subject</th>
                    </tr>
@@ -45,7 +45,7 @@ function Updatelist() {
                 <tbody>
                     {updatelist.updatedclasses.map((item, key)=>(
                         <tr key={key}>
-                            <td>{item.classes_id}</td>
+                            
                             <td>{item.yearandsection}</td>
                             <td>{item.subject}</td>
                         </tr>
@@ -58,7 +58,7 @@ function Updatelist() {
                <table>
                 <thead className='primary'>
                    <tr>
-                    <th className='padding12'>Subject Id</th>
+              
                     <th className='padding12'>Subject Code</th>
                     <th className='padding12'>Description</th>
                    </tr>
@@ -66,7 +66,7 @@ function Updatelist() {
                 <tbody>
                     {updatelist.addedsubj.map((item, key)=>(
                         <tr key={key}>
-                            <td>{item.id}</td>
+                            
                             <td>{item.sub_code}</td>
                             <td>{item.sub_name}</td>
                         </tr>
@@ -78,7 +78,7 @@ function Updatelist() {
                <table>
                 <thead className='primary'>
                 <tr>
-                    <th className='padding12'>Subject Id</th>
+                    
                     <th className='padding12'>Subject Code</th>
                     <th className='padding12'>Description</th>
                    </tr>
@@ -86,7 +86,7 @@ function Updatelist() {
                 <tbody>
                     {updatelist.updatedsubj.map((item, key)=>(
                         <tr key={key}>
-                            <td>{item.id}</td>
+                           
                             <td>{item.sub_code}</td>
                             <td>{item.sub_name}</td>
                         </tr>

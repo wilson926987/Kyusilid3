@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react'
-import { userInfoContext } from '../Globalcontext';
+import { currentdeptContext, userInfoContext } from '../Globalcontext';
 import Adminannouncementpanel from './Adminannouncementpanel';
 
 function Adminannouncements() {
@@ -8,13 +8,15 @@ function Adminannouncements() {
  const{userinfo} = useContext(userInfoContext);
 
  const [adminannouncements, setadminannouncements] = useState([]);
+ const {currentdept} = useContext(currentdeptContext)
 
  useEffect(()=>{
   filldata();
+  
  },[])
 
  async function filldata(){
-  await axios.get('https://api.kyusillid.online/api/getadminannouncement/' + 1).then(response =>{
+  await axios.get('https://api.kyusillid.online/api/getadminannouncement/' + currentdept.dep_id).then(response =>{
     setadminannouncements(response.data)
     console.log(response.data)
   }).catch();
@@ -24,7 +26,8 @@ function Adminannouncements() {
 
 
 
- const submitannouncement= async ()=>{
+ const submitannouncement= async (e)=>{
+  e.preventDefault();
   const temp = { 'acc_id' : userinfo.user.acc_id , 'dep_id' : 1 , 'announcement_content' : announcement};
 console.log(JSON.stringify(temp))
     await axios.put('https://api.kyusillid.online/api/createadminannouncement' ,temp).then().catch();
@@ -35,9 +38,10 @@ console.log(JSON.stringify(temp))
 
 
  const deleteannouncement_local = async (e)=>{
-   setadminannouncements(adminannouncements.filter((temp)=> {return temp.admin_an_id !== e.admin_an_id}))
+   setadminannouncements(adminannouncements.filter((temp)=> {return temp.admin_an_id !== e}))
  }
 
+ 
 
   return (
 
@@ -45,18 +49,22 @@ console.log(JSON.stringify(temp))
         <div className='col-lg-12'>
          <div className='borderradius-lg tertiary admincreateannouncement padding12'>
             <h4>Create new Announcement</h4>
-        
-         <textarea name="" id="" cols="30" rows="3" className='commontextarea primaryborder' value={announcement} onChange={(e)=>{setannouncement(e.target.value)}} placeholder='Enter content...'></textarea>
+
+            <form action="" onSubmit={submitannouncement}>
+            <textarea name="" id="" required cols="30" rows="3" className='commontextarea primaryborder' value={announcement} onChange={(e)=>{setannouncement(e.target.value)}} placeholder='Enter content...'></textarea>
   
-            <div className="flex width100"> <div className='marginleftauto'> <button className='commonbutton secondary lighttext' onClick={submitannouncement}>Post</button></div></div>
-             
+  <div className="flex width100"> <div className='marginleftauto'> <button className='commonbutton secondary lighttext' type ='submit'>Post</button></div></div>
+  
+            </form>
+        
+       
          </div>
         
         </div>
 
         {adminannouncements!== undefined && adminannouncements.map((item)=>(
             <div className="col-lg-12 margintop12" key={item.admin_an_id}>
-            <Adminannouncementpanel item = {item} deleteannouncement_local = {deleteannouncement_local}/>
+            <Adminannouncementpanel item = {item} deleteannouncement_local = {deleteannouncement_local} filldata={filldata}/>
         </div>
        
 

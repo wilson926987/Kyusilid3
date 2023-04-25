@@ -84,7 +84,7 @@ function App() {
             <Route path='/Quiz/:id' element={<Quiz/>} />
             <Route path='/QuizAnswer/:id/:id2' element={<QuizAnswer/>} />
             <Route path = '/Changepassword' element={userinfo !== null ? <Firstchangepass/> :<Login/>}/>
-            <Route path = '/forgotpass' element={<Forgotpass />}/>
+            <Route path='/Forgotpass' element={<Forgotpass/>} />
             <Route path='/ClassMarkPage' element={<ClassMarkPage/>} />
               <Route path={'/'} element={userinfo!=null ? <Container/> : <Login/> } > 
                 <Route path={'/home'} element={<Dashboard/>}></Route>  {/*this is the dashboard*/}

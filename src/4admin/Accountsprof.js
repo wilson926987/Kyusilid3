@@ -60,11 +60,11 @@ function Accountsprof() {
 
       <div className="tertiary borderradius-lg padding12">
         <table class="table col-lg-12">
-          <thead>
+          <thead className='primary'>
             <tr>
               <th>Faculty ID</th>
               <th>Name</th>
-              <th>Action</th>
+              {/* <th>Action</th> */}
             </tr>
           </thead>
           <tbody>
@@ -82,11 +82,11 @@ function Accountsprof() {
 
                 
 
-                  {item.active ? 
+                  {/* {item.active ? 
                   <button className='commonbutton secondary lighttext' onClick={()=>{handleativate( item.acc_id , 0) }}> Active </button>
                   :
                   <button className='commonbutton background darktext' onClick={()=>{handleativate( item.acc_id , 1)}}> Deactivated </button>
-                }
+                } */}
 
                   
                  

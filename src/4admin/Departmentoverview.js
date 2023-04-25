@@ -37,9 +37,9 @@ function Departmentoverview() {
 
    <div className="col-lg-6">
     <div className="row">
-      <div className="col-lg-6 margintop12 ">
+      <div className="col-lg-6 margintop12 minwidth">
         
-      <div className="pos tertiary borderradius-md overviewpanel1 padding1" >
+      <div className=" tertiary borderradius-md padding1  padding12" >
           <h4 className='h44 primary'><SiGoogleclassroom/>    Classes</h4>
           {/* <AreaChart></AreaChart> */}
           <p>
@@ -58,8 +58,8 @@ function Departmentoverview() {
             </p>
           </div> 
       </div>
-      <div className="col-lg-6 margintop12 ">
-      <div className="pos tertiary borderradius-md overviewpanel1 padding1" >
+      <div className="col-lg-6 margintop12 minwidth">
+      <div className="pos tertiary borderradius-md overviewpanel1 padding12" >
           <h4 className='h44 primary'><FiUsers/>  Accounts</h4>
           <p>
             <ul>
