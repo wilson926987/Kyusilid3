@@ -13,7 +13,7 @@ function Barchart({item}) {
             series= {[
               
               {
-                name: 'Pending',
+                name: 'Assigned',
                 type: 'column',
                 data: item.pendinglist
               },

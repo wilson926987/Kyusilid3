@@ -67,7 +67,16 @@
 		top: -50px;
 		left: calc(50% - 50px);
 }
-.Logincontainer .TechLogo img{
+
+.Logincontainer form{
+	margin-top: 180px;
+}
+.TechLogo{
+	z-index: -1;
+}
+
+
+ .TechLogo img{
             
 	width: 700px;
 	height: 700px;
@@ -78,12 +87,6 @@
   z-index: 1;
 	opacity: .3;
 }
-label, input, button {
-	top: -600px;
-	position: relative;
-	z-index: 2;
-	font-size: 20px;
-  }
 
 
 .Logincontainer h1 {

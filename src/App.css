@@ -662,8 +662,12 @@ justify-content: space-around;
 }
 
 .attendancepanel , .activitystatuspanel{
-  height: 200px;
+  height: 300px;
   padding: 18px;
+}
+
+.activitystatuspanel .BarChart{
+  transform: scaleX(90%);
 }
 
 .dbactivitylist{

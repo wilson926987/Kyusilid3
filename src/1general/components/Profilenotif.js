@@ -122,7 +122,8 @@ function Profilenotif() {
                 <div className='profilemodal background borderradius-md'>
                         <img src={profilePic} alt=""/>
 
-                        {userinfo.user.usertype !== 'admin' && <button className='secondary commonbutton' onClick={ gotoprofile}>Go to Account</button>}
+                        {userinfo.user.usertype !== 'admin' && 
+                        <button className='secondary commonbutton' onClick={ gotoprofile}>Go to Account</button>}
                     
                     <button className='secondary commonbutton' onClick={logout}>Logout</button>
 

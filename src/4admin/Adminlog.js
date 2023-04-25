@@ -64,7 +64,7 @@ function Adminlog() {
         </div>
       )}
 
-      <table class=" tertiary borderradius-lg table">
+      <table class=" tertiary borderradius-lg table col-lg-7">
         <thead>
           <tr className='primary'>
             <th>Name</th>

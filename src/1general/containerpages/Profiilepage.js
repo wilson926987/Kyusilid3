@@ -218,17 +218,10 @@ const handleProfile = (event) => {
     {userinfo.user.usertype && 
     <div className="col-md-12">
     <div className="row">
-        <div className="col-md-4">
-            <div className="tertiary attendancepanel borderradius-lg dbpanelmargin margintop12">
-            <h2 className="text-left">Attendance Status</h2>
+      
 
-<div className='DonutChart'><DonutChart></DonutChart></div>
-
-            </div>
-        </div>
-
-        <div className='col-md-8'>
-            <div className=" act-panel tertiary borderradius-lg activitystatuspanel dbpanelmargin margintop12">
+        <div className='col-lg-12'>
+            <div className="tertiary borderradius-lg activitystatuspanel dbpanelmargin margintop12">
             <h2 className="text-left">Activity Status</h2>
             <div className='BarChart'> {activitystatus !== undefined && <BarChart item= {activitystatus}/>}</div>
             </div>
