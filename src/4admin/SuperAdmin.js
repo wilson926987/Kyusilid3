@@ -23,6 +23,10 @@ function SuperAdmin() {
   const [suffix, setsuffix]= useState()
   const navigate= useNavigate();
 
+  const [password, setpassword] =useState();
+  const [password2, setpassword2] = useState();
+
+
   useEffect(()=>{
 
     console.log(userinfo)
@@ -52,7 +56,13 @@ function SuperAdmin() {
       'suffix' : suffix,
       'email' : email,
       'username' : username,
-      'dep_id' : dep_id
+      'dep_id' : dep_id,
+      'password' :password
+    }
+
+    if(password !== password2 ){
+      alert("Passwords must match")
+      return
     }
 
 
@@ -63,12 +73,13 @@ function SuperAdmin() {
       axios.get('https://api.kyusillid.online/api/manageadmin').then(
           response2=>{
             setadminlist(response2.data.adminlist);
-
+            e.target.reset(); 
           }
         ).catch();
-        e.target.reset();  
+       
 
     }).catch(error=> console.log(error.data))
+    e.target.reset();  
   
   }
 
@@ -187,6 +198,15 @@ function SuperAdmin() {
                  <label htmlFor="email"><h5>Email</h5></label>
                  <input type="text" id='email' className='commontextbox primaryborder width100'  required defaultValue={email} onChange={e=>setemail(e.target.value)} placeholder='Enter Email'/>
               </div>
+               <div className='margintop12 col-lg-12'> 
+                 <label htmlFor="email"><h5>Password</h5></label>
+                 <input type="password" id='email' className='commontextbox tertiary primaryborder width100 passwordscale'  required defaultValue={password} onChange={e=>setpassword(e.target.value)} placeholder='Enter Password'/>
+              </div> <div className='margintop12 col-lg-12'> 
+                 <label htmlFor="email"><h5>Confirm Password</h5></label>
+                 <input type="password" id='email' className='commontextbox tertiary primaryborder width100 passwordscale'  required defaultValue={password2} onChange={e=>setpassword2(e.target.value)} placeholder='Confirm Password'/>
+              </div> 
+
+
 
               <div className='margintop12 col-lg-1 '> 
                  <label htmlFor="title"><h5>Title</h5></label>

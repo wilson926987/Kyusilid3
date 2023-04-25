@@ -2143,6 +2143,11 @@ padding: 12px;
   width: 90px;
 }
 
+
+.passwordscale{
+  max-height: 35px;
+}
+
 .Schedd , .Schedd1{
   min-width: 200px;
 }
