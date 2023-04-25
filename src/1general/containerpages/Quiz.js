@@ -26,13 +26,15 @@ const [questions, setQuestions] = useState([
     }
 
      console.log(JSON.stringify(temp));
-  
-
-    axios.post("https://api.kyusillid.online/api/quiz-questions", temp).then((response) => {
+     
+     axios.post("https://api.kyusillid.online/api/quiz-questions", temp).then((response) => {
       console.log(response.data);
-    }).catch();
-
-    alert("Successfully created Quiz")
+      alert("Successfully created Quiz")
+      window.close(); // Close the form after submitting and saving the data
+    }).catch((error) => {
+      console.error(error);
+      alert("Failed to create Quiz");
+    });
   };
 
  
