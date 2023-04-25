@@ -3,38 +3,55 @@ import { userInfoContext } from '../../Globalcontext';
 import Avatar from '../../assets/images/avatar.jpg';
 import { personlistContext , currentclassContext } from '../../Globalcontext';
 import axios from 'axios';
+import { format } from 'date-fns';
+import { enUS } from 'date-fns/locale'; // import locale to display the month name in English
 
 function Attendance({ classId }) {
   const { userinfo } = useContext(userInfoContext);
   const { personlist } = useContext(personlistContext);
+  const { currentclass } = useContext(currentclassContext);
   const [attendanceList, setAttendanceList] = useState([]);
   const [search, setSearch] = useState('');
   const [attendances, setAttendances] = useState([]);
-  const {currentclass} = useContext(currentclassContext);
   const [searchTerm, setSearchTerm] = useState('');
   const [showTextbox, setShowTextbox] = useState(false);
-  
-  useEffect(() => {
-    console.log(currentclass)
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const today = new Date();
+  const [selectedDate, setSelectedDate] = useState(today);
 
+  useEffect(() => {
     if (currentclass !== undefined) {
-      axios.get(`https://api.kyusillid.online/api/getAttendance/${currentclass.classes_id}`)
+      axios.get(`https://api.kyusillid.online/api/getAttendanceByClass/${currentclass.classes_id}/${format(selectedDate, 'yyyy-MM-dd')}`)
         .then(response => {
-          setAttendances(response.data.attendances);
+          setAttendances(response.data.attendance_list);
           console.log(response.data);
         })
         .catch(error => {
           console.log(error);
         });
     }
-  }, [currentclass]);
+  }, [currentclass, selectedDate]);
 
+  const handlePreviousClick = () => {
+    const previousDate = new Date(selectedDate);
+    previousDate.setDate(previousDate.getDate() - 1);
+    setSelectedDate(previousDate);
+  };
+  
+  const handleNextClick = () => {
+    const nextDate = new Date(selectedDate);
+    nextDate.setDate(nextDate.getDate() + 1);
+    setSelectedDate(nextDate);
+  };
 
+  const filteredAttendances = attendances && attendances.length > 0 ? attendances.filter((attendance) => {
+    const fullName = `${attendance.lastname}, ${attendance.firstname}`;
+    return fullName.toLowerCase().includes(searchTerm.toLowerCase());
+  }) : [];
 
   return (
-        <div>
+    <div>
       <h2>Attendance</h2>
-
 
       <div className='search3'>
         <input
@@ -45,32 +62,39 @@ function Attendance({ classId }) {
         />
       </div>
 
+      <br />
+      <br />
 
-      <br></br>
-      <br></br>
-      <div style={{maxHeight: '500px', overflowY: 'hidden', maxWidth:'100%'}}>
-      <table className='table width100'>
-        <thead className='primary'>
-          <tr>
-            <th>Name</th>
-            <th>Attendance Status</th>
-            <th>Date Created</th>
-          </tr>
-        </thead>
-        <tbody>
-          {attendances != undefined && attendances.map(attendance => (
-            <tr key={attendance.id}>
-              <td>{attendance.lastname + ", " + attendance.firstname}</td>
-              <td>{attendance.att_status}</td>
-              <td>{attendance.date_created}</td>
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <button onClick={handlePreviousClick}>Previous</button>
+        <div>Date: {format(selectedDate, 'MMMM d, yyyy', { locale: enUS })}</div>
+        <button onClick={handleNextClick}>Next</button>
+      </div>
+
+      <div style={{ maxHeight: '500px', overflowY: 'hidden', maxWidth: '100%' }}>
+      {filteredAttendances.length === 0 ? (
+  <p>No attendance records found.</p>
+          ) : (
+        <table className='table width100'>
+          <thead className='primary'>
+            <tr>
+              <th>Name</th>
+              <th>Attendance Status</th>
+              <th>Date Created</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-    
-    
-
+          </thead>
+          <tbody>
+            {filteredAttendances.map(attendance => (
+              <tr key={attendance.id}>
+                <td>{attendance.lastname + ", " + attendance.firstname}</td>
+                <td>{attendance.att_status}</td>
+                <td>{format(new Date(attendance.date_created), 'yyyy-MM-dd HH:mm:ss')}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        )}
+      </div>
     </div>
   );
 }

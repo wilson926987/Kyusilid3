@@ -227,6 +227,11 @@ function toggleStudentselect(studentitem){
   })))
 
 }
+function handleButtonClick() {
+  markAttendance();
+  goToURL();
+}
+
 
 
 
@@ -306,14 +311,14 @@ const markAttendance = () => {
 
                   <>
                      <div className="secondary lighttext navcreatenew borderradius-lg dbpanelmargin">
-                        <h4 onClick={goToURL}>Class Link</h4>
+                        <h4 onClick={handleButtonClick}>Class Link</h4>
             
                       </div>
 
-                      <div className="secondary lighttext navcreatenew borderradius-lg dbpanelmargin">
+                      {/* <div className="secondary lighttext navcreatenew borderradius-lg dbpanelmargin">
                         <h4 onClick={markAttendance}>Attendance</h4>
             
-                      </div>
+                      </div> */}
                   </>
                      
                       
