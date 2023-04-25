@@ -2139,7 +2139,13 @@ padding: 12px;
 
 }
 
+.timescale{
+  width: 90px;
+}
 
+.Schedd , .Schedd1{
+  min-width: 200px;
+}
 
 .overviewlist{
   min-height: 200px;

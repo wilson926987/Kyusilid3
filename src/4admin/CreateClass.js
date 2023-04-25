@@ -141,10 +141,10 @@ function CreateClass() {
   />
 </div>
 <div className="Schedd">
-   schedfrom  1 <input type="time"  required  onChange={(e)=>{setschedfrom1(e.target.value)}}/>
+   schedfrom  1 <input type="time" className='timescale'  required  onChange={(e)=>{setschedfrom1(e.target.value)}}/>
 </div>
 <div className="Schedd1">
-   sched to 1 <input type="time"  required  onChange={(e)=>{setschedto1(e.target.value)}}/>
+   sched to 1 <input type="time" className='timescale'  required  onChange={(e)=>{setschedto1(e.target.value)}}/>
 </div>
 <div className="CD col-lg-6">
 <Textbox 
@@ -154,10 +154,10 @@ function CreateClass() {
   />
 </div>
 <div className="Schedd ">
-   schedfrom 2 <input type="time"   onChange={(e)=>{setschedfrom2(e.target.value)}}/>
+   schedfrom 2 <input type="time" className='timescale'    onChange={(e)=>{setschedfrom2(e.target.value)}}/>
 </div>
 <div className="Schedd1 ">
-   sched to 2 <input type="time"   onChange={(e)=>{setschedto2(e.target.value)}}/>
+   sched to 2 <input type="time" className='timescale'   onChange={(e)=>{setschedto2(e.target.value)}}/>
 </div>
 
 <div className="col-lg-2">
