@@ -64,8 +64,9 @@ function ClassContainer() {
   
  
 
-  const goToURL =()=>{
-    window.open(  "www." +sampleurl, '_blank' );
+  const 
+  goToURL =()=>{
+    window.open(  sampleurl, '_blank' );
   }
 
 

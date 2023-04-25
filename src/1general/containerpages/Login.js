@@ -134,8 +134,8 @@ function Login() {
         <button type="submit" className='secondary' >Log In
         </button>
       </form>
-        <button className='forgot secondary'> Forgot Password?
-        </button>
+        {/* <button className='forgot secondary'> Forgot Password?
+        </button> */}
 
       
     </div> 
