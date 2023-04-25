@@ -124,8 +124,20 @@ function Viewresponse() {
     
 
         <div className="margintop12">
-        {filelist !== undefined && filelist.map((item)=>(
-            <a href={"https://api.kyusillid.online/laravel"+item.stringpath} target='_blank' className='col-lg-6 ' >
+        {filelist !== undefined && filelist.map((item, key)=>(
+            <a 
+            href={"https://api.kyusillid.online/laravel" + item.stringpath} target="_blank" key={key} 
+            className='col-lg-6' rel="noopener noreferrer" onClick={() => {
+              if (item.file_name.endsWith('.docx') || item.file_name.endsWith('.pptx') || item.file_name.endsWith('.xlsx')) {
+                window.open(
+                  "https://view.officeapps.live.com/op/embed.aspx?" + 
+                  "src=" + encodeURIComponent("https://api.kyusillid.online/laravel" + item.stringpath),
+                  "_blank"
+                );
+                return false;
+              }
+            }}
+          >
                 <div className='primary padding12  borderradius-md margintop12'>
                     <h3>{item.file_name}</h3>
                 </div>

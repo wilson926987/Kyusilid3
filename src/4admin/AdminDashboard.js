@@ -29,7 +29,11 @@ function AdminDashboard() {
 
   }, []);
 
+  useEffect(() => {
+  
+    localStorage.setItem('history', '/kyusilidAdmin')
 
+  }, []);
 
   useEffect(()=> {
  

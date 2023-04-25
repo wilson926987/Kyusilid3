@@ -407,10 +407,11 @@ function exportGrades() {
     Grade: item.grade ? item.grade : 'n/a'
   };
 });
+  const date = new Date().toISOString().slice(0, 10);
   const worksheet = XLSX.utils.json_to_sheet(exportData);
   const workbook = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(workbook, worksheet, "Grades");
-  XLSX.writeFile(workbook, `${currentactivity.topic_name} Responses.xlsx`);
+  XLSX.writeFile(workbook, `${currentclass.sub_name}-${currentactivity.topic_name} Responses (${date}).xlsx`);
   }
 }
 
@@ -520,7 +521,7 @@ function exportGrades() {
                           "_blank"
                         );
                         return false;
-                      }
+                      } 
                     }}
                   >
                     <div className='materialpanel primary borderradius-md'>

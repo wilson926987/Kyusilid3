@@ -334,7 +334,6 @@ function exportGrades() {
       </div>   </div> 
       <br /> 
       <style jsx>{`
-
       .table-container{ 
         width: 100%;
         overflow: auto;
@@ -359,7 +358,6 @@ function exportGrades() {
    
         } 
         
-
         .active {
           border-radius: 10px;
         }
@@ -378,11 +376,9 @@ function exportGrades() {
         .fonttt th{ 
           background-color: #b5caf5;
         }
-
       `}</style>
     </div>
   );
 }
 
 export default Classmarks;
-

@@ -84,7 +84,7 @@ function SuperAdmin() {
         axios.get('https://api.kyusillid.online/api/manageadmin').then(
           response=>{
             setadminlist(response.data.adminlist);
-
+            console.log(response.data)
           }
         ).catch();
       }

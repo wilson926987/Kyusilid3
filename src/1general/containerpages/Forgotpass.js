@@ -120,10 +120,13 @@ function Forgotpass() {
 
        
             <button type="submit" className=' secondary' >Confirm</button>
+            </form>  
+            
             
 
-        </form>   
     }
+    <br/>
+    <button type="button" className=' secondary' onClick={()=>{navigate('/')}} >Cancel</button>
 
 
 {step ==='input otp' &&
