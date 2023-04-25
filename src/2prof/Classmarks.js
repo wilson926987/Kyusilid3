@@ -96,7 +96,7 @@ function exportGrades() {
       const totalfActivityGrade = factivityGrades.reduce((accumulator, currentValue) => isNaN(currentValue) ? accumulator : accumulator + currentValue, 0);
       const totalfAssignmentGrade = fassignmentGrades.reduce((accumulator, currentValue) => isNaN(currentValue) ? accumulator : accumulator + currentValue, 0);
       const totalfQuizGrade = fquizGrades.reduce((accumulator, currentValue) => isNaN(currentValue) ? accumulator : accumulator + currentValue, 0);
-      /*const midtermgrade = Math.round(((totalActivityGrade/item.activity_count?item.activity_count:1)*0.2)+((totalAssignmentGrade/item.assignment_count?item.assignment_count:1)*0.15)+((totalQuizGrade/item.quiz_count?item.quiz_count:1)*0.2)+(100*0.05)+((item.midterm_exam && item.midterm_exam.midterm_exam_1 && item.midterm_exam.midterm_exam_1.midterm_exam_grade) ? item.midterm_exam.midterm_exam_1.midterm_exam_grade*0.4 : 0));
+      const midtermgrade = Math.round(((totalActivityGrade/item.activity_count?item.activity_count:1)*0.2)+((totalAssignmentGrade/item.assignment_count?item.assignment_count:1)*0.15)+((totalQuizGrade/item.quiz_count?item.quiz_count:1)*0.2)+(100*0.05)+((item.midterm_exam && item.midterm_exam.midterm_exam_1 && item.midterm_exam.midterm_exam_1.midterm_exam_grade) ? item.midterm_exam.midterm_exam_1.midterm_exam_grade*0.4 : 0));
       const finalterm = Math.round(((totalfActivityGrade/item.finals_activity_count?item.finals_activity_count:1)*0.2)+((totalfAssignmentGrade/item.finals_assignment_count?item.finals_assignment_count:1)*0.15)+((totalfQuizGrade/item.finals_quiz_count?item.finals_quiz_count:1)*0.2)+(100*0.05)+((item.finals_exam && item.finals_exam.finals_exam_1 && item.finals_exam.finals_exam_1.finals_exam_grade) ? item.finals_exam.finals_exam_1.finals_exam_grade*0.4 : 0));
       const finalgrade = Math.round((midtermgrade*.5)+(finalterm*.5));
         let grade;
@@ -120,9 +120,9 @@ function exportGrades() {
         } else if (finalgrade >= 75 && finalgrade <= 76.99) {
           grade = 3.00;
         } else {
-          grade = 5.00; 
-        } 
-*/
+          grade = 5.00;
+        }
+
 
       
       return {
@@ -133,9 +133,9 @@ function exportGrades() {
         Attendance: '100',
         //"Midterm Exam": item.midterm_exam && item.midterm_exam.midterm_exam_1 && item.midterm_exam.midterm_exam_1.midterm_exam_grade ? item.midterm_exam.midterm_exam_1.midterm_exam_grade + '' : '0',
         //"Midterm Grade": midtermgrade,
-        ...Object.fromEntries(fassignmentNames.map((name, i) => [name, `${fassignmentGrades[i]}`]))?(fassignmentNames.map((name, i) => [name, `${fassignmentGrades[i]}`])):'',
-        ...Object.fromEntries(factivityNames.map((name, i) => [name, `${factivityGrades[i]}`]))?(factivityNames.map((name, i) => [name, `${factivityGrades[i]}`])):'',
-        ...Object.fromEntries(fquizNames.map((name, i) => [name, `${fquizGrades[i]}`]))?(fquizNames.map((name, i) => [name, `${fquizGrades[i]}`])):'',
+        ...Object.fromEntries(fassignmentNames.map((name, i) => [name, `${fassignmentGrades[i]}`])),
+        ...Object.fromEntries(factivityNames.map((name, i) => [name, `${factivityGrades[i]}`])),
+        ...Object.fromEntries(fquizNames.map((name, i) => [name, `${fquizGrades[i]}`])),
         Attendance: '100',
         //"Final Exam": item.finals_exam && item.finals_exam.finals_exam_1 && item.finals_exam.finals_exam_1.finals_exam_grade ? item.finals_exam.finals_exam_1.finals_exam_grade + '' : '0',
         //"Final Term Grade": finalterm,
@@ -144,7 +144,7 @@ function exportGrades() {
     });
 
     const date = new Date().toISOString().slice(0, 10);
-    const worksheet = XLSX.utils.json_to_sheet(exportData); 
+    const worksheet = XLSX.utils.json_to_sheet(exportData);
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, "Grades");
     XLSX.writeFile(workbook, `${currentclass.sub_name} Grades (${date}).xlsx`);
@@ -334,7 +334,6 @@ function exportGrades() {
       </div>   </div> 
       <br /> 
       <style jsx>{`
-
       .table-container{ 
         width: 100%;
         overflow: auto;
@@ -359,7 +358,6 @@ function exportGrades() {
    
         } 
         
-
         .active {
           border-radius: 10px;
         }
@@ -378,11 +376,9 @@ function exportGrades() {
         .fonttt th{ 
           background-color: #b5caf5;
         }
-
       `}</style>
     </div>
   );
 }
 
 export default Classmarks;
-
