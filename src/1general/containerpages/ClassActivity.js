@@ -542,7 +542,7 @@ function exportGrades() {
                       </div>
                       <div className='questionnairefooter flex'>
                  
-                        {userinfo.usertype==='prof' ? <button className='secondary'>view quiz</button> : <button className='secondary' onClick={takequiz}>take quiz </button>}
+                        {/* {userinfo.usertype==='prof' ? <button className='secondary'>view quiz</button> : <button className='secondary' onClick={takequiz}>take quiz </button>} */}
                       </div>
                   </div>
                   </div>
