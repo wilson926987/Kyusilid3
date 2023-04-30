@@ -3,6 +3,8 @@ import axios from 'axios';
 import { userInfoContext } from '../../Globalcontext';
 import { useContext , useState , useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import logoiconimage from '../../assets/images/Kyusilid.png'
+import logoiconimage1 from '../../assets/images/avatarlogo.webp'
 
 function Firstchangepass() {
   const [ newpass , setnewpass] = useState();
@@ -62,23 +64,41 @@ function Firstchangepass() {
   
 
   return (
-    <div>
+    <div className='Backgroundlog'>
+    <div className='logotext col-lg-5 '>
+        <h2 className='h16'>#KYUSILID</h2>
+        <br></br>
+        <br></br>
+        <h3>An integrated Learning System for Quezon City University 
+        which is a software application or web-based technology used 
+        to implement and assess a specific learning process.</h3>
+    </div>
       {userinfo !== null ?
-        <div className='Backgroundlog absolute'>
-     
-        <div className='resetpass1 primary borderradius-md'>
-       <form action="" onSubmit={handlechangepass} >
-       <center><h1>UPDATE PASSWORD</h1></center>
-       <br></br>
-         <input type='password'  className='editt' placeholder='New Password' onChange={(e)=>{setnewpass(e.target.value)}}/>
-         <br></br>       
-         <input type='password'className='editt1' placeholder='Confirm Password' onChange={(e)=>{setconfirmnewpass(e.target.value)}}/>
-         <br></br>
-         <button className="secondary commonbutton lighttext col-lg-4"> Save</button>
-       </form>
+
+        <div className='Logincontainer'>
+
+        <img src={logoiconimage1} alt="" srcset="" className='avatar'/>
+
+        <h1>QCU ONLINE CLASSROOM</h1>
+  
+  
+        <div className='TechLogo absolute'>
+        <img src={logoiconimage} alt="" srcset="" className='avatar1'/>
        </div>
- 
-     </div>
+       <br></br>
+      <h1>UPDATE YOUR NEW PASSWORD</h1>
+       <form action="" onSubmit={handlechangepass} >
+
+        <h3>Enter New Password:</h3>
+         <input type='password' placeholder='New Password' onChange={(e)=>{setnewpass(e.target.value)}}/>
+         <br></br>    
+         <h3>Confirm New Password:</h3>
+         <input type='password' placeholder='Confirm Password' onChange={(e)=>{setconfirmnewpass(e.target.value)}}/>
+         <br></br>
+         <button className="secondary width100 lighttext"> Save</button>
+</form> 
+       </div>
+
      :
      <div></div>
       }

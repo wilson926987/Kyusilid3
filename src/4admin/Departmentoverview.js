@@ -44,30 +44,60 @@ function Departmentoverview() {
           {/* <AreaChart></AreaChart> */}
           <p>
           <div className='positionr'>
-            <ul>
+            <ul >
               <br></br>
-              <li><BsFillJournalBookmarkFill/> 4th year : {departmentinfo.fourthyear}</li>
+              <li className='iconnn-case'>
+              <div className='images3'><h3>4th year: </h3>
+              
+              <h2 className='h22'> {departmentinfo.fourthyear}</h2>
+
+            </div> </li>
               <br></br>
-              <li><BsFillJournalBookmarkFill/> 3rd year  : {departmentinfo.thirdyear}</li>
+
+
+              <li className='iconnn-case'>
+              <div className='images3'><h3>3rd year:</h3>
+              
+              <h2 className='h22'>{departmentinfo.thirdyear}</h2>
+              </div> </li>
+
+
               <br></br>
-              <li><BsFillJournalBookmarkFill/> 2nd year  : {departmentinfo.secondyear}</li>
+
+              <li className='iconnn-case'>
+              <div className='images3'><h3>2nd year:</h3>
+              
+              <h2 className='h22'>{departmentinfo.secondyear}</h2>
+              </div></li>
               <br></br>
-              <li><BsFillJournalBookmarkFill/> 1st year  : {departmentinfo.firstyear}</li>
+
+              <li className='iconnn-case'> 
+              <div className='images3'><h3>1st year :</h3> 
+              <h2 className='h22'>{departmentinfo.firstyear}</h2>
+              </div></li>
             </ul>
-            </div>
+    </div>
             </p>
           </div> 
       </div>
       <div className="col-lg-6 margintop12 minwidth">
       <div className="pos tertiary borderradius-md overviewpanel1 padding12" >
-          <h4 className='h44 primary'><FiUsers/>  Accounts</h4>
+          <h4 className='h44 primary'>Accounts</h4>
           <p>
             <ul>
             <br></br>
             <div className='positionr'>
-              <li><GiTeacher/>  Professors : {departmentinfo.profcount}</li>
+
+              <li className='iconnn-case'> 
+              <div className='images2'><h3>Professors:</h3>
+              <h2 className='h22'>{departmentinfo.profcount}</h2>
+              </div></li>
               <br></br>
-              <li><FaUserGraduate/>  Students : {departmentinfo.studcount}</li>    
+              <li className='iconnn-case'> 
+              <div className='images1'><h3>Students : </h3>
+              <h2 className='h22'>{departmentinfo.studcount} </h2>
+              </div></li>    
+
               </div>       
             </ul>
             </p>
