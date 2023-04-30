@@ -60,7 +60,7 @@ function AdminDashboard() {
   
   return (
     <div>
-      <div className="iconn-case">
+      <div className="iconn-case"style={{cursor:"default"}}>
         <div className="boxes">
 
           <div class="linkk">
@@ -109,7 +109,7 @@ function AdminDashboard() {
 
           <div class="linkk1">
           <div className="box1">
-            <div className="cards1">
+            <div className="cards1" >
             <div className='images3'>
               <h2 className='h22'>{deptinfo!== undefined && deptinfo.classes}</h2>
               <h3>Classes</h3>
