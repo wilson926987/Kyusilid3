@@ -50,46 +50,46 @@ function exportGrades() {
       ));
   
       const activityGrades = Array.from({ length: item.activity_count ? item.activity_count : 1 }, (_, i) => (
-        item.midterm_activity && item.midterm_activity[`midterm_activity_${i+1}`] && item.midterm_activity[`midterm_activity_${i+1}`].midterm_activity_grade ? item.midterm_activity[`midterm_activity_${i+1}`].midterm_activity_grade : 0
+        item.midterm_activity && item.midterm_activity[`midterm_activity_${i+1}`] && item.midterm_activity[`midterm_activity_${i+1}`].midterm_activity_grade ? item.midterm_activity[`midterm_activity_${i+1}`].midterm_activity_grade : '0'
       ));
 
       const assignmentNames = Array.from({ length: item.assignment_count ? item.assignment_count : 1 }, (_, i) => (
-        item.midterm_assignment && item.midterm_assignment[`midterm_assignment_${i+1}`] && item.midterm_assignment[`midterm_assignment_${i+1}`].midterm_assignment_name ? item.midterm_assignment[`midterm_assignment_${i+1}`].midterm_assignment_name : 'assignment #'
+        item.midterm_assignment && item.midterm_assignment[`midterm_assignment_${i+1}`] && item.midterm_assignment[`midterm_assignment_${i+1}`].midterm_assignment_name ? item.midterm_assignment[`midterm_assignment_${i+1}`].midterm_assignment_name : 'Assignment #'
       ));
   
       const assignmentGrades = Array.from({ length: item.assignment_count ? item.assignment_count : 1 }, (_, i) => (
-        item.midterm_assignment && item.midterm_assignment[`midterm_assignment_${i+1}`] && item.midterm_assignment[`midterm_assignment_${i+1}`].midterm_assignment_grade ? item.midterm_assignment[`midterm_assignment_${i+1}`].midterm_assignment_grade : 0
+        item.midterm_assignment && item.midterm_assignment[`midterm_assignment_${i+1}`] && item.midterm_assignment[`midterm_assignment_${i+1}`].midterm_assignment_grade ? item.midterm_assignment[`midterm_assignment_${i+1}`].midterm_assignment_grade : '0'
       ));
       const quizNames = Array.from({ length: item.quiz_count ? item.quiz_count : 1 }, (_, i) => (
-        item.midterm_quiz && item.midterm_quiz[`midterm_quiz_${i+1}`] && item.midterm_quiz[`midterm_quiz_${i+1}`].midterm_quiz_name ? item.midterm_quiz[`midterm_quiz_${i+1}`].midterm_quiz_name : 'quiz #'
+        item.midterm_quiz && item.midterm_quiz[`midterm_quiz_${i+1}`] && item.midterm_quiz[`midterm_quiz_${i+1}`].midterm_quiz_name ? item.midterm_quiz[`midterm_quiz_${i+1}`].midterm_quiz_name : 'Quiz #'
       ));
   
       const quizGrades = Array.from({ length: item.quiz_count ? item.quiz_count : 1 }, (_, i) => (
-        item.midterm_quiz && item.midterm_quiz[`midterm_quiz_${i+1}`] && item.midterm_quiz[`midterm_quiz_${i+1}`].midterm_quiz_grade ? item.midterm_quiz[`midterm_quiz_${i+1}`].midterm_quiz_grade : 0
+        item.midterm_quiz && item.midterm_quiz[`midterm_quiz_${i+1}`] && item.midterm_quiz[`midterm_quiz_${i+1}`].midterm_quiz_grade ? item.midterm_quiz[`midterm_quiz_${i+1}`].midterm_quiz_grade : '0'
       ));
       const factivityNames = Array.from({ length: item.finals_activity_count ? item.finals_activity_count : 1 }, (_, i) => (
-        item.finals_activity && item.finals_activity[`finals_activity_${i+1}`] && item.finals_activity[`finals_activity_${i+1}`].finals_activity_name ? item.finals_activity[`finals_activity_${i+1}`].finals_activity_name : 'activity #'
+        item.finals_activity && item.finals_activity[`finals_activity_${i+1}`] && item.finals_activity[`finals_activity_${i+1}`].finals_activity_name ? item.finals_activity[`finals_activity_${i+1}`].finals_activity_name : 'Final Activity #'
       ));
   
       const factivityGrades = Array.from({ length: item.finals_activity_count ? item.finals_activity_count : 1 }, (_, i) => (
-        item.finals_activity && item.finals_activity[`finals_activity_${i+1}`] && item.finals_activity[`finals_activity_${i+1}`].finals_activity_grade ? item.finals_activity[`finals_activity_${i+1}`].finals_activity_grade : 0
+        item.finals_activity && item.finals_activity[`finals_activity_${i+1}`] && item.finals_activity[`finals_activity_${i+1}`].finals_activity_grade ? item.finals_activity[`finals_activity_${i+1}`].finals_activity_grade : '0'
       ));
       const fassignmentNames = Array.from({ length: item.finals_assignment_count ? item.finals_assignment_count : 1 }, (_, i) => (
-        item.finals_assignment && item.finals_assignment[`finals_assignment_${i+1}`] && item.finals_assignment[`finals_assignment_${i+1}`].finals_assignment_name ? item.finals_assignment[`finals_assignment_${i+1}`].finals_assignment_name : 'assignment #'
+        item.finals_assignment && item.finals_assignment[`finals_assignment_${i+1}`] && item.finals_assignment[`finals_assignment_${i+1}`].finals_assignment_name ? item.finals_assignment[`finals_assignment_${i+1}`].finals_assignment_name : 'Final Assignment #'
       ));
   
       const fassignmentGrades = Array.from({ length: item.finals_assignment_count ? item.finals_assignment_count : 1 }, (_, i) => (
-        item.finals_assignment && item.finals_assignment[`finals_assignment_${i+1}`] && item.finals_assignment[`finals_assignment_${i+1}`].finals_assignment_grade ? item.finals_assignment[`finals_assignment_${i+1}`].finals_assignment_grade : 0
+        item.finals_assignment && item.finals_assignment[`finals_assignment_${i+1}`] && item.finals_assignment[`finals_assignment_${i+1}`].finals_assignment_grade ? item.finals_assignment[`finals_assignment_${i+1}`].finals_assignment_grade : '0'
       ));
       const fquizNames = Array.from({ length: item.finals_quiz_count ? item.finals_quiz_count : 1 }, (_, i) => (
-        item.finals_quiz && item.finals_quiz[`finals_quiz_${i+1}`] && item.finals_quiz[`finals_quiz_${i+1}`].finals_quiz_name ? item.finals_quiz[`finals_quiz_${i+1}`].finals_quiz_name : 'quiz #'
+        item.finals_quiz && item.finals_quiz[`finals_quiz_${i+1}`] && item.finals_quiz[`finals_quiz_${i+1}`].finals_quiz_name ? item.finals_quiz[`finals_quiz_${i+1}`].finals_quiz_name : 'Final Quiz #'
       ));
   
       const fquizGrades = Array.from({ length: item.finals_quiz_count ? item.finals_quiz_count : 1 }, (_, i) => (
-        item.finals_quiz && item.finals_quiz[`finals_quiz_${i+1}`] && item.finals_quiz[`finals_quiz_${i+1}`].finals_quiz_grade ? item.finals_quiz[`finals_quiz_${i+1}`].finals_quiz_grade : 0
+        item.finals_quiz && item.finals_quiz[`finals_quiz_${i+1}`] && item.finals_quiz[`finals_quiz_${i+1}`].finals_quiz_grade ? item.finals_quiz[`finals_quiz_${i+1}`].finals_quiz_grade : '0'
       ));
 
-      const totalActivityGrade = activityGrades.reduce((accumulator, currentValue) => isNaN(currentValue) ? accumulator : accumulator + currentValue, 0);
+      /*const totalActivityGrade = activityGrades.reduce((accumulator, currentValue) => isNaN(currentValue) ? accumulator : accumulator + currentValue, 0);
       const totalAssignmentGrade = assignmentGrades.reduce((accumulator, currentValue) => isNaN(currentValue) ? accumulator : accumulator + currentValue, 0);
       const totalQuizGrade = quizGrades.reduce((accumulator, currentValue) => isNaN(currentValue) ? accumulator : accumulator + currentValue, 0);
 
@@ -122,7 +122,7 @@ function exportGrades() {
         } else {
           grade = 5.00;
         }
-
+*/
 
       
       return {
@@ -133,14 +133,21 @@ function exportGrades() {
         Attendance: '100',
         //"Midterm Exam": item.midterm_exam && item.midterm_exam.midterm_exam_1 && item.midterm_exam.midterm_exam_1.midterm_exam_grade ? item.midterm_exam.midterm_exam_1.midterm_exam_grade + '' : '0',
         //"Midterm Grade": midtermgrade,
-        ...Object.fromEntries(fassignmentNames.map((name, i) => [name, `${fassignmentGrades[i]}`])),
-        ...Object.fromEntries(factivityNames.map((name, i) => [name, `${factivityGrades[i]}`])),
-        ...Object.fromEntries(fquizNames.map((name, i) => [name, `${fquizGrades[i]}`])),
-        Attendance: '100',
+        ...(item.midterm_exam ? 
+          {
+            ...Object.fromEntries(factivityNames.map((name, i) => [name, `${factivityGrades[i]}`])),
+            ...Object.fromEntries(fassignmentNames.map((name, i) => [name, `${fassignmentGrades[i]}`])),
+            ...Object.fromEntries(fquizNames.map((name, i) => [name, `${fquizGrades[i]}`])),
+            Attendance: '100' 
         //"Final Exam": item.finals_exam && item.finals_exam.finals_exam_1 && item.finals_exam.finals_exam_1.finals_exam_grade ? item.finals_exam.finals_exam_1.finals_exam_grade + '' : '0',
         //"Final Term Grade": finalterm,
         //"Final Grade" : grade.toFixed(2),
+          }
+          : {}
+        )
+       
       };
+      
     });
 
     const date = new Date().toISOString().slice(0, 10);

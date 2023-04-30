@@ -60,7 +60,7 @@ function AdminDashboard() {
   
   return (
     <div>
-      <div className="iconn-case">
+      <div className="iconn-case"style={{cursor:"default"}}>
         <div className="boxes">
 
           <div class="linkk">
