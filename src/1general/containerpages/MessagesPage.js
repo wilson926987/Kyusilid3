@@ -1,5 +1,3 @@
-
-
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { currentclassContext, userInfoContext } from "../../Globalcontext";
 import {MdSend} from 'react-icons/md'
@@ -14,16 +12,19 @@ function MessagesPage() {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
 
+  const fetchNewMessages = async () => {
+    try {
+      const response = await fetch(`https://api.kyusillid.online/api/getmessages/${currentclass.classes_id}`);
+      const data = await response.json();
+      setMessages(data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   useEffect(()=>{
-      axios.get('https://api.kyusillid.online/api/getmessages/' + currentclass.classes_id).then(response=>
-        setMessages(response.data)
-       
-      ).catch();
-      console.log("classesid: " + currentclass.classes_id);
-      console.log(messages)
+      fetchNewMessages();
   },[])
-
-
 
   const handlesubmit = async ()=>{
 
@@ -55,43 +56,26 @@ function MessagesPage() {
     bottomRef.current?.scrollIntoView({behavior: 'smooth'});
   }, [messages]);
 
- 
-
-  
-
-
-
- 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      fetchNewMessages();
+    }, 5000); // fetch new messages every 5 seconds
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-
     <div className="messagespage">
-
       <div className="width100 row">
-
         {messages.map((item, key)=>(
-          <Chatmessage key={key}  item={item}/>
+          <Chatmessage key={key} item={item}/>
         ))}
         <div ref={bottomRef}></div>
-       
-      
       </div>
-
-  
-        <div className="relative">
-        <textarea name="Text1"  cols='1' rows="2"  placeholder='Enter comment'  value={message} className='commontextarea primaryborder margintop12' onChange={(e)=> {setMessage(e.target.value)}} onKeyDown={handleKeyDown}  ></textarea>
-           
-           <div className='sendbutton' onClick={handlesubmit} >  <MdSend/></div> 
-        </div>
-        
-       
-
-      
-      
+      <div className="relative">
+        <textarea name="Text1" cols='1' rows="2" placeholder='Enter comment' value={message} className='commontextarea primaryborder margintop12' onChange={(e)=> {setMessage(e.target.value)}} onKeyDown={handleKeyDown}></textarea>
+        <div className='sendbutton' onClick={handlesubmit}> <MdSend/></div>
+      </div>
     </div>
-
-
-   
   );
 }
 
