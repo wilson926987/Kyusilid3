@@ -4,6 +4,7 @@ import { userInfoContext } from '../../Globalcontext'
 import logoiconimage from '../../assets/images/Kyusilid.png'
 import logoiconimage1 from '../../assets/images/avatarlogo.webp'
 import { useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2'
 
 
 function Login() {
@@ -82,7 +83,11 @@ function Login() {
         console.log(response.data);
         navigate('/home');
       } else {
-        alert("Username and password didn't match");
+  
+      Swal.fire({
+        icon : 'error',
+        text: "Username and password didn't match",
+      })
         console.log('Authentication Failed!');
       }
       
