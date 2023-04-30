@@ -66,15 +66,7 @@ function Sidebar() {
 {sidebar && <h6 className='smallfont'>Online Classroom Application</h6>   }
 {sidebar && <div className='sidebarcontent'>
     <ul>
-        <li className="sidebarmenu" style={{ cursor: 'default' }}> <div></div> <FaBookReader />All Classes</li> 
-        {myclasses!== undefined &&
-            myclasses.map((classitem , key) =>(
-            <li className="sidebarsubmenu " key={key} onClick={()=>{gotoclass(classitem)}}><div className="highlight"></div> 
-                        <div className='ellipsis' >
-                            {classitem.sub_code +'- ' + classitem.sub_name}
-                            <p className='smallfont'> {classitem.yearlvl + classitem.sec_name +' | ' + classitem.day_label + ' | ' + classitem.sched_from + '-' + classitem.sched_to }</p> 
-                        </div></li>
-             ))
+        <li className='sidebarmenu' onClick={()=>{navigate('/home'); localStorage.setItem('history', '/home')}}> <div className={`highlight ${isactive('/home') && ' sidebarhighlightactive'}`}></div> <MdSpaceDashboard /> Home </li>
         
         {myclasses !== undefined && myclasses.length > 0 &&
           <li className="sidebarmenu"> <div></div> <FaBookReader />All Classes</li>
