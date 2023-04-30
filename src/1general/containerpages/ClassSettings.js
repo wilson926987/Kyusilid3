@@ -22,7 +22,17 @@ function ClassSettings() {
     const currentclass = useContext(currentclassContext)
     const [issaved, setissaved] = useState(false)
     
-    const [discussionlink, setdicussionlink] = useState();
+    const [discussionlink, setdicussionlink] = useState("https://");
+
+
+    function handleInputChange(event) {
+        const inputValue = event.target.value;
+        if (inputValue.startsWith("https://")) {
+            setdicussionlink(inputValue);
+        }
+      }
+
+
 
     const isequal =(e)=>{
         return e === classbanner;
@@ -108,7 +118,7 @@ function ClassSettings() {
         <div className="row">
             <div className="col-lg-10">
 
-                <input type="text" className='commontextbox primaryborder'  defaultValue={discussionlink} onChange={(e)=>{setdicussionlink(e.target.value)}} />
+            <input type="text" className='commontextbox primaryborder' defaultValue={discussionlink} onChange={handleInputChange} />
            
             </div>
 

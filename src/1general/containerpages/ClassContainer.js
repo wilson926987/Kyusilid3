@@ -310,9 +310,10 @@ const markAttendance = () => {
                   {currentclass.isarchived === 0 && userinfo.usertype === 'stud' && 
 
                   <>
-                     <div className="secondary lighttext navcreatenew borderradius-lg dbpanelmargin">
-                        <h4 onClick={handleButtonClick}>Class Link</h4>
-            
+                     <div className="secondary lighttext navcreatenew borderradius-lg dbpanelmargin"  onClick={handleButtonClick}>
+                        
+                     <h4>Class Link</h4>
+
                       </div>
 
                       {/* <div className="secondary lighttext navcreatenew borderradius-lg dbpanelmargin">

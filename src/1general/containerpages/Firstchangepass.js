@@ -13,7 +13,10 @@ function Firstchangepass() {
   const navigate = useNavigate();
   const [countdown, setCountdown] = useState(0);
 
-
+  function checkPasswordStrength(password) {
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+    return regex.test(password);
+  }
 
 
   useEffect(()=>{
@@ -30,6 +33,11 @@ function Firstchangepass() {
   const handlechangepass = (e) => {
     e.preventDefault();
   
+    if (!checkPasswordStrength(newpass)) {
+      alert("Password should contain at least one lowercase letter, one uppercase letter, one number, one special character, and be at least 6 characters long.");
+      return;
+    }
+    
     if (newpass === confirmnewpass && newpass !== undefined && confirmnewpass !== undefined) {
   
       const temp = {
