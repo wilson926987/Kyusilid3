@@ -86,6 +86,29 @@ function AdminDashboard() {
 
           </div>
 
+          <div class="linkk" >
+          <div className="box">
+            <div className="cards">
+            <div className='images2'>
+              <h2 className='h22'>{deptinfo !== undefined && deptinfo.archived}</h2>
+              <h3 className='tex'>Archived</h3>
+            </div></div>
+
+          </div></div>
+
+          <div class="linkk">
+          <div className="box">
+            <div className="cards">
+            <div className='images3'>
+              <h2 className='h22'>{deptinfo!== undefined && deptinfo.classes}</h2>
+              <h3>Classes</h3>
+            </div></div>
+
+          </div></div>
+
+</div>
+          <div className="boxes1">
+
           <div className="box2">
   <div className="cards">
     <h2>{currentTime.toLocaleTimeString()}</h2>
@@ -94,28 +117,6 @@ function AdminDashboard() {
   </div>
 </div>
 
-</div>
-          <div className="boxes1">
-
-          <div class="linkk1" >
-          <div className="box1">
-            <div className="cards1">
-            <div className='images2'>
-              <h2 className='h22'>{deptinfo !== undefined && deptinfo.archived}</h2>
-              <h3 className='tex'>Archived</h3>
-            </div></div>
-
-          </div></div>
-
-          <div class="linkk1">
-          <div className="box1">
-            <div className="cards1" >
-            <div className='images3'>
-              <h2 className='h22'>{deptinfo!== undefined && deptinfo.classes}</h2>
-              <h3>Classes</h3>
-            </div></div>
-
-          </div></div>
 
 
 

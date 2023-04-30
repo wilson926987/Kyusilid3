@@ -66,9 +66,9 @@ function Attendance({ classId }) {
       <br />
 
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <button onClick={handlePreviousClick}>Previous</button>
+        <button className='commonbutton primary' onClick={handlePreviousClick}>Previous</button>
         <div>Date: {format(selectedDate, 'MMMM d, yyyy', { locale: enUS })}</div>
-        <button onClick={handleNextClick}>Next</button>
+        <button className='commonbutton primary' onClick={handleNextClick}>Next</button>
       </div>
 
       <div style={{ maxHeight: '500px', overflowY: 'hidden', maxWidth: '100%' }}>
