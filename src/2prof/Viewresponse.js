@@ -104,7 +104,7 @@ function Viewresponse() {
 
      <div className="flex">
      <button className='commonbutton lighttext secondary col-lg-3' onClick={()=>{navigate('/classes/sampleclass/activity/activityId')}}>Back to Response list</button>
-     <button className='commonbutton secondary lighttext widthset' onClick={()=>{returnActivity()}}> Return</button>
+     <button className='commonbutton secondary lighttext widthset' hidden={responseinfo.status !== "done" && responseinfo.status !== "graded"} onClick={()=>{returnActivity()}}> Return</button>
             <h4 className='marginleftauto'>Score</h4>
             <input type="number" min={0} max={100} className="commontextbox primaryborder  col-lg-1" defaultValue={score} onChange={(e)=>{setscore(e.target.value)}}/>
             {!ifsaved ?
@@ -118,7 +118,7 @@ function Viewresponse() {
 
 
         <div className="flex margintop12 marginleft12"> 
-             <h4>Student's Work , {responseinfo.status} </h4>
+             <h4>{responseinfo.name}'s Work , {responseinfo.status === 'done' ? 'Submitted' : responseinfo.status[0].toUpperCase() + responseinfo.status.slice(1)} </h4>
       
         </div>
     

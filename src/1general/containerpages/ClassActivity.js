@@ -740,7 +740,7 @@ function exportGrades() {
               {responselist != undefined && responselist.map((item , key)=>(
                 <tr key={key}> 
                   <td>{item.name}</td>
-                  <td>{item.status}</td>
+                  <td>{item.status === 'done' ? 'Submitted' : item.status[0].toUpperCase() + item.status.slice(1)}</td>
                   <td>{item.grade !== null ?  item.grade : '?'} / {item.points}</td>
                   <td> <button className='commonbutton secondary lighttext' onClick={()=>{setresponseinfo(item); navigate('/classes/sampleclass/activity/activityId/response')}}> view</button></td>
                 </tr>
