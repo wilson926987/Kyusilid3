@@ -11,7 +11,7 @@ function ClassStats() {
   return (
     <div className=''>
       <h4>Announcements</h4>
-      {userinfo.usertype==='prof' &&<CreateAnnouncementprof /> }
+      {(userinfo.usertype==='prof' || userinfo.usertype ==='admin') &&<CreateAnnouncementprof /> }
       <div className="col-lg-12 margintop12 ">
 
         {announcementlist.length ===0 &&

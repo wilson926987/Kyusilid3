@@ -16,7 +16,7 @@ function AdminContainer() {
         navigate('/')
     }
 
-    console.log(userinfo)
+    
   },[userinfo, navigate])
 
 
@@ -30,6 +30,7 @@ function AdminContainer() {
   useEffect(()=>{
     axios.get('https://api.kyusillid.online/api/getdepartment/' +userinfo.user.acc_id).then(response=>{
       setdepartments(response.data)
+      setcurrentdept(response.data[0])
     
     }).catch();
   },[])

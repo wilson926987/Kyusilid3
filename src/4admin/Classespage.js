@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { adminYearfilterContext,  adminclasslistContext , adminSampleClassContext } from '../Globalcontext'
-
+import { adminYearfilterContext,  adminclasslistContext , adminSampleClassContext, currentclassContext, forceviewContext } from '../Globalcontext'
+import axios from 'axios'
 
 function Classespage() {
   const navigate = useNavigate()
@@ -9,10 +9,17 @@ function Classespage() {
   const {yearlistfilter} = useContext(adminYearfilterContext);
   const {setsampleclassid} = useContext(adminSampleClassContext)
   const [searchValue, setSearchValue] = useState("");
+  const {setcurrentclass} = useContext(currentclassContext)
+  const {setforceview} = useContext(forceviewContext)
+  
 
-  useEffect(() => {
-    console.log(yearlistfilter)
-  }, [yearlistfilter])
+  useEffect(()=>{
+    if(filteredList === undefined){
+      navigate('/')
+    }
+  },[filteredList])
+
+
 
   const filteredList = adminclasslist.filter(item => {
     return (
@@ -24,6 +31,16 @@ function Classespage() {
 
   const handleSearchChange = (event) => {
     setSearchValue(event.target.value)
+  }
+
+  const setclassview = (e)=>{
+    axios.get('https://api.kyusillid.online/api/getcurrentclass/' + e).then(
+      response=>{
+          setcurrentclass(response.data)
+          setforceview(true)
+          navigate('/classes/sampleclass')
+      }
+    )
   }
 
   return (
@@ -77,8 +94,9 @@ function Classespage() {
               <td>{item.profname}</td>
               <td>{item.schedule}</td>
               <td>{item.studentcount}</td>
+             
               
-              <td> <button className="secondary lighttext commonbutton" onClick={() => {setsampleclassid(item); navigate('/kyusilidAdmin/department/sections/samplesection') }}>Class Info</button></td>
+              <td> <button className="secondary lighttext commonbutton" onClick={() => {setclassview(item.classes_id) }}>Class Info</button></td>
             </tr>
           ))}
           

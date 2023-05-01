@@ -1,12 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
-import stud from '../assets/images/student.png';
-import prof from '../assets/images/prof.png';
-import arch from '../assets/images/archived.png';
-import klase from '../assets/images/class.png';
-import books from '../assets/images/book.png';
+
 
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { currentdeptContext, userInfoContext } from '../Globalcontext';
 
 
 
@@ -15,52 +12,39 @@ function AdminDashboard() {
 
   const navigate = useNavigate();
   const [deptinfo, setdepartmentoverview] = useState();
+  const {currentdept} = useContext(currentdeptContext)
+  const {userinfo} = useContext(userInfoContext)
 
 
 
 
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setCurrentTime(new Date());
-    }, 1000);
 
-    return () => clearInterval(intervalId);
-
-
-  }, []);
-
-  useEffect(() => {
-  
-    localStorage.setItem('history', '/kyusilidAdmin')
-
-  }, []);
 
   useEffect(()=> {
  
- 
-   
-      axios.get('https://api.kyusillid.online/api/admindashboard/' + 1)
-      .then(response=>
-        {
-          setdepartmentoverview(response.data)
- 
-        }
-
-      ).catch()
-
-    
-
-
-    
-
+    localStorage.setItem('history', '/kyusilidAdmin') 
+    if(userinfo.admintype ===0){
+      navigate('/kyusilidAdmin/adminhead')
+    }
+  
   },[])
+
+  useEffect(()=>{
+  
+    if(currentdept!= undefined){
+      
+
+     
+      navigate('/kyusilidAdmin/department')
+    }
+  },[currentdept])
 
 
 
   
   return (
     <div>
-      <div className="iconn-case"style={{cursor:"default"}}>
+      {/* <div className="iconn-case"style={{cursor:"default"}}>
         <div className="boxes">
 
           <div class="linkk">
@@ -121,7 +105,7 @@ function AdminDashboard() {
 
 
  </div>
-      </div>
+      </div> */}
       
     
 

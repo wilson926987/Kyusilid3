@@ -41,7 +41,7 @@ body::-webkit-scrollbar{
 }
 
 :root{
-  --defaultprimary : #6893ee;
+  --defaultprimary : #91b4ff;
   --defaultsecondary: #064273;
   --defaulttertiary: rgb(255, 255, 255);
   --defaultbackground: rgb(243, 242, 242);

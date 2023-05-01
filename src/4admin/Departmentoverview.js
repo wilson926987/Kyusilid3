@@ -21,9 +21,6 @@ function Departmentoverview() {
 
  
 
- useEffect(()=>{
-    console.log(departmentinfo);
- },[departmentinfo])
 
   return (
     departmentinfo != undefined ?

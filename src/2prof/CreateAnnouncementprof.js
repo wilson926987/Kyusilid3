@@ -87,6 +87,9 @@ function CreateAnnouncementprof() {
     
         if(saveannouncementready===true){
             setsaveannouncement(false);
+            console.log(selectedclass)
+
+            if(selectedclass.length>0){
               for(let x =0 ; x < selectedclass.length; x++){
                 if(selectedclass[x].selected){
                     let ggt = {
@@ -99,7 +102,8 @@ function CreateAnnouncementprof() {
                     }
                     //    
 
-                 
+                   
+                    console.log(JSON.stringify(ggt))
                 
                     await axios.post('https://api.kyusillid.online/api/add-announcement' , ggt)
                     .then()
@@ -111,6 +115,32 @@ function CreateAnnouncementprof() {
                 }
        
               }
+
+            }else{
+
+              let ggt = {
+                "an_title" : announcementtitle,
+                "an_content" : announcementcontent,
+                "acc_id" : userinfo.user.acc_id,
+                "classes_id" : currentclass.classes_id,
+                "schedule" : posttype==='postnow' ? new Date(currentdate).toISOString().slice(0, 19).replace('T', ' ') : 
+                new Date(postdate).toISOString().slice(0, 19).replace('T', ' ')
+               }
+               console.log(JSON.stringify(ggt))
+            //    
+
+           
+         
+        
+            await axios.post('https://api.kyusillid.online/api/add-announcement' , ggt)
+            .then()
+            .catch(error => {
+              console.log(error);
+            });
+
+
+            }
+             
               
               await axios.get('https://api.kyusillid.online/api/get-announcement/' + currentclass.classes_id)
               .then(response => {
@@ -159,22 +189,32 @@ function CreateAnnouncementprof() {
             <div className='postannouncement'>
 
                 <div className="row">
-                    <div className="col-lg-4">
-                        <p className='smallfont'> Select Classes</p>
-                    <Multiselector
-                        options={myclasses}
-                        onChangeHandler = {setselectedclass}
-                        mainClass= 'dropdownmain primary borderradius-md'
-                        itemClass= 'dropdownitem'
-                        controlClass='dropdowncontrol'
-                        menuClass='dropdownmenu primary'
-                        controlActiveClass='dropdowncontrolactive'
-                        mainActiveClass='dropdownmain-active'
-                        placeholderValue='Select classes'
-                        selectedAndDisabled = {currentclass}
-                    />
-             
-                    </div>
+                  {userinfo.user.usertype ==='prof' ?
+                  <div className="col-lg-4">
+                  <p className='smallfont'> Select Classes</p>
+              <Multiselector
+                  options={myclasses}
+                  onChangeHandler = {setselectedclass}
+                  mainClass= 'dropdownmain primary borderradius-md'
+                  itemClass= 'dropdownitem'
+                  controlClass='dropdowncontrol'
+                  menuClass='dropdownmenu primary'
+                  controlActiveClass='dropdowncontrolactive'
+                  mainActiveClass='dropdownmain-active'
+                  placeholderValue='Select classes'
+                  selectedAndDisabled = {currentclass}
+              />
+       
+              </div>
+              :
+
+
+                    <h4 className='padding12'>this class</h4>
+                  
+                
+                }
+                  
+                    
               
 
             

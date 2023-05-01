@@ -5,7 +5,7 @@ import './chart.css'
 import './profilestud.css'
 import './assets/css/bootstrap-grid.css';
 import { useState } from 'react';
-import { themeContext , userInfoContext} from './Globalcontext';
+import { themeContext , userInfoContext , currentclassContext , forceviewContext} from './Globalcontext';
 import Container from './1general/components/Container';
 import { BrowserRouter,  Routes, Route } from 'react-router-dom';
 import {FaPlus} from 'react-icons/fa'
@@ -66,15 +66,23 @@ import Forgotpass from './1general/containerpages/Forgotpass';
 
 
 
+
 function App() {
 
   const [theme, settheme] = useState('default');
   const [userinfo, setuserinfo ] = useState();
+  const [currentclass, setcurrentclass] = useState();
+  const [forceview, setforceview] = useState(false)
  
   return (
 
     <userInfoContext.Provider value={{userinfo, setuserinfo}}>
     <themeContext.Provider value={{theme, settheme}}>
+    <currentclassContext.Provider value={{currentclass, setcurrentclass}}>
+    <forceviewContext.Provider value={{forceview, setforceview}}>
+
+   
+
 
 
       <div className={theme}>
@@ -118,7 +126,11 @@ function App() {
                   <Route path='accounts' element={<Accountsprof/>} />
                   <Route path='sections' element={<SectionContainer/>}>
                         <Route path='' element={<Classespage/>}> </Route>
-                        <Route path='samplesection' element={<SampleSection/>} > </Route>
+                        <Route path='samplesection' element={<SampleSection/>} >
+
+                       
+                        
+                        </Route>
                   </Route>
                   <Route path='accounts_prof' element={<Accountsprof/>}></Route>
                   <Route path='accounts_stud' element ={<Accountsstud/>}></Route>
@@ -149,7 +161,8 @@ function App() {
         </BrowserRouter>
       </div>
       </div>
-
+      </forceviewContext.Provider>
+      </currentclassContext.Provider>
     </themeContext.Provider>
     </userInfoContext.Provider>
   

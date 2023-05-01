@@ -77,6 +77,7 @@ function ClassContainer() {
   useEffect(()=>{   
       setcurrentpage(location.pathname);
       if(currentclass !== undefined){
+  
         filldata();
         setclassbanner(currentclass!== undefined? currentclass.classbanner: 0)
         setsampleurl(currentclass.class_link !==undefined ? currentclass.class_link  : "")

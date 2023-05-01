@@ -40,7 +40,7 @@ function Department() {
      if(currentdept != undefined){
       axios.get('https://api.kyusillid.online/api/getsubjectlist/'+ currentdept.dep_id  ).then(response1 =>{
         setsubjectlist(response1.data);
-        console.log(response1.data)
+    
       }).catch();
 
       axios.get('https://api.kyusillid.online/api/getdeptinfo/' + currentdept.dep_id ).then(response =>{  

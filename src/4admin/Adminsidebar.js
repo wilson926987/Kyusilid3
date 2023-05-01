@@ -52,10 +52,10 @@ function Adminsidebar() {
 {sidebar && <h6 className='smallfont'>Online Classroom Application</h6>   }
 {sidebar && <div className='sidebarcontent'>
     <ul>
-        <li className='sidebarmenu' onClick={()=>{navigate('/kyusilidAdmin'); localStorage.setItem('history', '/kyusilidAdmin')}}> <div className="highlight"></div> <MdSpaceDashboard />  Dashboard</li>
+
         {userinfo.admintype === 1 ? 
             departments.map((item)=>(
-             <li key={item.dep_id} className='sidebarmenu' onClick={()=>{setcurrentdept(item); navigate('department'); localStorage.setItem('history', '/kyusilidAdmin')}}> <div className="highlight"></div> <MdBrightness1 className='clear ellipsis'/> {item.dep_name} </li>
+             <li key={item.dep_id} className='sidebarmenu' onClick={()=>{console.log(item); setcurrentdept(item); navigate('department'); localStorage.setItem('history', '/kyusilidAdmin')}}> <div className="highlight"></div> <MdBrightness1 className='clear ellipsis'/> {item.dep_name} </li>
         )):
         <li className='sidebarmenu'> <div className="highlight" onClick={()=>{navigate('adminhead'); localStorage.setItem('history', '/kyusilidAdmin/adminhead')}}></div> <MdBrightness1 className='clear ellipsis'/> Admin Accounts </li>
     

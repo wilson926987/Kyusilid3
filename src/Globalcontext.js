@@ -46,3 +46,6 @@ export const classbannerContext = createContext();
 export const updatelistContext = createContext();
 
 export const responseContext = createContext();
+
+
+export const forceviewContext= createContext();
