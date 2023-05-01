@@ -30,9 +30,9 @@ function Viewresponse() {
   
 
 
-    const tt = async ()=>{
+    const tt = async (e)=>{
 
-      
+      e.preventDefault();
         const temp = {
             "assign_id": responseinfo.assign_id,
             "score" : score,
@@ -57,21 +57,26 @@ function Viewresponse() {
     }
 
     const returnActivity = async() =>{
+  
+        if(score ===undefined || score === null){
+            Swal.fire({
+                icon: 'error',               
+                text: "grade must be set",
+            
+              })
+            return
+        }
         const temp = {
             assign_id : responseinfo.assign_id
         }
 
         await axios.post('https://api.kyusillid.online/api/returnActivity', temp).then(
-            ()=>{
-         
+            ()=>{       
                 Swal.fire({
-                    icon: 'success',
-                  
+                    icon: 'success',               
                     text: "activity returned",
                 
                   })
-              
-
             }
           
         ).catch();
@@ -120,19 +125,22 @@ function Viewresponse() {
      <button className='commonbutton lighttext secondary col-lg-3' onClick={()=>{navigate('/classes/sampleclass/activity/activityId')}}>Back to Response list</button>
      <button className='commonbutton secondary lighttext widthset' onClick={()=>{returnActivity()}}> Return</button>
             <h4 className='marginleftauto'>Score</h4>
-            <input type="number" min={0} max={100} className="commontextbox primaryborder  col-lg-1" defaultValue={score} onChange={(e)=>{setscore(e.target.value)}}/>
+            <form action="" onSubmit={tt}>
+            <input type="number" required min={0} max={100} className="commontextbox primaryborder  col-lg-1 minwidth80" defaultValue={score} onChange={(e)=>{setscore(e.target.value)}}/>
             {!ifsaved ?
-                <button className='commonbutton secondary lighttext widthset' onClick={tt}>Set Grade</button> 
+                <button type='submit' className='commonbutton secondary lighttext widthset' >Set Grade</button> 
                 :
                 <button className='commonbutton secondary lighttext widthset' >Saved </button>}
+            </form>
 
  
 
      </div>
 
 
-        <div className="flex margintop12 marginleft12"> 
+        <div className=" margintop12 marginleft12"> 
              <h4>Student's Work , {responseinfo.status} </h4>
+             <div className="flex"><h6 className='smallfont'>{responseinfo.date_submitted && 'Turned in ' + responseinfo.date_submitted} {responseinfo.updated_at && responseinfo.date_submitted !== null && ", resubmitted at " + responseinfo.updated_at}</h6></div>
       
         </div>
     

@@ -371,27 +371,72 @@ function ClassActivity() {
 
   const handIn = async (e) => {
 
-    const temp = {
-      assign_id: e,
-      filelist: filesubmitlist
-    };
-    await axios.post("https://api.kyusillid.online/api/handIn", temp)
-    .then((response) => {
-      console.log(response.data);
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+    if(activitystatus.status !== 'returned'){
+      return
+    }
 
-    await axios.get('https://api.kyusillid.online/api/getactivitystatus/' + currentactivity.activity_id + '/' + userinfo.user.acc_id).then(
-      response=>{
-        console.log(response.data)
-        if(response.data !== "unassigned"){
-          setactivitystatus(response.data);
-          setisassigned(true);
+  
+    if(filelist.length===0){
+      Swal.fire({
+   
+        text: "Turn in without submitted files?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Turn In'
+      }).then((result) => {
+        if (result.isConfirmed) {
+
+          const temp = {
+            assign_id: e,
+            filelist: filesubmitlist
+          };
+          axios.post("https://api.kyusillid.online/api/handIn", temp)
+          .then((response) => {
+            console.log(response.data);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      
+          axios.get('https://api.kyusillid.online/api/getactivitystatus/' + currentactivity.activity_id + '/' + userinfo.user.acc_id).then(
+            response=>{
+            
+              if(response.data !== "unassigned"){
+                setactivitystatus(response.data);
+                setisassigned(true);
+              }
+            }
+           ).catch()
+       
         }
-      }
-     ).catch()
+      })
+    }else{
+      const temp = {
+        assign_id: e,
+        filelist: filesubmitlist
+      };
+      await axios.post("https://api.kyusillid.online/api/handIn", temp)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  
+      await axios.get('https://api.kyusillid.online/api/getactivitystatus/' + currentactivity.activity_id + '/' + userinfo.user.acc_id).then(
+        response=>{
+       
+          if(response.data !== "unassigned"){
+            setactivitystatus(response.data);
+            setisassigned(true);
+          }
+        }
+       ).catch()
+    }
+
+    
    
   };
 
@@ -402,6 +447,10 @@ function ClassActivity() {
   
 
 const unSubmit= async (e)=>{
+
+  if(activitystatus.status ==="returned"){
+    return
+  }
   var temp = {
     "assign_id" : e
   }
@@ -696,7 +745,7 @@ function handleClick() {
                       </div>
                       <div className='questionnairefooter flex'>
                  
-                        {/* {userinfo.usertype==='prof' ? <button className='secondary'>view quiz</button> : <button className='secondary' onClick={takequiz}>take quiz </button>} */}
+                        {userinfo.usertype==='prof' ? <button className='secondary'>view quiz</button> : <button className='secondary' onClick={takequiz}>take quiz </button>}
                       </div>
                   </div>
                   </div>
@@ -713,17 +762,20 @@ function handleClick() {
               isassigned ?
           
               <div className=" background borderradius-md margintop12 padding12">
-                {activitystatus.status === 'marked' ?
+                {activitystatus.status === 'graded' ?
                  <h4>Grade {activitystatus.grade} / {activitystatus.points}</h4>
+                 :
+                 activitystatus.status ==='returned'?
+                 <h4>Returned {activitystatus.grade} / {activitystatus.points}</h4>
                  :
                  activitystatus.status ==='handed in late'?
       
                  <h4>Handed in Late  </h4>
                  :
 
-                 activitystatus.status ==='done'?
+                 activitystatus.status ==='submitted'?
       
-                 <h4>Done </h4>
+                 <h4>Submitted </h4>
                  :
 
                  <h4>Assigned </h4>
@@ -773,7 +825,7 @@ function handleClick() {
                     {isassigned ? 
                     <>
                     {activitystatus.status === 'assigned' ?
-                    <button className='secondary' onClick={()=>{handIn(activitystatus.assign_id)}}> Hand In</button>
+                    <button className='secondary' onClick={()=>{handIn(activitystatus.assign_id)}}> Turn In</button>
                   :
                   <button className='tertiary' onClick={()=>{unSubmit(activitystatus.assign_id)}} > Unsubmit</button>
                   }

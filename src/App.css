@@ -26,6 +26,9 @@ body {
 button{
   cursor: pointer;
 }
+.minwidth80{
+  min-width: 80px;
+}
 
 .appbody{
   display: block;
