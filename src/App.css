@@ -2143,6 +2143,19 @@ padding: 12px;
   width: 90px;
 }
 
+.loadercontainer{
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 40px;
+  margin-left: 100%;
+  transition: 0;
+}
+
+.loadercontainer svg{
+  font-size: 80px;
+  fill: #6893ee;
+}
 
 .passwordscale{
   max-height: 35px;

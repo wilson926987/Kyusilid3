@@ -4,6 +4,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import Dropdown from '../1general/formcomponents/Dropdown';
 import { useNavigate } from 'react-router-dom';
 import { userInfoContext } from '../Globalcontext';
+import Swal from 'sweetalert2';
 
 function SuperAdmin() {
 
@@ -61,7 +62,12 @@ function SuperAdmin() {
     }
 
     if(password !== password2 ){
-      alert("Passwords must match")
+      Swal.fire({
+        icon: 'error',
+      
+        text: 'Passwords must match',
+     
+      })
       return
     }
 
@@ -69,7 +75,8 @@ function SuperAdmin() {
 
 
     await axios.put('https://api.kyusillid.online/api/createAdmin' , temp).then((response)=>{
-      alert(response.data);
+   
+      Swal.fire(response.data)
       axios.get('https://api.kyusillid.online/api/manageadmin').then(
           response2=>{
             setadminlist(response2.data.adminlist);
@@ -112,7 +119,14 @@ function SuperAdmin() {
     }
 
     if(type == 0 ){
-      alert("Changing Active status is disabled for Admin Heads");
+
+
+      Swal.fire({
+        icon: 'error',
+      
+        text: "Changing Active status is disabled for Admin Heads",
+     
+      })
       return;
     }
 

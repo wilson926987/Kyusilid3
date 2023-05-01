@@ -7,6 +7,7 @@ import BarChart from '../components/BarChart'
 import StudProfile from '../components/statprofstud'
 import { userInfoContext } from '../../Globalcontext'
 import axios from 'axios'
+import Swal from 'sweetalert2'
 
 function Profiilepage() {
 
@@ -106,9 +107,15 @@ const handleProfile = (event) => {
     })
     .catch((error) => {
       console.error(error);
-      alert('Failed to upload profile picture');
+  
+      Swal.fire({
+        icon: 'error',
+
+        text:'Failed to upload profile picture'
+      });
     });
 };
+
 
 
   return (

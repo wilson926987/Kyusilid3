@@ -47,17 +47,7 @@ function Login() {
     e.preventDefault();
 
     //validation
-    if(username=== undefined){
-      alert('Username Required');
-     }else{
-       setusermessage('')
-     }
- 
-     if(password === undefined){
-       alert('Password Required');
-     }else{
-       setpassmessage('')
-     }
+  
  
 
    if(username!==undefined && password!==undefined){
@@ -126,12 +116,12 @@ function Login() {
 
 
       <label> Username:<div className='errortext'>{usernamemessage}</div></label>
-            <input type="text" placeholder='Username...' defaultValue ={username} onChange={handleUsernameChange}/>
+            <input type="text" placeholder='Username...' required defaultValue ={username} onChange={handleUsernameChange}/>
             
 
         <label> Password:<div className='errortext'>{passmessage}</div> </label>
 
-            <input type="password" placeholder='Password...' defaultValue ={password} onChange={handlePasswordChange}/>
+            <input type="password" placeholder='Password...' required defaultValue ={password} onChange={handlePasswordChange}/>
 
             
           

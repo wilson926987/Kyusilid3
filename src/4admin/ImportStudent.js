@@ -2,9 +2,13 @@ import React, { useContext, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { userInfoContext } from '../Globalcontext';
+import { BeatLoader } from 'react-spinners';
+import{AiFillWarning} from 'react-icons/ai'
 
 function ImportStudent({setupdatelist, setcreatestudmodal}) {
   const [file, setFile] = useState(null);
+  const [loader, setloader] = useState(false);
+  const[message , setmessage] = useState(true)
 
   const {userinfo} = useContext(userInfoContext)
   const navigate =useNavigate();
@@ -26,7 +30,7 @@ function ImportStudent({setupdatelist, setcreatestudmodal}) {
     axios.post('https://api.kyusillid.online/api/import-excel', formData)
       .then(response => {
         
-          alert('Import successful!');
+          
           console.log(response.data)
           setupdatelist(response.data.updatelist);
           setcreatestudmodal(false);
@@ -39,24 +43,45 @@ function ImportStudent({setupdatelist, setcreatestudmodal}) {
       })
       .catch(error => {
         console.error(error.data);
-        alert('Import failed!');
+        setmessage(false)
       });
   }
 
   return (
-    <div className='flex padding12'>
-    <div className='Import-file tertiary borderradius-lg padding12'>
-    <div className='Import-file-container'>
-    <h1>IMPORT STUDENT FILE</h1>
-      <input className='Choose-File commonbutton secondary lighttext width100' type="file" onChange={handleFileChange} />
-      </div>
-      </div>
-     
-      <div className='import-button'>
-      <button className='commonbutton secondary lighttext width100' onClick={handleImportClick}>Import</button>
-      </div>
+
+    <div className=' padding12 relative'>
+
+
+    {!loader ? 
+     <div className="flex">
+     <div className='Import-file tertiary borderradius-lg padding12'>
+      <div className='Import-file-container'>
+      <h1>IMPORT STUDENTS FILE</h1>
+        <input className='Choose-File commonbutton secondary lighttext width100' type="file" onChange={handleFileChange} />
+        </div>
+        </div>
+       
+        <div className='import-button'>
+        <button className='commonbutton secondary lighttext width100' onClick={()=>{handleImportClick(); setloader(true)}}>Import</button>
+        </div>
+     </div>
+     :
+     <div className="flex loadercontainer width100">
+    
+          {message ? <BeatLoader color="#6893ee" /> : <AiFillWarning/>}
+          <h1>{message ? "Updating Student list" : "Upload failed"}</h1>
+       
       
-      </div>
+     </div>
+  
+  
+  }
+
+
+
+    
+    </div>
+
   );
 }
 

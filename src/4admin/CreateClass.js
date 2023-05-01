@@ -4,6 +4,7 @@ import Textbox from '../1general/formcomponents/Textbox';
 import { currentdeptContext, subjectlistContext, userInfoContext} from '../Globalcontext';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 function CreateClass() {
   const {currentdept} = useContext(currentdeptContext)  
@@ -91,7 +92,12 @@ function CreateClass() {
   
     await axios.put('https://api.kyusillid.online/api/createclass' , temp).then(
       response=> {console.log(response.data) ;
-                 alert("Sucessfully added class") ;
+        Swal.fire({
+          icon: 'success',
+        
+          text: 'Successfully saved',
+       
+        })
                  axios.put('https://api.kyusillid.online/api/adminlog', temp2).catch(error => console.log(error.data))
 
 

@@ -11,6 +11,8 @@ import Textbox from '../formcomponents/Textbox';
 
 import * as XLSX from "xlsx"; 
 
+import Swal from 'sweetalert2';
+
 
 
 function ClassActivity() {
@@ -212,7 +214,8 @@ function ClassActivity() {
 
     await axios.post('https://api.kyusillid.online/api/updateactivity', temp).then(
     response=>{
-      alert('successfully edited');
+     
+      Swal.fire('successfully edited');
       navigate('/classes/sampleclass/modules');
     }
     ).catch(error => console.log(error.data))
@@ -221,17 +224,39 @@ function ClassActivity() {
 
   const handledelete = async (e) =>{
 
-    if(window.confirm('delete this activity?') === true){
-        await axios.delete('https://api.kyusillid.online/api/deleteactivity/' + e).then(
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        axios.delete('https://api.kyusillid.online/api/deleteactivity/' + e).then(
           response=>{
-            alert('successfully deleted');
+          
+            
+            Swal.fire(
+              'Deleted!',
+              'Activity has been deleted.',
+              'success'
+            )
             navigate('/classes/sampleclass/modules');
           }
         )
 
   .catch();
 
-    }
+     
+      }
+    })
+
+    
+
+   
   
   }
 
@@ -277,10 +302,13 @@ function ClassActivity() {
   const [responselist, setresponselist] = useState();
 
   const deletecomment = async(e)=>{
+
+    
     if(window.confirm('delete this comment?') === true){
       await axios.delete('https://api.kyusillid.online/api/deleteactivitycomment/' + e).then(
        
       set_actcommnentlist( act_commentlist.filter(ee=> ee.comment_id != e))
+
 
   ).catch();
 

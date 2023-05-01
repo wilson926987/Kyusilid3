@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { userInfoContext } from '../../Globalcontext'
 import logoiconimage from '../../assets/images/Kyusilid.png'
 import logoiconimage1 from '../../assets/images/avatarlogo.webp'
+import Swal from 'sweetalert2'
 
 
 function Forgotpass() {
@@ -33,7 +34,8 @@ function Forgotpass() {
               setacc_id(response.data.acc_id)
               setstep('input otp')
             }else{
-              alert("Account email not found.")
+              
+              Swal.fire("Account email not found.")
               
             }
           }
@@ -51,7 +53,12 @@ function Forgotpass() {
           if(response.data.status==="success"){
             setstep('new password')
           }else{
-            alert(response.data.message)
+      
+            Swal.fire({
+              icon: 'error',
+      
+              text: response.data.message,
+            })
           }
         }
       )
@@ -65,17 +72,31 @@ function Forgotpass() {
     const handlePassSubmit= (e)=>{
       e.preventDefault()
       if(password !== password2){
-        alert("passwords must match")
+        Swal.fire({
+          icon: 'error',
+          text: 'Passwords must match',
+        })
+
+        
+     
       }else{
         axios.post('https://api.kyusillid.online/api/NewPass' , { "acc_id" : acc_id , "password" : password}).then(
           response=>{
             if(response.data.status ==="success"){
-              alert("Password successsfully changed")
+              Swal.fire({
+                icon: 'success',
+        
+                text: 'Passwords must match'
+              })
               navigate("/")
 
               
             }else{
-              alert("Password not changed")
+              Swal.fire({
+                icon: 'error',
+        
+                text: 'Password not changed.'
+              })
             }
           }
         )

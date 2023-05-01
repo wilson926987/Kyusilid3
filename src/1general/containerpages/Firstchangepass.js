@@ -5,6 +5,7 @@ import { useContext , useState , useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import logoiconimage from '../../assets/images/Kyusilid.png'
 import logoiconimage1 from '../../assets/images/avatarlogo.webp'
+import Swal from 'sweetalert2';
 
 function Firstchangepass() {
   const [ newpass , setnewpass] = useState();
@@ -34,7 +35,12 @@ function Firstchangepass() {
     e.preventDefault();
   
     if (!checkPasswordStrength(newpass)) {
-      alert("Password should contain at least one lowercase letter, one uppercase letter, one number, one special character, and be at least 6 characters long.");
+   
+   
+      Swal.fire({
+        icon: 'error',
+        text: "Password should contain at least one lowercase letter, one uppercase letter, one number, one special character, and be at least 6 characters long."
+      })
       return;
     }
     
@@ -59,12 +65,17 @@ function Firstchangepass() {
     }
   
     if ((newpass !== undefined && newpass.length < 6) || (newpass !== undefined && newpass.length < 6)) {
-      alert("password minimum length is 6")
+      Swal.fire("password minimum length is 6")
       return
     }
   
     if (newpass !== confirmnewpass) {
-      alert("passwords must match")
+
+
+      Swal.fire({
+        icon: 'error',
+        text: 'Passwords must match'
+      })
       return
     }
   }

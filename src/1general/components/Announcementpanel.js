@@ -4,6 +4,7 @@ import axios from 'axios'
 import { useEffect } from 'react';
 import { announcementlistContext, userInfoContext , currentclassContext , forcerefreshContext } from '../../Globalcontext';
 import {AiFillEdit} from 'react-icons/ai'
+import Swal from 'sweetalert2';
 
 
 function Announcementpanel({announcementitem , forcerefresh}) {
@@ -67,21 +68,40 @@ function Announcementpanel({announcementitem , forcerefresh}) {
   const [editmenu, setedditmenu] = useState(false);
 
   const confirmdelete = async (e)=>{
-    if(window.confirm('delete this post?') === true){
-      await axios.delete('https://api.kyusillid.online/api/deleteannouncement/' + e).then(
-        forecerefreshHandler()
-      ).catch();
 
-      await axios.get(url + currentclass.classes_id)
-      .then(response => {
-        setannouncementlist(response.data)
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios.delete('https://api.kyusillid.online/api/deleteannouncement/' + e).then(
+          forecerefreshHandler()
+        ).catch();
+  
+        axios.get(url + currentclass.classes_id)
+        .then(response => {
+          setannouncementlist(response.data)
+         
+        })
+        .catch(error => {
+          console.log(error);
+        });
+
+        Swal.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        )
+      
        
-      })
-      .catch(error => {
-        console.log(error);
-      });
-    
-    }
+      }
+    })
+ 
   }
 
 

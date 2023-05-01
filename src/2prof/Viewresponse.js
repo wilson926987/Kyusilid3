@@ -3,6 +3,7 @@ import { responseContext } from '../Globalcontext'
 import { SiAeromexico } from 'react-icons/si'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2'
 
 
 function Viewresponse() {
@@ -41,7 +42,14 @@ function Viewresponse() {
         await  axios.post('https://api.kyusillid.online/api/setGrade' , temp).then(
 
         ()=>{
-            alert("Successfully saved");
+          
+            
+            Swal.fire({
+                icon: 'success',
+              
+                text: 'Successfully saved',
+             
+              })
             setsaved(true)
         }
         ).catch()
@@ -55,7 +63,13 @@ function Viewresponse() {
 
         await axios.post('https://api.kyusillid.online/api/returnActivity', temp).then(
             ()=>{
-                alert("activity returned");
+         
+                Swal.fire({
+                    icon: 'success',
+                  
+                    text: "activity returned",
+                
+                  })
               
 
             }

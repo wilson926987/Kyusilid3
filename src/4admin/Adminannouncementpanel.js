@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import {AiFillEdit} from 'react-icons/ai'
 import axios from 'axios'
+import Swal from 'sweetalert2';
 
 function Adminannouncementpanel({item , deleteannouncement_local , filldata}) {
 
@@ -30,7 +31,14 @@ function Adminannouncementpanel({item , deleteannouncement_local , filldata}) {
 
           console.log(JSON.stringify(temp ))
           await axios.post('https://api.kyusillid.online/api/editadminannouncement' , temp ).then(
-            alert("Successfully edited")
+            Swal.fire({
+              icon: 'success',
+            
+              text: 'Successfully saved',
+           
+            })
+
+       
           ).catch(error=> console.log(error.data))
 
           setedit(false)

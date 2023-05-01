@@ -31,8 +31,9 @@ function Department() {
     const [sampleclassid, setsampleclassid] = useState();
     const [topicid, settopicsid] = useState();
     const [updatelist, setupdatelist] = useState();
-    
 
+
+    
 
 
     useEffect(()=>{
