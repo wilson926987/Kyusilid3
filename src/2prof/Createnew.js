@@ -19,8 +19,8 @@ function Createnew() {
   const {studentselection} = useContext(classAndstudentselectionContext)
   const navigate = useNavigate()
   const [recordingtype, setrecordingtype] = useState('form');
+  const [isDisabled, setIsDisabled] = useState(false);
   const [topiclistemp, settopiclisttem]= useState([])
-
   const [categorylist, setcategorylist] = useState([{
     'value' : currentclass.sessionname1, 'label' : currentclass.sessionname1
   }])
@@ -74,6 +74,7 @@ function Createnew() {
       await axios.post('https://api.kyusillid.online/api/quizID').then(
       response=> {
         setQuizId(response.data);
+        setIsDisabled(true);
 
    
         window.open('/Quiz/' + response.data , '_blank');
@@ -82,7 +83,6 @@ function Createnew() {
     }
     
   }
-
 
   
 
@@ -103,7 +103,7 @@ function Createnew() {
   const [allowlate, setallowlate] = useState(true)
   const [formduration, setformduration] = useState();
   const [selectedFile, setSelectedFile] = useState(null);
-  const [QuizId, setQuizId] = useState();
+  const [QuizId, setQuizId] = useState(null);
  
   const [filelist, setfilelist] = useState([]);
 
@@ -346,11 +346,11 @@ const handlecreateactivity=()=>{
                           
                               {(activitytype ==='Questionnaire') && 
 
-                              <div className='secondary lighttext createquestionnaire' onClick={()=>{NewQuiz();}}>
+                                  <button type="button" className='secondary lighttext createquestionnaire' onClick={()=>{NewQuiz();}} disabled={isDisabled}>
                                   <h3>Edit Questionnaire</h3>
 
-                             
-                              </div>
+
+                                  </button>
 
 
 

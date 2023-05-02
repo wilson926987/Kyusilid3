@@ -5,9 +5,10 @@ import Identification from './Identification'
 import Quiz from '../../containerpages/Quiz'
 
 
-function QuizitemContainer({item , handleOptionChange ,handleaddoption, handleDeleteQuestion, handleQuestionChange , handleAnswerChange}) {
+function QuizitemContainer({item , handleOptionChange ,handleaddoption, handleDeleteQuestion, handleQuestionChange , handleAnswerChange, handlePointsChange}) {
 
-
+    
+console.log(item);
     const quizoption = [
         {"value" : "Multiplechoice",
         "label": "Multiple choice"},
@@ -21,9 +22,18 @@ function QuizitemContainer({item , handleOptionChange ,handleaddoption, handleDe
 
     <h1 style={{fontSize:20 }}> {item.questionid}</h1>
          <div className='flex'>
-            <input type= "text " className='Q commontextbox padding12' placeholder='Enter Question' onChange={e=>{handleQuestionChange(item, e.target.value)}}/>
+            <input type= "text"
+                value={item?.question}
+            className='Q commontextbox padding12' placeholder='Enter Question' onChange={e=>{handleQuestionChange(item, e.target.value)}}/>
+            <input type="number"
+             className="quiz-input-text commontextbox col-lg-2" value={item?.points} onChange={(e) => handlePointsChange(item, e.target.value)} placeholder="Points" />
             <div className='marginleftauto'> 
-            <select className='mult commonbutton lighttext secondary' onChange={(e)=>{handleOptionChange( item, e.target.value)}} >
+            <select className='mult commonbutton lighttext secondary'
+            onChange={(e)=>{
+              
+                    handleOptionChange( item, e.target.value);
+                
+            }} >
                 {quizoption.map((item2,key)=>(
                     
                     <option key={key} value={item2.value} selected={item2.value===item.type }>{item2.label}</option>
@@ -36,7 +46,7 @@ function QuizitemContainer({item , handleOptionChange ,handleaddoption, handleDe
 
          <div className='padding12 '>
          {item.type==='Multiplechoice' ? 
-        <Multiplechoice content= {item.content} item={item} handleaddoption={handleaddoption} handleAnswerChange={handleAnswerChange}/> :
+        <Multiplechoice content= {item?.content} item={item} handleaddoption={handleaddoption} handleAnswerChange={handleAnswerChange}/> :
             // item.type ==='Selectmany' ?
             // <SelectMany content= {item.content} item={item} handleaddoption={handleaddoption} handleAnswerChange={handleAnswerChange}/>: 
             <Identification handleAnswerChange={handleAnswerChange} item={item}/>

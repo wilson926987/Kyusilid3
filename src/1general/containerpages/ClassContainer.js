@@ -368,7 +368,7 @@ const markAttendance = () => {
                          <li className='classnavsubitem' onClick={()=>{settopicfilter('none') ; navigate('modules')}}>All topics</li>
                          <li><hr /></li>
 
-                         {topiclist !== undefined && topiclist.topiclist.map((topicitem, key)=>(
+                         {topiclist !== undefined && topiclist?.topiclist?.map((topicitem, key)=>(
                           <React.Fragment key={key}> 
                               <li key={key} className='classnavsubitem' onClick={()=>{settopicfilter(topicitem.topic_id) ; navigate('modules')}}>{topicitem.topic_name}</li>
                               <li><hr /></li>

@@ -31,6 +31,9 @@ function ClassActivity() {
   const [activitysettings, setactivitysettings] = useState(false);
   const [edittitle, setedittitle] = useState()
   const [editdescription, seteditdescription] = useState();
+  const [activitystatus, setactivitystatus]= useState();
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   // useEffect(()=>{
   //   console.log
@@ -112,7 +115,6 @@ function ClassActivity() {
 
 
   const [mark, setmark] = useState();
-  const [activitystatus, setactivitystatus]= useState();
   const [fileuploads, setfileuploads] = useState();
   const [uploadedFile, setUploadedFile] = useState(null);
 
@@ -167,10 +169,21 @@ function ClassActivity() {
 
        
       }
-     ).catch(error=> console.log(error.data));
-    }
-
-  },[activitystatus])
+      ).catch(error=> console.log(error.data));
+      axios.get('https://api.kyusillid.online/api/score/' + activitystatus?.assign_id).then(
+       response=>{
+         console.log(response.data);
+ 
+          if(response.data.status == "submitted") {
+           setIsSubmitted(true);
+          }
+       }
+      ).catch(error=> console.log(error)).finally(() =>setIsLoading(false));
+ 
+     }
+ 
+ 
+   },[activitystatus])
 
 
 
@@ -745,7 +758,13 @@ function handleClick() {
                       </div>
                       <div className='questionnairefooter flex'>
                  
-                        {userinfo.usertype==='prof' ? <button className='secondary'>view quiz</button> : <button className='secondary' onClick={takequiz}>take quiz </button>}
+                        {userinfo.usertype==='prof' ? <button className='secondary'
+
+                          type="button"
+                          onClick={() => {
+                            window.open("/Quiz/"+currentactivity.quiz_link, "_blank");
+                          }}
+                        >view quiz</button> :  !isLoading ? !isSubmitted && <button className='secondary' onClick={takequiz}>take quiz </button> : "Loading,"}
                       </div>
                   </div>
                   </div>

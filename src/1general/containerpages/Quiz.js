@@ -1,9 +1,10 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Dropdown from "../formcomponents/Dropdown";
 import QuizitemContainer from "../components/quizitems/QuizitemContainer";
 import axios from "axios";
 import { useParams } from "react-router";
+
 
 function Quiz() {
   
@@ -12,8 +13,8 @@ function Quiz() {
 
   const {id} = useParams();
   
-const [questions, setQuestions] = useState([
-    { "questionid": 1, "question": "", "points": 1, "type": "Multiplechoice", "content":[], "answer": "" }
+  const [questions, setQuestions] = useState([
+    { "questionid": 1, "question": "", "points": "", "type": "Multiplechoice", "content":[], "answer": "" }
   ]);
  
   const handleQuizSubmit = () => {
@@ -37,8 +38,44 @@ const [questions, setQuestions] = useState([
     });
   };
 
+  useEffect(() => {
+    axios
+    .get("https://api.kyusillid.online/api/getID/" + id)
+    .then((response) => {
+      settitle(response.data.title || null);
+      setdescrtiption(response.data.description || null);
+      setQuestions(response.data.questions || [
+        { "questionid": 1, "question": "", "points": "", "type": "Multiplechoice", "content": [        { value: 'Option 0', index: 0 },        { value: 'Option 1', index: 1 },        { value: 'Option 2', index: 2 },        { value: 'Option 3', index: 3 },      ], "answer": "" }
+      ]);
+      console.log(response);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+  },[])
+
+
+  //   axios.post("https://api.kyusillid.online/api/quiz-questions", temp).then((response) => {
+  //     console.log(response.data);
+  //   }).catch();
+
+  //   alert("Successfully created Quiz")
+  //   window.close();
+  // };
+
  
 
+  const handlePointsChange = (item, points) => {
+          setQuestions(questions.map((item2)=>({
+            "question": item2.question,
+            'points' : item2.questionid === item.questionid ? points : item2.points,
+            "type" : item2.type,
+            "content": item2.content,
+            "answer": item2.answer,
+            "questionid": item2.questionid
+          })))
+  };
+  
   
 
   const handleQuestionChange = (item, questiontemp) => {
@@ -57,7 +94,7 @@ const [questions, setQuestions] = useState([
       "question": item2.question,
       'points' : item2.points,
       "type" : item2.questionid === item.questionid ? typetemp : item2.type ,
-      "content": item2.content,
+      "content": typetemp == "Identification" ? []: item2.content,
       "answer": item2.answer,
       "questionid": item2.questionid
     })))
@@ -78,13 +115,14 @@ const [questions, setQuestions] = useState([
   const handleAddQuestion = () => {
     setQuestions([
       ...questions,
-      { "questionid": questions.length+1, "question": "", "points": 1, "type": "Multiplechoice", "content":[], "answer": "" }
+      { "questionid": questions.length+1, "question": "", "points": "", "type": "Multiplechoice", "content":[], "answer": "" }
   
     ]);
   };
 
   const handleDeleteQuestion = (item) => {
     const updatedItems = questions.filter(item2 => item2.questionid !== item.questionid);
+   
     setQuestions(updatedItems);
 
 
@@ -92,7 +130,6 @@ const [questions, setQuestions] = useState([
   };
 
   const handleaddoption= ( item , content)=>{
-    console.log('FAKDHF');
 
     setQuestions(questions.map(item2=>({
       "question": item2.question,
@@ -125,8 +162,7 @@ return(
             <input type="text" className="quiz-input-text commontextbox col-lg-4"   defaultValue={title} onChange={(e)=>{settitle(e.target.value)}} placeholder="Enter Title"/> 
             <br></br>
             <h1 className='quiz-text'>Form Description</h1>
-            <input type="text" className="quiz-input-text commontextbox col-lg-4" defaultValue={description} onChange={e=>setdescrtiption(e.target.value)} placeholder="Enter Description"/>
-            
+            <input type="text" className="quiz-input-text commontextbox col-lg-4" defaultValue={description} onChange={e=>setdescrtiption(e.target.value)} placeholder="Enter Description"/> 
         </header>
         
 <div className="Questions-Options tertiary padding12 margintop12 paddingleft12 divcenter">
@@ -137,7 +173,8 @@ return(
               handleDeleteQuestion = {handleDeleteQuestion} 
               handleaddoption={handleaddoption}
               handleQuestionChange={handleQuestionChange}
-              handleAnswerChange={handleAnswerChange}/>
+              handleAnswerChange={handleAnswerChange}
+              handlePointsChange={handlePointsChange}/>
         </div>     ))}
 
 <hr></hr>

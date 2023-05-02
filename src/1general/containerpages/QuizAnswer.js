@@ -11,6 +11,8 @@ function QuizAnswer({ questions }) {
   const {id} = useParams();
   const {id2} = useParams();
 
+  
+
   useEffect(() => {
     axios
       .get("https://api.kyusillid.online/api/getID/" + id)
@@ -25,6 +27,8 @@ function QuizAnswer({ questions }) {
       });
    
   }, []);
+  
+
 
   // const handleAnswerChange = (questionId, selectedAnswer) => {
   //   const temp = question.find((q) => q.questionid === questionId);
@@ -62,7 +66,7 @@ function QuizAnswer({ questions }) {
       setSelectedAnswer(e.target.value);
       setAnsweredQuestions(prevAnswers => {
         const existingAnswerIndex = prevAnswers.findIndex(q => q.questionid === question.questionid);
-        const newAnswer = { questionid: question.questionid, answer: e.target.value, correct_answer: question.answer };
+        const newAnswer = { questionid: question.questionid, answer: e.target.value, correct_answer: question.answer, cpoints : question.points };
         if (existingAnswerIndex >= 0) {
           return [...prevAnswers.slice(0, existingAnswerIndex), newAnswer, ...prevAnswers.slice(existingAnswerIndex + 1)];
         } else {
@@ -112,7 +116,7 @@ function QuizAnswer({ questions }) {
       setSelectedAnswer(e.target.value);
       setAnsweredQuestions(prevAnswers => {
         const existingAnswerIndex = prevAnswers.findIndex(q => q.questionid === question.questionid);
-        const newAnswer = { questionid: question.questionid, answer: e.target.value, correct_answer: question.answer };
+        const newAnswer = { questionid: question.questionid, answer: e.target.value, correct_answer: question.answer, cpoints : question.points};
         if (existingAnswerIndex >= 0) {
           return [...prevAnswers.slice(0, existingAnswerIndex), newAnswer, ...prevAnswers.slice(existingAnswerIndex + 1)];
         } else {
@@ -144,16 +148,22 @@ function QuizAnswer({ questions }) {
 
       const answers = question.map(q => {
         const answer = answeredQuestions.find(aq => aq.questionid === q.questionid);
-        return { questionid: q.questionid, answer: answer.answer, correct_answer: answer.correct_answer };
+        return { questionid: q.questionid, answer: answer.answer, correct_answer: answer.correct_answer , cpoints: answer.cpoints};
       });
 
       var points = 0;
+      var total = 0;
       
 
       
       answers.forEach(answer => {
         if (answer.answer == answer.correct_answer) {
-          points++; // increment points if answer is correct
+          
+          total = answers.reduce((acc, curr) => {
+            return acc + parseInt(curr.cpoints) 
+          }, 0);
+
+          // total = points + parseInt(cpoints) ; // increment points if answer is correct
         }
       });
       
@@ -161,10 +171,9 @@ function QuizAnswer({ questions }) {
       const score = {
         assign_id: id2,
         answers: answers,
-        score: points
+        score: total
       };
       console.log(score);
-
       
       await axios.post("https://api.kyusillid.online/api/submitscore", score)
         .then((response) => {
@@ -218,7 +227,6 @@ function QuizAnswer({ questions }) {
      
 
       <div className="flex width100 divcenter margintop12 padding12 "> 
-
       {!buttondisabled ?
           <button className="secondary commonbutton borderradius-md lighttext col-lg-6 divcenter margintop12" onClick={handleSubmit}>
           <h2>Submit</h2>
