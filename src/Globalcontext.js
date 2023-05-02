@@ -49,3 +49,5 @@ export const responseContext = createContext();
 
 
 export const forceviewContext= createContext();
+
+export const setactivityContext = createContext();

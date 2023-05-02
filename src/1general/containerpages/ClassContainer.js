@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Outlet , useNavigate, useLocation} from 'react-router-dom'
 import Activitylogpanel from '../components/Activitylogpanel';
-import {responseContext, classbannerContext , settingsContext, modulelistContext, forcerefreshContext, classAndstudentselectionContext, announcementlistContext, userInfoContext, topicfilterContext, activitytypefilterContext , topiclistContext , currentActivityContext , sourceMaterialContext , currentclassContext, myClasesContext , personlistContext } from '../../Globalcontext';
+import {setactivityContext, responseContext, classbannerContext , settingsContext, modulelistContext, forcerefreshContext, classAndstudentselectionContext, announcementlistContext, userInfoContext, topicfilterContext, activitytypefilterContext , topiclistContext , currentActivityContext , sourceMaterialContext , currentclassContext, myClasesContext , personlistContext } from '../../Globalcontext';
 import {FaPlusCircle ,FaArrowCircleLeft} from  'react-icons/fa'
 import {BiChevronsLeft} from 'react-icons/bi'
 import ClassSelectionitem from '../components/ClassSelectionitem';
@@ -18,7 +18,7 @@ import classbanner8 from '../../assets/images/classbanner8.png'
 
 
 function ClassContainer() {
- 
+ const [Activitytype, setActivitytype] = useState();
 
   const classbannerlist = [classbanner1, classbanner1, classbanner2 , classbanner3, classbanner4, classbanner5, classbanner6, classbanner7, classbanner8]
 
@@ -59,6 +59,8 @@ function ClassContainer() {
   }
 
   const [sampleurl, setsampleurl] = useState()
+
+  const [createdropdown, setcreatedropdown] = useState(false);
 
 
   
@@ -335,15 +337,28 @@ const markAttendance = () => {
               
                           (  (userinfo.usertype==='prof' || userinfo.usertype ==='admin') && 
                             !isactive('/classes/sampleclass/createnew') ?
-                            <div className="secondary lighttext navcreatenew borderradius-lg dbpanelmargin" onClick={()=>{setsourcematerial(); navigate('createnew')}}>
+                            <div className="secondary lighttext navcreatenew borderradius-lg dbpanelmargin" onClick={()=>{setcreatedropdown(!createdropdown)}}>
                             <FaPlusCircle /><h4>Create New</h4>
                             
                           </div>
                           :
                           (userinfo.usertype==='prof' || userinfo.usertype ==='admin') &&
-                          <div className="secondary lighttext navcreatenew borderradius-lg dbpanelmargin" onClick={()=>{navigate('/classes/sampleclass')}}>
+                          <div className="secondary lighttext navcreatenew borderradius-lg dbpanelmargin" onClick={()=>{ setcreatedropdown(false); navigate('/classes/sampleclass')}}>
                           <FaArrowCircleLeft /><h4>Cancel</h4>
                         </div>)
+                    }
+
+                    {createdropdown && 
+
+                        <ul className='secondary borderradius-md createlist'>
+
+                          <li className='padding12 lighttext borderradius-md' onClick={()=> { setcreatedropdown(false); setsourcematerial();setActivitytype({'value': "Material" , "label" : "Material"}); navigate('createnew')}}>Material</li>
+                          <li className='padding12 lighttext borderradius-md' onClick={()=>{setsourcematerial();setcreatedropdown(false);setActivitytype({'value': "Activity" , "label" : "Activity"}); navigate('createnew')}}>Activity</li>
+                          <li className='padding12 lighttext borderradius-md' onClick={()=>{setsourcematerial();setcreatedropdown(false);setActivitytype({'value': "Assignment" , "label" : "Assignment"}); navigate('createnew')}}>Assignment</li>
+                          <li className='padding12 lighttext borderradius-md' onClick={()=>{setsourcematerial();setcreatedropdown(false);setActivitytype({'value': "Questionnaire" , "label" : "Questionnaire"}); navigate('createnew')}}>Questionnaire</li>
+                        </ul>
+                    
+                    
                     }
 
 
@@ -468,7 +483,11 @@ const markAttendance = () => {
                                 <classbannerContext.Provider value={{classbanner, setclassbanner}}>
 
                                   <responseContext.Provider value={{responseinfo, setresponseinfo}}>
-                                  <Outlet /> 
+
+                                    <setactivityContext.Provider value={{Activitytype, setActivitytype}}>
+                                    <Outlet />  
+                                    </setactivityContext.Provider>
+                                 
                                   </responseContext.Provider>
                             
 

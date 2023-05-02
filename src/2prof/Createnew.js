@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { userInfoContext , sourceMaterialContext , currentclassContext, topiclistContext , classAndstudentselectionContext} from '../Globalcontext'
+import {setactivityContext, userInfoContext , sourceMaterialContext , currentclassContext, topiclistContext , classAndstudentselectionContext} from '../Globalcontext'
 import {AiFillFile , AiFillDelete} from 'react-icons/ai'
 import axios from 'axios'
 import ArrowSelector from '../1general/formcomponents/ArrowSelector'
@@ -26,6 +26,8 @@ function Createnew() {
   }])
 
   const [filename, setfilename] = useState();
+
+  const {Activitytype}  = useContext(setactivityContext)
 
 
 
@@ -405,6 +407,7 @@ const handlecreateactivity=()=>{
                               controlActiveClass='dropdowncontrolactive'
                               mainActiveClass='dropdownmain-active'
                               disabled ={sourcematerial !== undefined}
+                              defaultValue={Activitytype !== undefined && Activitytype}
                           />   
 }
                             </div>

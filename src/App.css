@@ -43,6 +43,15 @@ body::-webkit-scrollbar{
   display: none;
 }
 
+
+.createlist *{
+  text-align: center;
+}
+.createlist li:hover{
+  background-color: var(--defaultprimary);
+}
+
+
 :root{
   --defaultprimary : #91b4ff;
   --defaultsecondary: #064273;
