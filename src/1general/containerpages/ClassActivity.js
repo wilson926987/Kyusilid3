@@ -384,7 +384,7 @@ function ClassActivity() {
 
   const handIn = async (e) => {
 
-    if(activitystatus.status !== 'returned'){
+    if(activitystatus.status === 'returned'){
       return
     }
 
