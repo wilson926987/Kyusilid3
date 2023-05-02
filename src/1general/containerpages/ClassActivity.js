@@ -389,7 +389,7 @@ function ClassActivity() {
     }
 
   
-    if(filelist.length===0){
+    if(filesubmitlist.length===0 || filesubmitlist === undefined){
       Swal.fire({
    
         text: "Turn in without submitted files?",
