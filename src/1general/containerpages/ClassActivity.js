@@ -344,39 +344,83 @@ function ClassActivity() {
 
 
 
-  useEffect(()=>{
-    
-    if(selectedFile !== null && selectedFile !== undefined){
-      const formData = new FormData();
-    formData.append("file_link", selectedFile);
-
-    const xhr = new XMLHttpRequest();
-    xhr.open("POST", "https://api.kyusillid.online/api/uploadfile2");
-    xhr.onload = () => {
-      if (xhr.status === 200) {
-        const response = JSON.parse(xhr.responseText);
-        setfilesubmitlist(filesubmitlist =>[...filesubmitlist, {
-          "id" : response.id,
-          "filename" :  response.data.name,
-          "url" : response.url
-
-        }])
-       
-
+  useEffect(() => {
+    if (selectedFile !== null && selectedFile !== undefined) {
+      // Define the list of allowed file types/extensions
+      const allowedTypes = [
+        "image/jpeg",
+        "image/png",
+        "image/gif",
+        "image/bmp",
+        "image/webp",
+        "image/tiff",
+        "image/svg+xml",
+        "image/x-icon",
+        "audio/mpeg",
+        "audio/ogg",
+        "audio/wav",
+        "audio/webm",
+        "video/mp4",
+        "video/webm",
+        "video/ogg",
+        "application/pdf",
+        "application/msword",
+        "application/vnd.ms-excel",
+        "application/vnd.ms-powerpoint",
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+        "application/zip",
+        "application/x-rar-compressed",
+        "application/gzip",
+        "application/x-tar",
+        "application/x-7z-compressed",
+        "text/plain",
+        "application/postscript",
+        "application/illustrator",
+        "application/photoshop",
+        "application/x-indesign",
+        "application/after-effects",
+        "application/xd"
+      ];
+  
+      // Get the file type and validate against the allowed types
+      const fileType = selectedFile.type;
+      if (!allowedTypes.includes(fileType)) {
+        Swal.fire({
+          icon : 'error',
+          text: "Invalid file type",
+        })
+        console.log("Invalid file type");
+        return;
       }
-    };
-    xhr.send(formData);
-    }else{
-   
-      console.log('no selected file')
+  
+      // Append the valid file to the formData object
+      const formData = new FormData();
+      formData.append("file_link", selectedFile);
+  
+      const xhr = new XMLHttpRequest();
+      xhr.open("POST", "https://api.kyusillid.online/api/uploadfile2");
+      xhr.onload = () => {
+        if (xhr.status === 200) {
+          const response = JSON.parse(xhr.responseText);
+          setfilesubmitlist(filesubmitlist =>[...filesubmitlist, {
+            "id" : response.id,
+            "filename" :  response.data.name,
+            "url" : response.url
+          }])
+        }
+      };
+      xhr.send(formData);
+    } else {
+      console.log('No selected file');
     }
-
-    //console.log(filesubmitlist)
-    
-  },[selectedFile])
+  
+  }, [selectedFile]);
 
 
 
+  
 
   
 

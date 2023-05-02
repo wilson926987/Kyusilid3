@@ -313,40 +313,42 @@ const markAttendance = () => {
                         
                         
 
-                  {currentclass.isarchived === 0 && userinfo.usertype === 'stud' && 
-
-                  <>
-                     <div className="secondary lighttext navcreatenew borderradius-lg dbpanelmargin"  onClick={handleButtonClick}>
-                        
-                     <h4>Class Link</h4>
-
-                      </div>
-
-                      {/* <div className="secondary lighttext navcreatenew borderradius-lg dbpanelmargin">
-                        <h4 onClick={markAttendance}>Attendance</h4>
-            
-                      </div> */}
-                  </>
-                     
-                      
-                    }
-                         
-
-                    {currentclass.isarchived ===0 &&
+                  {currentclass.isarchived ===0 &&
                       
               
-                          (  (userinfo.usertype==='prof' || userinfo.usertype ==='admin') && 
-                            !isactive('/classes/sampleclass/createnew') ?
-                            <div className="secondary lighttext navcreatenew borderradius-lg dbpanelmargin" onClick={()=>{setcreatedropdown(!createdropdown)}}>
-                            <FaPlusCircle /><h4>Create New</h4>
-                            
-                          </div>
-                          :
-                          (userinfo.usertype==='prof' || userinfo.usertype ==='admin') &&
-                          <div className="secondary lighttext navcreatenew borderradius-lg dbpanelmargin" onClick={()=>{ setcreatedropdown(false); navigate('/classes/sampleclass')}}>
-                          <FaArrowCircleLeft /><h4>Cancel</h4>
-                        </div>)
-                    }
+                      (  (userinfo.usertype==='prof' || userinfo.usertype ==='admin') && 
+                        !isactive('/classes/sampleclass/createnew') ?
+                        <div className="secondary lighttext navcreatenew borderradius-lg dbpanelmargin" onClick={()=>{setcreatedropdown(!createdropdown)}}>
+                        <FaPlusCircle /><h4>Create New</h4>
+                        
+                      </div>
+                      :
+                      (userinfo.usertype==='prof' || userinfo.usertype ==='admin') &&
+                      <div className="secondary lighttext navcreatenew borderradius-lg dbpanelmargin" onClick={()=>{ setcreatedropdown(false); navigate('/classes/sampleclass')}}>
+                      <FaArrowCircleLeft /><h4>Cancel</h4>
+                    </div>)
+                }
+
+
+
+
+                    {currentclass.isarchived === 0 &&
+
+                    <>
+                      <div className="secondary lighttext navcreatenew borderradius-lg dbpanelmargin"  onClick={handleButtonClick}>
+                          
+                      <h4>Class Link</h4>
+
+                        </div>
+
+                        {/* <div className="secondary lighttext navcreatenew borderradius-lg dbpanelmargin">
+                          <h4 onClick={markAttendance}>Attendance</h4>
+
+                        </div> */}
+                    </>
+                      
+                        
+                      }
 
                     {createdropdown && 
 

@@ -71,8 +71,15 @@ function SuperAdmin() {
       return
     }
 
-
-
+         // Check if email ends with "qcu.edu.ph"
+  const emailPattern = /^.+@qcu\.edu\.ph$/i; // regular expression pattern
+  if (!emailPattern.test(email)) {
+    Swal.fire({
+      icon: "error",
+      text: "Invalid email format. Email must end with qcu.edu.ph",
+    });
+    return;
+  }
 
     await axios.put('https://api.kyusillid.online/api/createAdmin' , temp).then((response)=>{
    
