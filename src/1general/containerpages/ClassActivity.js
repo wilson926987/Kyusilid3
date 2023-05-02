@@ -495,17 +495,17 @@ function exportGrades() {
     Name: item.name ? item.name : '',
     Status: item.status ? item.status : '',
     Grade: item.grade ? item.grade : 0,
-    Temp : "tyemp"
+    Temp : "tyemp" 
   };
 });
   const date = new Date().toISOString().slice(0, 10);
   const worksheet = XLSX.utils.json_to_sheet(exportData);
   const workbook = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(workbook, worksheet, "Grades");
-  XLSX.writeFile(workbook, `${currentclass.sub_name}-${currentactivity.topic_name} Responses (${date}).xlsx`);
+  XLSX.writeFile(workbook, `${currentclass.sub_name} - ${currentactivity.activity_title} Responses (${date}).xlsx`);
   }
 }
-
+ 
 
 
 
