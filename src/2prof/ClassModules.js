@@ -25,10 +25,8 @@ function ClassModules() {
    },
    {'value' : 'Questionnaire',
    'label' : 'Questionnaire'
-   },
-   {'value' : 'Attendance',
-   'label' : 'Attendance'
-  }
+   }
+ 
 
 
   ])

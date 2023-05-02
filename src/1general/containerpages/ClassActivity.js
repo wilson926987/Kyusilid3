@@ -494,7 +494,8 @@ function exportGrades() {
    return{
     Name: item.name ? item.name : '',
     Status: item.status ? item.status : '',
-    Grade: item.grade ? item.grade : 'n/a'
+    Grade: item.grade ? item.grade : 0,
+    Temp : "tyemp"
   };
 });
   const date = new Date().toISOString().slice(0, 10);
@@ -543,7 +544,7 @@ function handleClick() {
        
 
 
-       {userinfo.usertype ==='prof' && (currentactivity.activity_type !== 'Material') &&
+       {(userinfo.usertype==='prof' || userinfo.usertype ==='admin') && (currentactivity.activity_type !== 'Material') &&
         <div className= {`flex activitytab ${activitytab === 'responses'  ? 'primary' : 'background'}`} onClick={()=>{setactivitytab('responses') ; setactivitysettings(false)}}>
             
          <h4>Responses</h4>
@@ -557,7 +558,7 @@ function handleClick() {
        }
 
 
-{userinfo.usertype === 'prof' &&
+{(userinfo.usertype==='prof' || userinfo.usertype ==='admin') &&
    
    <div className='flex activitytab background relative' >
       <div  onClick={()=>{setactivitysettings(!activitysettings)}}>
@@ -758,7 +759,7 @@ function handleClick() {
                       </div>
                       <div className='questionnairefooter flex'>
                  
-                        {userinfo.usertype==='prof' ? <button className='secondary'
+                        {(userinfo.usertype==='prof' || userinfo.usertype ==='admin') ? <button className='secondary'
 
                           type="button"
                           onClick={() => {

@@ -28,7 +28,6 @@ function Container() {
 
   
     if(userinfo.usertype === 'admin' && !forceview){
-      console.log(forceview)
       navigate('/kyusilidAdmin');
     }
     

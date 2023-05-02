@@ -37,13 +37,22 @@ function Firstchangepass() {
     e.preventDefault();
   
     if (!checkPasswordStrength(newpass)) {
-   
-   
+
       Swal.fire({
         icon: 'error',
         text: "Password should contain at least one lowercase letter, one uppercase letter, one number, one special character, and be at least 6 characters long."
       })
       return;
+    }
+
+    if(newpass != confirmnewpass) {
+
+
+      Swal.fire({
+        icon: 'error',
+        text: 'Passwords must match'
+      })
+      return
     }
     
     if (newpass === confirmnewpass && newpass !== undefined && confirmnewpass !== undefined) {
@@ -58,10 +67,21 @@ function Firstchangepass() {
           console.log("password successfully changed");
           setnewpass("");
           setconfirmnewpass("");
-          const confirmLogout = window.confirm("Your password has been change successfully, You will now be redirected to the login page. Click OK to continue.");
-          if (confirmLogout) {
-            window.location.href = '/';
-          }
+
+
+          Swal.fire({
+       
+            text: "Password has been set. Redirecting to login",
+            icon: 'success',
+       
+            confirmButtonColor: '#3085d6',
+      
+            confirmButtonText: 'Confirm'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              window.location.href = '/';
+            }
+          })
         })
         .catch()
     }
@@ -70,16 +90,9 @@ function Firstchangepass() {
       Swal.fire("password minimum length is 6")
       return
     }
+
+
   
-    if (newpass !== confirmnewpass) {
-
-
-      Swal.fire({
-        icon: 'error',
-        text: 'Passwords must match'
-      })
-      return
-    }
   }
   
   
@@ -112,7 +125,13 @@ function Firstchangepass() {
 
         <h3>Enter New Password:</h3>
         <div className="passss" style={{ position: 'relative' }}>
-         <input type={showPassword ? 'text' : 'password'} placeholder='New Password' onChange={(e)=>{setnewpass(e.target.value)}}/>
+
+          {showPassword ?    <input type='text' placeholder='New Password' defaultValue={newpass} onChange={(e)=>{setnewpass(e.target.value)}}/>
+            :    <input type='password' placeholder='New Password'  defaultValue={newpass} onChange={(e)=>{setnewpass(e.target.value)}}/>
+
+}
+      
+         
          <span onClick={() => setShowPassword(!showPassword)} style={{ position: 'absolute', right: 5, top: 7 }}>
          {showPassword ? <FaEyeSlash /> : <FaEye />}
        </span>
@@ -121,7 +140,7 @@ function Firstchangepass() {
 
          <h3>Confirm New Password:</h3>
          <div className="passss" style={{ position: 'relative' }}>
-         <input type={showPassword ? 'text' : 'password'} placeholder='Confirm Password' onChange={(e)=>{setconfirmnewpass(e.target.value)}}/>
+         <input type={showPassword ? 'text' : 'password'} placeholder='Confirm Password' defaultValue={confirmnewpass} onChange={(e)=>{setconfirmnewpass(e.target.value)}}/>
          <span onClick={() => setShowPassword(!showPassword)} style={{ position: 'absolute', right: 5, top: 7 }}>
          {showPassword ? <FaEyeSlash /> : <FaEye />}
        </span>

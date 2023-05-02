@@ -50,9 +50,15 @@ function MyclassesDefault() {
     </div>
     }
 
-   
 
-    <h4 className='title'>All Classes</h4>
+
+    {(allclasses !== undefined && allclasses.length >0) ?
+        <h4 className='title'>All Classes</h4>
+        :
+        <h4 className='title'>No Classes</h4>
+    }
+
+    
 
    <div className='classcontainer'>
    <div className="row">

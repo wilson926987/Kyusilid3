@@ -234,7 +234,7 @@ function CreateAnnouncementprof() {
 
                            
 
-                            <input type="submit" className='secondary  lighttext commonbuttonleft' value={posttype === "postnow" ? "Post Now" : " Scheduled Post"} />
+                            <input type="submit" className='secondary  lighttext commonbuttonleft' value={posttype === "postnow" ? "Create New" : " Scheduled Post"} />
                            <div className='relative'>
                                 <div className="commonbuttonright secondary lighttext" onClick={()=>{setdropdown(!dropdown)}}>
                                     <AiFillCaretDown/>
@@ -244,7 +244,7 @@ function CreateAnnouncementprof() {
                                {dropdown && 
                                 <div className='commonbuttondrop tertiary borderradius-md' >
                                 <ul>
-                                    <li className='padding12' onClick={()=>{setdropdown(false) ;setposttype('postnow')}}>Post Now</li>
+                                    <li className='padding12' onClick={()=>{setdropdown(false) ;setposttype('postnow')}}>Create New</li>
                                     <li className='padding12' onClick={()=>{setdropdown(false); setposttype('scheduled')}}>Scheduled Post</li>
                                 </ul>
                             </div>}

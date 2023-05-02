@@ -14,10 +14,10 @@ function Classespage() {
   
 
   useEffect(()=>{
-    if(filteredList === undefined){
+    if(adminclasslist === undefined){
       navigate('/')
     }
-  },[filteredList])
+  },[adminclasslist])
 
 
 

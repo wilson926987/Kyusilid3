@@ -71,7 +71,7 @@ function ClassContainer() {
 
 
 
-  const url = userinfo.user.usertype ==='prof' ?  'https://api.kyusillid.online/api/get-announcement/' : 'https://api.kyusillid.online/api/get-announcementforstudent/'
+  const url = (userinfo.user.usertype ==='prof' || userinfo.user.usertype ==='admin') ?  'https://api.kyusillid.online/api/get-announcement/' : 'https://api.kyusillid.online/api/get-announcementforstudent/'
   
 
   useEffect(()=>{   
@@ -112,10 +112,6 @@ function ClassContainer() {
 
 
 
-
-
-
-
   async function filldata(){
  
         await axios.get(url + currentclass.classes_id)
@@ -147,24 +143,31 @@ function ClassContainer() {
 
         
 
-        if(userinfo.usertype==='prof'){
-          await axios.get('https://api.kyusillid.online/api/getstudentlist/' + userinfo.user.acc_id)
-          .then(response => {
-      
-            const temp = response.data.map( item=>({
-                'selected' :   item.classitem.classes_id == currentclass.classes_id , 
-                'classitem' : item.classitem ,
-              
-                'studentlist': item.studentlist.map(item2=>({
-                'selected' : true, 'studentitem' : item2
-                }))
-              })
-              );
-              setstudentselection(temp);
-          })
-          .catch(error => {
-            console.log(error);
-          });
+        if(userinfo.usertype==='prof' || userinfo.usertype ==='admin'){
+
+          console.log(userinfo)
+
+     
+          console.log(currentclass.classes_id)
+             await axios.get('https://api.kyusillid.online/api/getstudentlist/' + userinfo.user.acc_id + "/" + currentclass.classes_id)
+            .then(response => {
+        
+              const temp = response.data.map( item=>({
+                  'selected' :   true, 
+                  'classitem' : item.classitem ,
+                
+                  'studentlist': item.studentlist.map(item2=>({
+                  'selected' : true, 'studentitem' : item2
+                  }))
+                })
+                );
+                setstudentselection(temp);
+            })
+            .catch(error => {
+              console.log(error);
+            });
+          
+         
 
 
           await axios.get('https://api.kyusillid.online/api/get-topiclist/' + currentclass.moduleSource)
@@ -330,14 +333,14 @@ const markAttendance = () => {
                     {currentclass.isarchived ===0 &&
                       
               
-                          (  userinfo.usertype==='prof' && 
+                          (  (userinfo.usertype==='prof' || userinfo.usertype ==='admin') && 
                             !isactive('/classes/sampleclass/createnew') ?
                             <div className="secondary lighttext navcreatenew borderradius-lg dbpanelmargin" onClick={()=>{setsourcematerial(); navigate('createnew')}}>
                             <FaPlusCircle /><h4>Create New</h4>
                             
                           </div>
                           :
-                          userinfo.usertype==='prof' &&
+                          (userinfo.usertype==='prof' || userinfo.usertype ==='admin') &&
                           <div className="secondary lighttext navcreatenew borderradius-lg dbpanelmargin" onClick={()=>{navigate('/classes/sampleclass')}}>
                           <FaArrowCircleLeft /><h4>Cancel</h4>
                         </div>)
@@ -379,7 +382,7 @@ const markAttendance = () => {
                        </div>
                      }
 
-                      {userinfo.usertype==='prof' &&
+                      {(userinfo.usertype==='prof' || userinfo.usertype ==='admin') &&
                         <>
                         <li className={`classnavitem ${isactive('/classes/sampleclass/sourcematerials') && 'classnav-active'}`} onClick={()=>{navigate('sourcematerials')}}>  Source Materials</li>
                      <li><hr /></li>
@@ -390,7 +393,7 @@ const markAttendance = () => {
 
                      <li className={`classnavitem ${isactive('/classes/sampleclass/info') && 'classnav-active'}`} onClick={()=>{navigate('info')}}>  Class info </li>
                      <li><hr /></li>
-                     {userinfo.usertype=== 'prof' &&
+                     {(userinfo.usertype==='prof' || userinfo.usertype ==='admin') &&
                         <>
                           <li className={`classnavitem ${isactive('/classes/sampleclass/marks') && 'classnav-active'}`} onClick={()=>{navigate('marks')}}> Marks </li>
                           <hr/>
@@ -398,7 +401,7 @@ const markAttendance = () => {
                      }
                      <li className={`classnavitem ${isactive('/classes/sampleclass/messages') && 'classnav-active'}`} onClick={()=>{navigate('messages')}}> Messages </li>
                  
-                     {userinfo.usertype ==='prof' &&
+                     {(userinfo.usertype==='prof' || userinfo.usertype ==='admin') &&
                       <>
                        <hr/>
                        <li className={`classnavitem ${isactive('/classes/sampleclass/settings') && 'classnav-active'}`} onClick={()=>{navigate('settings')}}> Settings </li>

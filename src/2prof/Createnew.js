@@ -35,7 +35,8 @@ function Createnew() {
   useEffect(()=>{
     console.log(sourcematerial)
 
-    if(userinfo.usertype!== 'prof'){
+    if(userinfo.usertype === 'stud' ){
+      
       navigate('/');
     }
 
@@ -104,6 +105,21 @@ function Createnew() {
   const [formduration, setformduration] = useState();
   const [selectedFile, setSelectedFile] = useState(null);
   const [QuizId, setQuizId] = useState(null);
+
+  const [points, setpoints] = useState(100)
+  const [gradetype, setgradetype] = useState('percent')
+
+  const gradetypeoptions = [
+
+    {
+      'value' : "percent", "label": "Percentage"
+     
+    }
+    ,
+    {
+      "value" : "points" , "label": "Points"
+    }
+  ]
  
   const [filelist, setfilelist] = useState([]);
 
@@ -250,7 +266,8 @@ async function createActivity(){
     'schedule' : postdate,
     'postschedtype' : postscheduletype,
     'scheduleoffset' : schedoffset, 
-    'points' : 100,
+    'points' : points,
+    'gradetype' : gradetype,
     'file_list': filelist
   }
   console.log(JSON.stringify(newtopicitem))
@@ -525,6 +542,34 @@ const handlecreateactivity=()=>{
                                 <input type="checkbox" name='' id='allowlate'  defaultChecked={allowlate} onChange={(e)=> {setallowlate(e.target.checked)}}/> <label htmlFor="allowlate"><b>ALLOW LATE SUBMISSION</b></label> <br />
                   
                                <br />
+
+                               
+                               <p className="smallfont">GRADE</p>
+
+                               <div className="flex">
+                               <Dropdown
+                                options={gradetypeoptions}
+                                onChangeHandler= {setgradetype}
+                                mainClass= 'dropdownmain primary borderradius-md col-lg-6'
+                                itemClass= 'dropdownitem'                           
+                                controlClass='dropdowncontrol'
+                                menuClass='dropdownmenu primary'
+                                controlActiveClass='dropdowncontrolactive'
+                                mainActiveClass='dropdownmain-active'
+                        
+                                placeholderValue='Percentage'/> 
+
+                               {gradetype=== "points" &&  <input type="number"  min={1} defaultValue={points}  onChange={e=>setpoints(e.target.value)} max={100} className='commontextbox primaryborder col-lg-3'/>} 
+
+                               </div>
+                            
+
+                           
+                              
+
+                        
+
+                               
             
  
                                 <br />
@@ -543,8 +588,8 @@ const handlecreateactivity=()=>{
                                 menuClass='dropdownmenu primary'
                                 controlActiveClass='dropdowncontrolactive'
                                 mainActiveClass='dropdownmain-active'
-                                defaultValue={Dueoptions[0]} 
-                                placeholderValue='select due option'/> 
+                        
+                                placeholderValue='no due date'/> 
                                 
                                       
                               </> 
