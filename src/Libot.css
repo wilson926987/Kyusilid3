@@ -94,7 +94,7 @@
 	}
 	
 
-.Logincontainer input[type="text"], input[type="password"]{
+.Logincontainer input[type="text"], .Logincontainer input[type="password"]{
 	border:none;
 	border-bottom: 1px solid  #fff;
 	background: transparent;

@@ -66,7 +66,7 @@ function ClassSettings() {
 
   return (
     <div>
-        <h4>class banner</h4>
+        <h4>Class Banner</h4>
         <div className="row">
             <div className="col-lg-3 themeimageminwidth">
                 <div className={`themeimage ${isequal(1) && "primaryborder"}`} onClick={()=>{setclassbanner(1) }}>
@@ -113,7 +113,7 @@ function ClassSettings() {
         </div>
 
 
-        <h4 className='margintop12'> Discussion link</h4>
+        <h4 className='margintop12'> Discussion Link</h4>
  
         <div className="row">
             <div className="col-lg-10">

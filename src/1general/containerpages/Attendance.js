@@ -73,7 +73,7 @@ function Attendance({ classId }) {
 
       <div style={{ maxHeight: '500px', overflowY: 'hidden', maxWidth: '100%' }}>
       {filteredAttendances.length === 0 ? (
-  <p>No attendance records found.</p>
+  <p style={{fontSize:'30px'}}><br></br><center>No attendance records found.</center></p>
           ) : (
         <table className='table width100'>
           <thead className='primary'>

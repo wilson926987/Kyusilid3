@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import logoiconimage from '../../assets/images/Kyusilid.png'
 import logoiconimage1 from '../../assets/images/avatarlogo.webp'
 import Swal from 'sweetalert2';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 function Firstchangepass() {
   const [ newpass , setnewpass] = useState();
@@ -13,6 +14,7 @@ function Firstchangepass() {
   const {userinfo , setuserinfo } = useContext(userInfoContext);
   const navigate = useNavigate();
   const [countdown, setCountdown] = useState(0);
+  const [showPassword, setShowPassword] = useState(false);
 
   function checkPasswordStrength(password) {
     const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
@@ -109,10 +111,21 @@ function Firstchangepass() {
        <form action="" onSubmit={handlechangepass} >
 
         <h3>Enter New Password:</h3>
-         <input type='password' placeholder='New Password' onChange={(e)=>{setnewpass(e.target.value)}}/>
-         <br></br>    
+        <div className="passss" style={{ position: 'relative' }}>
+         <input type={showPassword ? 'text' : 'password'} placeholder='New Password' onChange={(e)=>{setnewpass(e.target.value)}}/>
+         <span onClick={() => setShowPassword(!showPassword)} style={{ position: 'absolute', right: 5, top: 7 }}>
+         {showPassword ? <FaEyeSlash /> : <FaEye />}
+       </span>
+         </div>
+
+
          <h3>Confirm New Password:</h3>
-         <input type='password' placeholder='Confirm Password' onChange={(e)=>{setconfirmnewpass(e.target.value)}}/>
+         <div className="passss" style={{ position: 'relative' }}>
+         <input type={showPassword ? 'text' : 'password'} placeholder='Confirm Password' onChange={(e)=>{setconfirmnewpass(e.target.value)}}/>
+         <span onClick={() => setShowPassword(!showPassword)} style={{ position: 'absolute', right: 5, top: 7 }}>
+         {showPassword ? <FaEyeSlash /> : <FaEye />}
+       </span>
+       </div>
          <br></br>
          <button className="secondary width100 lighttext"> Save</button>
 </form> 

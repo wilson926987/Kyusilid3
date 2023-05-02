@@ -61,7 +61,7 @@ function ClassModules() {
                         <Dropdown
                                 options={tempactivityfilter}
                                 onChangeHandler= {setactivitytypefilter}
-                                placeholderValue='select filter'
+                                placeholderValue='Select Filter'
                                 mainClass= 'dropdownmain primary borderradius-md'
                                 itemClass= 'dropdownitem'
                                 controlClass='dropdowncontrol'

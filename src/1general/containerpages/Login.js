@@ -5,13 +5,15 @@ import logoiconimage from '../../assets/images/Kyusilid.png'
 import logoiconimage1 from '../../assets/images/avatarlogo.webp'
 import { useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
+
 
 
 function Login() {
   const {setuserinfo} = useContext(userInfoContext);
   const [username, setusername] = useState();
   const [password, setpassword] = useState();
-
+const [showPassword, setShowPassword] = useState(false);
   //Message for validation
   const [usernamemessage, setusermessage] = useState()
   const [passmessage, setpassmessage] = useState()
@@ -117,13 +119,19 @@ function Login() {
 
       <label> Username:<div className='errortext'>{usernamemessage}</div></label>
             <input type="text" placeholder='Username...' required defaultValue ={username} onChange={handleUsernameChange}/>
-            
 
-        <label> Password:<div className='errortext'>{passmessage}</div> </label>
 
-            <input type="password" placeholder='Password...' required defaultValue ={password} onChange={handlePasswordChange}/>
+        <label> Password:<div className='errortext'>{passmessage}
+        
+        </div> </label>
 
-            
+        <div className="passss" style={{ position: 'relative' }}>
+        <input type={showPassword ? 'text' : 'password'} placeholder='Password...' required defaultValue={password} onChange={handlePasswordChange} />
+        <span onClick={() => setShowPassword(!showPassword)} style={{ position: 'absolute', right: 5, top: 7 }}>
+          {showPassword ? <FaEyeSlash /> : <FaEye />}
+        </span>
+      </div>
+      
           
 
         <button type="submit" className='secondary' >Log In

@@ -8,6 +8,7 @@ import StudProfile from '../components/statprofstud'
 import { userInfoContext } from '../../Globalcontext'
 import axios from 'axios'
 import Swal from 'sweetalert2'
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 function Profiilepage() {
 
@@ -17,6 +18,7 @@ function Profiilepage() {
   const [cpassword, setcpassword] = useState();
   const [file, setFile] = useState(null);
   const [profilePic, setProfilePic] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
 
   useEffect(()=>{
@@ -162,7 +164,6 @@ const handleProfile = (event) => {
           <div className='accountinfo'>
             <h4>Account info</h4>
             <p>email: {userinfo.user.acc_email=== null ? " no email yet" : userinfo.user.acc_email}</p>
-            <p>username : {userinfo.user.acc_username}</p>
             <button className='commonbutton secondary lighttext' onClick={togglesetting}>change password</button>
           </div>
     
@@ -181,7 +182,16 @@ const handleProfile = (event) => {
        <form action="" onSubmit={handleSubmit}>
          <h4>Change password</h4>
          <div className='col-lg-12 flex'>
-         <input type="password" className='commontextbox background col-lg-7' placeholder='Enter password' onChange={e=>{setpassword(e.target.value)}}/>
+       
+
+    
+        <input type= {showPassword ? 'text' : 'password'} className='commontextbox background primaryborder col-lg-7' placeholder='Enter password' onChange={e=>{setpassword(e.target.value)}} />
+      
+  
+        
+         <span onClick={() => setShowPassword(!showPassword)}>
+      {showPassword ? <FaEyeSlash /> : <FaEye />}
+    </span>
          </div>
          
          <div className='col-lg-12 flex'>   <input type="password" className='commontextbox background col-lg-7' placeholder='Confirm new password' onChange={e=>{setcpassword(e.target.value)}}/>
