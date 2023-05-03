@@ -645,7 +645,7 @@ function handleClick() {
         </div>
           <div className='activitycontent'>
     
-            {currentactivity.activity_type ==='Material' ?
+            {currentactivity.activity_type ==='Material' || currentactivity.activity_type ==='Activity' || currentactivity.activity_type ==='Assignment' ?
               <div className="flex">
                {filelist !== undefined && filelist.map((item, key)=>(
                   <a 
@@ -665,7 +665,7 @@ function handleClick() {
                         modal.style.position = 'fixed';
                         modal.style.top = '50%';
                         modal.style.left = '50%';
-                        modal.style.width = 'auto';
+                        modal.style.width = '70%';
                         modal.style.height = 'auto';
                         modal.style.background = '#fff';
                         modal.style.zIndex = '999';
@@ -693,13 +693,15 @@ function handleClick() {
                         
                         var closeButton = document.createElement('span');
                         closeButton.style.fontSize = '40px';
+                        closeButton.style.left = '50%'
+                        closeButton.style.top = '50%'
                         closeButton.style.fontWeight = 'bold';
                         closeButton.innerHTML = '&times;';
 
                         var closeButtonContainer = document.createElement('div');
                         closeButtonContainer.style.display = 'flex';
                         closeButtonContainer.style.alignItems = 'center';
-                        closeButtonContainer.style.paddingRight = '20px';
+                        //closeButtonContainer.style.paddingRight = '20px';
                         closeButtonContainer.style.backgroundColor = 'red';
                         closeButtonContainer.appendChild(closeButton);
                         closeButtonContainer.style.marginLeft = 'auto';
@@ -723,8 +725,8 @@ function handleClick() {
                           modalContent.appendChild(video);
                         } else {
                           var img = document.createElement('img');
-                          img.style.maxWidth = '100%';
-                          img.style.maxHeight = '100%';
+                          img.style.maxWidth = '50%';
+                          img.style.maxHeight = '50%';
                           img.src = 'https://api.kyusillid.online/laravel' + item.stringpath;
                           modalContent.appendChild(img);
                         }

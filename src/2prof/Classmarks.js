@@ -11,7 +11,7 @@ function Classmarks() {
 
   const handleMidtermClick = () => {
     setGradeType("midterm");
-  };
+  }; 
 
   const handleFinalClick = () => {
     setGradeType("final");
