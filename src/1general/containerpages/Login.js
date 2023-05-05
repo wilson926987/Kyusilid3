@@ -6,6 +6,7 @@ import logoiconimage1 from '../../assets/images/avatarlogo.webp'
 import { useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import jwtDecode from 'jwt-decode'
 
 
 
@@ -17,6 +18,67 @@ const [showPassword, setShowPassword] = useState(false);
   //Message for validation
   const [usernamemessage, setusermessage] = useState()
   const [passmessage, setpassmessage] = useState()
+
+  const google = window.google
+  function handleCallbackResponse(response){
+      console.log(response.credential)
+      var temp = jwtDecode(response.credential)
+      setgoogleuser(temp)
+  }
+
+
+  const [googleuser, setgoogleuser] = useState()
+  useEffect(()=>{
+
+    google.accounts.id.initialize(
+      {  
+        client_id : '205053370954-j0qe2j6srhkcvg803lbcr3irsusq7dgc.apps.googleusercontent.com'
+        ,callback : handleCallbackResponse
+      }
+      )
+  
+  
+      google.accounts.id.renderButton(
+        document.getElementById('signInDiv'),
+        {theme: "outline" , size :" large"}
+      )
+  
+  },[])
+
+
+  useEffect(()=>{
+      if(googleuser!== undefined){
+  
+        const temp11 = {
+          "email" : googleuser.email
+        }
+
+        console.log(JSON.stringify(temp11))
+        axios.post('https://api.kyusillid.online/api/logingoogle' ,{email : temp11}).then(
+
+        response =>{
+          console.log(response.data)
+          if (response.data.status === 'success') {
+            console.log('Authentication Successful!');
+            localStorage.setItem('isAuthenticated', 'true');
+            localStorage.setItem('user', JSON.stringify(response.data));
+            localStorage.setItem('history', '/home');
+            setuserinfo(response.data);
+            console.log(response.data);
+            navigate('/home');
+          } else {
+      
+          Swal.fire({
+            icon : 'error',
+            text: "Username and password didn't match",
+          })
+            console.log('Authentication Failed!');
+          }
+        }
+        ).catch(error =>console.log(error.data))
+      }
+
+  },[googleuser])
 
   
 
@@ -49,9 +111,6 @@ const [showPassword, setShowPassword] = useState(false);
     e.preventDefault();
 
     //validation
-  
- 
-
    if(username!==undefined && password!==undefined){
     try {
 
@@ -139,6 +198,10 @@ const [showPassword, setShowPassword] = useState(false);
       </form>
         <button className='forgot secondary' onClick={()=>{navigate('/Forgotpass')}}> Forgot Password?
         </button>
+
+        <div className=' flex signIngoogle'>
+          <div id='signInDiv' ></div>
+        </div>
 
       
     </div> 
