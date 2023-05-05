@@ -1,12 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
-import { userInfoContext , departmentsContext , currentdeptContext} from '../Globalcontext'
+import { userInfoContext , departmentsContext , currentdeptContext , updatelistContext} from '../Globalcontext'
 import Adminsidebar from './Adminsidebar'
 import Profilenotif from '../1general/components/Profilenotif'
 import axios from 'axios'
 
 function AdminContainer() {
   const {userinfo} = useContext(userInfoContext)
+  const [updatelist, setupdatelist] = useState();
   
   const navigate = useNavigate()
 
@@ -39,8 +40,8 @@ function AdminContainer() {
 
 
   return (
-
-    <currentdeptContext.Provider value={{currentdept, setcurrentdept}}>
+    <updatelistContext.Provider value={{updatelist, setupdatelist}}>
+       <currentdeptContext.Provider value={{currentdept, setcurrentdept}}>
       <departmentsContext.Provider value={{departments, setdepartments}}>
         <div className='maincontainer'>
         <Adminsidebar/>
@@ -51,6 +52,10 @@ function AdminContainer() {
         </div>
     </departmentsContext.Provider>
     </currentdeptContext.Provider>
+
+
+    </updatelistContext.Provider>
+   
     
   )
 }

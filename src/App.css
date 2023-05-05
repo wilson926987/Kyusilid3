@@ -57,7 +57,7 @@ body::-webkit-scrollbar{
 
 
 :root{
-  --defaultprimary : #91b4ff;
+  --defaultprimary : #bdd2ff;
   --defaultsecondary: #064273;
   --defaulttertiary: rgb(255, 255, 255);
   --defaultbackground: rgb(243, 242, 242);
@@ -2354,7 +2354,7 @@ padding: 12px;
 }
 
 .adminmodal {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -2376,6 +2376,7 @@ padding: 12px;
   
   animation:  fadein .6s;
   position: absolute;
+  top: 200px;
   z-index: 13;
 
 }

@@ -4,11 +4,13 @@ import { useNavigate } from 'react-router-dom';
 import { userInfoContext } from '../Globalcontext';
 import { BeatLoader } from 'react-spinners';
 import{AiFillWarning} from 'react-icons/ai'
+import { updatelistContext } from '../Globalcontext';
 
-function ImportStudent({setupdatelist, setcreatestudmodal}) {
+function ImportStudent({ setcreatestudmodal}) {
   const [file, setFile] = useState(null);
   const [loader, setloader] = useState(false);
   const[message , setmessage] = useState(true)
+  const {setupdatelist} = useContext(updatelistContext)
 
   const {userinfo} = useContext(userInfoContext)
   const navigate =useNavigate();
@@ -36,9 +38,7 @@ function ImportStudent({setupdatelist, setcreatestudmodal}) {
           setcreatestudmodal(false);
           axios.put('https://api.kyusillid.online/api/adminlog', temp2).catch(error => console.log(error.data))
 
-
-
-          navigate('updateliststud')
+          navigate('/kyusilidAdmin/updateliststud')
         
       })
       .catch(error => {

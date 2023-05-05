@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useState, useEffect, useContext } from 'react'
 import { Outlet , useNavigate , useLocation, useOutletContext} from 'react-router-dom'
-import {updatelistContext, subjectmoduleContext, adminSampleClassContext, adminYearfilterContext, accountlistContext, adminclasslistContext, subjectlistContext, currentdeptContext , userInfoContext , departmentsContext , deptInfoContext , subjectfilterContext} from '../Globalcontext'
+import { subjectmoduleContext, adminSampleClassContext, adminYearfilterContext, accountlistContext, adminclasslistContext, subjectlistContext, currentdeptContext , userInfoContext , departmentsContext , deptInfoContext , subjectfilterContext} from '../Globalcontext'
 import {BiEdit} from 'react-icons/bi'
 import {FaUpload} from 'react-icons/fa'
 import ImportClass from './ImportClass'
@@ -33,7 +33,7 @@ function Department() {
     const [yearlistfilter, setyearlistfilter] = useState();
     const [sampleclassid, setsampleclassid] = useState();
     const [topicid, settopicsid] = useState();
-    const [updatelist, setupdatelist] = useState();
+
     const {userinfo} = useContext(userInfoContext)
 
 
@@ -145,7 +145,7 @@ function Department() {
          
               </ul>
             </div>
-  {userinfo.admintype === 3 &&
+  {/* {userinfo.admintype === 3 &&
     
     <div className="tertiary flex  margintop12 borderradius-md padding12 adminupdatepanel">
     <button className='commonbutton secondary lighttext width100'  onClick={()=>{setcreateclassmodal(true)}}>Update Class list</button>
@@ -153,7 +153,7 @@ function Department() {
     <button className='commonbutton secondary lighttext width100'  onClick={()=>{setcreateproffmodal(true)}}>Update Professor list</button>
   </div>
   
-  }
+  } */}
         </div>
         <div className="col-lg-9 margintop12">
   
@@ -165,9 +165,9 @@ function Department() {
                 <adminYearfilterContext.Provider value={{yearlistfilter}}>
                   <adminSampleClassContext.Provider value={{sampleclassid , setsampleclassid}}>
                     <subjectmoduleContext.Provider  value={{topicid, settopicsid}}>
-                      <updatelistContext.Provider value={{updatelist, setupdatelist}}>
+                   
                       <Outlet />
-                      </updatelistContext.Provider>
+                 
                  
                     </subjectmoduleContext.Provider>       
                   </adminSampleClassContext.Provider>
@@ -186,93 +186,6 @@ function Department() {
     
 
 
-{creatclassmodal &&
-      <div className='adminmodal' > 
-      <div className='modalbackground-lgt' onClick={()=>{setcreateclassmodal(false) ; setupclass(false)}}>
-
-      </div>
-      <div className='tertiary borderradius-md padding12 modal-body flex'>
-      {!upclass ? 
-          <>     
-          <div className='sideoption borderradius-md'onClick={()=>{navigate('createclass') ; setcreateclassmodal(false) }} > <BiEdit/><h2>ADD CLASS MANUALLY</h2>
-        
-          </div>
-          <div className='sideoption borderradius-md' onClick={()=>{setupclass(true)}}> <FaUpload/><h2>UPLOAD FILE</h2>
-          <div>
-          <h3>Uploading a class file will:</h3>
-            <ul>
-              <li>Add new Classes</li>
-              <li>Add new Source Modules</li>
-              <li>Update Existing Classes</li>
-            </ul>
-          </div>
-          </div>
-          </> 
-          :
-          <div><ImportClass setupdatelist = {setupdatelist} setcreateclassmodal= {setcreateclassmodal}/></div>
-          
-        }
-      </div>
-          
-</div>
-     }
-     
-     {createstudmodal &&
-      <div className='adminmodal' > 
-      <div className='modalbackground-lgt' onClick={()=>{setcreatestudmodal(false) ; setupstud(false)}}>
-
-      </div>
-      <div className='tertiary borderradius-md padding12 modal-body flex'>
-        {!upstud ? 
-          <>
-          {/* <div className='sideoption borderradius-md'onClick={()=>{navigate('createstud') ; setcreatestudmodal(false) }} > <BiEdit/><h2>ADD CLASS MANUALLY</h2></div> */}
-          <div className='sideoption borderradius-md' onClick={ ()=>{setupstud(true)}}> <FaUpload/><h2>Upload file</h2>
-          <div>
-          <h3>Uploading a student list file will:</h3>
-            <ul>
-              <li>Add new Student Accounts</li>
-              <li>Update existing students</li>
-             
-            </ul>
-          </div>
-        
-          </div>
-          </>
-          :
-          <div><ImportStudent setupdatelist={setupdatelist} setcreatestudmodal={setcreatestudmodal}/></div>
-          }
-      </div>
-          
-</div>
-     }
-
-     
-     {createproffmodal &&
-      <div className='adminmodal' > 
-      <div className='modalbackground-lgt' onClick={()=>{setcreateproffmodal(false) ; setupproff(false)}}>
-
-      </div>
-      <div className='tertiary borderradius-md padding12 modal-body flex'>
-{!upproff ?  
-        <> 
-        <div className='sideoption borderradius-md' onClick={()=>{setupproff(true) }}> <FaUpload/><h2>Upload file</h2>
-        <div>
-          <h3>Uploading a professor list file will:</h3>
-            <ul>
-              <li>Add new Professor Accounts</li>
-              <li>Update existing professors</li>
-             
-            </ul>
-          </div>
-        </div></>
-        :
-        <div><ImportProfessor  setupdatelist={setupdatelist} setcreateproffmodal={setcreateproffmodal}/></div>
-}
-      </div>
-          
-</div>
-     }
-      
       
     
 

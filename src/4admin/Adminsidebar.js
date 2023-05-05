@@ -6,6 +6,13 @@ import { themeContext , departmentsContext, currentdeptContext, userInfoContext 
 
 import {BiChevronsLeft ,BiChevronsRight} from 'react-icons/bi'
 import { useNavigate } from 'react-router-dom'
+import {BiEdit} from 'react-icons/bi'
+import {FaUpload} from 'react-icons/fa'
+import ImportClass from './ImportClass'
+import ImportClass2 from './ImportClass2'
+import ImportStudent from './ImportStudent'
+import ImportProfessor from './ImportProfessor'
+
 
 
 function Adminsidebar() {
@@ -14,7 +21,15 @@ function Adminsidebar() {
     const {setcurrentdept} = useContext(currentdeptContext);
     const [sidebar, setsidebar] = useState(true);
     const {userinfo} = useContext(userInfoContext);
+    const [upclass, setupclass] = useState('false');
 
+    const [createclassmodal , setcreateclassmodal] = useState(false) 
+    const [createstudmodal, setcreatestudmodal] = useState(false)
+
+    const [updatelist, setupdatelist] = useState();
+    const [upstud, setupstud] = useState(false)
+    const [createproffmodal , setcreateproffmodal] = useState(false)
+    const [upproff, setupproff] = useState(false)
 
 
 
@@ -66,10 +81,30 @@ function Adminsidebar() {
        
     
     }
-     <li className='sidebarmenu margintop12' onClick={()=>{navigate('adminlog'); localStorage.setItem('history', '/kyusilidAdmin/adminlog')}}> <div className="highlight"></div> Admin log</li>
-     
+    
 
-    </ul>              
+    </ul>  
+   {userinfo.admintype ===3 &&
+   <>
+    <hr className='margintop12'/>
+    <h6 className='smallfont' >Update classlist and accounts</h6>
+
+    <ul className='margintop12'>
+    <li className='sidebarmenu' onClick={()=>{setcreateclassmodal(true)}}> <div className="highlight"></div> Update Class list</li>
+    <li className='sidebarmenu' onClick={()=>{setcreatestudmodal(true)}}> <div className="highlight"></div> Update Student list</li>
+    <li className='sidebarmenu' onClick={()=>{setcreateproffmodal(true)}}> <div className="highlight"></div> Update Prof list</li>
+    </ul> </>
+   
+   
+   }
+
+
+
+    <hr className='margintop12'/>
+
+    <ul className='margintop12'>
+    <li className='sidebarmenu' onClick={()=>{navigate('adminlog'); localStorage.setItem('history', '/kyusilidAdmin/adminlog')}}> <div className="highlight"></div> Admin log</li>
+     </ul>            
 </div>}
 <div className='sidebarfooter'>
 <BiChevronsLeft className='sidebarfootertoggle' onClick={togglesidebar}/>
@@ -83,6 +118,112 @@ function Adminsidebar() {
     </div>
     </div>
 </div>
+
+
+
+{createclassmodal &&
+      <div className='adminmodal' > 
+      <div className='modalbackground-lgt' onClick={()=>{setcreateclassmodal(false) ; setupclass("false")}}>
+
+      </div>
+      <div className='tertiary borderradius-md padding12 modal-body flex'>
+      {upclass==="false"? 
+          <>     
+          <div className='sideoption borderradius-md'onClick={()=>{setupclass('safe')}} > <BiEdit/><h2>UPLOAD FILE</h2>
+            <div>
+         
+                <ul>
+                <li>Add new Classes</li>
+                <li>Add new Source Modules</li>
+                <li>Update Existing Classes</li>
+                </ul>
+            </div>
+          </div>
+          <div className='sideoption borderradius-md' onClick={()=>{setupclass('reset')}}> <FaUpload/><h2>RESET AND UPLOAD FILE</h2>
+          <div>
+          
+            <ul>
+                <li>Reset the Class list</li>
+              <li>Add new Classes</li>
+              <li>Add new Source Modules</li>
+              <li>Update Existing Classes</li>
+            </ul>
+          </div>
+          </div>
+          </> 
+          :
+            upclass==="reset" ?    
+          <div><ImportClass setcreateclassmodal= {setcreateclassmodal}/></div>
+          :
+          <div><ImportClass2 setcreateclassmodal= {setcreateclassmodal}/></div>
+          
+        }
+      </div>
+          
+</div>
+     }
+
+
+{createstudmodal &&
+      <div className='adminmodal' > 
+      <div className='modalbackground-lgt' onClick={()=>{setcreatestudmodal(false) ; setupstud(false)}}>
+
+      </div>
+      <div className='tertiary borderradius-md padding12 modal-body flex'>
+        {!upstud ? 
+          <>
+          {/* <div className='sideoption borderradius-md'onClick={()=>{navigate('createstud') ; setcreatestudmodal(false) }} > <BiEdit/><h2>ADD CLASS MANUALLY</h2></div> */}
+          <div className='sideoption borderradius-md' onClick={ ()=>{setupstud(true)}}> <FaUpload/><h2>Upload file</h2>
+          <div>
+          <h3>Uploading a student list file will:</h3>
+            <ul>
+              <li>Add new Student Accounts</li>
+              <li>Update existing students</li>
+             
+            </ul>
+          </div>
+        
+          </div>
+          </>
+          :
+          <div><ImportStudent setcreatestudmodal={setcreatestudmodal}/></div>
+          }
+      </div>
+          
+</div>
+     }
+
+{createproffmodal &&
+      <div className='adminmodal' > 
+      <div className='modalbackground-lgt' onClick={()=>{setcreateproffmodal(false) ; setupproff(false)}}>
+
+      </div>
+      <div className='tertiary borderradius-md padding12 modal-body flex'>
+{!upproff ?  
+        <> 
+        <div className='sideoption borderradius-md' onClick={()=>{setupproff(true) }}> <FaUpload/><h2>Upload file</h2>
+        <div>
+          <h3>Uploading a professor list file will:</h3>
+            <ul>
+              <li>Add new Professor Accounts</li>
+              <li>Update existing professors</li>
+             
+            </ul>
+          </div>
+        </div></>
+        :
+        <div><ImportProfessor setcreateproffmodal={setcreateproffmodal}/></div>
+}
+      </div>
+          
+</div>
+     }
+
+
+
+
+
+
         </div>
 
 

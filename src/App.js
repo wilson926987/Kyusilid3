@@ -138,12 +138,15 @@ function App() {
                   <Route  path='createclass' element={<CreateClass/>}/>
                   <Route  path='createproff' element={<Createproff/>}/>
                   <Route  path='createstud' element={<Createstud/>}/>
-                  <Route path = 'updatelist' element={<Updatelist/>} />
-                  <Route path='updatelistproff' element={<Updatelistproff/>}></Route>
-                  <Route path='updateliststud' element={<Updatedliststud/>}></Route>
+                
+                 
               
                 </Route>
                 <Route path='adminhead' element={<SuperAdmin/>} />
+
+                <Route path = 'updatelist' element={<Updatelist/>} />
+                <Route path='updatelistproff' element={<Updatelistproff/>}></Route>
+                <Route path='updateliststud' element={<Updatedliststud/>}></Route>
               
                 <Route path='adminlog' element={<Adminlog/>}/>
 

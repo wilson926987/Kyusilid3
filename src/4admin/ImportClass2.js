@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { BeatLoader } from 'react-spinners';
 import{AiFillWarning} from 'react-icons/ai'
 
-function ImportClass({setcreateclassmodal}) {
+function ImportClass2({setcreateclassmodal}) {
   const [file, setFile] = useState(null);
   const {userinfo} = useContext(userInfoContext)
   const [loader, setloader] = useState(false);
@@ -28,7 +28,7 @@ function ImportClass({setcreateclassmodal}) {
     }
 
   
-    axios.post('https://api.kyusillid.online/api/import-class', formData)
+    axios.post('https://api.kyusillid.online/api/import-class2', formData)
       .then(response => {
       
         if (response.data.success) {
@@ -80,10 +80,10 @@ function ImportClass({setcreateclassmodal}) {
     
     }
 
-<div className='margintop12'>
-        <h5>Warning: this will reset the class list</h5>
 
-    </div>
+
+
+
 
   
       
@@ -91,4 +91,4 @@ function ImportClass({setcreateclassmodal}) {
   );
 }
 
-export default ImportClass;
+export default ImportClass2;

@@ -1,16 +1,17 @@
 import React, { useContext, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { userInfoContext } from '../Globalcontext';
+import { userInfoContext  , updatelistContext} from '../Globalcontext';
 import { BeatLoader } from 'react-spinners';
 import{AiFillWarning} from 'react-icons/ai'
 
-function ImportProfessor({setupdatelist, setcreateproffmodal}) {
+function ImportProfessor({ setcreateproffmodal}) {
   const [file, setFile] = useState(null);
   const navigate = useNavigate();
   const {userinfo} = useContext(userInfoContext)
   const [loader, setloader] = useState(false);
   const[message , setmessage] = useState(true)
+  const {setupdatelist} = useContext(updatelistContext)
 
   function handleFileChange(event) {
     setFile(event.target.files[0]);
@@ -36,7 +37,7 @@ function ImportProfessor({setupdatelist, setcreateproffmodal}) {
         axios.put('https://api.kyusillid.online/api/adminlog', temp).catch(error => console.log(error.data))
 
 
-        navigate('updatelistproff')
+        navigate('/kyusilidAdmin/updatelistproff')
       }
     })
     .catch(error => {
