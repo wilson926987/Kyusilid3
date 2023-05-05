@@ -1183,8 +1183,7 @@ justify-content: space-around;
 }
 
 .adminpostpanel{
-  height: 100px;
-  width: 100%;
+
   margin-bottom: 8px;
   position: relative;
   display: flex;
