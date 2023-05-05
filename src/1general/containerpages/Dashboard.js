@@ -32,7 +32,11 @@ function Dashboard() {
             
 
             </div>
-           <CalendarAnnouncements />
+
+       
+                       <CalendarAnnouncements />
+        
+         
         </div>
        
     </div>

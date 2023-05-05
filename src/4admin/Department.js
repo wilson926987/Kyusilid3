@@ -78,7 +78,7 @@ function Department() {
  }
 
 
- const adminheaders = ["", BSIT, GENED, "", "" , BSIE,"" , ""];
+ const adminheaders = ["", BSIT, GENED, "", "" , BSIE,"" , "" ,"" ,"","","",""];
 
 
 

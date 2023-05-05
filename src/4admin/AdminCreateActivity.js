@@ -156,7 +156,7 @@ function AdminCreateActivity() {
         
               </div>
 
-              {activitytype ==="Material" ?
+              {/* {activitytype ==="Material" ?
                  <div className='margintop12'>
                  <p className="smallfont">File link</p>
    
@@ -181,7 +181,7 @@ function AdminCreateActivity() {
 
                  </div>
                  
-                }
+                } */}
 
 
            

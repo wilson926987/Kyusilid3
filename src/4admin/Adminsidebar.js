@@ -60,9 +60,9 @@ function Adminsidebar() {
 
         {(userinfo.admintype === 1 || userinfo.admintype === 3) ? 
             departments.map((item)=>(
-             <li key={item.dep_id} className='sidebarmenu ellipsis ' onClick={()=>{console.log(item); setcurrentdept(item); navigate('department'); localStorage.setItem('history', '/kyusilidAdmin')}}> <div className="highlight"></div> {item.dep_name} </li>
+             <li key={item.dep_id} className='sidebarmenu ellipsis ' onClick={()=>{ setcurrentdept(item); navigate('department'); localStorage.setItem('history', '/kyusilidAdmin')}}> <div className="highlight"></div> {item.dep_name} </li>
         )):
-        <li className='sidebarmenu'> <div className="highlight" onClick={()=>{navigate('adminhead'); localStorage.setItem('history', '/kyusilidAdmin/adminhead')}}></div> <MdBrightness1 className='clear ellipsis'/> Admin Accounts </li>
+        <li className='sidebarmenu'> <div className="highlight" onClick={()=>{navigate('adminhead'); localStorage.setItem('history', '/kyusilidAdmin/adminhead')}}></div> Admin Accounts </li>
        
     
     }

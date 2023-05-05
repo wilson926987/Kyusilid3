@@ -10,7 +10,7 @@ function CalendarAnnouncements() {
   useEffect(()=>{
     axios.get('https://api.kyusillid.online/api/getadminannouncement/' + 1).then(response =>{
       setadminannouncements(response.data)
-      console.log(response.data)
+   
     }).catch();
   },[])
 

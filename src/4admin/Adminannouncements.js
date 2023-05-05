@@ -13,9 +13,13 @@ function Adminannouncements() {
  useEffect(()=>{
   filldata();
   
- },[])
+if(currentdept !== undefined){
+  console.log(currentdept)
+}
+ },[currentdept])
 
  async function filldata(){
+
   await axios.get('https://api.kyusillid.online/api/getadminannouncement/' + currentdept.dep_id).then(response =>{
     setadminannouncements(response.data)
     console.log(response.data)
@@ -28,8 +32,8 @@ function Adminannouncements() {
 
  const submitannouncement= async (e)=>{
   e.preventDefault();
-  const temp = { 'acc_id' : userinfo.user.acc_id , 'dep_id' : 1 , 'announcement_content' : announcement};
-console.log(JSON.stringify(temp))
+  const temp = { 'acc_id' : userinfo.user.acc_id , 'dep_id' : currentdept.dep_id , 'announcement_content' : announcement};
+
     await axios.put('https://api.kyusillid.online/api/createadminannouncement' ,temp).then().catch();
     filldata();
   
