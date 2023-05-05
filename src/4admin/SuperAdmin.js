@@ -215,9 +215,35 @@ function SuperAdmin() {
 
               <div className="row">
                
-                <div className='margintop12 col-lg-12'> 
-                 <label htmlFor="email"><h5>Email</h5></label>
+                <div className='margintop12 flex col-lg-12'> 
+
+
+
+
+                <div className="margintop12 col-lg-5">
+                <label htmlFor="email"><h5>Email</h5></label>
                  <input type="text" id='email' className='commontextbox primaryborder width100'  required defaultValue={email} onChange={e=>setemail(e.target.value)} placeholder='Enter Email'/>
+           
+                </div>
+                 <div className='margintop12 col-lg-6'> 
+                 <label htmlFor="department"><h5>Department</h5></label>
+                 <Dropdown
+                                options={deplist}
+                                onChangeHandler= {setdep_id}
+                                mainClass= 'dropdownmain primary borderradius-md'
+                                itemClass= 'dropdownitem'
+                                placeholderValue= 'Select Department'
+                                controlClass='dropdowncontrol'
+                                menuClass='dropdownmenu primary'
+                                controlActiveClass='dropdowncontrolactive'
+                                mainActiveClass='dropdownmain-active'
+                                
+                            />   
+
+              </div>
+           
+           
+           
               </div>
                <div className='margintop12 col-lg-12'> 
                  <label htmlFor="email"><h5>Password</h5></label>
@@ -253,22 +279,7 @@ function SuperAdmin() {
                  <input type="text" id='suffix' className='commontextbox primaryborder  width100' defaultValue={suffix} onChange={e=>setsuffix(e.target.value)}  placeholder='Suffix'/>
               </div>
 
-              <div className='margintop12 col-lg-6'> 
-                 <label htmlFor="department"><h5>Department</h5></label>
-                 <Dropdown
-                                options={deplist}
-                                onChangeHandler= {setdep_id}
-                                mainClass= 'dropdownmain primary borderradius-md'
-                                itemClass= 'dropdownitem'
-                                placeholderValue= 'Select Department'
-                                controlClass='dropdowncontrol'
-                                menuClass='dropdownmenu primary'
-                                controlActiveClass='dropdowncontrolactive'
-                                mainActiveClass='dropdownmain-active'
-                                
-                            />   
-
-              </div>
+          
 
 
 

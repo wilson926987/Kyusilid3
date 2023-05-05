@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { adminYearfilterContext,  adminclasslistContext , adminSampleClassContext, currentclassContext, forceviewContext } from '../Globalcontext'
+import { adminYearfilterContext,  adminclasslistContext , adminSampleClassContext, currentclassContext, forceviewContext, userInfoContext } from '../Globalcontext'
 import axios from 'axios'
 
 function Classespage() {
@@ -11,6 +11,7 @@ function Classespage() {
   const [searchValue, setSearchValue] = useState("");
   const {setcurrentclass} = useContext(currentclassContext)
   const {setforceview} = useContext(forceviewContext)
+  const {userinfo} = useContext(userInfoContext)
   
 
   useEffect(()=>{
@@ -96,7 +97,9 @@ function Classespage() {
               <td>{item.studentcount}</td>
              
               
+       {userinfo.admintype !== 3 &&
               <td> <button className="secondary lighttext commonbutton" onClick={() => {setclassview(item.classes_id) }}>Class Info</button></td>
+       }
             </tr>
           ))}
           

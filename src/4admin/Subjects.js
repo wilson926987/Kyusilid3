@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
-import { subjectlistContext , subjectfilterContext , subjectmoduleContext} from '../Globalcontext';
+import { subjectlistContext , subjectfilterContext , subjectmoduleContext, userInfoContext} from '../Globalcontext';
 
 function Subjects() {
 
@@ -9,6 +9,8 @@ function Subjects() {
   const [searchTerm, setSearchTerm] = useState('');
   const subjectfilter = useContext(subjectfilterContext);
   const {settopicsid}= useContext(subjectmoduleContext)
+
+  const {userinfo} = useContext(userInfoContext)
   
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
@@ -61,8 +63,12 @@ function Subjects() {
         <td>{item.sub_code}</td>
         <td>{item.sub_name}</td>
       
+        {userinfo.admintype !== 3 &&
+        
         <td> <button className='commonbutton lighttext secondary' onClick={()=>{settopicsid(item.sub_id); navigate('/kyusilidAdmin/department/adminsidemodules')}}> Class Modules</button></td>
-    <td></td>
+  
+        }
+  <td></td>
         
       </tr>
     ))}

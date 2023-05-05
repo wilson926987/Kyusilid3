@@ -24,6 +24,8 @@ function Profilenotif() {
     const {userinfo, setuserinfo}= useContext(userInfoContext);
     const [imageUrl, setImageUrl] = useState(null);
 
+    const [title, settitle] = useState(); 
+
     const [profilePic, setProfilePic] = useState('');
  
 
@@ -55,6 +57,22 @@ function Profilenotif() {
 
     useEffect(()=>{
         setprofilepanel(false)
+     
+        if(userinfo!== undefined){
+            console.log(userinfo)
+
+
+            if(userinfo.temp !== undefined){
+                settitle(userinfo.temp)
+            }else if(userinfo.adminttype === 99){
+                settitle("MIS")
+            }else if(userinfo.adminttype === 98){
+                settitle("Registrar")
+            }else{
+                
+            }
+        }
+     
     },[userinfo])
 
  
@@ -78,7 +96,7 @@ function Profilenotif() {
           try {
             const response = await axios.get(`https://api.kyusillid.online/api/getprofilepic/${userinfo.user.acc_id}`);
             setProfilePic(response.data.profile_pic);
-            console.log(response.data.profile_pic);
+          
           } catch (error) {
             console.error(error);
           }
@@ -108,7 +126,8 @@ function Profilenotif() {
 
         <div className='profilenotifcontent'>
              <h5>{userinfo.user.acc_username}</h5>
-             <h6>{userinfo.temp}</h6>
+             <h6>{title}</h6>
+  
         </div>
         
         <div className='profileicon' >

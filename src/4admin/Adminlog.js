@@ -55,7 +55,7 @@ function Adminlog() {
       </div>
 
       <div>
-        <h3>Admin Log</h3>
+        <h3>Activity Log</h3>
       </div>
 
       {showTextbox && (

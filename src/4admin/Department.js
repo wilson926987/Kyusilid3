@@ -8,6 +8,9 @@ import ImportClass from './ImportClass'
 import ImportProfessor from './ImportProfessor'
 import ImportStudent from './ImportStudent'
 import { ContentChild } from '@angular/core'
+import BSIT from '../assets/images/BSIT1.png'
+import GENED from '../assets/images/GENED.png'
+import BSIE from '../assets/images/BSIE1.png'
 
 
 function Department() {
@@ -31,9 +34,9 @@ function Department() {
     const [sampleclassid, setsampleclassid] = useState();
     const [topicid, settopicsid] = useState();
     const [updatelist, setupdatelist] = useState();
+    const {userinfo} = useContext(userInfoContext)
 
 
-    
 
 
     useEffect(()=>{
@@ -75,12 +78,15 @@ function Department() {
  }
 
 
+ const adminheaders = ["", BSIT, GENED, "", "" , BSIE,"" , ""];
+
+
 
   return (
 
     currentdept != undefined ?
       <div>
-      <div className='col-lg-12 primary borderradius-lg adminheader flex'>
+      <div className='col-lg-12 primary borderradius-lg adminheader flex' style={{backgroundImage: `url(${adminheaders[currentdept.dep_id]})`}}>
         <div className='lighttext'>
           <h2> {currentdept!== undefined && currentdept.dep_name}</h2>
           <h4 className='margintop12'>School Year : 2022 - 2023 , 1st sem</h4>
@@ -139,12 +145,15 @@ function Department() {
          
               </ul>
             </div>
+  {userinfo.admintype === 3 &&
+    
+    <div className="tertiary flex  margintop12 borderradius-md padding12 adminupdatepanel">
+    <button className='commonbutton secondary lighttext width100'  onClick={()=>{setcreateclassmodal(true)}}>Update Class list</button>
+    <button className='commonbutton secondary lighttext width100'  onClick={()=>{setcreatestudmodal(true)}}>Update Student list</button>
+    <button className='commonbutton secondary lighttext width100'  onClick={()=>{setcreateproffmodal(true)}}>Update Professor list</button>
+  </div>
   
-            <div className="tertiary flex  margintop12 borderradius-md padding12 adminupdatepanel">
-              <button className='commonbutton secondary lighttext width100'  onClick={()=>{setcreateclassmodal(true)}}>Update Class list</button>
-              <button className='commonbutton secondary lighttext width100'  onClick={()=>{setcreatestudmodal(true)}}>Update Student list</button>
-              <button className='commonbutton secondary lighttext width100'  onClick={()=>{setcreateproffmodal(true)}}>Update Professor list</button>
-            </div>
+  }
         </div>
         <div className="col-lg-9 margintop12">
   
@@ -174,7 +183,10 @@ function Department() {
       </div>
 
 
-     {creatclassmodal &&
+    
+
+
+{creatclassmodal &&
       <div className='adminmodal' > 
       <div className='modalbackground-lgt' onClick={()=>{setcreateclassmodal(false) ; setupclass(false)}}>
 
@@ -260,6 +272,12 @@ function Department() {
           
 </div>
      }
+      
+      
+    
+
+
+   
    
 
 

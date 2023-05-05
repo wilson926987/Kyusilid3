@@ -125,7 +125,7 @@ function Departmentoverview() {
     <div className="col-lg-12 margintop12">
         <div className="tertiary borderradius-md overviewlist" >
          <div className='searchDept'> 
-         <h4>Department Admin</h4>  
+         <h4>Department Head</h4>  
          
          <div className='search2'>
          <input

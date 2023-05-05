@@ -232,7 +232,7 @@ const handleProfile = (event) => {
 
 
 
-    {userinfo.user.usertype && 
+    {userinfo.user.usertype === "stud" && 
     <div className="col-md-12">
     <div className="row">
       

@@ -32,9 +32,6 @@ function AdminDashboard() {
   useEffect(()=>{
   
     if(currentdept!= undefined){
-      
-
-     
       navigate('/kyusilidAdmin/department')
     }
   },[currentdept])

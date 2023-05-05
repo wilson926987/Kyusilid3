@@ -1,7 +1,9 @@
 import React, { useContext,  useState } from 'react'
 import kyusilidlogo from '../assets/images/Kyusilid.jpg'
-import {MdSpaceDashboard , MdBrightness1} from 'react-icons/md'
+import {MdSpaceDashboard ,MdDashboard, MdBrightness1 ,MdOutlineDashboard} from 'react-icons/md'
+import { RiDashboardLine ,RiDashboardFill ,RiProfileLine} from 'react-icons/ri'
 import { themeContext , departmentsContext, currentdeptContext, userInfoContext } from '../Globalcontext'
+
 import {BiChevronsLeft ,BiChevronsRight} from 'react-icons/bi'
 import { useNavigate } from 'react-router-dom'
 
@@ -35,8 +37,11 @@ function Adminsidebar() {
 
         <div className="togglebuttonbody">
                <div className='sidebarclosed primary' onClick={togglesidebar}>
+                
             <div className='dimmer'>
                     <BiChevronsRight/>
+                    
+
 
             </div>
 
@@ -53,14 +58,16 @@ function Adminsidebar() {
 {sidebar && <div className='sidebarcontent'>
     <ul>
 
-        {userinfo.admintype === 1 ? 
+        {(userinfo.admintype === 1 || userinfo.admintype === 3) ? 
             departments.map((item)=>(
-             <li key={item.dep_id} className='sidebarmenu' onClick={()=>{console.log(item); setcurrentdept(item); navigate('department'); localStorage.setItem('history', '/kyusilidAdmin')}}> <div className="highlight"></div> <MdBrightness1 className='clear ellipsis'/> {item.dep_name} </li>
+             <li key={item.dep_id} className='sidebarmenu ellipsis ' onClick={()=>{console.log(item); setcurrentdept(item); navigate('department'); localStorage.setItem('history', '/kyusilidAdmin')}}> <div className="highlight"></div> {item.dep_name} </li>
         )):
         <li className='sidebarmenu'> <div className="highlight" onClick={()=>{navigate('adminhead'); localStorage.setItem('history', '/kyusilidAdmin/adminhead')}}></div> <MdBrightness1 className='clear ellipsis'/> Admin Accounts </li>
+       
     
     }
-     <li className='sidebarmenu' onClick={()=>{navigate('adminlog'); localStorage.setItem('history', '/kyusilidAdmin/adminlog')}}> <div className="highlight"></div> <MdSpaceDashboard /> Admin log</li>
+     <li className='sidebarmenu margintop12' onClick={()=>{navigate('adminlog'); localStorage.setItem('history', '/kyusilidAdmin/adminlog')}}> <div className="highlight"></div> Admin log</li>
+     
 
     </ul>              
 </div>}
@@ -68,6 +75,7 @@ function Adminsidebar() {
 <BiChevronsLeft className='sidebarfootertoggle' onClick={togglesidebar}/>
 
 </div>
+
 
 
 

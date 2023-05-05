@@ -71,7 +71,7 @@ function Sidebar() {
      <li className='sidebarmenu' onClick={()=>{navigate('/home'); localStorage.setItem('history', '/home')}}> <div className={`highlight ${isactive('/home') && ' sidebarhighlightactive'}`}></div> <MdSpaceDashboard /> Home </li>
      
      {myclasses !== undefined && myclasses.length > 0 &&
-       <li className="sidebarmenu"> <div></div> <FaBookReader />All Classes</li>
+       <li className="sidebarmenu"><FaBookReader />All Classes</li>
    }
    {myclasses !== undefined && myclasses.length > 0 &&
        myclasses.map((classitem, key) => (

@@ -32,15 +32,15 @@ function CalendarAnnouncements() {
     <div className='col-md-3'>
     <div className='eventscontainer tertiary borderradius-lg'>
        
-        <div className="calendarcontainer primary borderradius-lg">
-        <div className="box2">
-        <div className="cards">
-          <h2>{currentTime.toLocaleTimeString()}</h2>
-          <br></br>
+        <div className="calendarcontainer primary borderradius-lg flex">
+  
+   
+          <h2>{ currentTime.toLocaleTimeString("en-US", { hour: "numeric", minute: "numeric", hour12: true })}</h2>
+          
           <h3>{currentTime.toLocaleString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</h3>
         </div>
-      </div>
-          </div>
+ 
+   
     
         <div className='announcementscontainer'>
            <h4> Announcements</h4>

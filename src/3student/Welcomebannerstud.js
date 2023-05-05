@@ -39,7 +39,10 @@ const currday = new Date().getDay();
     
  
    
+    {userinfo.user.usertype ==='stud' && 
+    
     <button className='secondary' onClick={()=>{navigate('/profile')}}>View Progress</button>
+    }
     <div className='welcomebannerdesign'>
      
     </div>
