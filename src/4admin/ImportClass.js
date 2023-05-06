@@ -1,9 +1,10 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { updatelistContext, userInfoContext } from '../Globalcontext';
 import { useNavigate } from 'react-router-dom';
 import { BeatLoader } from 'react-spinners';
 import{AiFillWarning} from 'react-icons/ai'
+import ReCAPTCHA from 'react-google-recaptcha';
 
 function ImportClass({setcreateclassmodal}) {
   const [file, setFile] = useState(null);
@@ -11,11 +12,30 @@ function ImportClass({setcreateclassmodal}) {
   const [loader, setloader] = useState(false);
   const[message , setmessage] = useState(true)
   const {setupdatelist} = useContext(updatelistContext)
+  const [buttondisabled, setbuttondisabled] = useState(true)
+  const [recaptchashow, setrecaptchashow] =useState(false)
+
+  const handleChange =()=>{
+    setbuttondisabled(false)
+
+  }
 
 
   function handleFileChange(event) {
     setFile(event.target.files[0]);
+
   }
+
+
+  useEffect(()=>{
+   
+      if(file!== undefined && file!== null){
+    
+        setrecaptchashow(true)
+      }
+  },[file])
+
+
   const navigate = useNavigate();
 
   function handleImportClick() {
@@ -32,8 +52,7 @@ function ImportClass({setcreateclassmodal}) {
       .then(response => {
       
         if (response.data.success) {
-         
-          console.log(response.data)
+
           setupdatelist(response.data.updatelist);
           setcreateclassmodal(false);
           navigate('updatelist');
@@ -62,10 +81,22 @@ function ImportClass({setcreateclassmodal}) {
         <h1>IMPORT CLASS FILE</h1>
           <input className='Choose-File commonbutton secondary lighttext width100' type="file" onChange={handleFileChange} />
           </div>
+
+    
+
+              {recaptchashow &&
+                 <ReCAPTCHA  sitekey='6Ldk-eYlAAAAAN-MZMRMJSRAMJu-4x4xH8cMR8PI' onChange={handleChange}/>   
+              }
+          
+          
+    
+
+       
           </div>
          
           <div className='import-button'>
-          <button className='commonbutton secondary lighttext width100' onClick={()=>{handleImportClick(); setloader(true)}}>Import</button>
+          
+          <button  disabled={buttondisabled} className='commonbutton secondary lighttext width100' onClick={()=>{handleImportClick(); setloader(true)}}>Import</button>
           </div>
        </div>
        :
