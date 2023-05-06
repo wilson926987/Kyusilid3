@@ -295,7 +295,7 @@ const markAttendance = () => {
                       <h1 >{currentclass.sub_name} </h1>
                      <h3 className='margintop12'>{currentclass.sub_code}</h3>
                     <h3>{currentclass.day_label} {currentclass.sched_from} - {currentclass.sched_to} {currentclass.sessionname2 != null && (", " + currentclass.sched_from2 + " - " + currentclass.sched_to2)}</h3>
-                    <h3> {currentclass.title!== undefined|| currentclass.title !== null && currentclass.title}{ ' '+ currentclass.firstname +' ' +  currentclass.lastname + ' ' } {currentclass.middle != undefined && currentclass.middle != null && currentclass.middle} {currentclass.suffix!== undefined && currentclass.suffix !== null && currentclass.suffix}</h3>
+                    <h3> { currentclass.title!== undefined|| currentclass.title !== null && currentclass.title}{currentclass.firstname!== undefined  && currentclass.firstname !== null && ' '+ currentclass.firstname +' ' +  currentclass.lastname + ' ' } {currentclass.middle != undefined && currentclass.middle != null && currentclass.middle} {currentclass.suffix!== undefined && currentclass.suffix !== null && currentclass.suffix}</h3>
                 
                    </div> :
  

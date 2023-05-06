@@ -48,7 +48,7 @@ function ImportClass2({setcreateclassmodal}) {
     }
 
   
-    axios.post('https://api.kyusillid.online/api/import-class', formData)
+    axios.post('https://api.kyusillid.online/api/import-class2', formData)
       .then(response => {
       
         if (response.data.success) {
