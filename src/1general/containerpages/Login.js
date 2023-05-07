@@ -176,8 +176,8 @@ const [showPassword, setShowPassword] = useState(false);
       <form action="" onSubmit={handleFormSubmit}>
 
 
-      <label> Username:<div className='errortext'>{usernamemessage}</div></label>
-            <input type="text" placeholder='Username...' required defaultValue ={username} onChange={handleUsernameChange}/>
+      <label> Email:<div className='errortext'>{usernamemessage}</div></label>
+            <input type="text" placeholder='Email...' required defaultValue ={username} onChange={handleUsernameChange}/>
 
 
         <label> Password:<div className='errortext'>{passmessage}
