@@ -61,10 +61,13 @@ function Firstchangepass() {
         "acc_id": userinfo.user.acc_id,
         "acc_password": newpass
       }
+
+      console.log(JSON.stringify(temp))
   
       axios.post('https://api.kyusillid.online/api/reset-pass', temp)
-        .then(() => {
-          console.log("password successfully changed");
+        .then(response => {
+
+        
           setnewpass("");
           setconfirmnewpass("");
 

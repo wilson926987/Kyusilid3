@@ -52,9 +52,12 @@ function MyclassesDefault() {
 
 
 
-    {(allclasses !== undefined && allclasses.length >0) ?
+    {(upcomingclasses!== undefined)?
+    <h4></h4>:
+    (allclasses !== undefined && allclasses.length >0 ) ?
         <h4 className='title'>All Classes</h4>
         :
+
         <h4 className='title'>No Classes</h4>
     }
 

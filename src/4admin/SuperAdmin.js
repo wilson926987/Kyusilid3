@@ -30,8 +30,6 @@ function SuperAdmin() {
 
   useEffect(()=>{
 
-    console.log(userinfo)
-
     if(userinfo.admintype ===1){
       navigate('/kyusilidAdmin');
     }
@@ -39,7 +37,7 @@ function SuperAdmin() {
       response=>{
         setadminlist(response.data.adminlist);
         setdeplist(response.data.departmentlist);
-        console.log(response.data.adminlist)
+    
 
       }
     ).catch();
@@ -60,6 +58,19 @@ function SuperAdmin() {
       'dep_id' : dep_id,
       'password' :password
     }
+
+
+    console.log("dep_id : " + dep_id)
+
+    if(dep_id === undefined){
+      Swal.fire({
+        icon: 'error',
+        text: 'Department must be set',  
+      })
+      return
+    }
+
+  
 
     if(password !== password2 ){
       Swal.fire({
@@ -207,7 +218,7 @@ function SuperAdmin() {
           </div>
         </div>
 
-        <div className="col-lg-6 margintop12">
+        <div className="col-lg-8 margintop12">
           <div className="tertiary padding12 borderradius-lg">
             <h4>Create New Admin Account</h4>
 
