@@ -181,9 +181,9 @@ function QuizAnswer({ questions }) {
           alert("Score Submitted");
           setbuttondisabled(true);
           console.log(response.data);
-          console.log(answers);
-          console.log(score);
-          //  window.close();
+          // console.log(answers);
+          // console.log(score);
+           window.close();
         })
         .catch((error) => {
           console.error(error);

@@ -33,6 +33,8 @@ function ClassActivity() {
   const [editdescription, seteditdescription] = useState();
   const [activitystatus, setactivitystatus]= useState();
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isReturned, setIsReturned] = useState(false);
+  const [isGraded, setIsGraded] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
   // useEffect(()=>{
@@ -177,6 +179,12 @@ function ClassActivity() {
           if(response.data.status == "submitted") {
            setIsSubmitted(true);
           }
+          else if(response.data.status == "returned"){
+           setIsReturned(true);
+          }
+          else if(response.data.status == "graded"){
+            setIsReturned(true);
+           }
        }
       ).catch(error=> console.log(error)).finally(() =>setIsLoading(false));
  
@@ -811,7 +819,7 @@ function handleClick() {
                           onClick={() => {
                             window.open("/Quiz/"+currentactivity.quiz_link, "_blank");
                           }}
-                        >view quiz</button> :  !isLoading ? !isSubmitted && <button className='secondary' onClick={takequiz}>take quiz </button> : "Loading,"}
+                        >view quiz</button> :  !isLoading ? !isSubmitted && !isReturned && !isGraded  && <button className='secondary' onClick={takequiz}>take quiz </button> : "Loading,"}
                       </div>
                   </div>
                   </div>
