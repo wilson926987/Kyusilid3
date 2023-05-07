@@ -157,7 +157,7 @@ const [showPassword, setShowPassword] = useState(false);
           <h2 className='h16'>#KYUSILID</h2>
           <br></br>
           <br></br>
-          <h3>An integrated Learning System for Quezon City University 
+          <h3>An Integrated Learning Management System for Quezon City University 
           which is a software application or web-based technology used 
           to implement and assess a specific learning process.</h3>
       </div>
