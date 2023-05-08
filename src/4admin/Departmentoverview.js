@@ -12,12 +12,14 @@ import { BsFillJournalBookmarkFill } from 'react-icons/bs';
 
 
 import { deptInfoContext } from '../Globalcontext';
+import { useNavigate } from 'react-router-dom';
 
 
 function Departmentoverview() {
 
  const {departmentinfo} = useContext(deptInfoContext);
  const [searchTerm, setSearchTerm] = useState('');
+ const navigate = useNavigate();
 
  
 
@@ -43,7 +45,7 @@ function Departmentoverview() {
           <div className='positionr'>
             <ul >
               <br></br>
-              <li className='iconnn-case'>
+              <li className='iconnn-case' onClick={()=>navigate('/kyusilidAdmin/department/sections')}>
               <div className='images3'><h3>4th year: </h3>
               
               <h2 className='h22'> {departmentinfo.fourthyear}</h2>
@@ -52,7 +54,7 @@ function Departmentoverview() {
               <br></br>
 
 
-              <li className='iconnn-case'>
+              <li className='iconnn-case'  onClick={()=>navigate('/kyusilidAdmin/department/sections')} >
               <div className='images3'><h3>3rd year:</h3>
               
               <h2 className='h22'>{departmentinfo.thirdyear}</h2>
@@ -61,14 +63,14 @@ function Departmentoverview() {
 
               <br></br>
 
-              <li className='iconnn-case'>
+              <li className='iconnn-case'  onClick={()=>navigate('/kyusilidAdmin/department/sections')}>
               <div className='images3'><h3>2nd year:</h3>
               
               <h2 className='h22'>{departmentinfo.secondyear}</h2>
               </div></li>
               <br></br>
 
-              <li className='iconnn-case'> 
+              <li className='iconnn-case'  onClick={()=>navigate('/kyusilidAdmin/department/sections')}> 
               <div className='images3'><h3>1st year :</h3> 
               <h2 className='h22'>{departmentinfo.firstyear}</h2>
               </div></li>
@@ -87,12 +89,12 @@ function Departmentoverview() {
             <br></br>
             <div className='positionr'>
 
-              <li className='iconnn-case'> 
+              <li className='iconnn-case'  onClick={()=>navigate('/kyusilidAdmin/department/accounts_prof')}> 
               <div className='images2'><h3>Professors:</h3>
               <h2 className='h22'>{departmentinfo.profcount}</h2>
               </div></li>
               <br></br>
-              <li className='iconnn-case'> 
+              <li className='iconnn-case' onClick={()=>navigate('/kyusilidAdmin/department/accounts_stud')}> 
               <div className='images1'><h3>Students : </h3>
               <h2 className='h22'>{departmentinfo.studcount} </h2>
               </div></li>    

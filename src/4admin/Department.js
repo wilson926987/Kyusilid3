@@ -9,9 +9,11 @@ import ImportProfessor from './ImportProfessor'
 import ImportStudent from './ImportStudent'
 import { ContentChild } from '@angular/core'
 import BSIT from '../assets/images/BSIT1.png'
-import GENED from '../assets/images/GENED.png'
+import BSGENED from '../assets/images/BSGENED.png'
 import BSIE from '../assets/images/BSIE1.png'
-
+import BSEE from '../assets/images/BSEE1.png'
+import BSENT from '../assets/images/BSENT.png'
+import BSECE from '../assets/images/BSECE.png'
 
 function Department() {
     const navigate = useNavigate()
@@ -78,7 +80,7 @@ function Department() {
  }
 
 
- const adminheaders = ["", BSIT, GENED, "", "" , BSIE,"" , "" ,"" ,"","","",""];
+ const adminheaders = ["", BSIT, BSGENED, "", "" , BSIE,BSENT,"","","","","",""];
 
 
 
