@@ -31,7 +31,7 @@ button{
   cursor: pointer;
 }
 .minwidth80{
-  min-width: 80px;
+  min-width: 100px;
 }
 
 .appbody{

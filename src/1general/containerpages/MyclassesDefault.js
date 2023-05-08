@@ -23,6 +23,9 @@ function MyclassesDefault() {
       setallclasses(myclasses.filter(item => item.day_label !== days[currday]))
     }
 
+
+   
+
   },[myclasses])
 
   
@@ -52,10 +55,13 @@ function MyclassesDefault() {
 
 
 
-    {(allclasses !== undefined && allclasses.length >0) ?
+    {
+    (allclasses !== undefined && allclasses.length >0 ) ?
         <h4 className='title'>All Classes</h4>
         :
-        <h4 className='title'>No Classes</h4>
+        (upcomingclasses.length ===0 && allclasses.length ===0)?
+
+        <h4 className='title'>No Classes</h4> : <h4></h4>
     }
 
     

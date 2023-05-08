@@ -16,27 +16,58 @@ function Quiz() {
   const [questions, setQuestions] = useState([
     { "questionid": 1, "question": "", "points": "", "type": "Multiplechoice", "content":[], "answer": "" }
   ]);
- 
+
   const handleQuizSubmit = () => {
-   
+    const isQuestionValid = questions.every(
+      (question) => question.question !== "" && question.type !== "" && question.points !== "" && question.answer !== ""
+    );
+    
+    if (!isQuestionValid) {
+      alert("Please select question, points, and type for all questions before submitting.");
+      return;
+    }
+    
     const temp = {
       "id" : id,
       "title" : title,
       "description" : description,
       "questions" : questions
     }
-
-     console.log(JSON.stringify(temp));
-     
-     axios.post("https://api.kyusillid.online/api/quiz-questions", temp).then((response) => {
-      console.log(response.data);
-      alert("Successfully created Quiz")
-      window.close(); // Close the form after submitting and saving the data
-    }).catch((error) => {
-      console.error(error);
-      alert("Failed to create Quiz");
-    });
+  
+    console.log(JSON.stringify(temp));
+  
+    axios.post("https://api.kyusillid.online/api/quiz-questions", temp)
+      .then((response) => {
+        console.log(response.data);
+        alert("Successfully created Quiz")
+        window.close(); // Close the form after submitting and saving the data
+      })
+      .catch((error) => {
+        console.error(error);
+        alert("Failed to create Quiz");
+      });
   };
+  
+  // const handleQuizSubmit = () => {
+   
+  //   const temp = {
+  //     "id" : id,
+  //     "title" : title,
+  //     "description" : description,
+  //     "questions" : questions
+  //   }
+
+  //    console.log(JSON.stringify(temp));
+     
+  //    axios.post("https://api.kyusillid.online/api/quiz-questions", temp).then((response) => {
+  //     console.log(response.data);
+  //     alert("Successfully created Quiz")
+  //     window.close(); // Close the form after submitting and saving the data
+  //   }).catch((error) => {
+  //     console.error(error);
+  //     alert("Failed to create Quiz");
+  //   });
+  // };
 
   useEffect(() => {
     axios
@@ -94,7 +125,7 @@ function Quiz() {
       "question": item2.question,
       'points' : item2.points,
       "type" : item2.questionid === item.questionid ? typetemp : item2.type ,
-      "content": typetemp == "Identification" ? []: item2.content,
+      "content": typetemp == "Identification" ? [ { value: 'Option 0', index: 0 },        { value: 'Option 1', index: 1 },        { value: 'Option 2', index: 2 },        { value: 'Option 3', index: 3 }]: item2.content,
       "answer": item2.answer,
       "questionid": item2.questionid
     })))
@@ -111,14 +142,36 @@ function Quiz() {
     })))
   };
 
-
   const handleAddQuestion = () => {
-    setQuestions([
-      ...questions,
-      { "questionid": questions.length+1, "question": "", "points": "", "type": "Multiplechoice", "content":[], "answer": "" }
+    const isQuestionValid = questions.every(
+      (question) => question.question !== "" && question.type !== "" && question.points !== "" && question.answer !== ""
+    );
   
-    ]);
+    if (isQuestionValid) {
+      setQuestions([
+        ...questions,
+        {
+          questionid: questions.length + 1,
+          question: "",
+          points: "",
+          type: "Multiplechoice",
+          content: [],
+          answer: "",
+        },
+      ]);
+    } else {
+      alert("Please select question, points question and type before adding a new question.");
+    }
   };
+  
+
+  // const handleAddQuestion = () => {
+  //   setQuestions([
+  //     ...questions,
+  //     { "questionid": questions.length+1, "question": "", "points": "", "type": "Multiplechoice", "content":[], "answer": "" }
+  
+  //   ]);
+  // };
 
   const handleDeleteQuestion = (item) => {
     const updatedItems = questions.filter(item2 => item2.questionid !== item.questionid);

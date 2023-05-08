@@ -25,7 +25,7 @@ console.log(item);
             <input type= "text"
                 value={item?.question}
             className='Q commontextbox padding12' placeholder='Enter Question' onChange={e=>{handleQuestionChange(item, e.target.value)}}/>
-            <input type="number"
+            <input type="number" min="1"
              className="quiz-input-text commontextbox col-lg-2" value={item?.points} onChange={(e) => handlePointsChange(item, e.target.value)} placeholder="Points" />
             <div className='marginleftauto'> 
             <select className='mult commonbutton lighttext secondary'

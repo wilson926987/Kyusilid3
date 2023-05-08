@@ -46,7 +46,7 @@ function ClassContainer() {
   
 
   const forecerefreshHandler= async()=>{
-    console.log('refreshed')
+  
     await axios.get(url + currentclass.classes_id)
     .then(response => {
       setannouncementlist(response.data)
@@ -103,7 +103,7 @@ function ClassContainer() {
 
       response=>
           {setcurrentactivity(response.data)
-            console.log(response.data)
+
           }
 
     ).then(
@@ -147,10 +147,10 @@ function ClassContainer() {
 
         if(userinfo.usertype==='prof' || userinfo.usertype ==='admin'){
 
-          console.log(userinfo)
+
 
      
-          console.log(currentclass.classes_id)
+    
              await axios.get('https://api.kyusillid.online/api/getstudentlist/' + userinfo.user.acc_id + "/" + currentclass.classes_id)
             .then(response => {
         
@@ -295,7 +295,7 @@ const markAttendance = () => {
                       <h1 >{currentclass.sub_name} </h1>
                      <h3 className='margintop12'>{currentclass.sub_code}</h3>
                     <h3>{currentclass.day_label} {currentclass.sched_from} - {currentclass.sched_to} {currentclass.sessionname2 != null && (", " + currentclass.sched_from2 + " - " + currentclass.sched_to2)}</h3>
-                    <h3> { currentclass.title!== undefined|| currentclass.title !== null && currentclass.title}{currentclass.firstname!== undefined  && currentclass.firstname !== null && ' '+ currentclass.firstname +' ' +  currentclass.lastname + ' ' } {currentclass.middle != undefined && currentclass.middle != null && currentclass.middle} {currentclass.suffix!== undefined && currentclass.suffix !== null && currentclass.suffix}</h3>
+                    <h3> { currentclass.title!== undefined && currentclass.title !== null && currentclass.title}{currentclass.firstname!== undefined  && currentclass.firstname !== null && ' '+ currentclass.firstname +' ' +  currentclass.lastname + ' ' } {currentclass.middle != undefined && currentclass.middle != null && currentclass.middle} {currentclass.suffix!== undefined && currentclass.suffix !== null && currentclass.suffix}</h3>
                 
                    </div> :
  

@@ -19,14 +19,45 @@ function Viewresponse() {
     const [filelist, setfilelist] = useState([]);
     const navigate= useNavigate();
     const [showModal, setShowModal] = useState(false);
+    const [min, setmin] = useState(0);
+    const [max, setmax] = useState(0)
+
 
     useEffect(()=>{
-  
+
+      if(responseinfo !== undefined){
+
         axios.get('https://api.kyusillid.online/api/activityassignfiles/' + responseinfo.assign_id).then(
             response => setfilelist(response.data)
         )
 
-    },[])
+        axios.get('https://api.kyusillid.online/api/getgradinginfo/' + responseinfo.assign_id).then(
+          response => {
+              console.log(responseinfo.assign_id)
+            console.log(response.data)
+              if(response.data.gradingtype=== "Percentage"){
+                setmax(100);
+                setmin(50);
+              }else{
+                setmax(response.data.points)
+                setmin(0);
+              }
+              
+          }
+      )
+      }
+
+
+
+    },[responseinfo])
+
+
+    function handlesetnumber(e){
+        var temp = Math.max(min, Math.min(max, e));
+        setscore(temp)
+
+
+    }
 
   
 
@@ -39,7 +70,7 @@ function Viewresponse() {
             "score" : score,
          
         }
-        console.log(JSON.stringify(temp))
+  
         await  axios.post('https://api.kyusillid.online/api/setGrade' , temp).then(
 
         ()=>{
@@ -57,7 +88,7 @@ function Viewresponse() {
 
     }
 
-    const returnActivity = async() =>{
+    const returnActivity = () =>{
   
         if(score ===undefined || score === null){
             Swal.fire({
@@ -71,7 +102,7 @@ function Viewresponse() {
             assign_id : responseinfo.assign_id
         }
 
-        await axios.post('https://api.kyusillid.online/api/returnActivity', temp).then(
+       axios.post('https://api.kyusillid.online/api/returnActivity', temp).then(
             ()=>{       
                 Swal.fire({
                     icon: 'success',               
@@ -94,11 +125,11 @@ function Viewresponse() {
        .then((response) => {
        if (response.data.success) {
            setUploadedFile(response.data.url);
-           console.log(response.data.url)
+         
        } else {
-           console.log(response.data.message);
+  
            setUploadedFile(response.data.url);
-           console.log(response.data.url)
+         
        }
        })
        .catch((error) => {
@@ -107,7 +138,7 @@ function Viewresponse() {
        });
     }
 
-    console.log(responseinfo)
+
 
 },[responseinfo])
 
@@ -125,7 +156,7 @@ function handleClick() {
   
 
      <div className="flex">
-     <button className='commonbutton lighttext secondary col-lg-3' onClick={()=>{navigate('/classes/sampleclass/activity/activityId')}}>Back to Response list</button>
+     <button className='commonbutton lighttext secondary col-lg-3 ellipsis' onClick={()=>{navigate('/classes/sampleclass/activity/activityId')}}>Back to Response list</button>
      {responseinfo.status === "graded" || responseinfo.status === "submitted" ?
     <button className='commonbutton secondary lighttext widthset' onClick={()=>{returnActivity()}}>Return</button>
     : null
@@ -133,7 +164,7 @@ function handleClick() {
 
             <h4 className='marginleftauto'>Score</h4>
             <form action="" onSubmit={tt}>
-            <input type="number" required min={0} max={100} className="commontextbox primaryborder  col-lg-1 minwidth80" defaultValue={score} onChange={(e)=>{setscore(e.target.value)}}/>
+            <input type="number" required  className="commontextbox primaryborder  col-lg-3 minwidth80" value={score} onChange={(e)=>{handlesetnumber(e.target.value)}}/>
             {!ifsaved ?
                 <button type='submit' className='commonbutton secondary lighttext widthset' >Set Grade</button> 
                 :
