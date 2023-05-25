@@ -103,7 +103,7 @@ function Adminsidebar() {
     <hr className='margintop12'/>
 
     <ul className='margintop12'>
-    <li className='sidebarmenu' onClick={()=>{navigate('adminlog'); localStorage.setItem('history', '/kyusilidAdmin/adminlog')}}> <div className="highlight"></div> Admin log</li>
+    <li className='sidebarmenu' onClick={()=>{navigate('adminlog'); localStorage.setItem('history', '/kyusilidAdmin/adminlog')}}> <div className="highlight"></div> Activity log</li>
      </ul>            
 </div>}
 <div className='sidebarfooter'>

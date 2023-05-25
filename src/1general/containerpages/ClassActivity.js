@@ -193,6 +193,41 @@ function ClassActivity() {
  
    },[activitystatus])
 
+   const returnAll=(assign_id)=>{
+
+
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        axios.post('https://api.kyusillid.online/api/returnAll' ,{id: assign_id}).then(
+
+        ).catch(error=>console.log(error.data)
+
+        )
+
+        axios.get('https://api.kyusillid.online/api/getactivityresponses/' + currentactivity.activity_id).then(
+          response =>{
+            setresponselist(response.data);
+        
+          }
+        ).catch();
+
+  
+
+         
+      }
+    })
+
+   }
+
 
 
 
@@ -1001,9 +1036,15 @@ function handleClick() {
       
 
       </div>
-    
-        <button className='commonbutton secondary lighttext padding12'  onClick={() => exportGrades()} >Export activity status as excel</button>
+
+      <div className="flex">
+      <button className='commonbutton secondary lighttext padding12'  onClick={() => exportGrades()} >Export activity status as excel</button>
+      <button className='commonbutton secondary lighttext padding12 marginleft12' onClick={() => returnAll(currentactivity.activity_id)}  >Return all</button>
       
+
+      </div>
+    
+    
 
           <table className='width100 margintop12'>
             <thead >

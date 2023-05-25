@@ -164,11 +164,11 @@ function handleClick() {
 
             <h4 className='marginleftauto'>Score</h4>
             <form action="" onSubmit={tt}>
-            <input type="number" required  className="commontextbox primaryborder  col-lg-3 minwidth80" value={score} onChange={(e)=>{handlesetnumber(e.target.value)}}/>
+            <input type="number" required  className="commontextbox primaryborder  col-lg-3 minwidth80" disabled={responseinfo.status ==='returned'} value={score} onChange={(e)=>{handlesetnumber(e.target.value)}}/>
             {!ifsaved ?
-                <button type='submit' className='commonbutton secondary lighttext widthset' >Set Grade</button> 
+                <button type='submit' className='commonbutton secondary lighttext widthset' disabled={responseinfo.status ==='returned'}>Set Grade</button> 
                 :
-                <button className='commonbutton secondary lighttext widthset' >Saved </button>}
+                <button className='commonbutton secondary lighttext widthset'disabled={responseinfo.status ==='returned' || ifsaved} >Saved </button>}
             </form>
 
  

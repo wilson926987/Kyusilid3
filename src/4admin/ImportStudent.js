@@ -33,6 +33,36 @@ function ImportStudent({ setcreatestudmodal}) {
       .then(response => {
         
           
+          
+          setupdatelist(response.data.updatelist);
+          setcreatestudmodal(false);
+          axios.put('https://api.kyusillid.online/api/adminlog', temp2).catch(error => console.log(error.data))
+
+          navigate('/kyusilidAdmin/updateliststud')
+        
+      })
+      .catch(error => {
+        console.error(error.data);
+        setmessage(false)
+      });
+  }
+
+
+  function handleImportClicktest() {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('userid', userinfo.user.acc_id)
+
+    const temp2 = {
+      "acc_id" : userinfo.user.acc_id,
+      "action" : "studentlist import"
+    }
+    
+
+    axios.post('https://api.kyusillid.online/api/import-exceltemp', formData)
+      .then(response => {
+        
+          
           console.log(response.data)
           setupdatelist(response.data.updatelist);
           setcreatestudmodal(false);
@@ -46,6 +76,12 @@ function ImportStudent({ setcreatestudmodal}) {
         setmessage(false)
       });
   }
+
+
+
+
+
+
 
   return (
 
@@ -62,7 +98,7 @@ function ImportStudent({ setcreatestudmodal}) {
         </div>
        
         <div className='import-button'>
-        <button className='commonbutton secondary lighttext width100' onClick={()=>{handleImportClick(); setloader(true)}}>Import</button>
+        <button className='commonbutton secondary lighttext width100' onClick={()=>{handleImportClicktest(); setloader(true)}}>Import</button>
         </div>
      </div>
      :

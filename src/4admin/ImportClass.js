@@ -41,6 +41,7 @@ function ImportClass({setcreateclassmodal}) {
   function handleImportClick() {
     const formData = new FormData();
     formData.append('file', file);
+    formData.append('userid' , userinfo.user.acc_id)
 
     let temp = {
       "acc_id" : userinfo.user.acc_id,

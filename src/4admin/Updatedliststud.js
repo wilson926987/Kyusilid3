@@ -1,8 +1,10 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { updatelistContext } from '../Globalcontext'
 
 function Updatedliststud() {
     const {updatelist} = useContext(updatelistContext)
+
+ 
 
     return (
       <div className='tertiary borderradius-lg padding12'>
@@ -21,7 +23,7 @@ function Updatedliststud() {
                  </tr>
               </thead>
               <tbody>
-                  {updatelist.addedstud.map((item, key)=>(
+                  {  updatelist.addedstud.map((item, key)=>(
                       <tr key={key}>
                           <td>{item.studnum}</td>
                           <td>{item.studname}</td>
